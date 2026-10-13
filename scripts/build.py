@@ -20,6 +20,7 @@ headlines stay on the page.
 import datetime as dt
 import html
 import json
+import os
 import re
 import socket
 import sys
@@ -143,31 +144,150 @@ def render_news(items):
     return "\n".join(out)
 
 
-# ---------- 2. Daily picks ----------
-def pick(lst, salt):
-    n = TODAY.toordinal() + salt
-    return lst[n % len(lst)]
+# ---------- 2. Daily picks: AI-written each morning, library as backup ----------
+TODAY_FILE = ROOT / "data" / "today.json"
+HISTORY_FILE = ROOT / "data" / "ai_history.json"
+ROLES = ["Anyone", "Marketing", "Finance", "Sales", "HR", "Operations", "Customer support",
+         "Leadership", "Legal", "Content", "Students", "Founders"]
 
 
-def render_term():
-    t = pick(BANK["terms"], 0)
+def library_picks():
+    """Today's picks from data/daily.json, cycling through everything before repeating."""
+    d = TODAY.toordinal()
+    term = BANK["terms"][d % len(BANK["terms"])]
+    prompt = BANK["prompts"][(d * 7 + 3) % len(BANK["prompts"])]
+    facts = [q for q in BANK["quiz"] if q["a"]]
+    myths = [q for q in BANK["quiz"] if not q["a"]]
+    pick = [facts[(d * 3 + i) % len(facts)] for i in range(3)] + \
+           [myths[(d * 2 + i) % len(myths)] for i in range(2)]
+    order = [0, 3, 1, 4, 2] if d % 2 else [3, 0, 1, 2, 4]
+    return {"term": term, "prompt": prompt, "quiz": [pick[i] for i in order], "source": "library"}
+
+
+def clean_text(t):
+    t = str(t or "").replace("\u2014", ", ").replace("\u2013", " to ").replace("|", "/")
+    t = re.sub(r"\s+,", ",", t)
+    return re.sub(r"\s+", " ", t).strip()
+
+
+def validate_ai(data, recent_terms):
+    """Return clean content, or raise ValueError if anything is off."""
+    term = data.get("term") or {}
+    t, d = clean_text(term.get("term")), clean_text(term.get("def"))
+    if not (2 <= len(t) <= 40 and 40 <= len(d) <= 280):
+        raise ValueError("term has the wrong length")
+    if t.lower() in recent_terms:
+        raise ValueError(f"term '{t}' was used recently")
+    pr = data.get("prompt") or {}
+    who, ptxt = clean_text(pr.get("for")), clean_text(pr.get("prompt"))
+    who = next((r for r in ROLES if r.lower() == who.lower()), "Anyone")
+    if not 40 <= len(ptxt) <= 320:
+        raise ValueError("prompt has the wrong length")
+    quiz = data.get("quiz") or []
+    if len(quiz) != 5:
+        raise ValueError("quiz needs exactly five questions")
+    out = []
+    for q in quiz:
+        qq, why = clean_text(q.get("q")), clean_text(q.get("why"))
+        if not isinstance(q.get("a"), bool):
+            raise ValueError("quiz answer must be true or false")
+        if not (20 <= len(qq) <= 200 and 20 <= len(why) <= 260):
+            raise ValueError("quiz item has the wrong length")
+        out.append({"q": qq, "a": q["a"], "why": why})
+    myths = sum(not q["a"] for q in out)
+    if not 1 <= myths <= 3:
+        raise ValueError("quiz needs a mix of myths and facts")
+    return {"term": {"term": t, "def": d}, "prompt": {"for": who, "prompt": ptxt},
+            "quiz": out, "source": "ai"}
+
+
+AI_SYSTEM = """You write the daily section of kunalai.in, a site by Kunal Mukherjee that explains AI to
+non-technical managers in India. Plain, warm, confident English. Short sentences. No jargon without
+explanation. Never use em dashes or en dashes. Never use the | character.
+
+Reply with JSON only, no other text, in exactly this shape:
+{"term": {"term": "...", "def": "..."},
+ "prompt": {"for": "...", "prompt": "..."},
+ "quiz": [{"q": "...", "a": true, "why": "..."}, ... five items ...]}
+
+Rules:
+- term: one AI word or phrase a manager will meet at work. "def" is one or two plain sentences, 60 to 220 characters.
+  Prefer a term connected to today's headlines. Do not use any term in the AVOID list.
+- prompt: one ready-to-use prompt a manager can paste into an AI tool today, 60 to 280 characters,
+  with [brackets] for the parts they fill in. "for" is one of: Anyone, Marketing, Finance, Sales, HR,
+  Operations, Customer support, Leadership, Legal, Content, Students, Founders.
+- quiz: exactly five Myth or Fact statements, "a" is true for fact and false for myth.
+  Include two or three myths. Each "q" is under 170 characters; each "why" is one or two sentences under 220 characters.
+- Up to two quiz items may be about today's headlines. They must be facts, must only restate what the headline
+  itself says, and must name the source, for example "Mint reports that ...". Never guess details beyond the headline.
+- Myths must be common misconceptions about AI in general. Never write a false claim about a real company,
+  person, product or news event.
+- Every other statement must be well-established and stable over time. If unsure, leave it out.
+- Nothing political, medical, legal advice, or about specific share prices."""
+
+
+def ai_picks(news):
+    key = os.environ.get("ANTHROPIC_API_KEY", "").strip()
+    if not key or not CFG.get("ai_daily", True):
+        return None
+    if TODAY_FILE.exists():
+        try:
+            saved = json.loads(TODAY_FILE.read_text(encoding="utf-8"))
+            if saved.get("date") == TODAY.isoformat() and saved.get("source") == "ai":
+                print("using today's AI content already written earlier")
+                return saved
+        except ValueError:
+            pass
+    history = {}
+    if HISTORY_FILE.exists():
+        try:
+            history = json.loads(HISTORY_FILE.read_text(encoding="utf-8"))
+        except ValueError:
+            history = {}
+    recent = [t.lower() for t in history.get("terms", [])[-120:]]
+    lines = "\n".join(f"- {n['title']} ({n['source']})" for n in news) or "- (no headlines today)"
+    user = (f"Date: {nice_date(TODAY)}\n\nToday's AI headlines:\n{lines}\n\n"
+            f"AVOID these terms: {', '.join(history.get('terms', [])[-120:]) or 'none'}\n\n"
+            "Write today's term, prompt and five quiz items.")
+    for model in CFG.get("ai_models", ["claude-sonnet-5-5"]):
+        try:
+            body = json.dumps({"model": model, "max_tokens": 2000, "system": AI_SYSTEM,
+                               "messages": [{"role": "user", "content": user}]}).encode()
+            req = urllib.request.Request("https://api.anthropic.com/v1/messages", data=body, headers={
+                "x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json"})
+            with urllib.request.urlopen(req, timeout=90) as r:
+                resp = json.loads(r.read().decode("utf-8"))
+            text = "".join(b.get("text", "") for b in resp.get("content", []) if b.get("type") == "text")
+            text = re.sub(r"^```(?:json)?|```$", "", text.strip(), flags=re.M).strip()
+            m = re.search(r"\{.*\}", text, re.S)
+            content = validate_ai(json.loads(m.group(0) if m else text), recent)
+            content["date"] = TODAY.isoformat()
+            content["model"] = model
+            TODAY_FILE.write_text(json.dumps(content, indent=1, ensure_ascii=False), encoding="utf-8")
+            history.setdefault("terms", []).append(content["term"]["term"])
+            history["terms"] = history["terms"][-365:]
+            HISTORY_FILE.write_text(json.dumps(history, indent=1, ensure_ascii=False), encoding="utf-8")
+            print(f"AI content written with {model}")
+            return content
+        except Exception as e:  # noqa
+            print(f"AI content with {model} not used: {e}", file=sys.stderr)
+    return None
+
+
+def render_term(t):
     return f'<h3>{E(t["term"])}</h3><p>{E(t["def"])}</p>'
 
 
-def render_prompt():
-    p = pick(BANK["prompts"], 7)
+def render_prompt(p):
     who = "ANYONE" if p["for"] == "Anyone" else p["for"].upper()
     return (f'<p class="td-for">FOR {E(who)}</p>'
             f'<p class="td-q" id="promptText">{E(p["prompt"])}</p>'
             f'<button type="button" class="td-copy" data-copy="promptText">Copy prompt</button>')
 
 
-def render_quiz():
-    q = BANK["quiz"]
-    start = (TODAY.toordinal() * 3) % len(q)
-    todays = [q[(start + i) % len(q)] for i in range(5)]
+def render_quiz(items, source):
     out = ['<ol class="td-quiz" id="quiz">']
-    for i, it in enumerate(todays):
+    for it in items:
         ans = "fact" if it["a"] else "myth"
         out.append(
             f'<li data-answer="{ans}"><p class="q">{E(it["q"])}</p>'
@@ -175,6 +295,9 @@ def render_quiz():
             f'<button type="button" data-pick="myth">Myth</button></div>'
             f'<p class="why"><strong>{ans.capitalize()}.</strong> {E(it["why"])}</p></li>')
     out.append("</ol>")
+    if source == "ai":
+        out.append('<p class="td-fine">Today\'s word, prompt and quiz were written with AI, '
+                   'based on this morning\'s headlines. Spot a mistake? Tell me.</p>')
     return "\n".join(out)
 
 
@@ -539,9 +662,10 @@ def main():
     else:
         print("no fresh news; keeping previous headlines", file=sys.stderr)
 
-    page = replace_block(page, "TERM", render_term())
-    page = replace_block(page, "PROMPT", render_prompt())
-    page = replace_block(page, "QUIZ", render_quiz())
+    picks = ai_picks(news) or library_picks()
+    page = replace_block(page, "TERM", render_term(picks["term"]))
+    page = replace_block(page, "PROMPT", render_prompt(picks["prompt"]))
+    page = replace_block(page, "QUIZ", render_quiz(picks["quiz"], picks["source"]))
 
     issues = load_issues()
     page = replace_block(page, "NEWSLETTER", render_archive(issues))
@@ -551,9 +675,8 @@ def main():
     write_issue_pages(issues)
     write_feed(issues)
     write_sitemap(issues)
-    print(f"built {TODAY}: {len(news)} headlines, {len(issues)} newsletter issues")
+    print(f"built {TODAY}: {len(news)} headlines, {len(issues)} newsletter issues, daily picks from {picks['source']}")
 
 
 if __name__ == "__main__":
     main()
-
