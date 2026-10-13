@@ -61,7 +61,11 @@ def replace_block(page, name, content):
 
 
 def strip_tags(s):
-    return re.sub(r"<[^>]+>", "", s or "").strip()
+    """Remove tags and turn entities like &#8216; into real characters."""
+    text = re.sub(r"<[^>]+>", "", s or "")
+    for _ in range(2):  # some feeds encode entities twice
+        text = html.unescape(text)
+    return re.sub(r"\s+", " ", text).strip()
 
 
 # ---------- 1. News ----------
@@ -78,6 +82,7 @@ def fetch_news():
             print(f"feed failed: {feed['name']}: {e}", file=sys.stderr)
             continue
         for en in parsed.entries[:25]:
+          try:
             title = strip_tags(en.get("title", ""))
             link = en.get("link", "")
             if not title or not link:
@@ -102,6 +107,8 @@ def fetch_news():
             seen.add(key)
             items.append({"title": title, "link": link, "source": source,
                           "when": when, "region": feed.get("region", "World")})
+          except Exception as e:  # noqa
+            print(f"skipped one item from {feed['name']}: {e}", file=sys.stderr)
     items.sort(key=lambda x: x["when"], reverse=True)
     picked, per = [], {}
     limit, per_max = CFG.get("news_count", 8), CFG.get("news_max_per_source", 2)
