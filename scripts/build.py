@@ -23,6 +23,7 @@ import json
 import re
 import socket
 import sys
+import urllib.request
 from pathlib import Path
 from urllib.parse import quote
 
@@ -199,10 +200,103 @@ def parse_issue(path):
             "minutes": max(1, round(words / 220))}
 
 
+LINKS_FILE = ROOT / "newsletter" / "links.txt"
+LINKS_CACHE = ROOT / "data" / "newsletter_links.json"
+UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+      "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
+
+
+def fetch_meta(url):
+    """Read the public page's title, summary and date. Returns {} if blocked."""
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept-Language": "en-IN,en"})
+        with urllib.request.urlopen(req, timeout=20) as r:
+            page = r.read(600_000).decode("utf-8", "ignore")
+    except Exception as e:  # noqa
+        print(f"could not read {url}: {e}", file=sys.stderr)
+        return {}
+
+    def meta(prop):
+        m = (re.search(rf'<meta[^>]+(?:property|name)="{prop}"[^>]+content="([^"]*)"', page, re.I)
+             or re.search(rf'<meta[^>]+content="([^"]*)"[^>]+(?:property|name)="{prop}"', page, re.I))
+        return html.unescape(m.group(1)).strip() if m else ""
+
+    title = meta("og:title") or meta("twitter:title")
+    title = re.sub(r"\s*\|\s*LinkedIn\s*$", "", title)
+    desc = meta("og:description") or meta("description")
+    date = meta("article:published_time")
+    if not date:
+        m = re.search(r'"datePublished"\s*:\s*"([0-9]{4}-[0-9]{2}-[0-9]{2})', page)
+        date = m.group(1) if m else ""
+    if not title or "sign in" in title.lower() or "sign up" in title.lower():
+        return {}
+    return {"title": title, "summary": desc, "date": date[:10]}
+
+
+def title_from_url(url):
+    """Fallback title from a LinkedIn link like /pulse/ai-for-hr-kunal-mukherjee-3xk9f/."""
+    slug = url.rstrip("/").split("/")[-1].split("?")[0]
+    parts = slug.split("-")
+    if parts and re.search(r"\d", parts[-1]) and len(parts[-1]) >= 4:
+        parts = parts[:-1]
+    if parts[-2:] == ["kunal", "mukherjee"]:
+        parts = parts[:-2]
+    caps = {"ai": "AI", "hr": "HR", "cfo": "CFO", "ceo": "CEO", "cmo": "CMO", "cxo": "CXO",
+            "llm": "LLM", "llms": "LLMs", "genai": "GenAI", "india": "India", "indian": "Indian"}
+    words = [caps.get(w.lower(), w) for w in parts if w]
+    text = " ".join(words).strip() or "What the AI!? issue"
+    return text[0].upper() + text[1:]
+
+
+def load_links():
+    """Issues listed in newsletter/links.txt, one public link per line.
+    Optional extras on the same line: link | title | 2026-10-20"""
+    if not LINKS_FILE.exists():
+        return []
+    cache = {}
+    if LINKS_CACHE.exists():
+        try:
+            cache = json.loads(LINKS_CACHE.read_text(encoding="utf-8"))
+        except ValueError:
+            cache = {}
+    out = []
+    for raw in LINKS_FILE.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        bits = [b.strip() for b in line.split("|")]
+        url = bits[0]
+        if not url.startswith("http"):
+            continue
+        c = cache.get(url, {})
+        if not c.get("fetched"):
+            got = fetch_meta(url)
+            c = {"title": got.get("title") or c.get("title") or title_from_url(url),
+                 "summary": got.get("summary") or c.get("summary", ""),
+                 "date": got.get("date") or c.get("date") or TODAY.isoformat(),
+                 "fetched": bool(got)}
+            cache[url] = c
+        title = bits[1] if len(bits) > 1 and bits[1] else c["title"]
+        try:
+            date = dt.date.fromisoformat(bits[2] if len(bits) > 2 and bits[2] else c["date"])
+        except ValueError:
+            date = TODAY
+        summ = c.get("summary", "")
+        if len(summ) > 200:
+            summ = summ[:200].rsplit(" ", 1)[0] + "..."
+        out.append({"title": title, "date": date, "slug": None, "external": url,
+                    "summary": summ or "Read this issue of What the AI!? on LinkedIn.",
+                    "minutes": None, "linkedin": url})
+    LINKS_CACHE.parent.mkdir(exist_ok=True)
+    LINKS_CACHE.write_text(json.dumps(cache, indent=1, ensure_ascii=False), encoding="utf-8")
+    return out
+
+
 def load_issues():
     (ROOT / "newsletter").mkdir(exist_ok=True)
     issues = [parse_issue(p) for p in sorted((ROOT / "newsletter").glob("*.md"))
               if not p.name.startswith("_")]
+    issues += load_links()
     if CFG.get("newsletter_rss") and feedparser:
         try:
             for en in feedparser.parse(CFG["newsletter_rss"]).entries[:30]:
@@ -228,7 +322,7 @@ def render_archive(issues):
         return ('<div class="nl-empty"><p class="s59">THE ARCHIVE</p><p>Issues are moving here from LinkedIn, '
                 f'one by one. Until then, <a href="{E(sub)}">read the latest on LinkedIn</a>.</p></div>')
     first, rest = issues[0], issues[1:7]
-    mins = f", {first['minutes']} min read" if first.get("minutes") else ""
+    mins = f", {first['minutes']} min read" if first.get("minutes") else (" · ON LINKEDIN" if first.get("external") else "")
     out = [f'<a class="nl-lead" href="{E(issue_url(first))}">'
            f'<span class="s59">LATEST ISSUE · {first["date"].day} {first["date"].strftime("%B %Y").upper()}{mins.upper()}</span>'
            f'<strong>{E(first["title"])}</strong><span class="sum">{E(first["summary"])}</span>'
@@ -280,12 +374,14 @@ PAGE = """<!doctype html>
 <h2 class="s99">Disagree with<br>something? Good.</h2>
 <p class="s100">Speaking, partnerships, collaborations, or a good argument about AI. My inbox is open.</p>
 <div class="s88"><a href="mailto:{email}" class="s101">Email me</a><a href="{sub}" target="_blank" rel="noopener" class="s102">Subscribe on LinkedIn</a>{xbtn}</div>
+<p class="mailline">Or write to <a href="mailto:{email}">{email}</a></p>
 </div></section>
 <footer class="s103"><div class="s104">
 <span>© {year} Kunal Mukherjee · Views are my own · <a class="foot" href="mailto:{email}">Email</a> · <a class="foot" href="{li}">LinkedIn</a>{xlink} · <a class="foot" href="/feed.xml">RSS</a></span>
 <span>Made in Mumbai</span>
 </div></footer>
 </div>
+<script src="/app-mail.js"></script>
 </body></html>
 """
 
