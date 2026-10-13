@@ -1,0 +1,40 @@
+{
+ "term": {
+  "term": "Edge AI",
+  "def": "Edge AI means running AI on the device itself, like a phone, camera or satellite, instead of sending data to a faraway data centre. It can be faster and use less bandwidth."
+ },
+ "prompt": {
+  "for": "Leadership",
+  "prompt": "Act as a strategy advisor. Our team of [team size] works on [business area]. List five decisions where AI could help us this quarter, and the risk to watch for in each."
+ },
+ "quiz": [
+  {
+   "q": "Myth or Fact: An AI tool always tells you when it is unsure, so a confident answer is a correct answer.",
+   "a": false,
+   "why": "AI tools can sound confident while being wrong. Always check important facts, numbers and names before you use them."
+  },
+  {
+   "q": "Myth or Fact: A realistic AI-generated image of a person can be made without that person ever posing for a photo.",
+   "a": true,
+   "why": "Image tools can create lifelike pictures from text or from other photos. That is why fake images can spread easily and need checking."
+  },
+  {
+   "q": "Myth or Fact: Only large tech companies can use AI in their daily work.",
+   "a": false,
+   "why": "Many small firms use AI tools every day for writing, support and analysis. You do not need a big tech team to start."
+  },
+  {
+   "q": "Myth or Fact: Business Standard reports that two-thirds of MSMEs use AI, but only 21% deploy business software, according to a study.",
+   "a": true,
+   "why": "This restates the Business Standard headline. It suggests many small firms try AI before they adopt wider business software."
+  },
+  {
+   "q": "Myth or Fact: If you give an AI tool a clearer, more detailed prompt, you usually get a better answer.",
+   "a": true,
+   "why": "AI works from the instructions you give it. Clear context, a goal and a format usually lead to more useful results."
+  }
+ ],
+ "source": "ai",
+ "date": "2026-10-13",
+ "model": "claude-sonnet-5-5"
+}
