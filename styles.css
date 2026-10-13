@@ -227,3 +227,35 @@ button:focus-visible,a:focus-visible{outline:3px solid #2B3BFF;outline-offset:3p
 .art-list{border:2px solid #101114;box-shadow:8px 8px 0 #101114;background:#fff}
 .nl-all{margin:0;padding:16px 36px}
 .nl-all a{font-weight:700;text-decoration:none}
+
+/* Email copied confirmation */
+#mailToast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#101114;color:#FFFFFF;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:15px;padding:14px 20px;border-radius:999px;box-shadow:4px 4px 0 #D9FF3F;transition:opacity .2s ease,transform .2s ease;z-index:20}
+#mailToast.show{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion: reduce){#mailToast{transition:none}}
+.mailline{margin:0;font-size:17px}
+.mailline a{color:#101114;font-weight:700}
+
+/* ---------- Newsletter issues: lead card, issue cards, archive ---------- */
+.nl-grid{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+@media (min-width:1000px){.nl-grid{grid-template-columns:1.6fr 1fr}}
+.nl-lead{gap:14px;border-bottom:0;padding:36px 40px;height:100%;box-sizing:border-box}
+.nl-ltop{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}
+.nl-lead strong{font-size:clamp(30px,3.4vw,46px)}
+.nl-lead .sum{font-size:18px;max-width:58ch}
+.nl-lfoot{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:6px}
+.nl-no{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;color:#2B3BFF;font-size:22px;letter-spacing:-0.02em;line-height:1}
+.nl-no-lg{font-size:30px;background:#101114;color:#D9FF3F;padding:6px 12px;border-radius:6px}
+.nl-tag{display:inline-block;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.1em;padding:4px 8px;border:1.5px solid #101114;border-radius:999px;color:#101114;background:#FFFFFF}
+.nl-more{margin-top:48px;display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+.nl-more .td-head{width:100%;margin:0}
+.nl-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;width:100%}
+.nl-card{border:2px solid #101114;background:#FFFFFF;color:#101114;text-decoration:none;padding:24px;display:flex;flex-direction:column;gap:14px;min-height:200px}
+.nl-ctop{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.nl-card strong{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:23px;line-height:1.12;letter-spacing:-0.02em;flex-grow:1}
+.nl-csum{font-size:15px;color:#3A3B40}
+.nl-cfoot{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.06em;color:#5B5C62}
+.nl-card:hover .nl-cfoot{color:#2B3BFF}
+.nl-allbtn{margin-top:8px}
+.art-wide{max-width:1240px}
+.art-wide .art-by a{font-weight:700}
+.nl-year{margin:48px 0 20px;padding-top:16px;border-top:2px solid #101114;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:40px;letter-spacing:-0.03em}
