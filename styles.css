@@ -259,3 +259,18 @@ button:focus-visible,a:focus-visible{outline:3px solid #2B3BFF;outline-offset:3p
 .art-wide{max-width:1240px}
 .art-wide .art-by a{font-weight:700}
 .nl-year{margin:48px 0 20px;padding-top:16px;border-top:2px solid #101114;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:40px;letter-spacing:-0.03em}
+
+/* ---------- Email panel ---------- */
+#mailPanel{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:20px}
+.mp-back{position:absolute;inset:0;background:rgba(16,17,20,.55)}
+.mp-box{position:relative;background:#FFFFFF;color:#101114;border:2px solid #101114;box-shadow:8px 8px 0 #D9FF3F;padding:32px;max-width:480px;width:100%;display:flex;flex-direction:column;gap:14px;font-family:'Hanken Grotesk',sans-serif}
+.mp-x{position:absolute;top:10px;right:12px;width:40px;height:40px;border:0;background:transparent;font-size:28px;line-height:1;cursor:pointer;color:#101114}
+.mp-label{margin:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.1em;color:#2B3BFF}
+.mp-addr{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(22px,5vw,30px);letter-spacing:-0.02em;word-break:break-all;user-select:all}
+.mp-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+.mp-btns>*{font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:15px;min-height:48px;padding:0 16px;border-radius:999px;border:2px solid #101114;background:#FFFFFF;color:#101114;text-decoration:none;display:flex;align-items:center;justify-content:center;cursor:pointer;text-align:center}
+.mp-btns>*:hover{background:#101114;color:#FFFFFF}
+.mp-copy{background:#101114 !important;color:#FFFFFF !important;grid-column:1/-1}
+.mp-copy.ok{background:#D9FF3F !important;color:#101114 !important}
+.mp-note{margin:0;min-height:1.4em;font-size:14px;color:#5B5C62}
+@media (max-width:420px){.mp-btns{grid-template-columns:1fr}.mp-box{padding:24px}}
