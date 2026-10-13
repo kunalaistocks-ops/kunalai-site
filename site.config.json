@@ -1,0 +1,43 @@
+{
+  "site_url": "https://kunalai.in",
+  "email": "kunalai.in@gmail.com",
+  "linkedin_profile": "https://www.linkedin.com/in/kunal--mukherjee/",
+  "linkedin_newsletter_url": "https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7396425243105329152",
+  "x_handle": "mukherjee_kunal",
+  "x_embed_timeline": false,
+  "newsletter_rss": "",
+  "news_count": 8,
+  "news_max_per_source": 2,
+  "news_feeds": [
+    {
+      "name": "Google News: AI in India",
+      "url": "https://news.google.com/rss/search?q=artificial+intelligence+India+when:2d&hl=en-IN&gl=IN&ceid=IN:en",
+      "region": "India"
+    },
+    {
+      "name": "Google News: AI business",
+      "url": "https://news.google.com/rss/search?q=AI+business+OR+enterprise+when:2d&hl=en-IN&gl=IN&ceid=IN:en",
+      "region": "World"
+    },
+    {
+      "name": "TechCrunch",
+      "url": "https://techcrunch.com/category/artificial-intelligence/feed/",
+      "region": "World"
+    },
+    {
+      "name": "The Verge",
+      "url": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
+      "region": "World"
+    },
+    {
+      "name": "MIT Technology Review",
+      "url": "https://www.technologyreview.com/topic/artificial-intelligence/feed",
+      "region": "World"
+    },
+    {
+      "name": "One Useful Thing",
+      "url": "https://www.oneusefulthing.org/feed",
+      "region": "World"
+    }
+  ]
+}

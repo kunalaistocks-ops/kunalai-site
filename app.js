@@ -1,4 +1,4 @@
-/* Site behaviour. You normally don't need to edit this file — edit content.js instead. */
+/* Site behaviour. You normally don't need to edit this file. Edit content.js instead. */
 (function(){
 var S={camp:"augment",role:"Marketing",track:"pro",ptag:"ALL",rtag:"ALL",spot:0,w:0};
 var $=function(id){return document.getElementById(id);};
@@ -20,7 +20,7 @@ function render(){
     return '<button type="button" data-k="camp" data-v="'+c.id+'" aria-label="'+esc(c.name)+'" aria-pressed="'+on+'" style="position: absolute; top: '+(28-sz/2)+'px; left: calc('+c.pos+'% - '+(sz/2)+'px); width: '+sz+'px; height: '+sz+'px; border-radius: 50%; cursor: pointer; padding: 0; transition: all .25s ease; '+(on?"background: #D9FF3F; border: 3px solid #101114; box-shadow: 0 0 0 2px #D9FF3F":"background: #101114; border: 2px solid #8F9BFF")+'"></button>';}).join("");
   tabs("campTabs",K_CAMPS.map(function(c){return {v:c.id,l:c.name};}),S.camp,"camp",true);
   $("campName").textContent=camp.name; $("campClaim").textContent=camp.claim; $("campArg").textContent=camp.argument;
-  $("campForYou").textContent=camp.forYou; $("campTake").textContent=camp.take;
+  $("campBig").textContent=camp.big||""; $("campAct").textContent=camp.act||""; $("campForYou").textContent=camp.forYou; $("campTake").textContent=camp.take;
   $("camp_voices").innerHTML=camp.voices.map(function(v){return '<span style="border: 1px solid #5B5C62; padding: 4px 12px; border-radius: 999px; font-size: 14px; color: #E8E8E3">'+esc(v)+'</span>';}).join("");
   /* jobs */
   var r=K_ROLES.filter(function(x){return x.name===S.role;})[0];
@@ -51,7 +51,7 @@ function render(){
 }
 function tick(){var n=new Date();
   $("clock").textContent=n.toLocaleTimeString("en-IN",{timeZone:"Asia/Kolkata",hour:"2-digit",minute:"2-digit",hour12:false});
-  $("today").textContent=n.toLocaleDateString("en-IN",{timeZone:"Asia/Kolkata",weekday:"long",day:"numeric",month:"long",year:"numeric"}).toUpperCase();}
+  $("todayDate").textContent=n.toLocaleDateString("en-IN",{timeZone:"Asia/Kolkata",weekday:"long",day:"numeric",month:"long",year:"numeric"}).toUpperCase();}
 document.addEventListener("click",function(e){
   var b=e.target.closest("button[data-k]"); if(b){S[b.dataset.k]=b.dataset.v; render(); var f=document.querySelector('button[data-k="'+b.dataset.k+'"][data-v="'+CSS.escape(b.dataset.v)+'"]'); if(f) f.focus(); return;}
   if(e.target.closest("#shuffle")){var i=S.spot; while(i===S.spot){i=Math.floor(Math.random()*K_READS.length);} S.spot=i; render();}
@@ -59,4 +59,41 @@ document.addEventListener("click",function(e){
 var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 if(!reduce){setInterval(function(){S.w++;var w=$("word");var nw=w.cloneNode(false);nw.textContent=K_WORDS[S.w%K_WORDS.length];w.parentNode.replaceChild(nw,w);},2200);}
 tick(); setInterval(tick,30000); render();
+
+/* Copy the prompt of the day */
+document.addEventListener("click",function(e){
+  var b=e.target.closest("[data-copy]"); if(!b) return;
+  var el=document.getElementById(b.getAttribute("data-copy")); if(!el) return;
+  var t=el.textContent.trim(), o=b.textContent;
+  var ok=function(){b.textContent="Copied. Paste it into your AI tool"; b.classList.add("done"); setTimeout(function(){b.textContent=o; b.classList.remove("done");},2400);};
+  if(navigator.clipboard){navigator.clipboard.writeText(t).then(ok,function(){window.prompt("Copy this prompt:",t);});} else {window.prompt("Copy this prompt:",t);}
+});
+/* Myth or fact quiz */
+(function(){
+  var q=document.getElementById("quiz"); if(!q) return;
+  var items=[].slice.call(q.querySelectorAll("li[data-answer]")); if(!items.length) return;
+  var score=0, done=0, out=document.getElementById("quizScore"), share=document.getElementById("quizShare");
+  var verdict=["Time to read the field guide.","A start. Chapter 01 will help.","Not bad at all.","Sharp. You know your AI.","Excellent. Nearly perfect.","Perfect score. Come back tomorrow for five more."];
+  items.forEach(function(li){
+    li.querySelectorAll("[data-pick]").forEach(function(btn){
+      btn.addEventListener("click",function(){
+        if(li.classList.contains("done")) return;
+        var ans=li.getAttribute("data-answer"), right=btn.getAttribute("data-pick")===ans;
+        btn.classList.add(right?"right":"wrong");
+        if(!right) li.querySelector('[data-pick="'+ans+'"]').classList.add("right");
+        li.querySelectorAll("[data-pick]").forEach(function(x){x.disabled=true;});
+        li.classList.add("done"); done++; if(right) score++;
+        out.textContent=done<items.length?("SCORE "+score+" / "+done):("YOU GOT "+score+" / "+items.length+". "+verdict[score].toUpperCase());
+        if(done===items.length&&share){
+          var msg="I scored "+score+"/"+items.length+" on today's AI Myth or Fact quiz at kunalai.in. Can you beat it?";
+          var u=encodeURIComponent("https://kunalai.in/#today");
+          share.innerHTML='<a target="_blank" rel="noopener" href="https://x.com/intent/post?text='+encodeURIComponent(msg)+'&url='+u+'">Share on X</a>'+
+            '<a target="_blank" rel="noopener" href="https://wa.me/?text='+encodeURIComponent(msg+" https://kunalai.in/#today")+'">Share on WhatsApp</a>'+
+            '<a target="_blank" rel="noopener" href="https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent("https://kunalai.in/")+'">Share on LinkedIn</a>';
+          share.hidden=false;
+        }
+      });
+    });
+  });
+})();
 })();

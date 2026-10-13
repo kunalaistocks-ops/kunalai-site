@@ -133,3 +133,97 @@ button:focus-visible,a:focus-visible{outline:3px solid #2B3BFF;outline-offset:3p
 .s102{border: 2px solid #101114; color: #101114; text-decoration: none; font-weight: 700; padding: 0 28px; min-height: 56px; display: flex; align-items: center; border-radius: 999px}
 .s103{background: #101114; color: #B4B5B0}
 .s104{max-width: 1240px; margin: 0 auto; padding: 28px 5%; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px}
+
+/* ---------- Additions: Today, camp questions, newsletter (same palette and type) ---------- */
+.ns h3{font-family:'Bricolage Grotesque',sans-serif;margin:16px 0 4px;font-size:20px}
+.ns p,.ns li{font-size:16px;margin:4px 0}
+.belief-note{display:block;font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:16px;color:#5B5C62;margin-top:6px}
+
+.cm{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:2px;background:#3A3B40;border:2px solid #3A3B40;margin-top:6px}
+.cm>div{background:#101114;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.cm-v{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:19px;line-height:1.2;color:#FFFFFF}
+
+.td{border-top:2px solid #101114;background:#F2F2EE}
+.td-grid{display:grid;grid-template-columns:1fr;border:2px solid #101114;box-shadow:8px 8px 0 #101114;background:#FFFFFF}
+@media (min-width:900px){.td-grid{grid-template-columns:1.5fr 1fr}}
+.td-news{padding:32px 36px;border-bottom:2px solid #101114}
+@media (min-width:900px){.td-news{border-bottom:0;border-right:2px solid #101114}}
+.td-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;margin-bottom:12px}
+.td-list{list-style:none;margin:0;padding:0;counter-reset:n}
+.td-list li{counter-increment:n;display:grid;grid-template-columns:44px 1fr;column-gap:8px;padding:16px 0;border-top:1px solid #DADAD4}
+.td-list li::before{content:counter(n,decimal-leading-zero);grid-row:span 2;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;color:#2B3BFF;padding-top:4px}
+.td-list a{color:#101114;text-decoration:none;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:20px;line-height:1.2;letter-spacing:-0.01em}
+.td-list a:hover{color:#2B3BFF;text-decoration:underline}
+.td-list span{font-size:14px;color:#5B5C62;margin-top:4px}
+.td-flag{display:inline-block;margin-left:8px;background:#FF7A2F;color:#101114;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.08em;padding:2px 6px;border-radius:4px}
+.td-fine{margin:14px 0 0;font-size:14px;color:#5B5C62}
+.td-side{display:flex;flex-direction:column}
+.td-word{background:#D9FF3F;color:#101114;padding:32px 36px;border-bottom:2px solid #101114;display:flex;flex-direction:column;gap:10px}
+.td-word h3{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(32px,3.6vw,48px);line-height:1;letter-spacing:-0.03em}
+.td-word p:last-child{margin:0;font-size:18px}
+.td-prompt{background:#2B3BFF;color:#FFFFFF;padding:32px 36px;display:flex;flex-direction:column;gap:12px;flex:1}
+.td-for{margin:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.1em;color:#D9FF3F}
+.td-q{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:21px;line-height:1.35}
+.td-copy{align-self:flex-start;font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:15px;padding:0 22px;min-height:48px;border-radius:999px;border:2px solid #FFFFFF;background:transparent;color:#FFFFFF;cursor:pointer;transition:background .2s ease,color .2s ease}
+.td-copy:hover,.td-copy.done{background:#D9FF3F;border-color:#D9FF3F;color:#101114}
+.td-quizwrap{margin-top:40px}
+.td-quiz{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+.td-quiz li{border:2px solid #101114;background:#FFFFFF;padding:22px;display:flex;flex-direction:column;gap:16px}
+.td-quiz .q{margin:0;font-size:17px;line-height:1.45;flex:1}
+.td-quiz .qb{display:flex;gap:8px}
+.td-quiz button{flex:1;font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:15px;min-height:44px;border-radius:999px;border:2px solid #101114;background:#FFFFFF;color:#101114;cursor:pointer}
+.td-quiz button:hover:not(:disabled){background:#101114;color:#FFFFFF}
+.td-quiz button:disabled{cursor:default;opacity:.35}
+.td-quiz button.right{background:#D9FF3F;opacity:1}
+.td-quiz button.wrong{background:#FF7A2F;opacity:1}
+.td-quiz .why{display:none;margin:0;font-size:15px;color:#3A3B40}
+.td-quiz li.done .why{display:block}
+.td-quiz li.done{box-shadow:6px 6px 0 #101114;transition:box-shadow .2s ease}
+.td-share{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.td-share a{border:2px solid #101114;color:#101114;text-decoration:none;font-weight:700;font-size:15px;padding:0 20px;min-height:44px;display:flex;align-items:center;border-radius:999px}
+.td-share a:hover{background:#101114;color:#FFFFFF}
+#quizScore{color:#101114;font-weight:500}
+@media (max-width:720px){.td-news,.td-word,.td-prompt{padding:24px}}
+
+.nl{border-top:2px solid #101114}
+.nl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;align-items:start}
+.nl-issues{border:2px solid #101114;box-shadow:8px 8px 0 #101114;background:#FFFFFF}
+.nl-empty{padding:32px 36px;display:flex;flex-direction:column;gap:10px}
+.nl-empty p:last-child{margin:0;font-size:19px}
+.nl-lead{display:flex;flex-direction:column;gap:10px;padding:32px 36px;border-bottom:2px solid #101114;color:#101114;text-decoration:none}
+.nl-lead:hover{background:#D9FF3F}
+.nl-lead strong{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(28px,3vw,40px);line-height:1.05;letter-spacing:-0.02em}
+.nl-lead .sum{color:#3A3B40}
+.nl-lead .go{font-weight:700;color:#2B3BFF}
+.nl-list{list-style:none;margin:0;padding:0}
+.nl-list li{display:flex;justify-content:space-between;gap:16px;padding:16px 36px;border-bottom:1px solid #DADAD4}
+.nl-list a{color:#101114;text-decoration:none;font-weight:700}
+.nl-list a:hover{color:#2B3BFF}
+.nl-list .meta{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#5B5C62;white-space:nowrap}
+.nl-sub{background:#D9FF3F;color:#101114;border:2px solid #101114;padding:32px 36px;display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+.nl-big{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(26px,2.8vw,36px);line-height:1.05;letter-spacing:-0.02em}
+.nl-small{margin:0;font-size:15px}
+.nl-small a{color:#101114}
+/* Five question tiles: one row on desktop, no orphan tile */
+@media (min-width:1000px){.s20{grid-template-columns:repeat(5,1fr)}.s21,.s25{padding:24px}.s23{font-size:24px}}
+@media (min-width:560px) and (max-width:999px){.s20{grid-template-columns:repeat(2,1fr)}.s20>a:nth-child(5){grid-column:1/-1}}
+@media (max-width:559px){.s20{grid-template-columns:1fr}}
+
+/* ---------- Newsletter issue pages ---------- */
+.art{max-width:760px;margin:0 auto;padding:96px 5% 112px}
+.art .s14 a{color:#2B3BFF;text-decoration:none}
+.art-h{margin:18px 0 12px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(40px,6vw,72px);line-height:0.98;letter-spacing:-0.03em}
+.art-by{margin:0 0 48px;color:#5B5C62}
+.prose{font-size:19px;line-height:1.7}
+.prose h2{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:32px;line-height:1.1;letter-spacing:-0.02em;margin:48px 0 12px}
+.prose h3{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:24px;margin:36px 0 8px}
+.prose blockquote{margin:28px 0;padding:20px 24px;background:#D9FF3F;font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:22px;line-height:1.35}
+.prose blockquote p{margin:0}
+.prose img{max-width:100%;border:2px solid #101114}
+.prose ul,.prose ol{padding-left:22px}
+.orig{margin:48px 0 0;padding-top:20px;border-top:2px solid #101114;color:#3A3B40}
+.issue-nav{display:grid;gap:12px;margin-top:24px;font-weight:700}
+.issue-nav a{color:#2B3BFF;text-decoration:none}
+.art-list{border:2px solid #101114;box-shadow:8px 8px 0 #101114;background:#fff}
+.nl-all{margin:0;padding:16px 36px}
+.nl-all a{font-weight:700;text-decoration:none}
