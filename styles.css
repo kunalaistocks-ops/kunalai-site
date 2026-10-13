@@ -445,3 +445,28 @@ button:focus-visible,a:focus-visible{outline:3px solid #2B3BFF;outline-offset:3p
 .sc-share-side{display:flex;flex-direction:column;gap:14px}
 .sc-share-h{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(26px,2.8vw,36px);line-height:1.05;letter-spacing:-.02em}
 .sc-steps{margin:4px 0 0;padding-left:22px;font-size:16px;color:#3A3B40;display:flex;flex-direction:column;gap:6px}
+
+/* ---------- "AI ready? Take the quiz" buttons ---------- */
+.qz-head{display:none;align-items:center;gap:6px;background:#D9FF3F;color:#101114;text-decoration:none;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:15px;padding:0 18px;min-height:44px;border-radius:999px;border:2px solid #101114;box-shadow:3px 3px 0 #101114;white-space:nowrap;transition:transform .15s ease,box-shadow .15s ease}
+.qz-head b{font-weight:800}
+.qz-head:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 #101114;color:#101114}
+@media (min-width:1000px){.qz-head{display:inline-flex}}
+.qz-hero{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;animation-delay:.3s}
+.qz-big{display:inline-flex;align-items:center;gap:10px;background:#D9FF3F;color:#101114;text-decoration:none;font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(20px,2.2vw,26px);letter-spacing:-.01em;padding:0 30px;min-height:64px;border-radius:999px;border:2px solid #101114;box-shadow:6px 6px 0 #101114;transition:transform .15s ease,box-shadow .15s ease}
+.qz-big b{font-weight:800}
+.qz-big:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 #101114;color:#101114}
+.qz-note{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.08em;color:#5B5C62;text-transform:uppercase}
+.qz-float{position:fixed;right:20px;bottom:20px;z-index:30;display:inline-flex;align-items:center;gap:6px;background:#D9FF3F;color:#101114;text-decoration:none;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:16px;padding:0 22px;min-height:54px;border-radius:999px;border:2px solid #101114;box-shadow:4px 4px 0 #101114;opacity:0;transform:translateY(20px);pointer-events:none;transition:opacity .25s ease,transform .25s ease}
+.qz-float b{font-weight:800}
+.qz-float.show{opacity:1;transform:none;pointer-events:auto}
+.qz-float:hover{color:#101114;box-shadow:6px 6px 0 #101114}
+@media (max-width:640px){.qz-float{left:16px;right:16px;bottom:16px;justify-content:center}}
+@media (prefers-reduced-motion: reduce){.qz-head,.qz-big,.qz-float{transition:none}}
+.qz-bar{background:#D9FF3F;color:#101114 !important;text-decoration:none;font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500;font-size:12px;letter-spacing:.08em;padding:5px 14px;border-radius:999px;white-space:nowrap;transition:background .2s ease}
+.qz-bar:hover{background:#FFFFFF}
+@media (max-width:640px){.s3{justify-content:center}.s3>span:last-child{display:none}}
+@media (max-width:640px){
+  .qz-big{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;width:100%;box-sizing:border-box;text-align:center;font-size:20px;line-height:1.2;padding:14px 20px;min-height:0}
+  .qz-big b{font-size:24px}
+  .qz-note{width:100%;text-align:center}
+}

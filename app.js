@@ -85,7 +85,8 @@ document.addEventListener("click",function(e){
         li.classList.add("done"); done++; if(right) score++;
         out.textContent=done<items.length?("SCORE "+score+" / "+done):("YOU GOT "+score+" / "+items.length+". "+verdict[score].toUpperCase());
         if(done===items.length&&share){
-          var msg="I scored "+score+"/"+items.length+" on today's AI Myth or Fact quiz at kunalai.in. Can you beat it?";
+          var st=window.kmStreak?window.kmStreak(score,items.length):null;
+          var msg="I scored "+score+"/"+items.length+" on today's AI Myth or Fact quiz at kunalai.in"+(st&&st.streak>1?(", "+st.streak+" days in a row"):"")+". Can you beat it?";
           var u=encodeURIComponent("https://kunalai.in/#today");
           share.innerHTML='<a target="_blank" rel="noopener" href="https://x.com/intent/post?text='+encodeURIComponent(msg)+'&url='+u+'">Share on X</a>'+
             '<a target="_blank" rel="noopener" href="https://wa.me/?text='+encodeURIComponent(msg+" https://kunalai.in/#today")+'">Share on WhatsApp</a>'+
@@ -98,6 +99,69 @@ document.addEventListener("click",function(e){
 })();
 
 })();
+
+/* Daily streak and badges for the Myth or Fact quiz. Stored only in the visitor's own browser. */
+(function(){
+  var KEY="km_daily", BKEY="km_badges";
+  function today(off){var d=new Date(Date.now()+(off||0)*864e5);return d.toLocaleDateString("en-CA",{timeZone:"Asia/Kolkata"});}
+  function load(k,def){try{return JSON.parse(localStorage.getItem(k))||def;}catch(e){return def;}}
+  function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+  var BADGES={
+    first:{name:"First quiz",desc:"Played your first Myth or Fact"},
+    perfect:{name:"Perfect five",desc:"Scored 5 out of 5"},
+    s3:{name:"3-day streak",desc:"Played three days in a row"},
+    s7:{name:"7-day streak",desc:"A full week in a row"},
+    s30:{name:"30-day streak",desc:"A month without missing a day"},
+    q25:{name:"25 correct",desc:"25 right answers in total"},
+    scored:{name:"Know your score",desc:"Took the How AI-proof is your job? check"}
+  };
+  function award(id){
+    var b=load(BKEY,{}); if(b[id]) return false;
+    b[id]=today(); save(BKEY,b); toast("Badge unlocked: "+BADGES[id].name); return true;
+  }
+  function toast(t){
+    var el=document.getElementById("kmToast");
+    if(!el){el=document.createElement("div");el.id="kmToast";el.setAttribute("role","status");document.body.appendChild(el);}
+    el.textContent=t; el.className="show"; clearTimeout(el._h); el._h=setTimeout(function(){el.className="";},3600);
+  }
+  function render(){
+    var bar=document.getElementById("streakBar"); if(!bar) return;
+    var d=load(KEY,null), b=load(BKEY,{});
+    if(!d){bar.innerHTML='<p class="sk-line">Answer all five to start your streak. New questions every morning at 6 AM.</p>'; return;}
+    var alive=d.last===today()||d.last===today(-1);
+    var streak=alive?d.streak:0, pct=d.answered?Math.round(100*d.correct/d.answered):0;
+    var ids=Object.keys(BADGES);
+    bar.innerHTML='<div class="sk-stats">'+
+      '<div><b>'+streak+'</b><span>DAY STREAK</span></div>'+
+      '<div><b>'+(d.best||0)+'</b><span>BEST STREAK</span></div>'+
+      '<div><b>'+pct+'%</b><span>CORRECT</span></div>'+
+      '<div><b>'+(d.days||0)+'</b><span>DAYS PLAYED</span></div></div>'+
+      '<div class="sk-badges">'+ids.map(function(id){var on=!!b[id];
+        return '<span class="sk-badge'+(on?' on':'')+'" title="'+BADGES[id].desc+'">'+(on?'★ ':'☆ ')+BADGES[id].name+'</span>';}).join("")+'</div>'+
+      (d.last===today()?'<p class="sk-line">You\'ve played today. Five new questions tomorrow at 6 AM IST.</p>':
+        (alive?'<p class="sk-line">Play today to keep your '+streak+'-day streak alive.</p>':''));
+  }
+  window.kmBadge=function(id){var r=award(id); render(); return r;};
+  window.kmStreak=function(score,total){
+    var d=load(KEY,{streak:0,best:0,correct:0,answered:0,days:0,last:null});
+    var t=today();
+    if(d.last!==t){
+      d.streak=(d.last===today(-1))?d.streak+1:1;
+      d.best=Math.max(d.best||0,d.streak);
+      d.correct+=score; d.answered+=total; d.days=(d.days||0)+1; d.last=t;
+      save(KEY,d);
+      award("first");
+      if(score===total) award("perfect");
+      if(d.streak>=3) award("s3");
+      if(d.streak>=7) award("s7");
+      if(d.streak>=30) award("s30");
+      if(d.correct>=25) award("q25");
+    }
+    render(); return d;
+  };
+  render();
+})();
+
 /* Email panel: "Email me" opens a small panel with the address and ways to send,
    so it works in incognito, on phones and on computers with no email app set up. */
 (function(){
@@ -139,4 +203,62 @@ document.addEventListener("click",function(e){
     open(addr, m?decodeURIComponent(m[1]):"");
   });
   document.addEventListener("keydown",function(e){if(e.key==="Escape") close();});
+})();
+
+/* Feature spotlight: live numbers and a mini Your Job card that cycles through the roles */
+(function(){
+  if(typeof K_ROLES==="undefined"||!document.getElementById("fxCard")) return;
+  var $=function(id){return document.getElementById(id);};
+  var words=["Zero","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten"];
+  var n=K_ROLES.length, top=K_ROLES.filter(function(r){return r.level===5;}).length;
+  $("fxRoles").textContent=n; $("fxRoles2").textContent=n; $("fxBadge").textContent=n;
+  $("fxTop").textContent=words[top]||top;
+  var colours={"Amplified":["#2B3BFF","#FFFFFF"],"Reinvented":["#D9FF3F","#101114"],"Split":["#101114","#FFFFFF"]};
+  var start=0; K_ROLES.forEach(function(r,i){if(r.name==="Customer support") start=i;});
+  var i=start, card=$("fxCard"), paused=false;
+  function show(r){
+    $("fxRole").textContent=r.name; $("fxAbsorb").textContent=r.absorbs; $("fxNext").textContent=r.next;
+    var v=$("fxVerdict"), c=colours[r.verdict]||["#101114","#D9FF3F"];
+    v.textContent=r.verdict; v.style.background=c[0]; v.style.color=c[1];
+    $("fxMeter").innerHTML=[1,2,3,4,5].map(function(k){return '<i'+(k<=r.level?' class="on"':'')+'></i>';}).join("");
+  }
+  show(K_ROLES[i]);
+  var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(!reduce){
+    setInterval(function(){
+      if(paused||document.hidden) return;
+      card.classList.add("fade");
+      setTimeout(function(){i=(i+1)%n; show(K_ROLES[i]); card.classList.remove("fade");},250);
+    },2800);
+    card.addEventListener("mouseenter",function(){paused=true;});
+    card.addEventListener("mouseleave",function(){paused=false;});
+  }
+  function goToRole(){
+    var name=K_ROLES[i].name;
+    var b=document.querySelector('button[data-k="role"][data-v="'+name.replace(/"/g,'\\"')+'"]');
+    if(b) b.click();
+    var j=document.getElementById("jobs"); if(j) j.scrollIntoView({behavior:reduce?"auto":"smooth"});
+  }
+  card.addEventListener("click",goToRole);
+  $("fxCta").addEventListener("click",function(e){e.preventDefault(); goToRole();});
+})();
+
+/* "AI ready? Take the quiz" floating button: shows after the hero, hides while the quiz is on screen */
+(function(){
+  var f=document.getElementById("qzFloat"), sc=document.getElementById("score"), hero=document.querySelector(".qz-hero")||document.getElementById("top");
+  if(!f||!sc) return;
+  var pastHero=false, quizVisible=false;
+  try{ if(JSON.parse(localStorage.getItem("km_score"))){ f.innerHTML="Your AI type: <b>see it again</b>"; } }catch(e){}
+  function update(){ f.classList.toggle("show", pastHero && !quizVisible); }
+  if("IntersectionObserver" in window){
+    new IntersectionObserver(function(es){ quizVisible=es[0].isIntersecting; update(); },{threshold:0.15}).observe(sc);
+    if(hero) new IntersectionObserver(function(es){ pastHero=!es[0].isIntersecting && es[0].boundingClientRect.top<0; update(); },{threshold:0}).observe(hero);
+  }
+  document.addEventListener("click",function(e){
+    var a=e.target.closest("[data-qz]"); if(!a) return;
+    e.preventDefault();
+    sc.scrollIntoView({behavior:(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)?"auto":"smooth"});
+    if(history.replaceState) history.replaceState(null,"","#score");
+    setTimeout(function(){ var b=sc.querySelector('[data-sc="start"],[data-sc="show"]'); if(b) b.focus({preventScroll:true}); },600);
+  });
 })();
