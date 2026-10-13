@@ -11,7 +11,7 @@ var SITE = {
   x: "https://x.com/mukherjee_kunal",
   email: "kunalai.in@gmail.com",
   sheet: "https://script.google.com/macros/s/AKfycbxs8ROj_uvBe2K5vytRl7xfgpp8R24YH-j39qJKKS0z72HjdlvvxI0qWJKHGaNNBjUwdg/exec",   // Paste your Google Sheet web app URL here (it ends in /exec). Leave empty to switch email capture off.
-  linkedinPartnerId: "",      // LinkedIn Insight Tag partner ID (numbers only). Leave empty to switch it off.
+  linkedinPartnerId: "11098649",      // LinkedIn Insight Tag partner ID (numbers only). Leave empty to switch it off.
   linkedinConversionId: ""    // Optional: LinkedIn conversion ID for "completed the quiz". Leave empty if you don't use it.
 };
 
