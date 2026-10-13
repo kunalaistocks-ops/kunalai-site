@@ -1,40 +1,40 @@
 {
  "term": {
-  "term": "Edge AI",
-  "def": "Edge AI means running AI on the device itself, like a phone, camera or satellite, instead of sending data to a faraway data centre. It can be faster and use less bandwidth."
+  "term": "Recommendation algorithm",
+  "def": "A set of rules that decides what you see next in a feed or app. It learns from what you watch, like and click, then shows you more of the same."
  },
  "prompt": {
   "for": "Leadership",
-  "prompt": "Act as a strategy advisor. Our team of [team size] works on [business area]. List five decisions where AI could help us this quarter, and the risk to watch for in each."
+  "prompt": "Act as an AI risk advisor. My team uses [AI tool] for [task]. List five data risks, name who should own each one, and give one simple rule staff can follow for each."
  },
  "quiz": [
   {
-   "q": "Myth or Fact: An AI tool always tells you when it is unsure, so a confident answer is a correct answer.",
+   "q": "TechCrunch reports that Facebook is giving users more control over their algorithm.",
+   "a": true,
+   "why": "This restates the TechCrunch headline. It is about users getting more say in what their feed shows them."
+  },
+  {
+   "q": "Express Computer reports that a Trellix report says 98% of Indian organisations report AI-linked insider incidents.",
+   "a": true,
+   "why": "This restates the Express Computer headline. It points to why data safety matters when staff use AI tools."
+  },
+  {
+   "q": "If an AI tool sounds confident, its answer must be correct.",
    "a": false,
-   "why": "AI tools can sound confident while being wrong. Always check important facts, numbers and names before you use them."
+   "why": "AI can write fluent, confident answers that are wrong. Always check important facts, numbers and names before you use them."
   },
   {
-   "q": "Myth or Fact: A realistic AI-generated image of a person can be made without that person ever posing for a photo.",
-   "a": true,
-   "why": "Image tools can create lifelike pictures from text or from other photos. That is why fake images can spread easily and need checking."
-  },
-  {
-   "q": "Myth or Fact: Only large tech companies can use AI in their daily work.",
+   "q": "You need to know coding to get good results from AI tools.",
    "a": false,
-   "why": "Many small firms use AI tools every day for writing, support and analysis. You do not need a big tech team to start."
+   "why": "Most AI tools work with plain language. Clear instructions, context and examples matter far more than any coding skill."
   },
   {
-   "q": "Myth or Fact: Business Standard reports that two-thirds of MSMEs use AI, but only 21% deploy business software, according to a study.",
-   "a": true,
-   "why": "This restates the Business Standard headline. It suggests many small firms try AI before they adopt wider business software."
-  },
-  {
-   "q": "Myth or Fact: If you give an AI tool a clearer, more detailed prompt, you usually get a better answer.",
-   "a": true,
-   "why": "AI works from the instructions you give it. Clear context, a goal and a format usually lead to more useful results."
+   "q": "Any AI tool is safe for confidential company data by default.",
+   "a": false,
+   "why": "Privacy rules differ by tool and by plan. Check your company policy before pasting client, financial or staff data into any AI tool."
   }
  ],
  "source": "ai",
- "date": "2026-10-13",
+ "date": "2026-10-14",
  "model": "claude-sonnet-5-5"
 }
