@@ -1,6 +1,6 @@
 # kunalai.in: A field guide to the AI decade
 
-> AI explained for the people who run things and don't write code. By Kunal Mukherjee, Mumbai: 20+ years in Indian media (Disney, UTV Network, Times Network), runs ImagiNXT, India's tech and innovation festival, and writes the What the AI!? newsletter for non-technical managers.
+> AI explained for the people who run things and don't write code. By Kunal Mukherjee, Mumbai, after 20+ years in Indian media (Disney, UTV Network, Times Network). He writes the What the AI!? newsletter for non-technical managers.
 
 ## Sections
 - [Perspectives](https://kunalai.in/#perspectives): five camps on how big AI is and what to do about it. Kunal's camp is Augment.
