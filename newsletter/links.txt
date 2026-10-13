@@ -1,11 +1,16 @@
 # What the AI!? issues
 #
-# Paste the public LinkedIn link of each new issue on its own line, then commit.
-# The site picks up the title, summary and date by itself within a few minutes.
-# Newest or oldest first, it doesn't matter: the site sorts them by date.
-#
-# Optional: if a title or date comes out wrong, add them after the link like this:
-# https://www.linkedin.com/pulse/your-issue-link | Your exact title | 2026-10-20
-#
+# One issue per line:   link | title | date | topic | summary
+# Only the link is required. Dates are written year-month-day.
+# The site numbers issues by date (oldest is #01) and shows the newest first.
 # Lines starting with # are notes and are ignored.
 
+https://www.linkedin.com/pulse/youre-overthinking-ai-heres-what-actually-matters-kunal-mukherjee-gfevf/ | You're overthinking AI. Here's what actually matters | 2025-11-18 | Basics | AI won't steal your job, it will steal your excuses. Why judgment, not output, is your real edge, plus a Chief of Staff prompt and five underrated tools.
+https://www.linkedin.com/pulse/what-ai-issue-2-does-level-playing-field-widens-gap-kunal-mukherjee-2axof/ | AI does not level the playing field. It widens the gap | 2025-12-02 | Marketing | Prompt copiers, tool tourists and quiet operators. Four AI workflows every marketer should master, and why India could become the capital of AI-led marketing.
+https://www.linkedin.com/pulse/what-ai-3-kunal-mukherjee-vbn2c/ | The end of the Information Tax | 2025-12-23 | India | For 75 years India has paid an information tax. How AI moves us from search to synthesis, and why in India it is about access, not efficiency.
+https://www.linkedin.com/pulse/what-ai-issue-4-kunal-mukherjee-wysef/ | The Doing Era: why 2026 changes everything | 2026-01-07 | Agents | 2026 is the year AI stops chatting and starts doing. From prompting to delegating, the rise of the one-person unicorn, and India's leap to voice agents.
+https://www.linkedin.com/pulse/what-ai-issue-5-end-static-media-you-now-movie-kunal-mukherjee-67olf/ | The end of static media: the movie is now an app | 2026-01-13 | Media | Software is eating the studio. Elastic cinema, AI-made micro-dramas from Tier 2 India, and why the creative technologist is the hybrid to become.
+https://www.linkedin.com/pulse/what-ai-issue-6-kunal-mukherjee-jnbxf/ | The Forever Interface: when AI becomes memory | 2026-02-18 | Memory | Dedicated to my father. The shift from AI that does tasks to AI that offers presence: digital ancestry, family clouds and passing wisdom forward.
+https://www.linkedin.com/pulse/death-rectangle-when-ai-opens-its-eyes-kunal-mukherjee-ndiff/ | The death of the rectangle: when AI opens its eyes | 2026-02-26 | Vision | The screenless revolution. Why your camera is the new keyboard, the rise of AI for blue-collar work, and how vision AI turns every mechanic into a master technician.
+https://www.linkedin.com/pulse/what-ai-issue-8-kunal-mukherjee-jpfbc/ | The Trust Economy: why marketers must care who owns the AI | 2026-06-27 | Marketing | From cool copy to brand safety. Why trust and data sovereignty are the new currency, two prompts to audit your stack, and India's sovereign AI toolkit.
+https://www.linkedin.com/pulse/what-ai-issue-9-build-your-superpowers-1-kunal-mukherjee-yp4zf/ | Build your AI superpowers #1: Goblin Tools | 2026-07-04 | Tools | Every Saturday, one AI tool and one new superpower. First up: Goblin Tools, which turns overwhelming tasks into small, doable steps.
