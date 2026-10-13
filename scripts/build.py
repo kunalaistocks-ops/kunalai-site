@@ -189,6 +189,8 @@ def validate_ai(data, recent_terms):
     out = []
     for q in quiz:
         qq, why = clean_text(q.get("q")), clean_text(q.get("why"))
+        qq = re.sub(r"^(myth or fact|fact or myth)\s*[:?.-]\s*", "", qq, flags=re.I)
+        qq = qq[:1].upper() + qq[1:]
         if not isinstance(q.get("a"), bool):
             raise ValueError("quiz answer must be true or false")
         if not (20 <= len(qq) <= 200 and 20 <= len(why) <= 260):
@@ -217,6 +219,7 @@ Rules:
   with [brackets] for the parts they fill in. "for" is one of: Anyone, Marketing, Finance, Sales, HR,
   Operations, Customer support, Leadership, Legal, Content, Students, Founders.
 - quiz: exactly five Myth or Fact statements, "a" is true for fact and false for myth.
+  Write each statement on its own, without starting it with "Myth or Fact".
   Include two or three myths. Each "q" is under 170 characters; each "why" is one or two sentences under 220 characters.
 - Up to two quiz items may be about today's headlines. They must be facts, must only restate what the headline
   itself says, and must name the source, for example "Mint reports that ...". Never guess details beyond the headline.
@@ -680,3 +683,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
