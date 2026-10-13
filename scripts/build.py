@@ -1,0 +1,420 @@
+#!/usr/bin/env python3
+"""
+Daily build for kunalai.in
+
+Runs every morning via GitHub Actions (see .github/workflows/daily.yml).
+It rewrites the marked blocks inside index.html, so the published page is
+plain HTML that search engines and AI assistants can read.
+
+What it does:
+  1. Stamps today's date (IST) as the edition date.
+  2. Pulls fresh AI headlines from the feeds in site.config.json
+     (headline, source and link only; never article text).
+  3. Picks today's term, prompt and quiz from data/daily.json.
+  4. Turns every newsletter/*.md file into its own page and an archive list.
+  5. Rebuilds sitemap.xml and feed.xml (RSS of the newsletter).
+
+If a feed fails, the build keeps going. If every feed fails, yesterday's
+headlines stay on the page.
+"""
+import datetime as dt
+import html
+import json
+import re
+import socket
+import sys
+from pathlib import Path
+from urllib.parse import quote
+
+ROOT = Path(__file__).resolve().parent.parent
+IST = dt.timezone(dt.timedelta(hours=5, minutes=30))
+NOW = dt.datetime.now(IST)
+TODAY = NOW.date()
+socket.setdefaulttimeout(20)
+
+try:
+    import feedparser
+except ImportError:
+    feedparser = None
+try:
+    import markdown as md
+except ImportError:
+    md = None
+
+CFG = json.loads((ROOT / "site.config.json").read_text(encoding="utf-8"))
+BANK = json.loads((ROOT / "data/daily.json").read_text(encoding="utf-8"))
+SITE = CFG["site_url"].rstrip("/")
+E = html.escape
+
+
+def nice_date(d):
+    return f"{d.strftime('%A')}, {d.day} {d.strftime('%B %Y')}"
+
+
+def replace_block(page, name, content):
+    pat = re.compile(rf"(<!--BUILD:{name}-->)(.*?)(<!--/BUILD:{name}-->)", re.S)
+    if not pat.search(page):
+        print(f"warning: marker {name} not found", file=sys.stderr)
+        return page
+    return pat.sub(lambda m: m.group(1) + content + m.group(3), page)
+
+
+def strip_tags(s):
+    return re.sub(r"<[^>]+>", "", s or "").strip()
+
+
+# ---------- 1. News ----------
+def fetch_news():
+    if not feedparser:
+        print("feedparser missing; skipping news", file=sys.stderr)
+        return []
+    items, seen = [], set()
+    cutoff = NOW - dt.timedelta(days=3)
+    for feed in CFG["news_feeds"]:
+        try:
+            parsed = feedparser.parse(feed["url"], agent="kunalai.in daily build")
+        except Exception as e:  # noqa
+            print(f"feed failed: {feed['name']}: {e}", file=sys.stderr)
+            continue
+        for en in parsed.entries[:25]:
+            title = strip_tags(en.get("title", ""))
+            link = en.get("link", "")
+            if not title or not link:
+                continue
+            source = feed["name"]
+            src = en.get("source")
+            if src and getattr(src, "title", None):
+                source = src.title
+            elif isinstance(src, dict) and src.get("title"):
+                source = src["title"]
+            if source and title.endswith(" - " + source):
+                title = title[: -len(" - " + source)]
+            if source.startswith("Google News"):
+                source = "News"
+            t = en.get("published_parsed") or en.get("updated_parsed")
+            when = dt.datetime(*t[:6], tzinfo=dt.timezone.utc).astimezone(IST) if t else NOW
+            if when < cutoff:
+                continue
+            key = re.sub(r"\W+", "", title.lower())[:60]
+            if key in seen:
+                continue
+            seen.add(key)
+            items.append({"title": title, "link": link, "source": source,
+                          "when": when, "region": feed.get("region", "World")})
+    items.sort(key=lambda x: x["when"], reverse=True)
+    picked, per = [], {}
+    limit, per_max = CFG.get("news_count", 8), CFG.get("news_max_per_source", 2)
+    # Make sure India gets at least two slots
+    for want_india in (True, False):
+        for it in items:
+            if len(picked) >= limit:
+                break
+            if it in picked:
+                continue
+            if want_india and (it["region"] != "India" or sum(p["region"] == "India" for p in picked) >= 2):
+                continue
+            if per.get(it["source"], 0) >= per_max:
+                continue
+            per[it["source"]] = per.get(it["source"], 0) + 1
+            picked.append(it)
+    picked.sort(key=lambda x: x["when"], reverse=True)
+    return picked
+
+
+def render_news(items):
+    out = ['<ol class="td-list">']
+    for it in items:
+        ago = NOW - it["when"]
+        hrs = int(ago.total_seconds() // 3600)
+        when = "Just now" if hrs < 1 else (f"{hrs}h ago" if hrs < 24 else f"{hrs // 24}d ago")
+        tag = '<span class="td-flag">INDIA</span>' if it["region"] == "India" else ""
+        out.append(
+            f'<li><a href="{E(it["link"])}" target="_blank" rel="noopener">{E(it["title"])}</a>'
+            f'<span>{E(it["source"])}, {when}{tag}</span></li>')
+    out.append("</ol>")
+    return "\n".join(out)
+
+
+# ---------- 2. Daily picks ----------
+def pick(lst, salt):
+    n = TODAY.toordinal() + salt
+    return lst[n % len(lst)]
+
+
+def render_term():
+    t = pick(BANK["terms"], 0)
+    return f'<h3>{E(t["term"])}</h3><p>{E(t["def"])}</p>'
+
+
+def render_prompt():
+    p = pick(BANK["prompts"], 7)
+    who = "ANYONE" if p["for"] == "Anyone" else p["for"].upper()
+    return (f'<p class="td-for">FOR {E(who)}</p>'
+            f'<p class="td-q" id="promptText">{E(p["prompt"])}</p>'
+            f'<button type="button" class="td-copy" data-copy="promptText">Copy prompt</button>')
+
+
+def render_quiz():
+    q = BANK["quiz"]
+    start = (TODAY.toordinal() * 3) % len(q)
+    todays = [q[(start + i) % len(q)] for i in range(5)]
+    out = ['<ol class="td-quiz" id="quiz">']
+    for i, it in enumerate(todays):
+        ans = "fact" if it["a"] else "myth"
+        out.append(
+            f'<li data-answer="{ans}"><p class="q">{E(it["q"])}</p>'
+            f'<div class="qb"><button type="button" data-pick="fact">Fact</button>'
+            f'<button type="button" data-pick="myth">Myth</button></div>'
+            f'<p class="why"><strong>{ans.capitalize()}.</strong> {E(it["why"])}</p></li>')
+    out.append("</ol>")
+    return "\n".join(out)
+
+
+# ---------- 3. Newsletter ----------
+def parse_issue(path):
+    raw = path.read_text(encoding="utf-8")
+    meta, body = {}, raw
+    m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", raw, re.S)
+    if m:
+        for line in m.group(1).splitlines():
+            if ":" in line:
+                k, v = line.split(":", 1)
+                meta[k.strip().lower()] = v.strip().strip('"').strip("'")
+        body = m.group(2)
+    try:
+        date = dt.date.fromisoformat(meta.get("date", ""))
+    except ValueError:
+        date = dt.date.fromtimestamp(path.stat().st_mtime)
+    title = meta.get("title") or path.stem.replace("-", " ").title()
+    slug = re.sub(r"[^a-z0-9]+", "-", path.stem.lower()).strip("-")
+    if md:
+        body_html = md.markdown(body, extensions=["extra", "sane_lists"])
+    else:
+        body_html = "".join(f"<p>{E(p)}</p>" for p in body.split("\n\n") if p.strip())
+    text = strip_tags(body_html)
+    summary = meta.get("summary") or (text[:180].rsplit(" ", 1)[0] + "...")
+    words = len(text.split())
+    return {"title": title, "date": date, "slug": slug, "summary": summary,
+            "linkedin": meta.get("linkedin", ""), "html": body_html,
+            "minutes": max(1, round(words / 220))}
+
+
+def load_issues():
+    (ROOT / "newsletter").mkdir(exist_ok=True)
+    issues = [parse_issue(p) for p in sorted((ROOT / "newsletter").glob("*.md"))
+              if not p.name.startswith("_")]
+    if CFG.get("newsletter_rss") and feedparser:
+        try:
+            for en in feedparser.parse(CFG["newsletter_rss"]).entries[:30]:
+                t = en.get("published_parsed")
+                issues.append({"title": strip_tags(en.get("title", "")),
+                               "date": dt.date(*t[:3]) if t else TODAY,
+                               "slug": None, "external": en.get("link", ""),
+                               "summary": strip_tags(en.get("summary", ""))[:180],
+                               "minutes": None})
+        except Exception as e:  # noqa
+            print(f"newsletter rss failed: {e}", file=sys.stderr)
+    issues.sort(key=lambda x: x["date"], reverse=True)
+    return issues
+
+
+def issue_url(it):
+    return it.get("external") or f"/newsletter/{it['slug']}.html"
+
+
+def render_archive(issues):
+    sub = CFG.get("linkedin_newsletter_url") or CFG["linkedin_profile"]
+    if not issues:
+        return ('<div class="nl-empty"><p class="s59">THE ARCHIVE</p><p>Issues are moving here from LinkedIn, '
+                f'one by one. Until then, <a href="{E(sub)}">read the latest on LinkedIn</a>.</p></div>')
+    first, rest = issues[0], issues[1:7]
+    mins = f", {first['minutes']} min read" if first.get("minutes") else ""
+    out = [f'<a class="nl-lead" href="{E(issue_url(first))}">'
+           f'<span class="s59">LATEST ISSUE · {first["date"].day} {first["date"].strftime("%B %Y").upper()}{mins.upper()}</span>'
+           f'<strong>{E(first["title"])}</strong><span class="sum">{E(first["summary"])}</span>'
+           f'<span class="go">Read the issue ↗</span></a>']
+    if rest:
+        out.append('<ul class="nl-list">')
+        for it in rest:
+            out.append(f'<li><a href="{E(issue_url(it))}">{E(it["title"])}</a>'
+                       f'<span class="meta">{it["date"].day} {it["date"].strftime("%b %Y")}</span></li>')
+        out.append("</ul>")
+    if len(issues) > 7:
+        out.append('<p class="nl-all"><a href="/newsletter/">See all issues ↗</a></p>')
+    return "\n".join(out)
+
+
+PAGE = """<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}: What the AI!? by Kunal Mukherjee</title>
+<meta name="description" content="{desc}">
+<link rel="canonical" href="{url}">
+<meta name="theme-color" content="#2B3BFF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{desc}">
+<meta property="og:url" content="{url}">
+<meta property="og:image" content="{site}/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="What the AI!?" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<script type="application/ld+json">{ld}</script>
+</head>
+<body>
+<div class="s1">
+<header class="s6"><div class="s7">
+<a href="/" class="s8"><span class="s9">KM</span><span class="s10">Kunal Mukherjee</span></a>
+<nav aria-label="Main" class="mainnav s11"><a href="/#today" class="s12">Today</a><a href="/#jobs" class="s12">Your job</a><a href="/#newsletter" class="s12">Newsletter</a><a href="/#about" class="s12">About</a></nav>
+</div></header>
+<main class="art">
+{body}
+</main>
+<section class="s97"><div class="s98">
+<h2 class="s99">Disagree with<br>something? Good.</h2>
+<p class="s100">Speaking, partnerships, collaborations, or a good argument about AI. My inbox is open.</p>
+<div class="s88"><a href="mailto:{email}" class="s101">Email me</a><a href="{sub}" target="_blank" rel="noopener" class="s102">Subscribe on LinkedIn</a>{xbtn}</div>
+</div></section>
+<footer class="s103"><div class="s104">
+<span>© {year} Kunal Mukherjee · Views are my own · <a class="foot" href="mailto:{email}">Email</a> · <a class="foot" href="{li}">LinkedIn</a>{xlink} · <a class="foot" href="/feed.xml">RSS</a></span>
+<span>Made in Mumbai</span>
+</div></footer>
+</div>
+</body></html>
+"""
+
+
+def x_url():
+    h = CFG.get("x_handle", "").lstrip("@").strip()
+    return f"https://x.com/{h}" if h else ""
+
+
+def page_common():
+    sub = CFG.get("linkedin_newsletter_url") or CFG["linkedin_profile"]
+    xl = f' · <a class="foot" href="{x_url()}">X</a>' if x_url() else ""
+    xb = (f'<a href="{x_url()}" target="_blank" rel="noopener me" class="s102">Follow on X</a>'
+          if x_url() else "")
+    return dict(site=SITE, email=CFG["email"], sub=sub, li=CFG["linkedin_profile"],
+                year=TODAY.year, xlink=xl, xbtn=xb)
+
+
+def write_issue_pages(issues):
+    outdir = ROOT / "newsletter"
+    outdir.mkdir(exist_ok=True)
+    local = [i for i in issues if i.get("slug")]
+    for idx, it in enumerate(local):
+        url = f"{SITE}/newsletter/{it['slug']}.html"
+        prev_ = local[idx + 1] if idx + 1 < len(local) else None
+        next_ = local[idx - 1] if idx > 0 else None
+        nav = '<nav class="issue-nav">'
+        if prev_:
+            nav += f'<a href="/newsletter/{prev_["slug"]}.html">Previous: {E(prev_["title"])}</a>'
+        if next_:
+            nav += f'<a href="/newsletter/{next_["slug"]}.html">Next: {E(next_["title"])}</a>'
+        nav += "</nav>"
+        orig = (f'<p class="orig">Also published on <a href="{E(it["linkedin"])}">LinkedIn</a>.</p>'
+                if it.get("linkedin") else "")
+        body = (f'<p class="s14"><a href="/#newsletter">WHAT THE AI!?</a> · '
+                f'{it["date"].day} {it["date"].strftime("%B %Y").upper()} · {it["minutes"]} MIN READ</p>'
+                f'<h1 class="art-h">{E(it["title"])}</h1>'
+                f'<p class="art-by">By Kunal Mukherjee</p>'
+                f'<div class="prose">{it["html"]}</div>{orig}{nav}')
+        ld = json.dumps({"@context": "https://schema.org", "@type": "Article",
+                         "headline": it["title"], "datePublished": it["date"].isoformat(),
+                         "author": {"@type": "Person", "name": "Kunal Mukherjee", "url": SITE + "/"},
+                         "mainEntityOfPage": url, "image": SITE + "/og-image.png"})
+        (outdir / f"{it['slug']}.html").write_text(PAGE.format(
+            title=E(it["title"]), desc=E(it["summary"]), url=url, body=body, ld=ld,
+            **page_common()), encoding="utf-8")
+    # Full archive page
+    rows = "".join(f'<li><a href="{E(issue_url(i))}">{E(i["title"])}</a>'
+                   f'<span class="meta">{i["date"].day} {i["date"].strftime("%b %Y")}</span></li>'
+                   for i in issues)
+    body = ('<p class="s14">THE NEWSLETTER</p><h1 class="art-h">What the AI!?</h1>'
+            '<p class="art-by">Every issue, newest first. Practical AI for non-technical managers.</p>'
+            f'<ul class="nl-list art-list">{rows or "<li>New issues will appear here.</li>"}</ul>')
+    (outdir / "index.html").write_text(PAGE.format(
+        title="All issues", desc="Every issue of What the AI!? by Kunal Mukherjee.",
+        url=f"{SITE}/newsletter/", body=body, ld="{}", **page_common()), encoding="utf-8")
+
+
+def write_feed(issues):
+    items = []
+    for it in issues[:30]:
+        link = it.get("external") or f"{SITE}/newsletter/{it['slug']}.html"
+        pub = dt.datetime.combine(it["date"], dt.time(8, 0), IST).strftime("%a, %d %b %Y %H:%M:%S %z")
+        items.append(f"<item><title>{E(it['title'])}</title><link>{E(link)}</link>"
+                     f"<guid>{E(link)}</guid><pubDate>{pub}</pubDate>"
+                     f"<description>{E(it['summary'])}</description></item>")
+    (ROOT / "feed.xml").write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel>'
+        f"<title>What the AI!? by Kunal Mukherjee</title><link>{SITE}/</link>"
+        "<description>AI explained for the people who run things.</description>"
+        f"<language>en-in</language>{''.join(items)}</channel></rss>\n", encoding="utf-8")
+
+
+def write_sitemap(issues):
+    urls = [(f"{SITE}/", TODAY), (f"{SITE}/newsletter/", TODAY)]
+    urls += [(f"{SITE}/newsletter/{i['slug']}.html", i["date"]) for i in issues if i.get("slug")]
+    body = "".join(f"<url><loc>{u}</loc><lastmod>{d.isoformat()}</lastmod></url>" for u, d in urls)
+    (ROOT / "sitemap.xml").write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        f'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{body}</urlset>\n', encoding="utf-8")
+
+
+# ---------- 4. X ----------
+def render_x():
+    url = x_url()
+    if not url:
+        return ""
+    h = CFG["x_handle"].lstrip("@")
+    out = f'<a class="btn ghost" href="{url}" rel="me">Follow @{E(h)} on X</a>'
+    return out
+
+
+def render_x_embed():
+    url = x_url()
+    if not url or not CFG.get("x_embed_timeline"):
+        return ""
+    h = CFG["x_handle"].lstrip("@")
+    return (f'<div class="x-embed"><a class="twitter-timeline" data-height="520" data-dnt="true" '
+            f'href="{url}">Posts by @{E(h)}</a>'
+            '<script async src="https://platform.twitter.com/widgets.js"></script></div>')
+
+
+def main():
+    page_path = ROOT / "index.html"
+    page = page_path.read_text(encoding="utf-8")
+
+    page = replace_block(page, "DATE", E(nice_date(TODAY).replace(",", "").upper()))
+
+    news = fetch_news()
+    if news:
+        page = replace_block(page, "NEWS", render_news(news))
+        page = replace_block(page, "NEWSTIME", E(f"UPDATED {NOW.strftime('%-I:%M %p')} IST"))
+    else:
+        print("no fresh news; keeping previous headlines", file=sys.stderr)
+
+    page = replace_block(page, "TERM", render_term())
+    page = replace_block(page, "PROMPT", render_prompt())
+    page = replace_block(page, "QUIZ", render_quiz())
+
+    issues = load_issues()
+    page = replace_block(page, "NEWSLETTER", render_archive(issues))
+
+    page_path.write_text(page, encoding="utf-8")
+    write_issue_pages(issues)
+    write_feed(issues)
+    write_sitemap(issues)
+    print(f"built {TODAY}: {len(news)} headlines, {len(issues)} newsletter issues")
+
+
+if __name__ == "__main__":
+    main()
+
