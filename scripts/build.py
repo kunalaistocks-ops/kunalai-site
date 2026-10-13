@@ -540,9 +540,11 @@ PAGE = """<!doctype html>
 </div></section>
 <footer class="s103"><div class="s104">
 <span>© {year} Kunal Mukherjee · Views are my own · <a class="foot" href="mailto:{email}">Email</a> · <a class="foot" href="{li}">LinkedIn</a>{xlink} · <a class="foot" href="/feed.xml">RSS</a></span>
-<span>Made in Mumbai</span>
+<span><a class="foot" href="/privacy.html">Privacy</a> · <a class="foot" href="#" data-cookie-settings>Cookie settings</a> · Made in Mumbai</span>
 </div></footer>
 </div>
+<script src="/content.js"></script>
+<script src="/consent.js"></script>
 <script src="/app-mail.js"></script>
 </body></html>
 """
@@ -624,7 +626,7 @@ def write_feed(issues):
 
 
 def write_sitemap(issues):
-    urls = [(f"{SITE}/", TODAY), (f"{SITE}/newsletter/", TODAY)]
+    urls = [(f"{SITE}/", TODAY), (f"{SITE}/newsletter/", TODAY), (f"{SITE}/privacy.html", TODAY)]
     urls += [(f"{SITE}/newsletter/{i['slug']}.html", i["date"]) for i in issues if i.get("slug")]
     body = "".join(f"<url><loc>{u}</loc><lastmod>{d.isoformat()}</lastmod></url>" for u, d in urls)
     (ROOT / "sitemap.xml").write_text(
@@ -654,7 +656,7 @@ def render_x_embed():
 
 
 # ---------- Version stamps so browsers always load the newest files ----------
-ASSETS = ["styles.css", "content.js", "app.js", "score.js", "app-mail.js"]
+ASSETS = ["styles.css", "content.js", "consent.js", "app.js", "score.js", "app-mail.js"]
 
 
 def asset_versions():
@@ -699,6 +701,9 @@ def main():
     versions = asset_versions()
     page = stamp_assets(page, versions)
     page_path.write_text(page, encoding="utf-8")
+    priv = ROOT / "privacy.html"
+    if priv.exists():
+        priv.write_text(stamp_assets(priv.read_text(encoding="utf-8"), versions), encoding="utf-8")
     write_issue_pages(issues)
     write_feed(issues)
     write_sitemap(issues)
