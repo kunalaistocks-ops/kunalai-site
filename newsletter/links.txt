@@ -1,0 +1,11 @@
+# What the AI!? issues
+#
+# Paste the public LinkedIn link of each new issue on its own line, then commit.
+# The site picks up the title, summary and date by itself within a few minutes.
+# Newest or oldest first, it doesn't matter: the site sorts them by date.
+#
+# Optional: if a title or date comes out wrong, add them after the link like this:
+# https://www.linkedin.com/pulse/your-issue-link | Your exact title | 2026-10-20
+#
+# Lines starting with # are notes and are ignored.
+
