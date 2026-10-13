@@ -132,7 +132,11 @@
       moves: ["Turn your best prompts into templates your whole team can reuse.",
               "Pick one weekly process and automate it end to end.",
               "Teach two colleagues what works for you this month. Your edge grows when theirs does."],
-      track: "leader"
+      track: "leader",
+      plan: ["Week 1: list your five most-used prompts and turn them into templates.",
+             "Week 2: automate one weekly process end to end.",
+             "Week 3: run a 30-minute session teaching two colleagues what works.",
+             "Week 4: measure the time you've saved and share the numbers with your manager."]
     },
     next: {
       name: "Next in Line",
@@ -140,7 +144,11 @@
       moves: ["Use AI on three real tasks every day for the next 30 days.",
               "Learn to brief AI like you'd brief a good agency: context, goal and an example.",
               "Move more of your time toward what AI can't do: judgement, relationships and decisions."],
-      track: "pro"
+      track: "pro",
+      plan: ["Week 1: use AI on three real tasks every working day.",
+             "Week 2: brief AI properly every time: context, goal and an example.",
+             "Week 3: save your three best prompts as reusable templates.",
+             "Week 4: hand one recurring task to AI for good, and spend the time saved on work that needs you."]
     },
     multiplier: {
       name: "Multiplier",
@@ -148,7 +156,11 @@
       moves: ["Hand AI the admin around your core work: notes, follow-ups, first drafts.",
               "Use AI as a sparring partner before big decisions. Ask it to argue the other side.",
               "Help your team catch up. A team of multipliers outruns everyone."],
-      track: "leader"
+      track: "leader",
+      plan: ["Week 1: list the admin around your core work and hand two pieces of it to AI.",
+             "Week 2: before each big decision, ask AI to argue the other side.",
+             "Week 3: build one reusable prompt for the document you write most often.",
+             "Week 4: show one teammate how you use AI, and learn one trick from them."]
     },
     bystander: {
       name: "Comfortable Bystander",
@@ -156,9 +168,20 @@
       moves: ["Try one AI tool this week on something you already do.",
               "Read one practical AI newsletter every week. What the AI!? is a good place to start.",
               "Ask who in your team uses AI best, and spend 20 minutes learning from them."],
-      track: "pro"
+      track: "pro",
+      plan: ["Week 1: try one AI tool on something you already do, at least twice.",
+             "Week 2: read one practical AI newsletter issue and try one idea from it.",
+             "Week 3: ask the best AI user you know for 20 minutes of their time.",
+             "Week 4: pick one weekly task and do it with AI every week from now on."]
     }
   };
+
+  // ---------- Google Sheet (optional): set SITE.sheet in content.js ----------
+  var SHEET = (typeof SITE !== "undefined" && SITE.sheet) ? SITE.sheet : "";
+  function sendToSheet(payload) {
+    if (!SHEET) return Promise.reject(new Error("off"));
+    return fetch(SHEET, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) });
+  }
 
   var KEY = "km_score";
   var answers = [], step = 0, userName = "";
@@ -192,7 +215,7 @@
       '<div class="sc-intro">' +
       '<div class="sc-intro-l"><p class="s59">' + (last && last.name ? "WELCOME BACK, " + esc(last.name.toUpperCase()) : "10 QUESTIONS · 2 MINUTES · PRIVATE") + '</p>' +
       '<p class="sc-big">Find out how much of your work AI could take on, and how ready you are for it.</p>' +
-      '<p class="sc-small">For every kind of work: office, creative, health, education, public sector, hands-on and frontline, students too. You get two scores, your AI type and next moves. Your answers stay in your browser.</p>' +
+      '<p class="sc-small">For every kind of work: office, creative, health, education, public sector, hands-on and frontline, students too. You get two scores, your AI type and next moves. Your answers stay in your browser.' + (SHEET ? ' We only count anonymous results (role and type, never your name) to see trends.' : '') + '</p>' +
       '<button type="button" class="sc-go" data-sc="start">' + (last ? "Take it again" : "Start the check") + ' →</button>' +
       '<details class="sc-how"><summary>How the scoring works</summary>' +
       '<p><b>AI exposure</b> combines a starting point for your field (30%) with how you actually spend your week (70%). ' +
@@ -222,7 +245,7 @@
       '<input id="scName" class="sc-input" type="text" maxlength="24" autocomplete="given-name" placeholder="e.g. Priya" value="' + esc(userName || (last && last.name) || "") + '">' +
       '<button type="submit" class="sc-go">Continue →</button></form>' +
       '<p class="sc-small sc-err" aria-live="polite"></p>' +
-      '<p class="sc-small">It goes on your result card. Like your answers, it stays in your browser.</p></div>';
+      '<p class="sc-small">It goes on your result card. It stays in your browser unless you choose to email yourself your results.</p></div>';
     var i = box.querySelector("#scName"); i.focus(); i.select();
   }
 
@@ -288,6 +311,25 @@
     }).join("") + '</div>';
   }
 
+  function mailBlock(r) {
+    var done = null; try { done = JSON.parse(localStorage.getItem("km_mailed")); } catch (e) {}
+    if (done && done.date === r.date && done.type === r.type) {
+      return '<div class="sc-mail sc-mail-done"><p class="s59">IN YOUR INBOX</p><p class="sc-mail-h">Sent to ' + esc(done.email) + '.</p>' +
+        '<p class="sc-small">Not there? Check your spam folder, or <button type="button" class="sc-link" data-sc="remail">send it again</button>.</p></div>';
+    }
+    return '<div class="sc-mail"><div class="sc-mail-l"><p class="s59">GET THIS IN YOUR INBOX</p>' +
+      '<p class="sc-mail-h">Email me my results and a 4-week plan</p>' +
+      '<p class="sc-small">Your scores, your next moves and a simple week-by-week plan for a ' + esc(TYPES[r.type].name) + '.</p></div>' +
+      '<form class="sc-mail-f" data-mail-form novalidate>' +
+      '<label class="sc-vh" for="scEmail">Your email</label>' +
+      '<div class="sc-mail-row"><input id="scEmail" class="sc-input" type="email" autocomplete="email" placeholder="you@example.com" required>' +
+      '<button type="submit" class="sc-go">Send it to me</button></div>' +
+      '<input type="text" name="website" class="sc-trap" tabindex="-1" autocomplete="off" aria-hidden="true">' +
+      '<label class="sc-check"><input type="checkbox" id="scNews"> <span>Also send me <b>What the AI!?</b>, Kunal\'s practical AI newsletter. Unsubscribe anytime.</span></label>' +
+      '<p class="sc-fine">Your email is used only to send what you ask for. Never shared, never sold. <a href="/privacy.html">Privacy</a></p>' +
+      '<p class="sc-small sc-mail-msg" aria-live="polite"></p></form></div>';
+  }
+
   function meter(label, v, note) {
     return '<div class="sc-meter"><p class="s59">' + label + '</p><p class="sc-num">' + v + '<small>/100</small></p>' +
       '<div class="sc-bar"><span style="width:' + v + '%"></span></div><p class="sc-note">' + note + '</p></div>';
@@ -312,6 +354,7 @@
       '<div class="sc-moves"><p class="s59">YOUR NEXT MOVES</p><ol>' + moves.map(function (m) { return "<li>" + esc(m) + "</li>"; }).join("") + '</ol>' +
       '<div class="sc-actions"><button type="button" class="sc-go" data-sc="path">Start your learning path →</button>' +
       (role && role.card ? '<button type="button" class="sc-ghost" data-sc="role">See your role in detail</button>' : "") + '</div></div>' +
+      (SHEET ? mailBlock(r) : "") +
       '<div class="sc-share"><div class="sc-share-card"><div class="sc-card-wrap"><canvas id="scCanvas" width="1080" height="1350" role="img" aria-label="Your result card: ' + esc(t.name) + ', exposure ' + r.exposure + ', readiness ' + r.readiness + '"></canvas></div></div>' +
       '<div class="sc-share-side"><p class="s59">SHARE YOUR RESULT</p><p class="sc-share-h">Post your card. See what your network gets.</p>' +
       '<div class="sc-share-btns">' +
@@ -327,6 +370,10 @@
     box._share = shareText;
     box._r = r;
     drawCard(r);
+    if (fresh && window.kmTrackQuiz) window.kmTrackQuiz();
+    if (fresh && SHEET) {
+      sendToSheet({ kind: "result", role: r.role, type: TYPES[r.type].name, exposure: r.exposure, readiness: r.readiness }).catch(function () {});
+    }
     if (fresh) {
       var h = box.querySelector(".sc-res-name"); if (h) h.focus();
       if (window.kmBadge) window.kmBadge("scored");
@@ -451,6 +498,7 @@
     var a = b.getAttribute("data-sc");
     if (a === "start") { answers = []; step = 0; openGroup = null; nameStep(); }
     if (a === "back") { if (step === 0) { nameStep(); } else { step--; question(); } }
+    if (a === "remail") { try { localStorage.removeItem("km_mailed"); } catch (err) {} result(box._r, false); var em = box.querySelector("#scEmail"); if (em) em.focus(); return; }
     if (a === "show") { var l = load(); if (l && TYPES[l.type]) result(l, false); }
     if (a === "path") {
       var trk = box._r.role === "Student" ? "student" : (box._r.role === "Founder, business owner or senior leader" ? "leader" : TYPES[box._r.type].track);
@@ -485,6 +533,25 @@
     if (!v) { box.querySelector(".sc-err").textContent = "Add your first name so we can put it on your card."; box.querySelector("#scName").focus(); return; }
     userName = v; step = 0; question(); var h = box.querySelector(".sc-qt"); if (h) h.focus();
     if (window.innerWidth > 640) { var si = box.querySelector("#scSearch"); if (si) si.focus(); }
+  });
+  box.addEventListener("submit", function (e) {
+    if (!e.target.hasAttribute("data-mail-form")) return;
+    e.preventDefault();
+    var f = e.target, msg = f.querySelector(".sc-mail-msg"), btn = f.querySelector("button[type=submit]");
+    var email = f.querySelector("#scEmail").value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { msg.textContent = "Please check your email address."; f.querySelector("#scEmail").focus(); return; }
+    var r = box._r, t = TYPES[r.type], role = ROLES.filter(function (x) { return x.name === r.role; })[0];
+    var moves = t.moves.slice(); if (role && role.next) moves.push("Your next skill: " + role.next.charAt(0).toLowerCase() + role.next.slice(1));
+    btn.disabled = true; btn.textContent = "Sending...";
+    sendToSheet({ kind: "signup", website: f.querySelector(".sc-trap").value, name: r.name || "", email: email, role: r.role, type: t.name, line: t.line,
+      exposure: r.exposure, readiness: r.readiness, moves: moves, plan: t.plan, newsletter: f.querySelector("#scNews").checked })
+      .then(function () {
+        try { localStorage.setItem("km_mailed", JSON.stringify({ email: email, date: r.date, type: r.type })); } catch (err) {}
+        f.parentNode.outerHTML = mailBlock(r).replace("Sent to ", "Sent! Check your inbox in a minute. We sent it to ");
+      }, function () {
+        btn.disabled = false; btn.textContent = "Send it to me";
+        msg.textContent = "That didn't go through. Check your connection and try again.";
+      });
   });
   box.addEventListener("input", function (e) {
     if (!e.target.hasAttribute("data-search")) return;

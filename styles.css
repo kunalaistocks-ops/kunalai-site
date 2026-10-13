@@ -492,3 +492,37 @@ button:focus-visible,a:focus-visible{outline:3px solid #2B3BFF;outline-offset:3p
 .sc-or{margin:6px 0 -6px}
 .sc-res-you{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(22px,2.6vw,30px);letter-spacing:-.01em}
 @media (max-width:640px){.sc-count-n{font-size:18px}.sc-count-n b{font-size:26px}.sc-dots{gap:4px}}
+
+/* ---------- Score: email results ---------- */
+.sc-mail{display:grid;grid-template-columns:1fr;gap:18px 32px;padding:32px 40px;background:#D9FF3F;border-bottom:2px solid #101114;align-items:center}
+@media (min-width:900px){.sc-mail{grid-template-columns:1fr 1.15fr}}
+.sc-mail-l{display:flex;flex-direction:column;gap:8px}
+.sc-mail .s59{color:#101114}
+.sc-mail-h{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(24px,2.6vw,32px);line-height:1.08;letter-spacing:-.02em}
+.sc-mail .sc-small{color:#101114}
+.sc-mail-f{display:flex;flex-direction:column;gap:12px}
+.sc-mail-row{display:flex;flex-wrap:wrap;gap:10px}
+.sc-mail-row .sc-input{flex:1 1 220px}
+.sc-trap{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.sc-check{display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.4;cursor:pointer}
+.sc-check input{width:20px;height:20px;margin-top:1px;accent-color:#101114;flex:none}
+.sc-fine{margin:0;font-size:13px;color:#3A3B40}
+.sc-mail-msg{min-height:1.2em;font-weight:600}
+.sc-mail-done{display:block}
+.sc-mail-done .sc-mail-h{margin:6px 0}
+@media (max-width:640px){.sc-mail{padding:24px}}
+
+/* ---------- Cookie notice ---------- */
+#kmConsent{position:fixed;left:20px;bottom:20px;z-index:45;max-width:420px;background:#FFFFFF;color:#101114;border:2px solid #101114;box-shadow:6px 6px 0 #101114;border-radius:12px;padding:20px 22px;font-family:'Hanken Grotesk',sans-serif}
+.kc-t{margin:0 0 6px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;letter-spacing:-.01em}
+.kc-p{margin:0 0 14px;font-size:15px;line-height:1.45;color:#3A3B40}
+.kc-p a{color:#2B3BFF;font-weight:700}
+.kc-b{display:flex;gap:10px;justify-content:flex-end}
+.kc-b button{font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:15px;min-height:44px;padding:0 18px;border-radius:999px;border:2px solid #101114;background:#FFFFFF;color:#101114;cursor:pointer}
+.kc-b .kc-yes{background:#101114;color:#FFFFFF}
+.kc-b button:hover{background:#D9FF3F;color:#101114}
+@media (max-width:640px){#kmConsent{left:12px;right:12px;bottom:12px;max-width:none}}
+/* keep the floating quiz button clear of the cookie notice */
+body:has(#kmConsent) .qz-float{bottom:200px}
+@media (max-width:640px){body:has(#kmConsent) .qz-float{display:none}}
+.sc-fine a{color:#101114;font-weight:700}
