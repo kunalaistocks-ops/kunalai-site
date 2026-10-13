@@ -13,6 +13,7 @@ on:
       - "index.html"
       - "content.js"
       - "app.js"
+      - "app-mail.js"
       - "styles.css"
       - "scripts/**"
 
@@ -33,6 +34,8 @@ jobs:
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
 
       - uses: actions/setup-python@v5
         with:
@@ -48,9 +51,22 @@ jobs:
         run: |
           git config user.name "kunalai-bot"
           git config user.email "actions@users.noreply.github.com"
+          MSG="Daily update $(TZ=Asia/Kolkata date +%F)"
           git add -A
-          git diff --cached --quiet || git commit -m "Daily update $(TZ=Asia/Kolkata date +%F)"
-          git push
+          if git diff --cached --quiet; then echo "Nothing new to save."; exit 0; fi
+          git commit -m "$MSG"
+          for attempt in 1 2 3; do
+            if git push; then echo "Saved."; exit 0; fi
+            echo "The repository changed during the build. Catching up and rebuilding (attempt $attempt)."
+            sleep $((attempt * 5))
+            git fetch origin "$GITHUB_REF_NAME"
+            git reset --hard "origin/$GITHUB_REF_NAME"
+            python scripts/build.py
+            git add -A
+            if git diff --cached --quiet; then echo "Already up to date."; exit 0; fi
+            git commit -m "$MSG"
+          done
+          echo "::warning::Could not save this run's update. The site was still published, and the next run will save it."
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
