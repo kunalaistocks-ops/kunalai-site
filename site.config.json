@@ -39,5 +39,11 @@
       "url": "https://www.oneusefulthing.org/feed",
       "region": "World"
     }
+  ],
+  "ai_daily": true,
+  "ai_models": [
+    "claude-sonnet-5-5",
+    "claude-sonnet-5",
+    "claude-haiku-4-5"
   ]
 }
