@@ -431,3 +431,17 @@ button:focus-visible,a:focus-visible{outline:3px solid #2B3BFF;outline-offset:3p
 .sc-how{margin-top:6px;font-size:15px;color:#3A3B40;max-width:60ch}
 .sc-how summary{cursor:pointer;font-weight:700;color:#2B3BFF}
 .sc-how p{margin:10px 0 0}
+
+/* ---------- Score: sample card and share layout ---------- */
+.sc-sample{padding:32px;display:flex;flex-direction:column;gap:14px;align-items:center;background:#F2F2EE;border-top:2px solid #101114}
+@media (min-width:900px){.sc-sample{border-top:0;border-left:2px solid #101114}}
+.sc-sample .s59{align-self:flex-start}
+.sc-sample .sc-card-wrap{width:100%;max-width:340px;transform:rotate(1.5deg)}
+.sc-types-line{margin:4px 0 0;font-size:15px;color:#3A3B40;text-align:center;max-width:36ch}
+.sc-card-wrap{background:#2B3BFF}
+.sc-share{display:grid;grid-template-columns:1fr;gap:28px;align-items:start}
+@media (min-width:860px){.sc-share{grid-template-columns:minmax(280px,420px) 1fr}}
+.sc-share-card .sc-card-wrap{max-width:420px;width:100%}
+.sc-share-side{display:flex;flex-direction:column;gap:14px}
+.sc-share-h{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(26px,2.8vw,36px);line-height:1.05;letter-spacing:-.02em}
+.sc-steps{margin:4px 0 0;padding-left:22px;font-size:16px;color:#3A3B40;display:flex;flex-direction:column;gap:6px}

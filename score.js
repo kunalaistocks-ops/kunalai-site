@@ -158,11 +158,13 @@
       'and physical and care work far less. Students and people between jobs are scored on their answers alone.</p>' +
       '<p><b>AI readiness</b> combines how often you use AI (35%), whether you\'ve built repeatable habits (30%), whether you check its work (25%) and how you feel about it (10%).</p>' +
       '<p>Exposure means your work is likely to change, not that your job will disappear. <a href="https://www.ilo.org/node/706766" target="_blank" rel="noopener">Read the ILO research ↗</a></p></details></div>' +
-      '<div class="sc-types">' + Object.keys(TYPES).map(function (k) {
-        return '<div class="sc-type sc-t-' + k + '"><b>' + TYPES[k].name + '</b><span>' + (k === "operator" ? "High exposure, high readiness" : k === "next" ? "High exposure, low readiness" : k === "multiplier" ? "Low exposure, high readiness" : "Low exposure, low readiness") + '</span></div>';
-      }).join("") + '</div></div>' +
+      '<div class="sc-sample"><p class="s59">YOU GET A CARD LIKE THIS TO SHARE</p>' +
+      '<div class="sc-card-wrap"><canvas id="scSample" width="1080" height="1350" role="img" aria-label="Sample result card: Quiet Operator, exposure 68, readiness 74"></canvas></div>' +
+      '<p class="sc-types-line">Four types: <b>Quiet Operator</b>, <b>Next in Line</b>, <b>Multiplier</b> and <b>Comfortable Bystander</b>.</p></div></div>' +
       (last ? '<p class="sc-last">Your last result: <b>' + esc(TYPES[last.type].name) + '</b>, exposure ' + last.exposure + ', readiness ' + last.readiness + '. <button type="button" class="sc-link" data-sc="show">See it again</button></p>' : "");
   }
+
+  function introCard() { drawCard({ exposure: 68, readiness: 74, type: "operator", role: "Marketing, brand or communications" }, "scSample", true); }
 
   function question() {
     var q = Q[step], opts = q.opts || [];
@@ -216,16 +218,16 @@
       '<div class="sc-moves"><p class="s59">YOUR NEXT MOVES</p><ol>' + moves.map(function (m) { return "<li>" + esc(m) + "</li>"; }).join("") + '</ol>' +
       '<div class="sc-actions"><button type="button" class="sc-go" data-sc="path">Start your learning path →</button>' +
       (role && role.card ? '<button type="button" class="sc-ghost" data-sc="role">See your role in detail</button>' : "") + '</div></div>' +
-      '<div class="sc-share"><p class="s59">SHARE YOUR RESULT</p>' +
-      '<div class="sc-card-wrap"><canvas id="scCanvas" width="1080" height="1080" aria-label="Your result as an image"></canvas></div>' +
+      '<div class="sc-share"><div class="sc-share-card"><div class="sc-card-wrap"><canvas id="scCanvas" width="1080" height="1350" role="img" aria-label="Your result card: ' + esc(t.name) + ', exposure ' + r.exposure + ', readiness ' + r.readiness + '"></canvas></div></div>' +
+      '<div class="sc-share-side"><p class="s59">SHARE YOUR RESULT</p><p class="sc-share-h">Post your card. See what your network gets.</p>' +
       '<div class="sc-share-btns">' +
       '<button type="button" class="sc-go" data-sc="download">Download image</button>' +
       '<button type="button" class="sc-ghost" data-sc="copy">Copy caption</button>' +
       '<a class="sc-ghost" target="_blank" rel="noopener" href="https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url) + '">LinkedIn</a>' +
       '<a class="sc-ghost" target="_blank" rel="noopener" href="https://wa.me/?text=' + encodeURIComponent(shareText + " " + url) + '">WhatsApp</a>' +
       '<a class="sc-ghost" target="_blank" rel="noopener" href="https://x.com/intent/post?text=' + encodeURIComponent(shareText) + '&url=' + encodeURIComponent(url) + '">X</a>' +
-      '</div><p class="sc-tip">For LinkedIn, download the image, copy the caption, and post both together. Posts with images get seen far more.</p>' +
-      '<p class="sc-small sc-copied" aria-live="polite"></p></div>' +
+      '</div><ol class="sc-steps"><li>Download your card.</li><li>Copy the caption.</li><li>On LinkedIn, start a post, paste the caption and add the image.</li></ol>' +
+      '<p class="sc-small sc-copied" aria-live="polite"></p></div></div>' +
       '<p class="sc-foot">These scores are a quick guide based on your answers, not a forecast. <button type="button" class="sc-link" data-sc="start">Take it again</button></p>' +
       '</div>';
     box._share = shareText;
@@ -237,52 +239,104 @@
     }
   }
 
-  // ---------- share image ----------
-  function wrap(ctx, text, x, y, maxW, lh) {
-    var words = text.split(" "), line = "", lines = [];
+  // ---------- share image (1080 x 1350, LinkedIn's 4:5 feed format) ----------
+  var TCOL = { operator: ["#D9FF3F", "#101114"], next: ["#FF7A2F", "#101114"], multiplier: ["#FFFFFF", "#2B3BFF"], bystander: ["#101114", "#FFFFFF"] };
+  function wrap(ctx, text, x, y, maxW, lh, maxLines) {
+    var words = String(text).split(" "), line = "", lines = [];
     words.forEach(function (w) { var t = line ? line + " " + w : w; if (ctx.measureText(t).width > maxW && line) { lines.push(line); line = w; } else { line = t; } });
     if (line) lines.push(line);
+    if (maxLines && lines.length > maxLines) { lines = lines.slice(0, maxLines); lines[maxLines - 1] = lines[maxLines - 1].replace(/\s+\S*$/, "") + "..."; }
     lines.forEach(function (l, i) { ctx.fillText(l, x, y + i * lh); });
     return lines.length;
   }
-  function drawCard(r) {
-    var c = document.getElementById("scCanvas"); if (!c || !c.getContext) return;
-    var t = TYPES[r.type];
-    var go = function () {
-      var x = c.getContext("2d"), W = 1080;
-      x.fillStyle = "#2B3BFF"; x.fillRect(0, 0, W, W);
-      x.strokeStyle = "rgba(255,255,255,0.08)"; x.lineWidth = 1;
-      for (var g = 0; g <= W; g += 40) { x.beginPath(); x.moveTo(g, 0); x.lineTo(g, W); x.stroke(); x.beginPath(); x.moveTo(0, g); x.lineTo(W, g); x.stroke(); }
-      x.fillStyle = "#D9FF3F"; x.beginPath(); x.arc(92, 108, 9, 0, 7); x.fill();
-      x.font = "500 26px 'JetBrains Mono', monospace"; x.fillText("MY AI SCORE · KUNALAI.IN", 116, 117);
-      x.fillStyle = "#FFFFFF"; x.font = "800 64px 'Bricolage Grotesque', sans-serif";
-      x.fillText("I'm a", 80, 230);
-      x.font = "800 " + (t.name.length > 16 ? 92 : 112) + "px 'Bricolage Grotesque', sans-serif";
-      var tw = Math.min(x.measureText(t.name).width, 920);
-      x.save(); x.translate(80, 268); x.rotate(-0.025);
-      x.fillStyle = "#101114"; x.fillRect(10, 10, tw + 44, 128);
-      x.fillStyle = "#D9FF3F"; x.fillRect(0, 0, tw + 44, 128);
-      x.fillStyle = "#101114"; x.fillText(t.name, 22, 100, 920);
-      x.restore();
-      [["AI EXPOSURE", r.exposure, 80], ["AI READINESS", r.readiness, 560]].forEach(function (m) {
-        x.fillStyle = "#FFFFFF"; x.fillRect(m[2], 470, 440, 250);
-        x.strokeStyle = "#101114"; x.lineWidth = 4; x.strokeRect(m[2], 470, 440, 250);
-        x.fillStyle = "#2B3BFF"; x.font = "500 24px 'JetBrains Mono', monospace"; x.fillText(m[0], m[2] + 32, 520);
-        x.fillStyle = "#101114"; x.font = "800 120px 'Bricolage Grotesque', sans-serif"; x.fillText(String(m[1]), m[2] + 28, 650);
-        x.fillStyle = "#DADAD4"; x.fillRect(m[2] + 32, 674, 376, 16);
-        x.fillStyle = "#2B3BFF"; x.fillRect(m[2] + 32, 674, 376 * m[1] / 100, 16);
-      });
-      x.fillStyle = "#FFFFFF"; x.font = "600 34px 'Hanken Grotesk', sans-serif";
-      wrap(x, t.line, 80, 790, 920, 46);
-      x.fillStyle = "#101114"; x.fillRect(0, 930, W, 150);
-      x.fillStyle = "#D9FF3F"; x.font = "800 44px 'Bricolage Grotesque', sans-serif";
-      x.fillText("How AI-proof is your job?", 80, 1002);
-      x.fillStyle = "#FFFFFF"; x.font = "500 26px 'JetBrains Mono', monospace";
-      x.fillText("TAKE THE 2-MINUTE CHECK · KUNALAI.IN", 80, 1048);
-    };
+  function rrect(x, X, Y, W, H, R) { x.beginPath(); x.moveTo(X + R, Y); x.arcTo(X + W, Y, X + W, Y + H, R); x.arcTo(X + W, Y + H, X, Y + H, R); x.arcTo(X, Y + H, X, Y, R); x.arcTo(X, Y, X + W, Y, R); x.closePath(); }
+  function paintCard(c, r, sample) {
+    var t = TYPES[r.type], col = TCOL[r.type], x = c.getContext("2d"), W = 1080, H = 1350, M = 72;
+    x.clearRect(0, 0, W, H);
+    // background and grid
+    x.fillStyle = "#2B3BFF"; x.fillRect(0, 0, W, H);
+    x.strokeStyle = "rgba(255,255,255,0.07)"; x.lineWidth = 1;
+    for (var g = 0; g <= W; g += 40) { x.beginPath(); x.moveTo(g, 0); x.lineTo(g, H); x.stroke(); }
+    for (g = 0; g <= H; g += 40) { x.beginPath(); x.moveTo(0, g); x.lineTo(W, g); x.stroke(); }
+    // header
+    x.fillStyle = "#D9FF3F"; x.beginPath(); x.arc(M + 10, 92, 10, 0, 7); x.fill();
+    x.font = "500 26px 'JetBrains Mono', monospace"; x.textBaseline = "alphabetic";
+    x.fillText("MY AI SCORE · KUNALAI.IN", M + 34, 101);
+    if (sample) {
+      x.font = "700 22px 'JetBrains Mono', monospace"; var sw = x.measureText("SAMPLE").width + 36;
+      x.fillStyle = "#FF7A2F"; rrect(x, W - M - sw, 66, sw, 50, 25); x.fill(); x.strokeStyle = "#101114"; x.lineWidth = 3; x.stroke();
+      x.fillStyle = "#101114"; x.fillText("SAMPLE", W - M - sw + 18, 100);
+    }
+    // role pill
+    if (r.role && r.role !== "Something else") {
+      x.font = "500 24px 'JetBrains Mono', monospace";
+      var role = r.role.toUpperCase(); while (x.measureText(role).width > W - 2 * M - 60 && role.length > 10) role = role.slice(0, -2);
+      if (role !== r.role.toUpperCase()) role = role.replace(/\s*\S*$/, "") + "...";
+      var pw = x.measureText(role).width + 44;
+      x.strokeStyle = "rgba(255,255,255,0.9)"; x.lineWidth = 2; rrect(x, M, 140, pw, 52, 26); x.stroke();
+      x.fillStyle = "#FFFFFF"; x.fillText(role, M + 22, 175);
+    }
+    // "I'm a" + type name
+    x.fillStyle = "#FFFFFF"; x.font = "800 72px 'Bricolage Grotesque', sans-serif"; x.fillText("I'm a", M, 300);
+    var size = t.name.length > 18 ? 92 : t.name.length > 13 ? 110 : 124;
+    x.font = "800 " + size + "px 'Bricolage Grotesque', sans-serif";
+    var nw = Math.min(x.measureText(t.name).width, W - 2 * M - 40), bh = size * 1.22;
+    x.save(); x.translate(M, 330); x.rotate(-0.022);
+    x.fillStyle = "#101114"; x.fillRect(12, 12, nw + 48, bh);
+    x.fillStyle = col[0]; x.fillRect(0, 0, nw + 48, bh);
+    x.strokeStyle = "#101114"; x.lineWidth = 4; x.strokeRect(0, 0, nw + 48, bh);
+    x.fillStyle = col[1]; x.fillText(t.name, 24, bh * 0.78, W - 2 * M - 40);
+    x.restore();
+    // score cards (left) and type map (right)
+    var top = 560, colW = 440, gap = W - 2 * M - 2 * colW;
+    [["AI EXPOSURE", r.exposure, "How much of my work AI could take on"], ["AI READINESS", r.readiness, "How ready I am to make the most of it"]].forEach(function (m, i) {
+      var y = top + i * 210;
+      x.fillStyle = "#101114"; x.fillRect(M + 8, y + 8, colW, 190);
+      x.fillStyle = "#FFFFFF"; x.fillRect(M, y, colW, 190);
+      x.strokeStyle = "#101114"; x.lineWidth = 4; x.strokeRect(M, y, colW, 190);
+      x.fillStyle = "#2B3BFF"; x.font = "500 22px 'JetBrains Mono', monospace"; x.fillText(m[0], M + 28, y + 44);
+      x.fillStyle = "#101114"; x.font = "800 96px 'Bricolage Grotesque', sans-serif"; x.fillText(String(m[1]), M + 24, y + 140);
+      var nwid = x.measureText(String(m[1])).width;
+      x.fillStyle = "#5B5C62"; x.font = "600 28px 'Hanken Grotesk', sans-serif"; x.fillText("/100", M + 32 + nwid, y + 140);
+      x.fillStyle = "#DADAD4"; x.fillRect(M + 28, y + 160, colW - 56, 12);
+      x.fillStyle = "#2B3BFF"; x.fillRect(M + 28, y + 160, (colW - 56) * m[1] / 100, 12);
+    });
+    // map: x = readiness, y = exposure
+    var mx = M + colW + gap, my = top, ms = colW - 20, cell = ms / 2;
+    var cells = [["next", "NEXT IN LINE", 0, 0], ["operator", "QUIET OPERATOR", 1, 0], ["bystander", "BYSTANDER", 0, 1], ["multiplier", "MULTIPLIER", 1, 1]];
+    x.fillStyle = "#101114"; x.fillRect(mx + 28, my + 8, ms, ms);
+    cells.forEach(function (cl) {
+      var cx = mx + 20 + cl[2] * cell, cy = my + cl[3] * cell, on = cl[0] === r.type;
+      x.fillStyle = on ? TCOL[cl[0]][0] : "rgba(255,255,255,0.92)"; x.fillRect(cx, cy, cell, cell);
+      x.fillStyle = on ? TCOL[cl[0]][1] : "#5B5C62"; x.font = (on ? "700 " : "500 ") + "17px 'JetBrains Mono', monospace";
+      x.fillText(cl[1], cx + 14, cy + 30, cell - 24);
+    });
+    x.strokeStyle = "#101114"; x.lineWidth = 4; x.strokeRect(mx + 20, my, ms, ms);
+    x.beginPath(); x.moveTo(mx + 20 + cell, my); x.lineTo(mx + 20 + cell, my + ms); x.moveTo(mx + 20, my + cell); x.lineTo(mx + 20 + ms, my + cell); x.lineWidth = 2; x.stroke();
+    var dx = mx + 20 + ms * r.readiness / 100, dy = my + ms * (1 - r.exposure / 100);
+    dx = Math.max(mx + 46, Math.min(mx + 20 + ms - 26, dx)); dy = Math.max(my + 78, Math.min(my + ms - 28, dy)); if (dy > my + cell - 30 && dy < my + cell + 52) dy = dy < my + cell + 11 ? my + cell - 30 : my + cell + 52;
+    x.fillStyle = "#101114"; x.beginPath(); x.arc(dx + 3, dy + 3, 22, 0, 7); x.fill();
+    x.fillStyle = r.type === "next" ? "#FFFFFF" : "#FF7A2F"; x.beginPath(); x.arc(dx, dy, 22, 0, 7); x.fill();
+    x.strokeStyle = "#101114"; x.lineWidth = 4; x.stroke();
+    x.fillStyle = "#101114"; x.font = "800 15px 'JetBrains Mono', monospace"; x.textAlign = "center"; x.fillText("ME", dx, dy + 5); x.textAlign = "left";
+    x.fillStyle = "#FFFFFF"; x.font = "500 18px 'JetBrains Mono', monospace";
+    x.fillText("READINESS →", mx + 20, my + ms + 34);
+    x.save(); x.translate(mx + 4, my + ms); x.rotate(-Math.PI / 2); x.fillText("EXPOSURE →", 0, 0); x.restore();
+    // verdict
+    x.fillStyle = "#FFFFFF"; x.font = "600 36px 'Hanken Grotesk', sans-serif";
+    wrap(x, t.line, M, 1052, W - 2 * M, 48, 3);
+    // footer
+    x.fillStyle = "#101114"; x.fillRect(0, H - 150, W, 150);
+    x.fillStyle = "#D9FF3F"; x.font = "800 50px 'Bricolage Grotesque', sans-serif"; x.fillText("How AI-proof is your job?", M, H - 82);
+    x.fillStyle = "#FFFFFF"; x.font = "500 24px 'JetBrains Mono', monospace"; x.fillText("TAKE THE 2-MINUTE CHECK  →  KUNALAI.IN", M, H - 40);
+  }
+  function drawCard(r, id, sample) {
+    var c = document.getElementById(id || "scCanvas"); if (!c || !c.getContext) return;
+    var go = function () { paintCard(c, r, sample); };
+    go();
     if (document.fonts && document.fonts.load) {
-      Promise.all([document.fonts.load("800 64px 'Bricolage Grotesque'"), document.fonts.load("500 26px 'JetBrains Mono'"), document.fonts.load("600 34px 'Hanken Grotesk'")]).then(go, go);
-    } else { go(); }
+      Promise.all([document.fonts.load("800 72px 'Bricolage Grotesque'"), document.fonts.load("500 26px 'JetBrains Mono'"), document.fonts.load("600 36px 'Hanken Grotesk'")]).then(go, go);
+    }
   }
 
   // ---------- events ----------
@@ -327,5 +381,5 @@
     }
   });
 
-  intro();
+  intro(); introCard();
 })();
