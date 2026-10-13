@@ -61,10 +61,53 @@
       ["Between jobs or on a career break", null, null, "Using AI to learn a new skill and sharpen your applications, one small project at a time."],
       ["Something else", null, null, null]]]
   ];
+  // Extra words people might type when searching for their role
+  var KEYWORDS = {
+    "Admin, office or executive assistant": "secretary pa ea receptionist office manager clerk data entry back office",
+    "Marketing, brand or communications": "pr public relations social media digital seo advertising growth content marketing cmo",
+    "Sales or business development": "bd account manager key accounts relationship manager inside sales pre-sales",
+    "HR, people or recruitment": "human resources talent acquisition recruiter hrbp payroll l&d people ops",
+    "Finance, accounting or audit": "ca chartered accountant accountant cfo tax treasury controller fp&a bookkeeping",
+    "Operations or supply chain": "procurement purchase logistics planning vendor coo admin ops",
+    "Customer service or support": "call centre bpo helpdesk customer success cx contact centre",
+    "Consulting or strategy": "consultant management consulting advisory analyst",
+    "Founder, business owner or senior leader": "ceo md director entrepreneur startup owner promoter vp head chief",
+    "Software engineering": "developer programmer coder engineer it dev frontend backend full stack qa tester devops",
+    "Data, analytics or BI": "data scientist analyst machine learning ml ai engineer statistics",
+    "IT support or infrastructure": "sysadmin network cloud cybersecurity security it admin",
+    "Product management": "product manager pm product owner",
+    "UX or product design": "ui ux designer product designer interaction",
+    "Writing, content or journalism": "writer journalist editor copywriter reporter author blogger",
+    "Design, film, photography or visual art": "graphic designer artist illustrator photographer filmmaker video editor animator creative",
+    "Media, advertising or entertainment": "tv film production broadcast agency creator influencer music",
+    "Law, compliance or risk": "lawyer advocate legal counsel solicitor attorney paralegal company secretary cs",
+    "Banking, insurance or investment": "banker bank insurance wealth investment fund analyst stock broker",
+    "Doctor or clinician": "physician surgeon dentist medical gp",
+    "Nursing, therapy or allied health": "nurse physiotherapist therapist pharmacist lab technician paramedic",
+    "Pharma, biotech or life sciences": "pharmaceutical scientist researcher clinical trials medical rep",
+    "Social work, counselling or care": "counsellor caregiver psychologist social worker",
+    "School teaching": "teacher school educator principal tutor",
+    "Higher education or research": "professor lecturer academic phd researcher university",
+    "Training, coaching or L&D": "trainer coach facilitator learning and development",
+    "Government or public administration": "civil servant ias ips psu public sector government officer bureaucrat",
+    "NGO, development or social impact": "nonprofit non-profit charity foundation csr",
+    "Engineering: civil, mechanical or electrical": "civil engineer mechanical electrical chemical site engineer",
+    "Manufacturing or production": "factory plant production supervisor quality",
+    "Skilled trade or technician": "electrician plumber mechanic carpenter technician fitter",
+    "Retail or store operations": "store manager shop cashier merchandiser",
+    "Hospitality, travel or events": "hotel restaurant chef travel tourism events event manager airline",
+    "Logistics, delivery or transport": "driver delivery warehouse shipping courier fleet",
+    "Construction or real estate": "builder architect broker property site",
+    "Agriculture or agribusiness": "farmer farming agri",
+    "Student": "college school university studying",
+    "Between jobs or on a career break": "unemployed looking for work career break job hunting",
+    "Something else": "other freelancer self employed"
+  };
   var ROLES = [];
   FIELDS.forEach(function (f, gi) { f[1].forEach(function (r) {
     var card = r[2] ? K_ROLES.filter(function (k) { return k.name === r[2]; })[0] : null;
-    ROLES.push({ name: r[0], level: r[1], group: gi, card: card || null, next: r[3] || (card ? card.next : null) });
+    ROLES.push({ name: r[0], level: r[1], group: gi, card: card || null, next: r[3] || (card ? card.next : null),
+      find: (r[0] + " " + f[0] + " " + (KEYWORDS[r[0]] || "")).toLowerCase() });
   }); });
 
   var SCALE = ["Very little", "About a quarter", "About half", "Most of it"];
@@ -118,7 +161,7 @@
   };
 
   var KEY = "km_score";
-  var answers = [], step = 0;
+  var answers = [], step = 0, userName = "";
 
   function esc(t) { return String(t).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function load() { try { return JSON.parse(localStorage.getItem(KEY)); } catch (e) { return null; } }
@@ -140,14 +183,14 @@
     exposure = Math.round(Math.max(3, Math.min(97, exposure * 100)));
     var readiness = Math.round(Math.max(3, Math.min(97, ready * 100)));
     var key = exposure >= 50 ? (readiness >= 50 ? "operator" : "next") : (readiness >= 50 ? "multiplier" : "bystander");
-    return { exposure: exposure, readiness: readiness, type: key, role: role.name, date: new Date().toISOString().slice(0, 10) };
+    return { name: userName, exposure: exposure, readiness: readiness, type: key, role: role.name, date: new Date().toISOString().slice(0, 10) };
   }
 
   function intro() {
     var last = load();
     box.innerHTML =
       '<div class="sc-intro">' +
-      '<div class="sc-intro-l"><p class="s59">10 QUESTIONS · 2 MINUTES · PRIVATE</p>' +
+      '<div class="sc-intro-l"><p class="s59">' + (last && last.name ? "WELCOME BACK, " + esc(last.name.toUpperCase()) : "10 QUESTIONS · 2 MINUTES · PRIVATE") + '</p>' +
       '<p class="sc-big">Find out how much of your work AI could take on, and how ready you are for it.</p>' +
       '<p class="sc-small">For every kind of work: office, creative, health, education, public sector, hands-on and frontline, students too. You get two scores, your AI type and next moves. Your answers stay in your browser.</p>' +
       '<button type="button" class="sc-go" data-sc="start">' + (last ? "Take it again" : "Start the check") + ' →</button>' +
@@ -164,33 +207,83 @@
       (last ? '<p class="sc-last">Your last result: <b>' + esc(TYPES[last.type].name) + '</b>, exposure ' + last.exposure + ', readiness ' + last.readiness + '. <button type="button" class="sc-link" data-sc="show">See it again</button></p>' : "");
   }
 
-  function introCard() { drawCard({ exposure: 68, readiness: 74, type: "operator", role: "Marketing, brand or communications" }, "scSample", true); }
+  function introCard() { drawCard({ name: "Priya", exposure: 68, readiness: 74, type: "operator", role: "Marketing, brand or communications" }, "scSample", true); }
+
+  function cleanName(v) { v = String(v || "").replace(/\s+/g, " ").trim().slice(0, 24); return v ? v.charAt(0).toUpperCase() + v.slice(1) : ""; }
+
+  function nameStep() {
+    var last = load();
+    box.innerHTML =
+      '<div class="sc-q">' +
+      '<p class="s59">BEFORE WE START</p>' +
+      '<h3 class="sc-qt" tabindex="-1">What\'s your first name?</h3>' +
+      '<form class="sc-name" data-name-form novalidate>' +
+      '<label class="sc-vh" for="scName">Your first name</label>' +
+      '<input id="scName" class="sc-input" type="text" maxlength="24" autocomplete="given-name" placeholder="e.g. Priya" value="' + esc(userName || (last && last.name) || "") + '">' +
+      '<button type="submit" class="sc-go">Continue →</button></form>' +
+      '<p class="sc-small sc-err" aria-live="polite"></p>' +
+      '<p class="sc-small">It goes on your result card. Like your answers, it stays in your browser.</p></div>';
+    var i = box.querySelector("#scName"); i.focus(); i.select();
+  }
 
   function question() {
     var q = Q[step], opts = q.opts || [];
     var pct = Math.round(100 * step / Q.length);
     box.innerHTML =
       '<div class="sc-q">' +
-      '<div class="sc-prog"><span style="width:' + pct + '%"></span></div>' +
-      '<p class="s59">QUESTION ' + (step + 1) + ' OF ' + Q.length + (q.kind === "ready" ? " · YOUR AI HABITS" : q.kind === "role" ? "" : " · YOUR WEEK") + '</p>' +
+      '<div class="sc-count"><p class="sc-count-n">Question <b>' + (step + 1) + '</b> of ' + Q.length + '</p>' +
+      '<p class="s59">' + (q.kind === "ready" ? "YOUR AI HABITS" : q.kind === "role" ? "YOUR WORK" : "YOUR WEEK") + (userName ? " · " + esc(userName.toUpperCase()) : "") + '</p></div>' +
+      '<div class="sc-dots" aria-hidden="true">' + Q.map(function (_, i) { return '<i class="' + (i < step ? "done" : i === step ? "now" : "") + '"></i>'; }).join("") + '</div>' +
       '<h3 class="sc-qt" tabindex="-1">' + esc(q.text) + '</h3>' +
       (q.kind === "role" ? rolePicker() :
       '<div class="sc-opts">' + opts.map(function (o, i) {
         return '<button type="button" class="sc-opt' + (answers[step] === i ? " picked" : "") + '" data-opt="' + i + '">' + esc(o) + '</button>';
       }).join("") + '</div>') +
-      (step > 0 ? '<button type="button" class="sc-link" data-sc="back">← Back</button>' : "") +
+      '<button type="button" class="sc-link" data-sc="back">← Back</button>' +
       '</div>';
     var h = box.querySelector(".sc-qt"); if (h && document.activeElement && box.contains(document.activeElement)) h.focus();
+    if (q.kind === "role") { var si = box.querySelector("#scSearch"); if (si && window.innerWidth > 640) si.focus(); }
   }
 
+  function roleButton(r, i) {
+    return '<button type="button" class="sc-opt' + (answers[0] === i ? " picked" : "") + '" data-opt="' + i + '">' + esc(r.name) + '</button>';
+  }
+  function searchResults(q) {
+    q = q.toLowerCase().replace(/[^a-z0-9& ]/g, " ").trim();
+    if (!q) return "";
+    var words = q.split(/\s+/);
+    var scored = [];
+    ROLES.forEach(function (r, i) {
+      var tokens = r.find.split(/[^a-z0-9&]+/), total = 0;
+      var ok = words.every(function (w) {
+        var best = 0;
+        tokens.forEach(function (t) {
+          if (t === w) best = Math.max(best, 3);                       // whole word: "ca", "hr", "pm"
+          else if (w.length >= 3 && t.indexOf(w) === 0) best = Math.max(best, 2);   // start of a word: "teach" finds teacher
+          else if (w.length >= 4 && t.indexOf(w) > -1) best = Math.max(best, 1);    // inside a word, longer searches only
+        });
+        total += best; return best > 0;
+      });
+      if (ok) scored.push([total + (r.name.toLowerCase().indexOf(q) === 0 ? 2 : 0), i]);
+    });
+    scored.sort(function (a, b) { return b[0] - a[0] || a[1] - b[1]; });
+    var hits = scored.map(function (x) { return x[1]; });
+    if (!hits.length) return '<p class="sc-none">No match for "' + esc(q) + '". Try another word, browse the fields below, or pick ' +
+      '<button type="button" class="sc-link" data-opt="' + (ROLES.length - 1) + '">Something else</button>.</p>';
+    return '<div class="sc-opts sc-opts-role">' + hits.slice(0, 8).map(function (i) { return roleButton(ROLES[i], i); }).join("") + '</div>';
+  }
   function rolePicker() {
     if (openGroup === null && answers[0] !== undefined) openGroup = ROLES[answers[0]].group;
-    return '<div class="sc-fields">' + FIELDS.map(function (f, gi) {
+    return '<div class="sc-search"><label class="sc-vh" for="scSearch">Search for your role</label>' +
+      '<input id="scSearch" class="sc-input" type="search" autocomplete="off" placeholder="Search: teacher, nurse, CA, developer, sales..." data-search>' +
+      '<div id="scHits" aria-live="polite"></div></div>' +
+      '<p class="s59 sc-or">OR BROWSE BY FIELD</p>' +
+      '<div class="sc-fields">' + FIELDS.map(function (f, gi) {
       var open = openGroup === gi;
       return '<div class="sc-field' + (open ? " open" : "") + '">' +
         '<button type="button" class="sc-fbtn" data-group="' + gi + '" aria-expanded="' + open + '">' + esc(f[0]) + '<span aria-hidden="true">' + (open ? "−" : "+") + '</span></button>' +
         (open ? '<div class="sc-opts sc-opts-role">' + ROLES.map(function (r, i) {
-          return r.group === gi ? '<button type="button" class="sc-opt' + (answers[0] === i ? " picked" : "") + '" data-opt="' + i + '">' + esc(r.name) + '</button>' : "";
+          return r.group === gi ? roleButton(r, i) : "";
         }).join("") + '</div>' : "") + '</div>';
     }).join("") + '</div>';
   }
@@ -210,6 +303,7 @@
     box.innerHTML =
       '<div class="sc-res sc-t-' + r.type + '">' +
       '<div class="sc-res-head"><p class="s59">YOUR AI TYPE' + (r.role && r.role !== "Something else" ? " · " + esc(r.role.toUpperCase()) : "") + '</p>' +
+      (r.name ? '<p class="sc-res-you">' + esc(r.name) + ', you\'re a</p>' : '') +
       '<h3 class="sc-res-name" tabindex="-1">' + t.name + '</h3><p class="sc-res-line">' + esc(t.line) + '</p></div>' +
       '<div class="sc-meters">' +
       meter("AI EXPOSURE", r.exposure, "How much of your work AI could take on.") +
@@ -277,7 +371,10 @@
       x.fillStyle = "#FFFFFF"; x.fillText(role, M + 22, 175);
     }
     // "I'm a" + type name
-    x.fillStyle = "#FFFFFF"; x.font = "800 72px 'Bricolage Grotesque', sans-serif"; x.fillText("I'm a", M, 300);
+    var lead = r.name ? r.name + " is a" : "I'm a", lsz = 72;
+    x.font = "800 " + lsz + "px 'Bricolage Grotesque', sans-serif";
+    while (x.measureText(lead).width > W - 2 * M && lsz > 44) { lsz -= 4; x.font = "800 " + lsz + "px 'Bricolage Grotesque', sans-serif"; }
+    x.fillStyle = "#FFFFFF"; x.fillText(lead, M, 300);
     var size = t.name.length > 18 ? 92 : t.name.length > 13 ? 110 : 124;
     x.font = "800 " + size + "px 'Bricolage Grotesque', sans-serif";
     var nw = Math.min(x.measureText(t.name).width, W - 2 * M - 40), bh = size * 1.22;
@@ -352,8 +449,8 @@
       return;
     }
     var a = b.getAttribute("data-sc");
-    if (a === "start") { answers = []; step = 0; openGroup = null; question(); box.querySelector(".sc-qt").focus(); }
-    if (a === "back") { step = Math.max(0, step - 1); question(); }
+    if (a === "start") { answers = []; step = 0; openGroup = null; nameStep(); }
+    if (a === "back") { if (step === 0) { nameStep(); } else { step--; question(); } }
     if (a === "show") { var l = load(); if (l && TYPES[l.type]) result(l, false); }
     if (a === "path") {
       var trk = box._r.role === "Student" ? "student" : (box._r.role === "Founder, business owner or senior leader" ? "leader" : TYPES[box._r.type].track);
@@ -369,7 +466,7 @@
       var c = document.getElementById("scCanvas");
       try {
         var link = document.createElement("a");
-        link.download = "my-ai-score-kunalai.png"; link.href = c.toDataURL("image/png");
+        link.download = ((box._r && box._r.name) ? box._r.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") + "-" : "my-") + "ai-score-kunalai.png"; link.href = c.toDataURL("image/png");
         document.body.appendChild(link); link.click(); link.remove();
       } catch (err) { box.querySelector(".sc-copied").textContent = "Couldn't download. Long-press or right-click the image to save it."; }
     }
@@ -378,6 +475,24 @@
       var ok = function () { note.textContent = "Caption copied. Paste it with your image."; };
       if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(txt).then(ok, function () { window.prompt("Copy this caption:", txt); }); }
       else { window.prompt("Copy this caption:", txt); }
+    }
+  });
+
+  box.addEventListener("submit", function (e) {
+    if (!e.target.hasAttribute("data-name-form")) return;
+    e.preventDefault();
+    var v = cleanName(box.querySelector("#scName").value);
+    if (!v) { box.querySelector(".sc-err").textContent = "Add your first name so we can put it on your card."; box.querySelector("#scName").focus(); return; }
+    userName = v; step = 0; question(); var h = box.querySelector(".sc-qt"); if (h) h.focus();
+    if (window.innerWidth > 640) { var si = box.querySelector("#scSearch"); if (si) si.focus(); }
+  });
+  box.addEventListener("input", function (e) {
+    if (!e.target.hasAttribute("data-search")) return;
+    box.querySelector("#scHits").innerHTML = searchResults(e.target.value);
+  });
+  box.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && e.target.hasAttribute && e.target.hasAttribute("data-search")) {
+      e.preventDefault(); var first = box.querySelector("#scHits [data-opt]"); if (first) first.click();
     }
   });
 

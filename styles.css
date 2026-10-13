@@ -470,3 +470,25 @@ button:focus-visible,a:focus-visible{outline:3px solid #2B3BFF;outline-offset:3p
   .qz-big b{font-size:24px}
   .qz-note{width:100%;text-align:center}
 }
+
+/* ---------- Score: name step, counter, role search ---------- */
+.sc-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.sc-name{display:flex;flex-wrap:wrap;gap:12px;width:100%;max-width:640px}
+.sc-input{flex:1 1 260px;min-height:58px;padding:0 20px;font-family:'Hanken Grotesk',sans-serif;font-size:19px;font-weight:600;color:#101114;background:#FFFFFF;border:2px solid #101114;border-radius:12px;box-shadow:4px 4px 0 #101114;outline:none}
+.sc-input:focus{background:#FBFFE6;box-shadow:4px 4px 0 #2B3BFF;border-color:#2B3BFF}
+.sc-input::placeholder{color:#8A8B90;font-weight:500}
+.sc-err{color:#C2410C;font-weight:600;min-height:1.2em;margin:0}
+.sc-count{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 16px;width:100%}
+.sc-count-n{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:20px;color:#3A3B40}
+.sc-count-n b{font-weight:800;font-size:30px;color:#2B3BFF}
+.sc-dots{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;width:100%}
+.sc-dots i{height:10px;border-radius:999px;background:#E4E4DE;border:1.5px solid #101114}
+.sc-dots i.done{background:#2B3BFF}
+.sc-dots i.now{background:#D9FF3F}
+.sc-search{width:100%;display:flex;flex-direction:column;gap:12px}
+.sc-search .sc-input{width:100%;box-sizing:border-box;flex:none}
+#scHits:empty{display:none}
+.sc-none{margin:0;font-size:16px;color:#3A3B40}
+.sc-or{margin:6px 0 -6px}
+.sc-res-you{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(22px,2.6vw,30px);letter-spacing:-.01em}
+@media (max-width:640px){.sc-count-n{font-size:18px}.sc-count-n b{font-size:26px}.sc-dots{gap:4px}}
