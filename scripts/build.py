@@ -587,7 +587,7 @@ def write_issue_pages(issues):
                          "headline": it["title"], "datePublished": it["date"].isoformat(),
                          "author": {"@type": "Person", "name": "Kunal Mukherjee", "url": SITE + "/"},
                          "mainEntityOfPage": url, "image": SITE + "/og-image.png"})
-        (outdir / f"{it['slug']}.html").write_text(PAGE.format(
+        (outdir / f"{it['slug']}.html").write_text(stamp_assets(PAGE, asset_versions()).format(
             title=E(it["title"]), desc=E(it["summary"]), url=url, body=body, ld=ld,
             **page_common()), encoding="utf-8")
     # Full archive page, grouped by year
@@ -602,7 +602,7 @@ def write_issue_pages(issues):
             f'<p class="art-by">{len(issues)} issues of practical AI for non-technical managers, newest first. '
             f'<a href="{E(sub)}" target="_blank" rel="noopener">Subscribe on LinkedIn ↗</a></p>'
             + (groups or '<p>New issues will appear here.</p>'))
-    (outdir / "index.html").write_text(PAGE.format(
+    (outdir / "index.html").write_text(stamp_assets(PAGE, asset_versions()).format(
         title="All issues", desc="Every issue of What the AI!? by Kunal Mukherjee.",
         url=f"{SITE}/newsletter/", body=body, ld="{}", **page_common())
         .replace('<main class="art">', '<main class="art art-wide">'), encoding="utf-8")
@@ -652,6 +652,28 @@ def render_x_embed():
             '<script async src="https://platform.twitter.com/widgets.js"></script></div>')
 
 
+
+# ---------- Version stamps so browsers always load the newest files ----------
+ASSETS = ["styles.css", "content.js", "app.js", "score.js", "app-mail.js"]
+
+
+def asset_versions():
+    import hashlib
+    out = {}
+    for name in ASSETS:
+        f = ROOT / name
+        if f.exists():
+            out[name] = hashlib.md5(f.read_bytes()).hexdigest()[:8]
+    return out
+
+
+def stamp_assets(page, versions):
+    """Turn src="app.js" into src="app.js?v=1a2b3c4d" (and update old stamps)."""
+    for name, v in versions.items():
+        page = re.sub(r'((?:src|href)="/?' + re.escape(name) + r')(\?v=[0-9a-f]*)?"', r'\1?v=' + v + '"', page)
+    return page
+
+
 def main():
     page_path = ROOT / "index.html"
     page = page_path.read_text(encoding="utf-8")
@@ -674,6 +696,8 @@ def main():
     page = replace_block(page, "NEWSLETTER", render_archive(issues))
     page = replace_block(page, "NLMORE", render_more(issues))
 
+    versions = asset_versions()
+    page = stamp_assets(page, versions)
     page_path.write_text(page, encoding="utf-8")
     write_issue_pages(issues)
     write_feed(issues)
