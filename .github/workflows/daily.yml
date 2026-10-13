@@ -32,6 +32,8 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -74,4 +76,3 @@ jobs:
           path: .
       - id: deploy
         uses: actions/deploy-pages@v4
-
