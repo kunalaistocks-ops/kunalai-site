@@ -196,7 +196,7 @@ def parse_issue(path):
     summary = meta.get("summary") or (text[:180].rsplit(" ", 1)[0] + "...")
     words = len(text.split())
     return {"title": title, "date": date, "slug": slug, "summary": summary,
-            "linkedin": meta.get("linkedin", ""), "html": body_html,
+            "linkedin": meta.get("linkedin", ""), "html": body_html, "topic": meta.get("topic", ""),
             "minutes": max(1, round(words / 220))}
 
 
@@ -250,7 +250,7 @@ def title_from_url(url):
 
 def load_links():
     """Issues listed in newsletter/links.txt, one public link per line.
-    Optional extras on the same line: link | title | 2026-10-20"""
+    Optional extras on the same line: link | title | 2026-10-20 | topic | summary"""
     if not LINKS_FILE.exists():
         return []
     cache = {}
@@ -281,10 +281,11 @@ def load_links():
             date = dt.date.fromisoformat(bits[2] if len(bits) > 2 and bits[2] else c["date"])
         except ValueError:
             date = TODAY
-        summ = c.get("summary", "")
+        summ = bits[4] if len(bits) > 4 and bits[4] else c.get("summary", "")
         if len(summ) > 200:
             summ = summ[:200].rsplit(" ", 1)[0] + "..."
-        out.append({"title": title, "date": date, "slug": None, "external": url,
+        topic = bits[3] if len(bits) > 3 else ""
+        out.append({"title": title, "date": date, "slug": None, "external": url, "topic": topic,
                     "summary": summ or "Read this issue of What the AI!? on LinkedIn.",
                     "minutes": None, "linkedin": url})
     LINKS_CACHE.parent.mkdir(exist_ok=True)
@@ -308,7 +309,10 @@ def load_issues():
                                "minutes": None})
         except Exception as e:  # noqa
             print(f"newsletter rss failed: {e}", file=sys.stderr)
-    issues.sort(key=lambda x: x["date"], reverse=True)
+    issues.sort(key=lambda x: x["date"])
+    for n, it in enumerate(issues, 1):
+        it["no"] = n
+    issues.reverse()
     return issues
 
 
@@ -316,26 +320,51 @@ def issue_url(it):
     return it.get("external") or f"/newsletter/{it['slug']}.html"
 
 
+def short_date(d):
+    return f"{d.day} {d.strftime('%b %Y').upper()}"
+
+
+def card(it, with_summary=False):
+    tag = f'<span class="nl-tag">{E(it["topic"].upper())}</span>' if it.get("topic") else ""
+    where = "ON LINKEDIN" if it.get("external") else f'{it.get("minutes") or 1} MIN READ'
+    summ = (f'<span class="nl-csum">{E(it["summary"])}</span>'
+            if with_summary and it.get("summary") else "")
+    tgt = ' target="_blank" rel="noopener"' if it.get("external") else ""
+    return (f'<a class="nl-card k-lift" href="{E(issue_url(it))}"{tgt}>'
+            f'<span class="nl-ctop"><span class="nl-no">#{it["no"]:02d}</span>{tag}</span>'
+            f'<strong>{E(it["title"])}</strong>{summ}'
+            f'<span class="nl-cfoot">{short_date(it["date"])} · {where} ↗</span></a>')
+
+
 def render_archive(issues):
     sub = CFG.get("linkedin_newsletter_url") or CFG["linkedin_profile"]
     if not issues:
         return ('<div class="nl-empty"><p class="s59">THE ARCHIVE</p><p>Issues are moving here from LinkedIn, '
                 f'one by one. Until then, <a href="{E(sub)}">read the latest on LinkedIn</a>.</p></div>')
-    first, rest = issues[0], issues[1:7]
-    mins = f", {first['minutes']} min read" if first.get("minutes") else (" · ON LINKEDIN" if first.get("external") else "")
-    out = [f'<a class="nl-lead" href="{E(issue_url(first))}">'
-           f'<span class="s59">LATEST ISSUE · {first["date"].day} {first["date"].strftime("%B %Y").upper()}{mins.upper()}</span>'
-           f'<strong>{E(first["title"])}</strong><span class="sum">{E(first["summary"])}</span>'
-           f'<span class="go">Read the issue ↗</span></a>']
-    if rest:
-        out.append('<ul class="nl-list">')
-        for it in rest:
-            out.append(f'<li><a href="{E(issue_url(it))}">{E(it["title"])}</a>'
-                       f'<span class="meta">{it["date"].day} {it["date"].strftime("%b %Y")}</span></li>')
-        out.append("</ul>")
+    it = issues[0]
+    where = "ON LINKEDIN" if it.get("external") else f'{it.get("minutes") or 1} MIN READ'
+    tag = f'<span class="nl-tag">{E(it["topic"].upper())}</span>' if it.get("topic") else ""
+    tgt = ' target="_blank" rel="noopener"' if it.get("external") else ""
+    return (f'<a class="nl-lead" href="{E(issue_url(it))}"{tgt}>'
+            f'<span class="nl-ltop"><span class="nl-no nl-no-lg">#{it["no"]:02d}</span>'
+            f'<span class="s59">LATEST ISSUE · {short_date(it["date"])} · {where}</span></span>'
+            f'<strong>{E(it["title"])}</strong>'
+            f'<span class="sum">{E(it["summary"])}</span>'
+            f'<span class="nl-lfoot">{tag}<span class="go">Read the issue ↗</span></span></a>')
+
+
+def render_more(issues):
+    more = issues[1:7]
+    if not more:
+        return ""
+    out = ['<div class="nl-more"><div class="td-head"><p class="s59">EARLIER ISSUES</p>'
+           f'<p class="s59">{len(issues)} ISSUES SO FAR</p></div><div class="nl-cards">']
+    out += [card(i) for i in more]
+    out.append("</div>")
     if len(issues) > 7:
-        out.append('<p class="nl-all"><a href="/newsletter/">See all issues ↗</a></p>')
-    return "\n".join(out)
+        out.append(f'<a class="s102 nl-allbtn" href="/newsletter/">See all {len(issues)} issues ↗</a>')
+    out.append("</div>")
+    return "".join(out)
 
 
 PAGE = """<!doctype html>
@@ -428,16 +457,22 @@ def write_issue_pages(issues):
         (outdir / f"{it['slug']}.html").write_text(PAGE.format(
             title=E(it["title"]), desc=E(it["summary"]), url=url, body=body, ld=ld,
             **page_common()), encoding="utf-8")
-    # Full archive page
-    rows = "".join(f'<li><a href="{E(issue_url(i))}">{E(i["title"])}</a>'
-                   f'<span class="meta">{i["date"].day} {i["date"].strftime("%b %Y")}</span></li>'
-                   for i in issues)
+    # Full archive page, grouped by year
+    years = {}
+    for i in issues:
+        years.setdefault(i["date"].year, []).append(i)
+    groups = "".join(f'<h2 class="nl-year">{y}</h2><div class="nl-cards">'
+                     + "".join(card(i, with_summary=True) for i in items) + "</div>"
+                     for y, items in years.items())
+    sub = CFG.get("linkedin_newsletter_url") or CFG["linkedin_profile"]
     body = ('<p class="s14">THE NEWSLETTER</p><h1 class="art-h">What the AI!?</h1>'
-            '<p class="art-by">Every issue, newest first. Practical AI for non-technical managers.</p>'
-            f'<ul class="nl-list art-list">{rows or "<li>New issues will appear here.</li>"}</ul>')
+            f'<p class="art-by">{len(issues)} issues of practical AI for non-technical managers, newest first. '
+            f'<a href="{E(sub)}" target="_blank" rel="noopener">Subscribe on LinkedIn ↗</a></p>'
+            + (groups or '<p>New issues will appear here.</p>'))
     (outdir / "index.html").write_text(PAGE.format(
         title="All issues", desc="Every issue of What the AI!? by Kunal Mukherjee.",
-        url=f"{SITE}/newsletter/", body=body, ld="{}", **page_common()), encoding="utf-8")
+        url=f"{SITE}/newsletter/", body=body, ld="{}", **page_common())
+        .replace('<main class="art">', '<main class="art art-wide">'), encoding="utf-8")
 
 
 def write_feed(issues):
@@ -503,6 +538,7 @@ def main():
 
     issues = load_issues()
     page = replace_block(page, "NEWSLETTER", render_archive(issues))
+    page = replace_block(page, "NLMORE", render_more(issues))
 
     page_path.write_text(page, encoding="utf-8")
     write_issue_pages(issues)
