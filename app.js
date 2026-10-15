@@ -262,3 +262,55 @@ document.addEventListener("click",function(e){
     setTimeout(function(){ var b=sc.querySelector('[data-sc="start"],[data-sc="show"]'); if(b) b.focus({preventScroll:true}); },600);
   });
 })();
+
+/* Today's top 5 carousel: auto-advances, pauses on hover/focus/tap, swipe on phones, still for reduced motion */
+(function(){
+  var band=document.querySelector(".t5"), track=document.getElementById("t5Track");
+  if(!band||!track) return;
+  var slides=[].slice.call(track.querySelectorAll(".t5-slide")), n=slides.length;
+  if(n<2) return;
+  var ctrl=document.getElementById("t5Ctrl"), dots=document.getElementById("t5Dots"), pauseBtn=band.querySelector('[data-t5="pause"]');
+  var MS=7000, i=0, timer=null, userPaused=false, hover=false;
+  var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  band.style.setProperty("--t5ms",MS+"ms");
+  if(reduce){ band.classList.add("t5-static"); userPaused=true; pauseBtn.hidden=true; }
+  ctrl.hidden=false;
+  dots.innerHTML=slides.map(function(_,k){return '<button type="button" role="tab" aria-label="Story '+(k+1)+' of '+n+'"></button>';}).join("");
+  var dotBtns=[].slice.call(dots.children);
+  var side=document.getElementById("t5Side"), sideBtns=[];
+  if(side){
+    side.innerHTML='<p class="t5-side-h">ALL FIVE TODAY</p>'+slides.map(function(s,k){
+      var h=s.querySelector(".t5-h"), src=s.querySelector(".t5-src");
+      return '<button type="button" class="t5-item" data-k="'+k+'"><b>'+String(k+1).padStart(2,"0")+'</b><span>'+(h?h.textContent:"")+'<small>'+(src?src.textContent.split(" · ")[0]:"")+'</small></span></button>';
+    }).join("");
+    side.hidden=false;
+    sideBtns=[].slice.call(side.querySelectorAll(".t5-item"));
+  }
+  function go(k,focus){
+    i=(k+n)%n;
+    track.style.transform="translateX("+(-100*i)+"%)";
+    slides.forEach(function(s,j){ s.setAttribute("aria-hidden",j!==i); s.querySelectorAll("a").forEach(function(a){a.tabIndex=j===i?0:-1;}); });
+    dotBtns.forEach(function(d,j){ d.setAttribute("aria-selected",j===i); d.style.animation="none"; void d.offsetWidth; d.style.animation=""; });
+    sideBtns.forEach(function(b,j){ b.classList.toggle("on",j===i); b.setAttribute("aria-current",j===i?"true":"false"); });
+    if(focus){ var h=slides[i].querySelector(".t5-h"); if(h) h.focus({preventScroll:true}); }
+    schedule();
+  }
+  function schedule(){ clearTimeout(timer); if(!userPaused&&!hover&&!document.hidden) timer=setTimeout(function(){go(i+1);},MS); }
+  function setPaused(p){ userPaused=p; band.classList.toggle("paused",p); pauseBtn.textContent=p?"Play":"Pause"; pauseBtn.setAttribute("aria-label",p?"Play the stories":"Pause the stories"); schedule(); }
+  band.addEventListener("click",function(e){
+    var b=e.target.closest("[data-t5]");
+    if(b){ var a=b.getAttribute("data-t5"); if(a==="next") go(i+1,true); if(a==="prev") go(i-1,true); if(a==="pause") setPaused(!userPaused); return; }
+    var d=e.target.closest("#t5Dots button"); if(d) go(dotBtns.indexOf(d),true);
+    var it=e.target.closest(".t5-item"); if(it) go(+it.getAttribute("data-k"),true);
+  });
+  band.addEventListener("mouseenter",function(){hover=true;band.classList.add("paused");clearTimeout(timer);});
+  band.addEventListener("mouseleave",function(){hover=false;if(!userPaused)band.classList.remove("paused");schedule();});
+  band.addEventListener("focusin",function(){hover=true;band.classList.add("paused");clearTimeout(timer);});
+  band.addEventListener("focusout",function(){hover=false;if(!userPaused)band.classList.remove("paused");schedule();});
+  band.addEventListener("keydown",function(e){ if(e.key==="ArrowRight"){go(i+1,true);} if(e.key==="ArrowLeft"){go(i-1,true);} });
+  var sx=null;
+  track.addEventListener("touchstart",function(e){sx=e.touches[0].clientX;},{passive:true});
+  track.addEventListener("touchend",function(e){ if(sx===null) return; var dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>40){ go(dx<0?i+1:i-1); setPaused(true);} sx=null; });
+  document.addEventListener("visibilitychange",schedule);
+  go(0);
+})();
