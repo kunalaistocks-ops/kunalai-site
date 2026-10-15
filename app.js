@@ -268,6 +268,8 @@ document.addEventListener("click",function(e){
   var band=document.querySelector(".t5"), track=document.getElementById("t5Track");
   if(!band||!track) return;
   var slides=[].slice.call(track.querySelectorAll(".t5-slide")), n=slides.length;
+  var strip=document.getElementById("t5Strip"), stripT=document.getElementById("t5StripT");
+  if(strip&&stripT&&slides.length){ var fh=slides[0].querySelector(".t5-h"); if(fh&&fh.getAttribute("href")!=="#today"){ stripT.textContent=fh.textContent; strip.hidden=false; } }
   if(n<2) return;
   var ctrl=document.getElementById("t5Ctrl"), dots=document.getElementById("t5Dots"), pauseBtn=band.querySelector('[data-t5="pause"]');
   var MS=7000, i=0, timer=null, userPaused=false, hover=false;

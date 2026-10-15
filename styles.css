@@ -577,3 +577,45 @@ body:has(#kmConsent) .qz-float{bottom:200px}
 .t5-item:hover{color:#FFFFFF;background:#1A1B20}
 .t5-item.on{color:#FFFFFF;background:#1A1B20}
 .t5-item.on b{color:#D9FF3F}
+
+/* ---------- Hero with the news card beside it ---------- */
+.hero-grid{display:grid;grid-template-columns:1fr;gap:36px;align-items:center}
+.hero-text{display:flex;flex-direction:column;gap:28px;min-width:0}
+@media (min-width:1000px){
+  .hero-grid{grid-template-columns:minmax(0,1.18fr) minmax(0,1fr);gap:48px;padding-top:64px}
+  .hero-grid .s15{font-size:clamp(48px,5.6vw,88px)}
+  .hero-grid .s17{font-size:clamp(17px,1.5vw,20px)}
+}
+.t5-card{border:2px solid #101114;border-radius:14px;box-shadow:8px 8px 0 #2B3BFF;overflow:hidden;animation:kf-in .8s cubic-bezier(.2,.7,.2,1) .35s both}
+.t5-card .t5-in{padding:22px 24px 20px;max-width:none}
+.t5-card .t5-head{margin-bottom:14px}
+.t5-card .t5-kick{font-size:11px}
+.t5-card .t5-all{font-size:13px}
+.t5-card .t5-h{font-size:clamp(21px,1.9vw,26px);line-height:1.15;max-width:none;-webkit-line-clamp:4}
+.t5-card .t5-src{font-size:13px}
+.t5-card .t5-what{font-size:15px}
+.t5-card .t5-ctrl{margin-top:16px;gap:10px}
+.t5-card .t5-arrow{width:40px;height:40px}
+.t5-card .t5-dots button{width:22px}
+.t5-card .t5-slide{min-height:0}
+@media (min-width:1000px){.t5-card .t5-stage{min-height:236px}}
+.t5-card .t5-body{display:block}
+/* slim strip under the menu on smaller screens */
+.t5-strip{display:none}
+@media (max-width:999px){
+  .t5-strip:not([hidden]){display:flex;align-items:center;gap:10px;background:#101114;color:#FFFFFF;text-decoration:none;padding:10px 5%;font-family:'Hanken Grotesk',sans-serif;font-size:14px;border-bottom:2px solid #101114}
+  .t5-strip b{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.12em;color:#D9FF3F;white-space:nowrap;font-weight:500}
+  .t5-strip-t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .t5-strip .t5-dot{flex:none}
+}
+/* balance tweaks: cookie notice bottom-right on desktop, compact on phones; less space above the headline on phones */
+@media (min-width:641px){#kmConsent{left:auto;right:20px}}
+@media (max-width:640px){
+  #kmConsent{padding:14px 16px}
+  #kmConsent .kc-t{font-size:17px;margin-bottom:4px}
+  #kmConsent .kc-p{font-size:13px;margin-bottom:10px}
+  #kmConsent .kc-b button{min-height:40px;font-size:14px}
+  .hero-grid{padding-top:36px;gap:28px}
+  .hero-text{gap:22px}
+}
+body:has(#kmConsent) .qz-float{bottom:220px}
