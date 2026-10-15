@@ -1,40 +1,40 @@
 {
  "term": {
-  "term": "Recommendation algorithm",
-  "def": "A set of rules that decides what you see next in a feed or app. It learns from what you watch, like and click, then shows you more of the same."
+  "term": "Compute",
+  "def": "The computing power needed to train and run AI. When people talk about a compute crisis, they mean AI demand is growing faster than the chips available."
  },
  "prompt": {
   "for": "Leadership",
-  "prompt": "Act as an AI risk advisor. My team uses [AI tool] for [task]. List five data risks, name who should own each one, and give one simple rule staff can follow for each."
+  "prompt": "Act as a tough client at a [type of company]. I will pitch my plan for [project]. Ask me five hard questions, one at a time, then give me honest feedback on my answers."
  },
  "quiz": [
   {
-   "q": "TechCrunch reports that Facebook is giving users more control over their algorithm.",
+   "q": "The Verge reports that McKinsey is making job applicants spar with a fake AI client.",
    "a": true,
-   "why": "This restates the TechCrunch headline. It is about users getting more say in what their feed shows them."
+   "why": "That is what the headline says. It shows AI is now appearing in how some firms test candidates."
   },
   {
-   "q": "Express Computer reports that a Trellix report says 98% of Indian organisations report AI-linked insider incidents.",
+   "q": "TechCrunch reports that Ricursive Intelligence is betting on AI-designed chips to help solve the compute crisis.",
    "a": true,
-   "why": "This restates the Express Computer headline. It points to why data safety matters when staff use AI tools."
+   "why": "That is what the headline says. Compute means the computing power AI needs, and chips supply it."
   },
   {
    "q": "If an AI tool sounds confident, its answer must be correct.",
    "a": false,
-   "why": "AI can write fluent, confident answers that are wrong. Always check important facts, numbers and names before you use them."
+   "why": "AI can write wrong answers in a smooth, sure tone. Always check important facts, numbers and names."
   },
   {
-   "q": "You need to know coding to get good results from AI tools.",
-   "a": false,
-   "why": "Most AI tools work with plain language. Clear instructions, context and examples matter far more than any coding skill."
+   "q": "Adding details like your audience, your goal and the format you want to a prompt usually gives a better answer.",
+   "a": true,
+   "why": "AI works with what you give it. Clear context means fewer guesses and less rewriting for you."
   },
   {
-   "q": "Any AI tool is safe for confidential company data by default.",
+   "q": "Once an AI tool writes a draft, a person no longer needs to check it before it goes out.",
    "a": false,
-   "why": "Privacy rules differ by tool and by plan. Check your company policy before pasting client, financial or staff data into any AI tool."
+   "why": "AI can make mistakes or miss context. A human should review anything that goes to customers, bosses or the public."
   }
  ],
  "source": "ai",
- "date": "2026-10-14",
+ "date": "2026-10-15",
  "model": "claude-sonnet-5-5"
 }
