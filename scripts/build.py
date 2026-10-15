@@ -170,6 +170,9 @@ def clean_text(t):
     return re.sub(r"\s+", " ", t).strip()
 
 
+NEWS_TITLES = []
+
+
 def validate_ai(data, recent_terms):
     """Return clean content, or raise ValueError if anything is off."""
     term = data.get("term") or {}
@@ -199,7 +202,15 @@ def validate_ai(data, recent_terms):
     myths = sum(not q["a"] for q in out)
     if not 1 <= myths <= 3:
         raise ValueError("quiz needs a mix of myths and facts")
-    return {"term": {"term": t, "def": d}, "prompt": {"for": who, "prompt": ptxt},
+    whats = {}
+    for item in (data.get("news") or [])[:5]:
+        try:
+            n, w = int(item.get("n")), clean_text(item.get("what"))
+        except (TypeError, ValueError, AttributeError):
+            continue
+        if 1 <= n <= len(NEWS_TITLES) and 30 <= len(w) <= 200:
+            whats[NEWS_TITLES[n - 1]] = w
+    return {"whats": whats, "term": {"term": t, "def": d}, "prompt": {"for": who, "prompt": ptxt},
             "quiz": out, "source": "ai"}
 
 
@@ -210,7 +221,8 @@ explanation. Never use em dashes or en dashes. Never use the | character.
 Reply with JSON only, no other text, in exactly this shape:
 {"term": {"term": "...", "def": "..."},
  "prompt": {"for": "...", "prompt": "..."},
- "quiz": [{"q": "...", "a": true, "why": "..."}, ... five items ...]}
+ "quiz": [{"q": "...", "a": true, "why": "..."}, ... five items ...],
+ "news": [{"n": 1, "what": "..."}, ... one for each of the first five headlines ...]}
 
 Rules:
 - term: one AI word or phrase a manager will meet at work. "def" is one or two plain sentences, 60 to 220 characters.
@@ -226,6 +238,9 @@ Rules:
 - Myths must be common misconceptions about AI in general. Never write a false claim about a real company,
   person, product or news event.
 - Every other statement must be well-established and stable over time. If unsure, leave it out.
+- news: for each of the first five headlines (numbered 1 to 5 in the order given), one plain-English sentence,
+  60 to 170 characters, saying why it matters to a manager. Use only what the headline itself says. Never add
+  facts, numbers, names or details that are not in the headline. If a headline is unclear, keep it general.
 - Nothing political, medical, legal advice, or about specific share prices."""
 
 
@@ -248,7 +263,8 @@ def ai_picks(news):
         except ValueError:
             history = {}
     recent = [t.lower() for t in history.get("terms", [])[-120:]]
-    lines = "\n".join(f"- {n['title']} ({n['source']})" for n in news) or "- (no headlines today)"
+    NEWS_TITLES[:] = [n["title"] for n in news]
+    lines = "\n".join(f"{i}. {n['title']} ({n['source']})" for i, n in enumerate(news, 1)) or "- (no headlines today)"
     user = (f"Date: {nice_date(TODAY)}\n\nToday's AI headlines:\n{lines}\n\n"
             f"AVOID these terms: {', '.join(history.get('terms', [])[-120:]) or 'none'}\n\n"
             "Write today's term, prompt and five quiz items.")
@@ -275,6 +291,27 @@ def ai_picks(news):
         except Exception as e:  # noqa
             print(f"AI content with {model} not used: {e}", file=sys.stderr)
     return None
+
+
+def render_top5(news, whats):
+    if not news:
+        return ""
+    out = ['<ol class="t5-track" id="t5Track">']
+    for i, it in enumerate(news[:5], 1):
+        ago = NOW - it["when"]
+        hrs = int(ago.total_seconds() // 3600)
+        when = "just now" if hrs < 1 else (f"{hrs}h ago" if hrs < 24 else f"{hrs // 24}d ago")
+        flag = '<span class="t5-flag">INDIA</span>' if it["region"] == "India" else ""
+        what = whats.get(it["title"])
+        out.append(
+            f'<li class="t5-slide" data-i="{i - 1}">'
+            f'<p class="t5-num"><b>{i:02d}</b> / 05{flag}</p>'
+            f'<a class="t5-h" href="{E(it["link"])}" target="_blank" rel="noopener">{E(it["title"])}</a>'
+            f'<p class="t5-src">{E(it["source"])} · {when} · <a href="{E(it["link"])}" target="_blank" rel="noopener">Read at source ↗</a></p>'
+            + (f'<p class="t5-what"><span>WHAT IT MEANS</span>{E(what)}</p>' if what else "") +
+            '</li>')
+    out.append("</ol>")
+    return "".join(out)
 
 
 def render_term(t):
@@ -690,6 +727,9 @@ def main():
         print("no fresh news; keeping previous headlines", file=sys.stderr)
 
     picks = ai_picks(news) or library_picks()
+    if news:
+        page = replace_block(page, "TOP5", render_top5(news, picks.get("whats", {})))
+    page = replace_block(page, "T5DATE", E(nice_date(TODAY).replace(",", "").upper()))
     page = replace_block(page, "TERM", render_term(picks["term"]))
     page = replace_block(page, "PROMPT", render_prompt(picks["prompt"]))
     page = replace_block(page, "QUIZ", render_quiz(picks["quiz"], picks["source"]))
