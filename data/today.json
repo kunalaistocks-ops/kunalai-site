@@ -1,40 +1,47 @@
 {
+ "whats": {
+  "Informatica: MDM and the cost of AI’s data blind spots": "Frontier Enterprise says gaps in data can hurt AI results, so check how clean your data is before you scale up AI.",
+  "India's family offices bet on homegrown AI firms to catch up with US, China": "Business Standard says Indian family offices are backing homegrown AI firms, a sign more local AI options may appear.",
+  "Can AI change the way India prepares for NEET, JEE, UPSC, and other competitive exams?": "Moneycontrol asks if AI can change how India prepares for NEET, JEE and UPSC. It shows AI is reaching everyday learning.",
+  "AI-Powered Cyberattacks Hit Indian Firms in Hours, CERT-In Flags Growing Threat": "The420.in reports AI-powered attacks hit Indian firms within hours, so your security checks need to keep pace with AI.",
+  "India IT Jobs Split as AI Skills Win Salary Premiums": "Urbanacres.in says AI skills are winning salary premiums in Indian IT jobs, so planning upskilling for your team is worthwhile."
+ },
  "term": {
-  "term": "Compute",
-  "def": "The computing power needed to train and run AI. When people talk about a compute crisis, they mean AI demand is growing faster than the chips available."
+  "term": "AI agent",
+  "def": "An AI agent is software that does more than answer questions. It can take actions on its own, such as opening files, using apps or sending messages."
  },
  "prompt": {
   "for": "Leadership",
-  "prompt": "Act as a tough client at a [type of company]. I will pitch my plan for [project]. Ask me five hard questions, one at a time, then give me honest feedback on my answers."
+  "prompt": "Act as a security-aware advisor. List five questions I should ask my IT team about which AI tools and agents in our [type of company] can reach live systems or sensitive data."
  },
  "quiz": [
   {
-   "q": "The Verge reports that McKinsey is making job applicants spar with a fake AI client.",
+   "q": "Fortune India reports that CERT-In has warned that AI agents accessed the live systems and sensitive data of Indian firms.",
    "a": true,
-   "why": "That is what the headline says. It shows AI is now appearing in how some firms test candidates."
+   "why": "This restates the Fortune India headline. It shows why it matters to know what access your AI tools have."
   },
   {
-   "q": "TechCrunch reports that Ricursive Intelligence is betting on AI-designed chips to help solve the compute crisis.",
-   "a": true,
-   "why": "That is what the headline says. Compute means the computing power AI needs, and chips supply it."
-  },
-  {
-   "q": "If an AI tool sounds confident, its answer must be correct.",
+   "q": "If an AI tool sounds confident, its answer is almost certainly correct.",
    "a": false,
-   "why": "AI can write wrong answers in a smooth, sure tone. Always check important facts, numbers and names."
+   "why": "Myth. AI tools can sound sure and still be wrong. Always check important facts, numbers and names before you use them."
   },
   {
-   "q": "Adding details like your audience, your goal and the format you want to a prompt usually gives a better answer.",
-   "a": true,
-   "why": "AI works with what you give it. Clear context means fewer guesses and less rewriting for you."
-  },
-  {
-   "q": "Once an AI tool writes a draft, a person no longer needs to check it before it goes out.",
+   "q": "You need to know how to code before you can use AI tools well at work.",
    "a": false,
-   "why": "AI can make mistakes or miss context. A human should review anything that goes to customers, bosses or the public."
+   "why": "Myth. Most AI tools work with plain language. Clear instructions matter far more than coding skills."
+  },
+  {
+   "q": "Business Standard reports that India's family offices are betting on homegrown AI firms.",
+   "a": true,
+   "why": "This restates the Business Standard headline. It points to growing money going into Indian AI companies."
+  },
+  {
+   "q": "An AI tool can only work with the information it has been trained on or given, so poor data leads to poor results.",
+   "a": true,
+   "why": "AI learns from data and uses what you give it. Messy or missing data usually means weaker answers."
   }
  ],
  "source": "ai",
- "date": "2026-10-15",
+ "date": "2026-10-16",
  "model": "claude-sonnet-5-5"
 }
