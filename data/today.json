@@ -1,47 +1,47 @@
 {
  "whats": {
-  "Informatica: MDM and the cost of AI’s data blind spots": "Frontier Enterprise says gaps in data can hurt AI results, so check how clean your data is before you scale up AI.",
-  "India's family offices bet on homegrown AI firms to catch up with US, China": "Business Standard says Indian family offices are backing homegrown AI firms, a sign more local AI options may appear.",
-  "Can AI change the way India prepares for NEET, JEE, UPSC, and other competitive exams?": "Moneycontrol asks if AI can change how India prepares for NEET, JEE and UPSC. It shows AI is reaching everyday learning.",
-  "AI-Powered Cyberattacks Hit Indian Firms in Hours, CERT-In Flags Growing Threat": "The420.in reports AI-powered attacks hit Indian firms within hours, so your security checks need to keep pace with AI.",
-  "India IT Jobs Split as AI Skills Win Salary Premiums": "Urbanacres.in says AI skills are winning salary premiums in Indian IT jobs, so planning upskilling for your team is worthwhile."
+  "HPE Launches AMD-Powered ProLiant Gen13 Servers for Enterprise AI and High-Performance Computing": "New AMD powered servers show hardware makers racing to support companies building AI systems at scale.",
+  "OpenAI poaches another SpaceX sales lead for cybersecurity business": "OpenAI hiring sales talent for cybersecurity signals it sees business security as a growing market.",
+  "Nvidia CEO Jensen Huang ‘strongly’ disagrees with OpenAI’s Sam Altman on AI agents hacking websites, ‘I’m": "A public disagreement between top AI leaders on agent safety shows this is still an unsettled, risky area.",
+  "University admissions cleared, visas rejected: 64% of Indian students denied Ireland visas over AI-generate...": "Managers hiring or sponsoring students abroad should know AI generated documents can cause visa rejections.",
+  "​Autonomous AI Agents Infiltrate Indian Corporate Data Without Authorization": "Unauthorized AI access to company data is a real risk leaders should ask their IT teams about now."
  },
  "term": {
-  "term": "AI agent",
-  "def": "An AI agent is software that does more than answer questions. It can take actions on its own, such as opening files, using apps or sending messages."
+  "term": "Shadow AI",
+  "def": "This means employees using AI tools or AI agents at work without IT or security team approval. It can quietly expose company data to outside systems."
  },
  "prompt": {
-  "for": "Leadership",
-  "prompt": "Act as a security-aware advisor. List five questions I should ask my IT team about which AI tools and agents in our [type of company] can reach live systems or sensitive data."
+  "for": "Operations",
+  "prompt": "List all AI tools my team might be using without IT approval for [task or department], and suggest three questions I should ask to check data safety."
  },
  "quiz": [
   {
-   "q": "Fortune India reports that CERT-In has warned that AI agents accessed the live systems and sensitive data of Indian firms.",
+   "q": "The Times of India reports CERT-In found AI agents accessing corporate data undetected.",
    "a": true,
-   "why": "This restates the Fortune India headline. It shows why it matters to know what access your AI tools have."
+   "why": "This directly restates what the Times of India headline reported about India's cybersecurity agency."
   },
   {
-   "q": "If an AI tool sounds confident, its answer is almost certainly correct.",
+   "q": "Bhaskar English reports 64% of Indian students were denied Ireland visas over AI-generated documents.",
+   "a": true,
+   "why": "This matches the headline from Bhaskar English about visa rejections linked to AI-generated material."
+  },
+  {
+   "q": "AI chatbots can sometimes state false information very confidently.",
+   "a": true,
+   "why": "This is a well known limitation called hallucination, where AI generates plausible sounding but incorrect answers."
+  },
+  {
+   "q": "Typing company data into a free public AI chatbot always keeps that data fully private.",
    "a": false,
-   "why": "Myth. AI tools can sound sure and still be wrong. Always check important facts, numbers and names before you use them."
+   "why": "Many free tools can store or use your inputs to improve their systems unless you check the privacy settings."
   },
   {
-   "q": "You need to know how to code before you can use AI tools well at work.",
+   "q": "AI systems only ever do exactly what a programmer wrote line by line, with no learning involved.",
    "a": false,
-   "why": "Myth. Most AI tools work with plain language. Clear instructions matter far more than coding skills."
-  },
-  {
-   "q": "Business Standard reports that India's family offices are betting on homegrown AI firms.",
-   "a": true,
-   "why": "This restates the Business Standard headline. It points to growing money going into Indian AI companies."
-  },
-  {
-   "q": "An AI tool can only work with the information it has been trained on or given, so poor data leads to poor results.",
-   "a": true,
-   "why": "AI learns from data and uses what you give it. Messy or missing data usually means weaker answers."
+   "why": "Modern AI learns patterns from data rather than following only fixed, hand written instructions."
   }
  ],
  "source": "ai",
- "date": "2026-10-16",
- "model": "claude-sonnet-5-5"
+ "date": "2026-10-17",
+ "model": "claude-sonnet-5"
 }
