@@ -1,47 +1,47 @@
 {
  "whats": {
-  "HPE Launches AMD-Powered ProLiant Gen13 Servers for Enterprise AI and High-Performance Computing": "New AMD powered servers show hardware makers racing to support companies building AI systems at scale.",
-  "OpenAI poaches another SpaceX sales lead for cybersecurity business": "OpenAI hiring sales talent for cybersecurity signals it sees business security as a growing market.",
-  "Nvidia CEO Jensen Huang ‘strongly’ disagrees with OpenAI’s Sam Altman on AI agents hacking websites, ‘I’m": "A public disagreement between top AI leaders on agent safety shows this is still an unsettled, risky area.",
-  "University admissions cleared, visas rejected: 64% of Indian students denied Ireland visas over AI-generate...": "Managers hiring or sponsoring students abroad should know AI generated documents can cause visa rejections.",
-  "​Autonomous AI Agents Infiltrate Indian Corporate Data Without Authorization": "Unauthorized AI access to company data is a real risk leaders should ask their IT teams about now."
+  "AI is changing Asia’s jobs market: What it means for India": "AI is shifting the job market across Asia, so managers in India should start thinking about which skills their teams will need next.",
+  "AI cuts job demand in exposed occupations by nearly 10% across Asia: IMF report": "The IMF report points to lower job demand in AI-exposed roles, a useful nudge to plan training and role changes early.",
+  "How Conversational AI Could Reshape Business And Society": "Conversational AI, which talks in plain language, could change how businesses serve customers and run daily work.",
+  "Veryon Unveils AI-enabled Business Jet Maintenance Information Platform": "Specialist AI tools are reaching industries like aviation maintenance, a sign that AI is moving into everyday operations work.",
+  "'AI to drive growth over next decade': Infosys co-founder SD Shibulal": "A well-known Infosys co-founder expects AI to drive growth over the next decade, so leaders should treat it as a long-term matter."
  },
  "term": {
-  "term": "Shadow AI",
-  "def": "This means employees using AI tools or AI agents at work without IT or security team approval. It can quietly expose company data to outside systems."
+  "term": "Conversational AI",
+  "def": "Conversational AI is software that talks with people in everyday language, by text or voice. Chatbots and voice assistants are common examples."
  },
  "prompt": {
-  "for": "Operations",
-  "prompt": "List all AI tools my team might be using without IT approval for [task or department], and suggest three questions I should ask to check data safety."
+  "for": "Leadership",
+  "prompt": "Act as a workplace advisor. Our team of [number] people in [department] does [main tasks]. List which tasks AI could help with, which need human judgment, and a simple first step."
  },
  "quiz": [
   {
-   "q": "The Times of India reports CERT-In found AI agents accessing corporate data undetected.",
+   "q": "Using an AI tool well means checking its answers, because it can sound confident even when it is wrong.",
    "a": true,
-   "why": "This directly restates what the Times of India headline reported about India's cybersecurity agency."
+   "why": "AI tools can produce wrong answers in a very sure tone. A human check matters, especially for numbers, names and facts."
   },
   {
-   "q": "Bhaskar English reports 64% of Indian students were denied Ireland visas over AI-generated documents.",
-   "a": true,
-   "why": "This matches the headline from Bhaskar English about visa rejections linked to AI-generated material."
-  },
-  {
-   "q": "AI chatbots can sometimes state false information very confidently.",
-   "a": true,
-   "why": "This is a well known limitation called hallucination, where AI generates plausible sounding but incorrect answers."
-  },
-  {
-   "q": "Typing company data into a free public AI chatbot always keeps that data fully private.",
+   "q": "If an AI tool gives you an answer, it has looked up the facts and confirmed that they are true.",
    "a": false,
-   "why": "Many free tools can store or use your inputs to improve their systems unless you check the privacy settings."
+   "why": "Many AI tools predict likely words from patterns in their training. They do not automatically verify facts unless built to do so."
   },
   {
-   "q": "AI systems only ever do exactly what a programmer wrote line by line, with no learning involved.",
+   "q": "The Times of India reports that an IMF report says AI cuts job demand in exposed occupations by nearly 10% across Asia.",
+   "a": true,
+   "why": "This restates the headline. It shows why managers should plan for how AI changes the tasks within roles."
+  },
+  {
+   "q": "AI only works if you know how to write computer code.",
    "a": false,
-   "why": "Modern AI learns patterns from data rather than following only fixed, hand written instructions."
+   "why": "Most modern AI tools take plain-language instructions. Clear writing and good judgment matter more than coding for most managers."
+  },
+  {
+   "q": "The more specific your instruction to an AI tool is, the more useful its answer usually is.",
+   "a": true,
+   "why": "Details such as the audience, goal, format and length help the tool give a response closer to what you need."
   }
  ],
  "source": "ai",
- "date": "2026-10-17",
- "model": "claude-sonnet-5"
+ "date": "2026-10-18",
+ "model": "claude-sonnet-5-5"
 }
