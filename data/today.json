@@ -1,47 +1,47 @@
 {
  "whats": {
-  "AI is changing Asia’s jobs market: What it means for India": "AI is shifting the job market across Asia, so managers in India should start thinking about which skills their teams will need next.",
-  "AI cuts job demand in exposed occupations by nearly 10% across Asia: IMF report": "The IMF report points to lower job demand in AI-exposed roles, a useful nudge to plan training and role changes early.",
-  "How Conversational AI Could Reshape Business And Society": "Conversational AI, which talks in plain language, could change how businesses serve customers and run daily work.",
-  "Veryon Unveils AI-enabled Business Jet Maintenance Information Platform": "Specialist AI tools are reaching industries like aviation maintenance, a sign that AI is moving into everyday operations work.",
-  "'AI to drive growth over next decade': Infosys co-founder SD Shibulal": "A well-known Infosys co-founder expects AI to drive growth over the next decade, so leaders should treat it as a long-term matter."
+  "India sounds critical alert on rogue AI agent intrusions": "India's alert on rogue AI agent intrusions means managers should check how AI tools access company systems.",
+  "CXMT Says AI Demand Flipped Its DRAM Business Profitable": "CXMT's AI driven profit jump shows how strong AI demand is reshaping even basic hardware businesses.",
+  "AI in Insurance Agencies: What Actually Makes the Business Better": "The report suggests AI can genuinely improve how insurance agencies run, not just add buzzwords.",
+  "Diverse, SM C&C Partner on Artist IP and AI Avatar Business Using Creta": "This AI avatar partnership shows how artist IP can become a new AI powered revenue stream.",
+  "Cyber Alert: Today’s Biggest Cyber Crime Stories Shaking India – 19 th October": "The420.in's roundup is a reminder that cyber crime risks in India keep evolving and need steady attention."
  },
  "term": {
-  "term": "Conversational AI",
-  "def": "Conversational AI is software that talks with people in everyday language, by text or voice. Chatbots and voice assistants are common examples."
+  "term": "AI governance",
+  "def": "AI governance is the set of rules and checks a company uses to make sure AI tools are used safely, fairly and within the law."
  },
  "prompt": {
-  "for": "Leadership",
-  "prompt": "Act as a workplace advisor. Our team of [number] people in [department] does [main tasks]. List which tasks AI could help with, which need human judgment, and a simple first step."
+  "for": "HR",
+  "prompt": "Create a 3-month AI skills plan for my [team or department], covering practical tools, weekly tasks and clear career milestones."
  },
  "quiz": [
   {
-   "q": "Using an AI tool well means checking its answers, because it can sound confident even when it is wrong.",
+   "q": "Moneycontrol reports that IT firms are beating low expectations as their AI business starts to pay.",
    "a": true,
-   "why": "AI tools can produce wrong answers in a very sure tone. A human check matters, especially for numbers, names and facts."
+   "why": "This directly restates the Moneycontrol headline about IT firms and AI revenue."
   },
   {
-   "q": "If an AI tool gives you an answer, it has looked up the facts and confirmed that they are true.",
+   "q": "ETHRWorld reports that India's tech workforce wants practical AI skills and clearer career paths at work.",
+   "a": true,
+   "why": "This directly restates the ETHRWorld headline about workforce demand for AI skills."
+  },
+  {
+   "q": "AI systems can become completely free of bias if you just feed them enough data.",
    "a": false,
-   "why": "Many AI tools predict likely words from patterns in their training. They do not automatically verify facts unless built to do so."
+   "why": "Bias often comes from how data was collected or labelled, not just its volume, so more data alone does not fix it."
   },
   {
-   "q": "The Times of India reports that an IMF report says AI cuts job demand in exposed occupations by nearly 10% across Asia.",
+   "q": "Removing sensitive personal details before feeding data into an AI tool lowers your privacy risk.",
    "a": true,
-   "why": "This restates the headline. It shows why managers should plan for how AI changes the tasks within roles."
+   "why": "Less sensitive input means less chance of that data being exposed or misused later."
   },
   {
-   "q": "AI only works if you know how to write computer code.",
+   "q": "Only large companies need written rules about how staff can use AI tools.",
    "a": false,
-   "why": "Most modern AI tools take plain-language instructions. Clear writing and good judgment matter more than coding for most managers."
-  },
-  {
-   "q": "The more specific your instruction to an AI tool is, the more useful its answer usually is.",
-   "a": true,
-   "why": "Details such as the audience, goal, format and length help the tool give a response closer to what you need."
+   "why": "Small teams face the same risks of data leaks and errors, so clear AI rules help companies of any size."
   }
  ],
  "source": "ai",
- "date": "2026-10-18",
- "model": "claude-sonnet-5-5"
+ "date": "2026-10-19",
+ "model": "claude-sonnet-5"
 }
