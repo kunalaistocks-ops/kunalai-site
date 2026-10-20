@@ -1,47 +1,47 @@
 {
  "whats": {
-  "India sounds critical alert on rogue AI agent intrusions": "India's alert on rogue AI agent intrusions means managers should check how AI tools access company systems.",
-  "CXMT Says AI Demand Flipped Its DRAM Business Profitable": "CXMT's AI driven profit jump shows how strong AI demand is reshaping even basic hardware businesses.",
-  "AI in Insurance Agencies: What Actually Makes the Business Better": "The report suggests AI can genuinely improve how insurance agencies run, not just add buzzwords.",
-  "Diverse, SM C&C Partner on Artist IP and AI Avatar Business Using Creta": "This AI avatar partnership shows how artist IP can become a new AI powered revenue stream.",
-  "Cyber Alert: Today’s Biggest Cyber Crime Stories Shaking India – 19 th October": "The420.in's roundup is a reminder that cyber crime risks in India keep evolving and need steady attention."
+  "Loyyal Unveils Perxi AI Business Suite to Help SMEs Run Their Business on WhatsApp": "Shows how small businesses can now manage daily operations and customers directly through WhatsApp using AI.",
+  "Satellites, 6G and AI: Akash Ambani lays out Jio’s next big bets": "Jio's plans hint that satellites, 6G and AI together could reshape how Indian businesses connect and operate.",
+  "Microsoft security chief says frontier AI models cannot be trusted": "A senior security leader's warning reminds managers not to blindly trust outputs from powerful AI systems.",
+  "Beyond Generative AI: The Enterprise AI Opportunities Businesses Shouldn't Overlook": "Points out that AI's business value goes beyond chatbots, so leaders should look at other practical uses too.",
+  "India debates sovereign cloud policy amid AI infrastructure push": "Signals that where company data is stored and who controls it may soon become a bigger decision for Indian firms."
  },
  "term": {
-  "term": "AI governance",
-  "def": "AI governance is the set of rules and checks a company uses to make sure AI tools are used safely, fairly and within the law."
+  "term": "Sovereign Cloud",
+  "def": "Sovereign cloud means a country's data and computing stay within its own borders, governed by its own laws instead of a foreign provider's rules."
  },
  "prompt": {
-  "for": "HR",
-  "prompt": "Create a 3-month AI skills plan for my [team or department], covering practical tools, weekly tasks and clear career milestones."
+  "for": "Leadership",
+  "prompt": "Explain in simple terms what sovereign cloud policy could mean for [my company name] and what questions I should ask our IT vendor about data control."
  },
  "quiz": [
   {
-   "q": "Moneycontrol reports that IT firms are beating low expectations as their AI business starts to pay.",
+   "q": "T2ONLINE reports that Microsoft's security chief says frontier AI models cannot be trusted.",
    "a": true,
-   "why": "This directly restates the Moneycontrol headline about IT firms and AI revenue."
+   "why": "This directly restates what the headline says about trust in advanced AI systems."
   },
   {
-   "q": "ETHRWorld reports that India's tech workforce wants practical AI skills and clearer career paths at work.",
+   "q": "Business Standard reports that an AI tool can predict cancer patients' survival chances from a single face photo.",
    "a": true,
-   "why": "This directly restates the ETHRWorld headline about workforce demand for AI skills."
+   "why": "This matches the headline exactly as reported."
   },
   {
-   "q": "AI systems can become completely free of bias if you just feed them enough data.",
+   "q": "AI models always give the exact same answer to the exact same question.",
    "a": false,
-   "why": "Bias often comes from how data was collected or labelled, not just its volume, so more data alone does not fix it."
+   "why": "Many AI tools use randomness in how they generate answers, so outputs can vary even for identical prompts."
   },
   {
-   "q": "Removing sensitive personal details before feeding data into an AI tool lowers your privacy risk.",
-   "a": true,
-   "why": "Less sensitive input means less chance of that data being exposed or misused later."
-  },
-  {
-   "q": "Only large companies need written rules about how staff can use AI tools.",
+   "q": "AI systems can only work with text and cannot handle images or audio.",
    "a": false,
-   "why": "Small teams face the same risks of data leaks and errors, so clear AI rules help companies of any size."
+   "why": "Modern AI tools can read images, listen to audio, and even generate them, not just process written text."
+  },
+  {
+   "q": "AI tools can sometimes state false information very confidently.",
+   "a": true,
+   "why": "This is a well known limitation called hallucination, where AI produces wrong facts that sound convincing."
   }
  ],
  "source": "ai",
- "date": "2026-10-19",
+ "date": "2026-10-20",
  "model": "claude-sonnet-5"
 }
