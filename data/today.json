@@ -1,47 +1,47 @@
 {
  "whats": {
-  "Loyyal Unveils Perxi AI Business Suite to Help SMEs Run Their Business on WhatsApp": "Shows how small businesses can now manage daily operations and customers directly through WhatsApp using AI.",
-  "Satellites, 6G and AI: Akash Ambani lays out Jio’s next big bets": "Jio's plans hint that satellites, 6G and AI together could reshape how Indian businesses connect and operate.",
-  "Microsoft security chief says frontier AI models cannot be trusted": "A senior security leader's warning reminds managers not to blindly trust outputs from powerful AI systems.",
-  "Beyond Generative AI: The Enterprise AI Opportunities Businesses Shouldn't Overlook": "Points out that AI's business value goes beyond chatbots, so leaders should look at other practical uses too.",
-  "India debates sovereign cloud policy amid AI infrastructure push": "Signals that where company data is stored and who controls it may soon become a bigger decision for Indian firms."
+  "How AI Is Reshaping the Stock Photography Business": "AI generated images are changing the stock photo business, so marketing teams should check licensing rules before using them.",
+  "HSBC Flags Buying Opportunities in Indian Stocks as Global AI Investments Face Risks": "HSBC sees buying opportunities in Indian stocks even as global AI investment risks worry other investors.",
+  "Can AI predict cancer survival from a selfie, new study explains": "A new study on predicting cancer survival from a selfie shows AI is moving into sensitive personal health territory.",
+  "Why AI Is Becoming Interim Management’s Greatest Strategic Ally": "Interim managers are reportedly using AI as a strategic ally to deliver faster results during short term roles.",
+  "SpaceX Revenue Jumps 161% to $14.6 Billion as AI Business Overtakes Starlink": "SpaceX says its AI business has overtaken Starlink as revenue jumped sharply, showing how fast AI units can scale."
  },
  "term": {
-  "term": "Sovereign Cloud",
-  "def": "Sovereign cloud means a country's data and computing stay within its own borders, governed by its own laws instead of a foreign provider's rules."
+  "term": "AI bubble",
+  "def": "This means AI spending and valuations rising faster than the real business value being created, which raises the risk of a sharp correction later."
  },
  "prompt": {
-  "for": "Leadership",
-  "prompt": "Explain in simple terms what sovereign cloud policy could mean for [my company name] and what questions I should ask our IT vendor about data control."
+  "for": "Finance",
+  "prompt": "List the AI related investments or tools our company has spent on this year, then flag which ones show measurable returns and which ones are still unproven for [team or department]."
  },
  "quiz": [
   {
-   "q": "T2ONLINE reports that Microsoft's security chief says frontier AI models cannot be trusted.",
+   "q": "Siliconindia reports that HSBC flagged buying opportunities in Indian stocks as global AI investments face risks.",
    "a": true,
-   "why": "This directly restates what the headline says about trust in advanced AI systems."
+   "why": "This is what the Siliconindia headline states about HSBC's view on Indian stocks."
   },
   {
-   "q": "Business Standard reports that an AI tool can predict cancer patients' survival chances from a single face photo.",
+   "q": "Open Magazine reports that SpaceX's AI business overtook Starlink as revenue jumped 161 percent to 14.6 billion dollars.",
    "a": true,
-   "why": "This matches the headline exactly as reported."
+   "why": "This matches the figures and claim in the Open Magazine headline."
   },
   {
-   "q": "AI models always give the exact same answer to the exact same question.",
+   "q": "AI chatbots always give the exact same answer to the exact same question.",
    "a": false,
-   "why": "Many AI tools use randomness in how they generate answers, so outputs can vary even for identical prompts."
+   "why": "Generative AI tools can vary their wording or even their conclusions each time, even with identical input."
   },
   {
-   "q": "AI systems can only work with text and cannot handle images or audio.",
+   "q": "Only technology companies need to think seriously about AI strategy.",
    "a": false,
-   "why": "Modern AI tools can read images, listen to audio, and even generate them, not just process written text."
+   "why": "AI now touches hiring, finance, operations and customer service in almost every industry, not just tech firms."
   },
   {
-   "q": "AI tools can sometimes state false information very confidently.",
+   "q": "AI tools can state wrong information very confidently, without signaling any doubt.",
    "a": true,
-   "why": "This is a well known limitation called hallucination, where AI produces wrong facts that sound convincing."
+   "why": "This is a well known limitation called hallucination, and managers should always verify important AI outputs."
   }
  ],
  "source": "ai",
- "date": "2026-10-20",
+ "date": "2026-10-21",
  "model": "claude-sonnet-5"
 }
