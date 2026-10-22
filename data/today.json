@@ -1,47 +1,47 @@
 {
  "whats": {
-  "How AI Is Reshaping the Stock Photography Business": "AI generated images are changing the stock photo business, so marketing teams should check licensing rules before using them.",
-  "HSBC Flags Buying Opportunities in Indian Stocks as Global AI Investments Face Risks": "HSBC sees buying opportunities in Indian stocks even as global AI investment risks worry other investors.",
-  "Can AI predict cancer survival from a selfie, new study explains": "A new study on predicting cancer survival from a selfie shows AI is moving into sensitive personal health territory.",
-  "Why AI Is Becoming Interim Management’s Greatest Strategic Ally": "Interim managers are reportedly using AI as a strategic ally to deliver faster results during short term roles.",
-  "SpaceX Revenue Jumps 161% to $14.6 Billion as AI Business Overtakes Starlink": "SpaceX says its AI business has overtaken Starlink as revenue jumped sharply, showing how fast AI units can scale."
+  "The AI Boom Promises To Be A Shot In The Arm For India’s Health-care Delivery Infrastructure": "The headline says AI may boost health-care delivery in India, so managers in or near health services should watch for new tools and partners.",
+  "OpenAI brings AI models to Google Cloud for enterprise customers": "OpenAI's models are coming to another major cloud, so enterprise teams may get more choice in where they run AI.",
+  "Sundar Pichai explains how a team of AI agents helps him run the company": "A top leader is using a team of AI agents in his own work, so managers can ask how similar helpers might support their routines.",
+  "India’s Management Education Needs AI Reset": "Business education is being told to reset for AI, so managers should think about which AI skills their own teams need to learn.",
+  "India’s network quality debate reopens: Drive tests versus AI": "The debate is about AI versus drive tests for judging network quality, a reminder to ask what AI adds over older methods."
  },
  "term": {
-  "term": "AI bubble",
-  "def": "This means AI spending and valuations rising faster than the real business value being created, which raises the risk of a sharp correction later."
+  "term": "Deepfake",
+  "def": "A photo, video or voice clip made or changed by AI so it looks real when it is not. Always check the source before you trust it or share it."
  },
  "prompt": {
-  "for": "Finance",
-  "prompt": "List the AI related investments or tools our company has spent on this year, then flag which ones show measurable returns and which ones are still unproven for [team or department]."
+  "for": "Leadership",
+  "prompt": "Act as my chief of staff. Here are my notes from this week: [paste notes]. List the five decisions I must make, who should own each one, and a deadline you suggest."
  },
  "quiz": [
   {
-   "q": "Siliconindia reports that HSBC flagged buying opportunities in Indian stocks as global AI investments face risks.",
+   "q": "Storyboard18 reports that India's GCCs are offering up to a 40% salary premium for AI talent.",
    "a": true,
-   "why": "This is what the Siliconindia headline states about HSBC's view on Indian stocks."
+   "why": "This restates the Storyboard18 headline. It shows that AI skills are in demand and employers are paying more for them."
   },
   {
-   "q": "Open Magazine reports that SpaceX's AI business overtook Starlink as revenue jumped 161 percent to 14.6 billion dollars.",
+   "q": "Tech Wire Asia reports that OpenAI is bringing its AI models to Google Cloud for enterprise customers.",
    "a": true,
-   "why": "This matches the figures and claim in the Open Magazine headline."
+   "why": "This restates the Tech Wire Asia headline. It suggests companies may get more choice in where they use AI models."
   },
   {
-   "q": "AI chatbots always give the exact same answer to the exact same question.",
+   "q": "If an AI tool sounds confident, its answer is almost always correct.",
    "a": false,
-   "why": "Generative AI tools can vary their wording or even their conclusions each time, even with identical input."
+   "why": "AI can give wrong answers in a very confident tone. This is called hallucination. Check important facts before you use them."
   },
   {
-   "q": "Only technology companies need to think seriously about AI strategy.",
+   "q": "You need to know coding to use AI tools well at work.",
    "a": false,
-   "why": "AI now touches hiring, finance, operations and customer service in almost every industry, not just tech firms."
+   "why": "Most AI tools work with plain language. If you can explain a task clearly in words, you can start using them."
   },
   {
-   "q": "AI tools can state wrong information very confidently, without signaling any doubt.",
+   "q": "Giving an AI tool clear context in your prompt usually gives you a better answer.",
    "a": true,
-   "why": "This is a well known limitation called hallucination, and managers should always verify important AI outputs."
+   "why": "AI works from what you tell it. Details like your goal, your audience and the format you want help it respond well."
   }
  ],
  "source": "ai",
- "date": "2026-10-21",
- "model": "claude-sonnet-5"
+ "date": "2026-10-22",
+ "model": "claude-sonnet-5-5"
 }
