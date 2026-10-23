@@ -1,47 +1,47 @@
 {
  "whats": {
-  "The AI Boom Promises To Be A Shot In The Arm For India’s Health-care Delivery Infrastructure": "The headline says AI may boost health-care delivery in India, so managers in or near health services should watch for new tools and partners.",
-  "OpenAI brings AI models to Google Cloud for enterprise customers": "OpenAI's models are coming to another major cloud, so enterprise teams may get more choice in where they run AI.",
-  "Sundar Pichai explains how a team of AI agents helps him run the company": "A top leader is using a team of AI agents in his own work, so managers can ask how similar helpers might support their routines.",
-  "India’s Management Education Needs AI Reset": "Business education is being told to reset for AI, so managers should think about which AI skills their own teams need to learn.",
-  "India’s network quality debate reopens: Drive tests versus AI": "The debate is about AI versus drive tests for judging network quality, a reminder to ask what AI adds over older methods."
+  "AI Agents Redefine Business Processes as Performance and Trust Become Key": "As AI takes over more business processes, performance and trust matter. Managers should ask how reliable a tool is before they rely on it.",
+  "Gary Vaynerchuk knows where he'd start if he were 16 and launching a business today": "Advice for young founders is a useful prompt for managers too: think about where you would start today, with AI tools now easily available.",
+  "Indian Students Worry AI Could Limit In-Depth Learning, Survey Reveals": "Students worry AI may limit deep learning. Managers should think about how new hires build real understanding and not just quick answers.",
+  "Uber rival inDrive eyes 2027 robotaxi tests in Central Asia with Pony.ai and Nvidia": "Self-driving taxi tests are being planned with big tech partners. Managers in transport and logistics should watch how this area develops.",
+  "NDTV World Summit 2026: Full Day 2 Schedule, Key Speakers And Sessions": "Business and policy events like this often shape the wider conversation. Managers can use them to keep up with ideas and speakers in the field."
  },
  "term": {
-  "term": "Deepfake",
-  "def": "A photo, video or voice clip made or changed by AI so it looks real when it is not. Always check the source before you trust it or share it."
+  "term": "Robotaxi",
+  "def": "A robotaxi is a taxi that drives itself using AI, cameras and sensors, with no human driver doing the steering. Companies are testing them in several cities around the world."
  },
  "prompt": {
   "for": "Leadership",
-  "prompt": "Act as my chief of staff. Here are my notes from this week: [paste notes]. List the five decisions I must make, who should own each one, and a deadline you suggest."
+  "prompt": "Act as a careful advisor. Our team wants to use AI for [business process]. List the 5 biggest risks, how we can check the AI's work, and who should approve it."
  },
  "quiz": [
   {
-   "q": "Storyboard18 reports that India's GCCs are offering up to a 40% salary premium for AI talent.",
-   "a": true,
-   "why": "This restates the Storyboard18 headline. It shows that AI skills are in demand and employers are paying more for them."
-  },
-  {
-   "q": "Tech Wire Asia reports that OpenAI is bringing its AI models to Google Cloud for enterprise customers.",
-   "a": true,
-   "why": "This restates the Tech Wire Asia headline. It suggests companies may get more choice in where they use AI models."
-  },
-  {
-   "q": "If an AI tool sounds confident, its answer is almost always correct.",
+   "q": "AI tools like ChatGPT always know when they are wrong and will tell you so.",
    "a": false,
-   "why": "AI can give wrong answers in a very confident tone. This is called hallucination. Check important facts before you use them."
+   "why": "AI tools can give wrong answers in a confident tone. They do not reliably know when they are mistaken, so important work needs a human check."
   },
   {
-   "q": "You need to know coding to use AI tools well at work.",
-   "a": false,
-   "why": "Most AI tools work with plain language. If you can explain a task clearly in words, you can start using them."
-  },
-  {
-   "q": "Giving an AI tool clear context in your prompt usually gives you a better answer.",
+   "q": "The quality of your prompt, meaning the instruction you give, strongly affects the quality of the AI's answer.",
    "a": true,
-   "why": "AI works from what you tell it. Details like your goal, your audience and the format you want help it respond well."
+   "why": "Clear instructions with context, a goal and a format usually give better results than a vague, one-line request."
+  },
+  {
+   "q": "TechCrunch reports that inDrive is eyeing 2027 robotaxi tests in Central Asia with Pony.ai and Nvidia.",
+   "a": true,
+   "why": "This restates the headline. It shows that ride-hailing companies are exploring self-driving taxis with technology partners."
+  },
+  {
+   "q": "You need to know how to code to get real value from AI tools at work.",
+   "a": false,
+   "why": "Most modern AI tools work with plain language. Managers can write, summarise and analyse using simple everyday instructions."
+  },
+  {
+   "q": "BW Education reports that Indian students worry AI could limit in-depth learning, according to a survey.",
+   "a": true,
+   "why": "This restates the headline. It reminds managers that people are thinking about how AI affects deep learning and skills."
   }
  ],
  "source": "ai",
- "date": "2026-10-22",
+ "date": "2026-10-23",
  "model": "claude-sonnet-5-5"
 }
