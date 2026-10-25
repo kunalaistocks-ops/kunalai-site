@@ -1,47 +1,47 @@
 {
  "whats": {
-  "Business Today MPW Awards: Women Leadership, Economic Growth And AI Focus - India Today": "AI is now part of mainstream leadership and growth conversations, so managers should be ready to discuss it with confidence.",
-  "Can WhatsApp AI Help Small Businesses Thrive? ILO’s SABY Pilot Puts Everyday Advice to the Test": "Simple chat-based AI advice for small businesses is being tested, a sign that everyday tools may help smaller teams.",
-  "India’s AI race is becoming an infrastructure race": "Building AI is not only about software. Managers should expect questions about the infrastructure behind it.",
-  "Govt to issue consultation paper on AI law in coming weeks: Vaishnaw": "A consultation paper on an AI law is expected in the coming weeks, so it is worth watching what rules may come.",
-  "Persistent CIO Debashis Singh on scaling enterprise technology for the AI era": "Technology leaders are thinking about scaling enterprise technology for the AI era, so managers should plan beyond small pilots."
+  "Barclays plans 5,000 job cuts by year-end amid AI push, 1,000 roles already gone": "Barclays cutting 5,000 jobs for AI shows how fast automation can reshape large company workforces.",
+  "AI Firm Behind India’s ‘Mahabharat’ Series Turns to Indonesian Myth in Cross-Border IP Pact (EXCLUSIVE)": "The Mahabharat AI studio's move into Indonesian myth shows AI opening new cross-border content and IP deals.",
+  "Fusion AI In-a-Box Shown to Jensen Huang at GTC Berlin [2026]": "A fusion AI in-a-box demo to Nvidia's chief hints at future energy solutions built specifically for AI hardware.",
+  "AI race beyond US, China: Japan, South Korea emerge as leading AI-ready economies. How India fares": "Japan and South Korea rising as AI-ready economies signals shifting global competition that India must track.",
+  "Korea’s Enterprise AI Market Is Repricing Startup Experience": "Korea's enterprise AI market repricing startup experience suggests hiring and pay norms for AI talent are changing fast."
  },
  "term": {
-  "term": "Grounding",
-  "def": "Grounding means making an AI tool answer from your own trusted documents and data, instead of only from what it learned in training. It helps cut down wrong answers."
+  "term": "AI readiness",
+  "def": "A measure of how prepared a country or company is to use AI well, based on infrastructure, skills, data and policy support."
  },
  "prompt": {
-  "for": "Anyone",
-  "prompt": "Act as a careful analyst. Use only the [document or data] I paste below to answer [your question]. If the answer is not in it, say so clearly and do not guess."
+  "for": "Leadership",
+  "prompt": "List three ways AI could change staffing needs in [department] over the next year, and suggest a plan to retrain affected employees."
  },
  "quiz": [
   {
-   "q": "Express Computer reports that India's AI race is becoming an infrastructure race.",
+   "q": "India Today reports that Barclays plans 5,000 job cuts by year-end amid its AI push, with 1,000 roles already gone.",
    "a": true,
-   "why": "This restates the headline. It shows that AI depends on more than software."
+   "why": "This restates the headline from India Today about Barclays and its AI related job cuts."
   },
   {
-   "q": "If an AI tool sounds confident, its answer must be correct.",
+   "q": "LawBeat reports that Union Minister Ashwini Vaishnaw says India will soon issue a consultation paper on a new AI law.",
+   "a": true,
+   "why": "This restates the headline from LawBeat about India's upcoming AI law consultation paper."
+  },
+  {
+   "q": "The quality of training data strongly affects how reliable an AI model's answers are.",
+   "a": true,
+   "why": "AI models learn patterns from their training data, so poor or biased data leads to poor or biased outputs."
+  },
+  {
+   "q": "AI systems understand language the same way humans do, with real comprehension and intent.",
    "a": false,
-   "why": "AI tools can sound sure even when they are wrong. Always check important facts."
+   "why": "AI predicts likely word patterns from data. It does not understand meaning the way a person does."
   },
   {
-   "q": "AI is only useful for big companies with large tech teams.",
+   "q": "Once an AI tool is deployed, it never needs human review or oversight again.",
    "a": false,
-   "why": "Everyday chat tools are used by small teams too. You do not need a big tech department to start."
-  },
-  {
-   "q": "Visual Studio Magazine reports that Microsoft has added a Work IQ retrieval tool to ground AI agents in enterprise data.",
-   "a": true,
-   "why": "This restates the headline. Grounding links AI answers to a company's own data."
-  },
-  {
-   "q": "Giving an AI tool clear context and an example of what you want usually improves its answer.",
-   "a": true,
-   "why": "AI tools respond to the detail you give them. Vague requests tend to get vague answers."
+   "why": "AI can make mistakes or drift over time, so ongoing human checks are still needed for safe use."
   }
  ],
  "source": "ai",
- "date": "2026-10-24",
- "model": "claude-sonnet-5-5"
+ "date": "2026-10-25",
+ "model": "claude-sonnet-5"
 }
