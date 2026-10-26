@@ -1,47 +1,47 @@
 {
  "whats": {
-  "Barclays plans 5,000 job cuts by year-end amid AI push, 1,000 roles already gone": "Barclays cutting 5,000 jobs for AI shows how fast automation can reshape large company workforces.",
-  "AI Firm Behind India’s ‘Mahabharat’ Series Turns to Indonesian Myth in Cross-Border IP Pact (EXCLUSIVE)": "The Mahabharat AI studio's move into Indonesian myth shows AI opening new cross-border content and IP deals.",
-  "Fusion AI In-a-Box Shown to Jensen Huang at GTC Berlin [2026]": "A fusion AI in-a-box demo to Nvidia's chief hints at future energy solutions built specifically for AI hardware.",
-  "AI race beyond US, China: Japan, South Korea emerge as leading AI-ready economies. How India fares": "Japan and South Korea rising as AI-ready economies signals shifting global competition that India must track.",
-  "Korea’s Enterprise AI Market Is Repricing Startup Experience": "Korea's enterprise AI market repricing startup experience suggests hiring and pay norms for AI talent are changing fast."
+  "Confluent CTO: AI agents expose a data timing gap": "AI tools can only act on the data they receive, so slow or late data can lead to weaker decisions. Ask your team how fresh your data is.",
+  "Meta postpones revised business terms as publishers challenge AI content use": "How AI uses published content is still being argued over. If your team creates or shares content, watch how these rules develop.",
+  "India can export digital infrastructure, AI expertise, but 8–10% growth harder in protectionist world:...": "India's AI skills and digital systems are seen as a strength, but growth faces hurdles. Managers should think about where those skills can help their business.",
+  "Reddit's massive developer community r/opensource just banned all AI projects": "Some online communities are setting firm rules on AI. Check the rules of any group or platform before you share AI-made work there.",
+  "India Data Centres Gain Global AI Demand Amid Power Delays": "Demand for AI is lifting interest in Indian data centres, but power delays are a worry. This can affect the cost and speed of AI services you buy."
  },
  "term": {
-  "term": "AI readiness",
-  "def": "A measure of how prepared a country or company is to use AI well, based on infrastructure, skills, data and policy support."
+  "term": "Guardrails",
+  "def": "Guardrails are rules and checks built around an AI tool to stop it from doing things it should not, like sharing private data or acting without approval."
  },
  "prompt": {
   "for": "Leadership",
-  "prompt": "List three ways AI could change staffing needs in [department] over the next year, and suggest a plan to retrain affected employees."
+  "prompt": "Act as an AI risk advisor. I manage [team] and want staff to use AI for [task]. List five simple guardrails we should set, with one real example of each in plain words."
  },
  "quiz": [
   {
-   "q": "India Today reports that Barclays plans 5,000 job cuts by year-end amid its AI push, with 1,000 roles already gone.",
-   "a": true,
-   "why": "This restates the headline from India Today about Barclays and its AI related job cuts."
-  },
-  {
-   "q": "LawBeat reports that Union Minister Ashwini Vaishnaw says India will soon issue a consultation paper on a new AI law.",
-   "a": true,
-   "why": "This restates the headline from LawBeat about India's upcoming AI law consultation paper."
-  },
-  {
-   "q": "The quality of training data strongly affects how reliable an AI model's answers are.",
-   "a": true,
-   "why": "AI models learn patterns from their training data, so poor or biased data leads to poor or biased outputs."
-  },
-  {
-   "q": "AI systems understand language the same way humans do, with real comprehension and intent.",
+   "q": "If you write a clear, detailed request, an AI tool will always give you a correct answer.",
    "a": false,
-   "why": "AI predicts likely word patterns from data. It does not understand meaning the way a person does."
+   "why": "A good request helps, but AI can still give wrong answers in a confident tone. Always check important facts before you use them."
   },
   {
-   "q": "Once an AI tool is deployed, it never needs human review or oversight again.",
+   "q": "Livemint reports that Indian IT companies see business in policing AI agents.",
+   "a": true,
+   "why": "This is what the headline says. Checking and controlling AI tools is becoming a service that companies may pay for."
+  },
+  {
+   "q": "An AI chatbot understands your question the way a person does.",
    "a": false,
-   "why": "AI can make mistakes or drift over time, so ongoing human checks are still needed for safe use."
+   "why": "It predicts likely words from patterns in the data it learned from. It can sound sure even when it has no real grasp of your situation."
+  },
+  {
+   "q": "India Today reports that Reddit's r/opensource community has banned all AI projects.",
+   "a": true,
+   "why": "This is what the headline says. Online communities set their own rules on AI, so it is wise to read those rules before you post."
+  },
+  {
+   "q": "An AI system fed poor or outdated data will usually give poor or outdated results.",
+   "a": true,
+   "why": "AI output depends heavily on the data behind it. Clean, current and well-organised data is one of the best ways to get useful answers."
   }
  ],
  "source": "ai",
- "date": "2026-10-25",
- "model": "claude-sonnet-5"
+ "date": "2026-10-26",
+ "model": "claude-sonnet-5-5"
 }
