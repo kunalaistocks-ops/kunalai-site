@@ -1,47 +1,47 @@
 {
  "whats": {
-  "Confluent CTO: AI agents expose a data timing gap": "AI tools can only act on the data they receive, so slow or late data can lead to weaker decisions. Ask your team how fresh your data is.",
-  "Meta postpones revised business terms as publishers challenge AI content use": "How AI uses published content is still being argued over. If your team creates or shares content, watch how these rules develop.",
-  "India can export digital infrastructure, AI expertise, but 8–10% growth harder in protectionist world:...": "India's AI skills and digital systems are seen as a strength, but growth faces hurdles. Managers should think about where those skills can help their business.",
-  "Reddit's massive developer community r/opensource just banned all AI projects": "Some online communities are setting firm rules on AI. Check the rules of any group or platform before you share AI-made work there.",
-  "India Data Centres Gain Global AI Demand Amid Power Delays": "Demand for AI is lifting interest in Indian data centres, but power delays are a worry. This can affect the cost and speed of AI services you buy."
+  "IIT-Kharagpur Pioneers Physical AI With New School": "A dedicated Physical AI school signals India is investing in robots and AI working together in factories and labs.",
+  "IIT Kharagpur to establish India’s first Physical AI school with Rs 35 crore investment": "A Rs 35 crore investment shows real money is backing AI that controls physical machines, not just software.",
+  "Is the AI boom real or a bubble? Nikhil Kamath asks Silicon Valley founders": "Even top investors are publicly debating if AI spending is justified, worth watching before big AI bets.",
+  "IBM watsonx Orchestrate advances enterprise AI agent management with new capabilities at TechXchange 2026": "IBM is adding tools to help companies manage many AI systems at once, useful as firms scale AI use.",
+  "This AI startup is cloning consumers so companies can pick their brains": "AI that mimics customer thinking could change how companies test products and ads before launch."
  },
  "term": {
-  "term": "Guardrails",
-  "def": "Guardrails are rules and checks built around an AI tool to stop it from doing things it should not, like sharing private data or acting without approval."
+  "term": "Physical AI",
+  "def": "AI that senses and acts in the real world through robots or machines, not just on a screen. It combines sensors, cameras and motors with AI software."
  },
  "prompt": {
-  "for": "Leadership",
-  "prompt": "Act as an AI risk advisor. I manage [team] and want staff to use AI for [task]. List five simple guardrails we should set, with one real example of each in plain words."
+  "for": "Operations",
+  "prompt": "List three repetitive physical tasks in our [warehouse/plant] that could be automated with sensors or robots, and estimate the cost of a small pilot."
  },
  "quiz": [
   {
-   "q": "If you write a clear, detailed request, an AI tool will always give you a correct answer.",
+   "q": "Rediff reports that IIT Kharagpur is setting up a new Physical AI school.",
+   "a": true,
+   "why": "This matches the headline from Rediff about IIT Kharagpur's new Physical AI school."
+  },
+  {
+   "q": "The Economic Times reports that Nikhil Kamath asked Silicon Valley founders if the AI boom is real or a bubble.",
+   "a": true,
+   "why": "This directly restates the Economic Times headline about Kamath's question to founders."
+  },
+  {
+   "q": "AI systems can think and feel emotions the way humans do.",
    "a": false,
-   "why": "A good request helps, but AI can still give wrong answers in a confident tone. Always check important facts before you use them."
+   "why": "AI predicts patterns in data. It has no feelings, awareness or inner experience, no matter how natural it sounds."
   },
   {
-   "q": "Livemint reports that Indian IT companies see business in policing AI agents.",
+   "q": "AI tools can sometimes give confident but completely false answers.",
    "a": true,
-   "why": "This is what the headline says. Checking and controlling AI tools is becoming a service that companies may pay for."
+   "why": "This is called hallucination. It happens because AI predicts likely words, not verified facts."
   },
   {
-   "q": "An AI chatbot understands your question the way a person does.",
+   "q": "You must know how to code to use most AI tools at work today.",
    "a": false,
-   "why": "It predicts likely words from patterns in the data it learned from. It can sound sure even when it has no real grasp of your situation."
-  },
-  {
-   "q": "India Today reports that Reddit's r/opensource community has banned all AI projects.",
-   "a": true,
-   "why": "This is what the headline says. Online communities set their own rules on AI, so it is wise to read those rules before you post."
-  },
-  {
-   "q": "An AI system fed poor or outdated data will usually give poor or outdated results.",
-   "a": true,
-   "why": "AI output depends heavily on the data behind it. Clean, current and well-organised data is one of the best ways to get useful answers."
+   "why": "Most workplace AI tools today use plain language chat or simple menus, no coding needed."
   }
  ],
  "source": "ai",
- "date": "2026-10-26",
- "model": "claude-sonnet-5-5"
+ "date": "2026-10-27",
+ "model": "claude-sonnet-5"
 }
