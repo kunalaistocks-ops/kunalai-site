@@ -663,7 +663,7 @@ def write_feed(issues):
 
 
 def write_sitemap(issues):
-    urls = [(f"{SITE}/", TODAY), (f"{SITE}/about/", TODAY), (f"{SITE}/human-line/", TODAY), (f"{SITE}/newsletter/", TODAY), (f"{SITE}/privacy.html", TODAY)]
+    urls = [(f"{SITE}/", TODAY), (f"{SITE}/about/", TODAY), (f"{SITE}/human-line/", TODAY), (f"{SITE}/check/", TODAY), (f"{SITE}/newsletter/", TODAY), (f"{SITE}/privacy.html", TODAY)]
     urls += [(f"{SITE}/newsletter/{i['slug']}.html", i["date"]) for i in issues if i.get("slug")]
     body = "".join(f"<url><loc>{u}</loc><lastmod>{d.isoformat()}</lastmod></url>" for u, d in urls)
     (ROOT / "sitemap.xml").write_text(
