@@ -10,13 +10,14 @@ var SITE = {
   newsletter: "https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7396425243105329152",   // What the AI!? subscribe link
   x: "https://x.com/mukherjee_kunal",
   email: "kunalai.in@gmail.com",
+  substack: "",   // Your Substack address once it works, e.g. "https://newsletter.kunalai.in". Leave empty to keep the LinkedIn subscribe link.
   sheet: "https://script.google.com/macros/s/AKfycbxs8ROj_uvBe2K5vytRl7xfgpp8R24YH-j39qJKKS0z72HjdlvvxI0qWJKHGaNNBjUwdg/exec",   // Paste your Google Sheet web app URL here (it ends in /exec). Leave empty to switch email capture off.
   linkedinPartnerId: "11098649",      // LinkedIn Insight Tag partner ID (numbers only). Leave empty to switch it off.
   linkedinConversionId: ""    // Optional: LinkedIn conversion ID for "completed the quiz". Leave empty if you don't use it.
 };
 
 /* Words that rotate in the headline "AI, explained for ___" */
-var K_WORDS = ["marketers", "CFOs", "founders", "HR leaders", "managers", "students"];
+var K_WORDS = ["team", "brand team", "marketing team", "agency"];
 
 /* Chapter 01: Perspectives: the camps. pos = position on the line (0 to 100) */
 var K_CAMPS = [

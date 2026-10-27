@@ -248,7 +248,7 @@ document.addEventListener("click",function(e){
   var f=document.getElementById("qzFloat"), sc=document.getElementById("score"), hero=document.querySelector(".qz-hero")||document.getElementById("top");
   if(!f||!sc) return;
   var pastHero=false, quizVisible=false;
-  try{ if(JSON.parse(localStorage.getItem("km_score"))){ f.innerHTML="Your AI type: <b>see it again</b>"; } }catch(e){}
+
   function update(){ f.classList.toggle("show", pastHero && !quizVisible); }
   if("IntersectionObserver" in window){
     new IntersectionObserver(function(es){ quizVisible=es[0].isIntersecting; update(); },{threshold:0.15}).observe(sc);
@@ -315,4 +315,41 @@ document.addEventListener("click",function(e){
   track.addEventListener("touchend",function(e){ if(sx===null) return; var dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>40){ go(dx<0?i+1:i-1); setPaused(true);} sx=null; });
   document.addEventListener("visibilitychange",schedule);
   go(0);
+})();
+
+/* Newsletter buttons: use the Substack address from content.js once it is set */
+(function(){
+  if(typeof SITE==="undefined"||!SITE.substack) return;
+  document.querySelectorAll("[data-subscribe]").forEach(function(a){ a.href=SITE.substack.replace(/\/$/,"")+"/subscribe"; });
+})();
+
+/* Hero: interactive Human Line scorer */
+(function(){
+  var box=document.getElementById("hlx"); if(!box) return;
+  var vals=[1,1,1,2,1], name="Writing the campaign brief", ovr=false;
+  var ZONES=[[3,"Hand off","AI drafts and does it. You spot-check.",""],[6,"Team up","AI drafts. You challenge, edit and approve.",""],[10,"Hold","AI may inform. A human decides.","hold"]];
+  var $=function(id){return document.getElementById(id);};
+  function render(){
+    var t=vals.reduce(function(a,b){return a+b;},0), z=ZONES[t<=3?0:t<=6?1:2];
+    box.querySelectorAll(".hlx-f").forEach(function(row,i){
+      row.querySelectorAll("button").forEach(function(b){ b.setAttribute("role","radio"); b.setAttribute("aria-checked", +b.getAttribute("data-v")===vals[i]?"true":"false"); });
+    });
+    $("hlxScore").textContent=t;
+    $("hlxZone").textContent=z[1];
+    $("hlxRule").textContent=z[2]+(ovr?" Plus: a named human approves it, whatever the score.":"");
+    $("hlxName").textContent=name||"Your task";
+    var v=box.querySelector(".hlx-verdict"); v.className="hlx-verdict"+(z[3]?" "+z[3]:"");
+    // place the marker inside its zone band: Hand off 0-3 (4 parts), Team up 4-6 (3 parts), Hold 7-10 (4 parts)
+    var pos=(t+0.5)/11*100; $("hlxMark").style.left=pos+"%";
+  }
+  box.addEventListener("click",function(e){
+    var b=e.target.closest(".hlx-seg button");
+    if(b){ var i=+b.closest(".hlx-f").getAttribute("data-f"); vals[i]=+b.getAttribute("data-v"); box.querySelectorAll(".hlx-presets button").forEach(function(x){x.classList.remove("on");}); if(!$("hlxTask").value) name="Your task"; render(); return; }
+    var p=e.target.closest("[data-preset]");
+    if(p){ vals=p.getAttribute("data-preset").split(",").map(Number); name=p.getAttribute("data-name"); $("hlxTask").value="";
+      box.querySelectorAll(".hlx-presets button").forEach(function(x){x.classList.toggle("on",x===p);}); render(); }
+  });
+  $("hlxTask").addEventListener("input",function(){ name=this.value.trim()||"Your task"; box.querySelectorAll(".hlx-presets button").forEach(function(x){x.classList.remove("on");}); render(); });
+  $("hlxOvr").addEventListener("change",function(){ ovr=this.checked; render(); });
+  render();
 })();
