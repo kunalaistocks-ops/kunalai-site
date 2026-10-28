@@ -7,6 +7,7 @@ on:
   push:
     branches: [main, master]
     paths:
+      - "update-*.zip"
       - "newsletter/**"
       - "site.config.json"
       - "data/daily.json"
@@ -14,7 +15,15 @@ on:
       - "content.js"
       - "app.js"
       - "app-mail.js"
+      - "score.js"
+      - "consent.js"
       - "styles.css"
+      - "llms.txt"
+      - "privacy.html"
+      - "about/**"
+      - "human-line/**"
+      - "the-human-line/**"
+      - "check/**"
       - "scripts/**"
 
 permissions:
@@ -46,6 +55,36 @@ jobs:
       - name: Install tools
         run: pip install feedparser==6.0.11 markdown==3.7
 
+      - name: Install any update zip
+        # Drop a file named update-<anything>.zip in the main folder and this step
+        # unpacks it into the right folders, deletes what its DELETE.txt lists,
+        # then removes the zip. Files under .github are never written from a zip.
+        run: |
+          cat > /tmp/apply_updates.sh <<'SH'
+          set -e
+          shopt -s nullglob
+          applied=""
+          for z in update-*.zip; do
+            echo "Installing $z"
+            if unzip -Z1 "$z" | grep -E '(^/|(^|/)\.\.(/|$)|^\.git/)' ; then
+              echo "::error::$z has a path it may not write. Nothing was installed."; exit 1
+            fi
+            unzip -o -q "$z" -x 'DELETE.txt' '.github/*' -d .
+            if unzip -Z1 "$z" | grep -qx 'DELETE.txt'; then
+              unzip -p "$z" DELETE.txt | tr -d '\r' | while IFS= read -r f || [ -n "$f" ]; do
+                f="$(echo "$f" | sed 's/^ *//;s/ *$//')"
+                case "$f" in ""|\#*|/*|*..*|.git*|CNAME) continue;; esac
+                git rm -r -q --ignore-unmatch -- "$f" && echo "Removed $f"
+              done
+            fi
+            git rm -q --cached -- "$z" 2>/dev/null || true
+            rm -f -- "$z"
+            applied="$applied $z"
+          done
+          echo "$applied" > /tmp/applied.txt
+          SH
+          bash /tmp/apply_updates.sh
+
       - name: Build today's edition
         run: python scripts/build.py
 
@@ -54,6 +93,8 @@ jobs:
           git config user.name "kunalai-bot"
           git config user.email "actions@users.noreply.github.com"
           MSG="Daily update $(TZ=Asia/Kolkata date +%F)"
+          APPLIED="$(cat /tmp/applied.txt 2>/dev/null | xargs)"
+          if [ -n "$APPLIED" ]; then MSG="Install $APPLIED and rebuild"; fi
           git add -A
           if git diff --cached --quiet; then echo "Nothing new to save."; exit 0; fi
           git commit -m "$MSG"
@@ -63,6 +104,7 @@ jobs:
             sleep $((attempt * 5))
             git fetch origin "$GITHUB_REF_NAME"
             git reset --hard "origin/$GITHUB_REF_NAME"
+            bash /tmp/apply_updates.sh
             python scripts/build.py
             git add -A
             if git diff --cached --quiet; then echo "Already up to date."; exit 0; fi
