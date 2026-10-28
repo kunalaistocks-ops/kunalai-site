@@ -1,47 +1,47 @@
 {
  "whats": {
-  "IIT-Kharagpur Pioneers Physical AI With New School": "A dedicated Physical AI school signals India is investing in robots and AI working together in factories and labs.",
-  "IIT Kharagpur to establish India’s first Physical AI school with Rs 35 crore investment": "A Rs 35 crore investment shows real money is backing AI that controls physical machines, not just software.",
-  "Is the AI boom real or a bubble? Nikhil Kamath asks Silicon Valley founders": "Even top investors are publicly debating if AI spending is justified, worth watching before big AI bets.",
-  "IBM watsonx Orchestrate advances enterprise AI agent management with new capabilities at TechXchange 2026": "IBM is adding tools to help companies manage many AI systems at once, useful as firms scale AI use.",
-  "This AI startup is cloning consumers so companies can pick their brains": "AI that mimics customer thinking could change how companies test products and ads before launch."
+  "VCs will make billions on Anthropic’s IPO, but Amazon is set to make much (much) more": "Shows how AI investment gains can flow more to big partners like Amazon than to early investors.",
+  "QwikBuild raises $2.3M pre-seed to expand enterprise AI platform": "Fresh funding for enterprise AI tools shows investors still see demand for workplace AI platforms.",
+  "Workforce shake-up is here to stay. Brace for it": "Signals that managers should plan for ongoing shifts in team structures, not a one time change.",
+  "Preparing people to put AI to work": "Highlights that training staff to use AI well is becoming as important as adopting the technology itself.",
+  "Cognizant restructures software engineering business as clients seek AI returns": "Shows a major IT firm reshaping its engineering teams as clients expect clearer value from AI spending."
  },
  "term": {
-  "term": "Physical AI",
-  "def": "AI that senses and acts in the real world through robots or machines, not just on a screen. It combines sensors, cameras and motors with AI software."
+  "term": "Enterprise AI platform",
+  "def": "A shared software system that lets different teams in a company use AI tools together, instead of each team buying separate apps."
  },
  "prompt": {
-  "for": "Operations",
-  "prompt": "List three repetitive physical tasks in our [warehouse/plant] that could be automated with sensors or robots, and estimate the cost of a small pilot."
+  "for": "Leadership",
+  "prompt": "List three roles in [your team] that AI could change in the next two years, and suggest one reskilling step for each."
  },
  "quiz": [
   {
-   "q": "Rediff reports that IIT Kharagpur is setting up a new Physical AI school.",
+   "q": "TechCrunch reports that VCs will earn billions from Anthropic's IPO, but Amazon is set to earn far more.",
    "a": true,
-   "why": "This matches the headline from Rediff about IIT Kharagpur's new Physical AI school."
+   "why": "This directly restates what TechCrunch's headline says about who profits most from the IPO."
   },
   {
-   "q": "The Economic Times reports that Nikhil Kamath asked Silicon Valley founders if the AI boom is real or a bubble.",
+   "q": "Livemint reports that Cognizant is restructuring its software engineering business as clients seek AI returns.",
    "a": true,
-   "why": "This directly restates the Economic Times headline about Kamath's question to founders."
+   "why": "This matches Livemint's headline about Cognizant's restructuring move."
   },
   {
-   "q": "AI systems can think and feel emotions the way humans do.",
+   "q": "AI can fully replace human judgment in every business decision.",
    "a": false,
-   "why": "AI predicts patterns in data. It has no feelings, awareness or inner experience, no matter how natural it sounds."
+   "why": "AI can support decisions with data and patterns, but final judgment calls still need human context and accountability."
   },
   {
-   "q": "AI tools can sometimes give confident but completely false answers.",
+   "q": "Reskilling current employees is often a practical way to adapt to AI changes, instead of always hiring new people.",
    "a": true,
-   "why": "This is called hallucination. It happens because AI predicts likely words, not verified facts."
+   "why": "Training existing staff on new tools usually costs less and keeps valuable experience inside the company."
   },
   {
-   "q": "You must know how to code to use most AI tools at work today.",
+   "q": "Every company must build its own AI model from scratch to use AI well.",
    "a": false,
-   "why": "Most workplace AI tools today use plain language chat or simple menus, no coding needed."
+   "why": "Most businesses use existing AI platforms or tools built by others rather than building models themselves."
   }
  ],
  "source": "ai",
- "date": "2026-10-27",
+ "date": "2026-10-28",
  "model": "claude-sonnet-5"
 }

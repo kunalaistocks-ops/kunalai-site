@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Human Line Check: free 3-minute check for marketing and brand teams | Kunal Mukherjee</title>
-<meta name="description" content="Ten everyday marketing tasks, three answers each. In 3 minutes see where your team draws the line between AI and people: Line drawn, Line drifting or No line yet. Free, no login, nothing stored.">
+<meta name="description" content="Ten everyday marketing tasks, three answers each. In 3 minutes see where your team draws the line between AI and people: Line drawn, Line drifting or No line yet. Free, no login, no email needed.">
 <link rel="canonical" href="https://kunalai.in/check/">
 <meta name="theme-color" content="#2B3BFF">
 <meta property="og:title" content="The Human Line Check: where does your team draw the line with AI?">
@@ -123,7 +123,7 @@ a.foot{color:#D9FF3F}
 <li><strong>c)</strong> People only</li>
 </ul>
 <p>Each answer is compared with where <a href="/human-line/">The Human Line</a> says the task belongs: Hand off, Team up or Hold. One point for every match. Answer for the team as it really works, not as the policy reads.</p>
-<div class="priv"><strong>Private by design.</strong> No login, no email needed, no cookies from this page. Your answers are scored in your browser and are not sent or stored anywhere.</div>
+<div class="priv"><strong>Private by design.</strong> No login, and no email needed to see your result. Your answers are scored in your browser. Nothing is sent unless you choose to have your result emailed to you.</div>
 <div class="row"><button class="btn" id="go" type="button">Start the check</button><span class="small">10 questions · about 3 minutes</span></div>
 </section>
 
@@ -165,10 +165,28 @@ a.foot{color:#D9FF3F}
 </div>
 </div>
 
+<div class="card" id="hlcMail" style="margin-top:18px">
+<p class="eyebrow">OPTIONAL</p>
+<h2 class="h" style="margin-top:0">Want this in your inbox?</h2>
+<p>Get your Line profile, your three fixes and a one-page summary of The Human Line by email. Useful for sharing with your team.</p>
+<form id="hlcForm" novalidate style="display:grid;gap:10px;max-width:520px">
+<label for="hlcEmail" style="font-weight:600">Work email</label>
+<input id="hlcEmail" type="email" autocomplete="email" placeholder="you@company.com" required style="min-height:48px;padding:0 14px;border:2px solid #101114;border-radius:10px;font-size:16px">
+<label for="hlcRole" style="font-weight:600">Your role <span class="small">(optional)</span></label>
+<select id="hlcRole" style="min-height:48px;padding:0 12px;border:2px solid #101114;border-radius:10px;font-size:16px;background:#fff"><option value="">Choose one</option><option>Head of marketing or brand</option><option>Marketing or brand manager</option><option>Agency</option><option>Founder or business owner</option><option>Other</option></select>
+<label for="hlcSize" style="font-weight:600">Team size <span class="small">(optional)</span></label>
+<select id="hlcSize" style="min-height:48px;padding:0 12px;border:2px solid #101114;border-radius:10px;font-size:16px;background:#fff"><option value="">Choose one</option><option>Just me</option><option>2 to 5</option><option>6 to 15</option><option>16 to 40</option><option>More than 40</option></select>
+<input type="text" id="hlcTrap" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+<div class="row"><button class="btn" id="hlcSend" type="submit">Email me my result</button></div>
+<p class="small" id="hlcMsg" role="status" style="min-height:1.2em;margin:0"></p>
+<p class="small" style="margin:0">Used only to send your result. Never shared, never sold. <a href="/privacy.html">Privacy</a></p>
+</form>
+</div>
+
 <h2 class="h">Get one of these every Saturday</h2>
 <p><em>What the AI!?</em> is my free weekly newsletter: one task, one verdict on where the human line sits, one tested tool, one thing to try on Monday. Written for marketing and brand teams.</p>
 <div class="row" style="margin-top:12px"><a class="btn alt" href="https://vadersasaint.substack.com/subscribe" rel="noopener">Subscribe free on Substack</a><a class="btn ghost" href="/human-line/">Read The Human Line</a></div>
-<p class="small" style="margin-top:14px">Subscribing is optional and happens on Substack, which has its own privacy terms. This check never needs your email.</p>
+<p class="small" style="margin-top:14px">Subscribing is optional and happens on Substack, which has its own privacy terms. You never need an email to see your result.</p>
 </section>
 
 <!-- ALWAYS-VISIBLE REFERENCE -->
@@ -296,6 +314,41 @@ a.foot{color:#D9FF3F}
     function done(m){ el("copied").textContent = m; }
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(function(){done("Copied.")}, function(){done(txt)});
     else done(txt);
+  });
+})();
+</script>
+<script src="/content.js?v=bb26b8c5"></script>
+<script src="/consent.js?v=025a549b"></script>
+<script>
+/* Optional: email the result. Reads the finished result from the page; posts to Kunal's Google Sheet. */
+(function(){
+  var form=document.getElementById("hlcForm"); if(!form) return;
+  var SHEET=(typeof SITE!=="undefined"&&SITE.sheet)?SITE.sheet:"";
+  if(!SHEET){ var b=document.getElementById("hlcMail"); if(b) b.hidden=true; return; }
+  var RANK={a:2,b:1,c:0};
+  form.addEventListener("submit",function(e){
+    e.preventDefault();
+    var msg=document.getElementById("hlcMsg"), btn=document.getElementById("hlcSend");
+    var email=document.getElementById("hlcEmail").value.trim();
+    var r=window.__hlc;
+    if(!r){ msg.textContent="Finish the check first."; return; }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ msg.textContent="Please check your email address."; document.getElementById("hlcEmail").focus(); return; }
+    var over=[], under=[], answers="";
+    Array.prototype.forEach.call(document.querySelectorAll("#rtbl tbody tr"),function(tr){
+      var c=tr.children, task=c[1].textContent, mine=c[2].textContent.trim().charAt(0), rec=(c[3].textContent.match(/\(([abc])\)\s*$/)||[])[1], line=c[3].textContent.replace(/\s*\([abc]\)\s*$/,"");
+      answers+=mine;
+      if(rec && mine!==rec){ (RANK[mine]>RANK[rec]?over:under).push(task+" ("+line+")"); }
+    });
+    var fixes=Array.prototype.map.call(document.querySelectorAll("#rfixes li"),function(li){return li.textContent;});
+    var text=(document.getElementById("rtext")||{}).textContent||"";
+    btn.disabled=true; btn.textContent="Sending...";
+    fetch(SHEET,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({
+      kind:"check", website:document.getElementById("hlcTrap").value, email:email,
+      role:document.getElementById("hlcRole").value, teamSize:document.getElementById("hlcSize").value,
+      points:r.score, profile:r.band, profileText:text, over:over, under:under, fixes:fixes, answers:answers
+    })}).then(function(){
+      form.innerHTML='<p style="font-weight:600;color:#0B6B3A;margin:0">Sent. Check your inbox in a minute (and your spam folder, just in case).</p>';
+    },function(){ btn.disabled=false; btn.textContent="Email me my result"; msg.textContent="That didn't go through. Check your connection and try again."; });
   });
 })();
 </script>

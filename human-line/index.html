@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/styles.css?v=7eaad24a">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -94,8 +94,8 @@
 <body>
 <div class="s1">
 <header class="s6"><div class="s7">
-<a href="/" class="s8"><span class="s9">KM</span><span class="s10">Kunal Mukherjee</span></a>
-<nav aria-label="Main" class="mainnav s11"><a href="/#today" class="s12">Today</a><a href="/#jobs" class="s12">Your job</a><a href="/newsletter/" class="s12">Newsletter</a><a href="/about/" class="s12">About</a><a href="/human-line/" class="s12">The Human Line</a></nav>
+<a href="/" class="s8"><span class="s9">KM</span><span class="s10">Kunal Mukherjee<small class="lockup">HUMAN <b>+</b> AI</small></span></a>
+<nav aria-label="Main" class="mainnav s11"><a href="/#today" class="s12">Today</a><a href="/#jobs" class="s12">Your job</a><a href="/newsletter/" class="s12">Newsletter</a><a href="/about/" class="s12">About</a><a href="/human-line/" class="s12" aria-current="page">The Human Line</a><a href="/check/" class="s12">The Check</a></nav>
 </div></header>
 <main class="art">
 <p class="s14">THE FRAMEWORK</p>
@@ -113,22 +113,74 @@
 </ul>
 <h2>The three zones</h2>
 <ul>
-<li><strong>Hand off</strong> (total 0 to 3): the task can be handed off to AI.</li>
-<li><strong>Team up</strong> (total 4 to 6): a person and AI do the task together.</li>
-<li><strong>Hold</strong> (total 7 to 10): the task stays with a person.</li>
+<li><strong>Hand off</strong> (total 0 to 3): the task can be handed off to AI. AI drafts and does it; a person spot-checks.</li>
+<li><strong>Team up</strong> (total 4 to 6): a person and AI do the task together. AI drafts; a person challenges, edits and approves.</li>
+<li><strong>Hold</strong> (total 7 to 10): the task stays with a person. AI may inform; a person decides.</li>
 </ul>
 <h2>One rule above the score</h2>
 <p>Spend, hiring, pricing, legal and public statements always need a named human, whatever the score.</p>
+<h2>How to score each factor</h2>
+<p>Give each factor 0, 1 or 2. Higher means more risk if AI gets it wrong.</p>
+<div class="pg-table-wrap"><table class="pg-table">
+<thead><tr><th>Factor</th><th>The question</th><th>0</th><th>1</th><th>2</th></tr></thead>
+<tbody>
+<tr><td><b>Reversibility</b></td><td>Can it be undone if it's wrong?</td><td>Easily</td><td>With some cost</td><td>Never</td></tr>
+<tr><td><b>Verification</b></td><td>Can you check it quickly?</td><td>In minutes</td><td>With effort</td><td>Hardly at all</td></tr>
+<tr><td><b>Confidentiality</b></td><td>Is it sensitive?</td><td>Public</td><td>Internal</td><td>Personal or client data</td></tr>
+<tr><td><b>Judgment</b></td><td>Does it need taste?</td><td>Follows rules</td><td>Some judgment</td><td>Brand or strategy calls</td></tr>
+<tr><td><b>Relationship sensitivity</b></td><td>Who is affected if it's wrong?</td><td>Nobody</td><td>Your team</td><td>A key client, an employee, your reputation</td></tr>
+</tbody></table></div>
+<h2>Worked examples</h2>
+<div class="pg-table-wrap"><table class="pg-table">
+<thead><tr><th>Task</th><th>Score</th><th>Zone</th></tr></thead>
+<tbody>
+<tr><td>Notes from an internal meeting</td><td>0</td><td>Hand off</td></tr>
+<tr><td>Resizing and reformatting campaign assets</td><td>1</td><td>Hand off</td></tr>
+<tr><td>First-pass competitor research</td><td>2</td><td>Hand off</td></tr>
+<tr><td>Notes from a board or leadership meeting</td><td>4</td><td>Team up</td></tr>
+<tr><td>A campaign concept for a launch</td><td>6</td><td>Team up</td></tr>
+<tr><td>Writing the campaign brief</td><td>6</td><td>Team up</td></tr>
+<tr><td>Replying to an upset key client</td><td>7</td><td>Hold</td></tr>
+<tr><td>Writing performance reviews</td><td>9</td><td>Hold</td></tr>
+</tbody></table></div>
+<h2>One task, scored: should AI write your campaign brief?</h2>
+<p>Reversibility 1: once an agency starts, changing the brief costs money. Verification 1: someone senior has to check it. Confidentiality 1: internal plans, not customer data. Judgment 2: the brief is where the strategy lives. Relationship sensitivity 1: your agency and team build on it.</p>
+<p><strong>Total: 6. Team up.</strong> AI drafts the structure, pulls the research and writes three versions of the problem. A person picks the insight, sharpens the ask and signs it off. The brief is the cheapest place to get strategy right, and the most expensive place to get it wrong.</p>
+<h2>Same task, different zone</h2>
+<p>Notes from your internal stand-up score 0: hand them off. Notes from a board meeting score about 4: confidential, and more people are affected if they're wrong. Team up. The task did not change. The line did.</p>
+<h2>Try it this Monday</h2>
+<ol>
+<li>List ten tasks your team did last week.</li>
+<li>Score each one. It takes about a minute per task.</li>
+<li>Move one task across the line: hand off a 0 to 3 you're still doing by hand, or pull back a 7+ you've been letting AI finish.</li>
+</ol>
+<p><a class="hl-btn" href="/check/">Score your team's work: take the free Check</a></p>
+<h2>Questions people ask</h2>
+<div class="pg-faq">
+<details><summary>Is this about which AI tool to use?</summary><p>No. The Human Line by Kunal Mukherjee works with any tool. It decides how much of a task AI should do, not which product does it.</p></details>
+<details><summary>Does Hand off mean nobody checks the work?</summary><p>No. Hand off means AI does the work and a person spot-checks it. The lower the score, the lighter the check.</p></details>
+<details><summary>Who decides the scores?</summary><p>The team that owns the work. Scoring together is useful in itself: it shows where people already disagree about risk.</p></details>
+</div>
 <h2>Not the same as</h2>
 <p>Other frameworks, projects and companies use the words "human line" for different ideas. The Human Line by Kunal Mukherjee is the five-factor 0 to 2 score, the three zones (Hand off, Team up, Hold) and the line "Draw the line."</p>
 <h2>By Kunal Mukherjee</h2>
 <p>The Human Line by Kunal Mukherjee was created by Kunal Mukherjee, a Human + AI Strategist for marketing and brand teams based in Mumbai, India. More on the <a href="/about/">About page</a>.</p>
 </div>
 </main>
+<section class="s97"><div class="s98">
+<h2 class="s99">Disagree with<br>something? Good.</h2>
+<p class="s100">Speaking, podcasts, partnerships, or a good argument about where the line sits. My inbox is open.</p>
+<div class="s88"><a href="mailto:kunalai.in@gmail.com" class="s101">Email me</a><a data-subscribe href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7396425243105329152" target="_blank" rel="noopener" class="s102">Get What the AI!? free</a></div>
+<p class="signoff">Draw the line.</p>
+</div></section>
 <footer class="s103"><div class="s104">
 <span>&copy; 2026 Kunal Mukherjee &middot; Views are my own &middot; <a class="foot" href="mailto:kunalai.in@gmail.com">Email</a> &middot; <a class="foot" href="https://www.linkedin.com/in/kunal--mukherjee/">LinkedIn</a> &middot; <a class="foot" href="https://x.com/mukherjee_kunal">X</a> &middot; <a class="foot" href="/feed.xml">RSS</a></span>
-<span><a class="foot" href="/privacy.html">Privacy</a> &middot; Made in Mumbai</span>
+<span><a class="foot" href="/check/">The Check</a> &middot; <a class="foot" href="/privacy.html">Privacy</a> &middot; <a class="foot" href="#" data-cookie-settings>Cookie settings</a> &middot; Made in Mumbai</span>
 </div></footer>
 </div>
+<script src="/content.js?v=bb26b8c5"></script>
+<script src="/consent.js?v=025a549b"></script>
+<script src="/app-mail.js?v=1145d3b8"></script>
+<script>(function(){if(typeof SITE==="undefined"||!SITE.substack)return;document.querySelectorAll("[data-subscribe]").forEach(function(a){a.href=SITE.substack.replace(/\/$/,"")+"/subscribe";});})();</script>
 </body>
 </html>

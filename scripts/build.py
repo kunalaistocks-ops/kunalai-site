@@ -638,7 +638,7 @@ def write_issue_pages(issues):
                      for y, items in years.items())
     sub = CFG.get("linkedin_newsletter_url") or CFG["linkedin_profile"]
     body = ('<p class="s14">THE NEWSLETTER</p><h1 class="art-h">What the AI!?</h1>'
-            f'<p class="art-by">{len(issues)} issues of practical AI for non-technical managers, newest first. '
+            f'<p class="art-by">Every Saturday: one task, one verdict on where the line sits, one tested tool, one thing to try on Monday. {len(issues)} issues so far, newest first. '
             f'<a href="{E(sub)}" target="_blank" rel="noopener">Subscribe on LinkedIn ↗</a></p>'
             + (groups or '<p>New issues will appear here.</p>'))
     (outdir / "index.html").write_text(stamp_assets(PAGE, asset_versions()).format(
@@ -663,7 +663,8 @@ def write_feed(issues):
 
 
 def write_sitemap(issues):
-    urls = [(f"{SITE}/", TODAY), (f"{SITE}/about/", TODAY), (f"{SITE}/human-line/", TODAY), (f"{SITE}/check/", TODAY), (f"{SITE}/newsletter/", TODAY), (f"{SITE}/privacy.html", TODAY)]
+    urls = [(f"{SITE}/", TODAY), (f"{SITE}/about/", TODAY), (f"{SITE}/human-line/", TODAY),
+            (f"{SITE}/check/", TODAY), (f"{SITE}/newsletter/", TODAY), (f"{SITE}/privacy.html", TODAY)]
     urls += [(f"{SITE}/newsletter/{i['slug']}.html", i["date"]) for i in issues if i.get("slug")]
     body = "".join(f"<url><loc>{u}</loc><lastmod>{d.isoformat()}</lastmod></url>" for u, d in urls)
     (ROOT / "sitemap.xml").write_text(
@@ -741,9 +742,10 @@ def main():
     versions = asset_versions()
     page = stamp_assets(page, versions)
     page_path.write_text(page, encoding="utf-8")
-    priv = ROOT / "privacy.html"
-    if priv.exists():
-        priv.write_text(stamp_assets(priv.read_text(encoding="utf-8"), versions), encoding="utf-8")
+    for extra in ["privacy.html", "about/index.html", "human-line/index.html", "check/index.html"]:
+        f = ROOT / extra
+        if f.exists():
+            f.write_text(stamp_assets(f.read_text(encoding="utf-8"), versions), encoding="utf-8")
     write_issue_pages(issues)
     write_feed(issues)
     write_sitemap(issues)
@@ -752,4 +754,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

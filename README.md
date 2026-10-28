@@ -1,40 +1,35 @@
 # kunalai.in
 
-Kunal Mukherjee's field guide to the AI decade. It's a plain static site: no build step, hosted on GitHub Pages.
+The personal site of Kunal Mukherjee, Human + AI Strategist for marketing and brand teams. Hosted on GitHub Pages and rebuilt every morning at 6 AM IST by a GitHub Action.
 
-## Editing content (the usual case)
-Almost everything you'd want to change is in **`content.js`**:
+## Pages
+| Address | File | What it is |
+|---|---|---|
+| / | `index.html` | Homepage: Human Line scorer, today's top 5, The Human Line, field guide, newsletter |
+| /about/ | `about/index.html` | Bio, career, disambiguation, Person schema |
+| /human-line/ | `human-line/index.html` | The Human Line by Kunal Mukherjee (DefinedTermSet schema) |
+| /the-human-line/ | `the-human-line/index.html` | Redirects to /human-line/ |
+| /check/ | `check/index.html` | The Human Line Check, with an optional email of the result |
+| /newsletter/ | built by the robot | What the AI!? archive, from `newsletter/links.txt` |
+| /privacy.html | `privacy.html` | Privacy |
 
-| What | Where in content.js |
-|---|---|
-| Your LinkedIn, newsletter and email links | `SITE` at the top |
-| Rotating headline words ("AI, explained for ___") | `K_WORDS` |
-| Chapter 01: Perspectives / camps | `K_CAMPS` |
-| Chapter 02: Your job | `K_ROLES` |
-| Chapter 03: What to study | `K_TRACKS` |
-| Chapter 04: People to follow | `K_PEOPLE` |
-| Chapter 05: Reading room | `K_READS` |
+## Editing
+- Links and settings (Substack, Google Sheet, LinkedIn tag): `SITE` at the top of `content.js`
+- Field guide chapters (camps, roles, study paths, people, reads): `content.js`
+- New newsletter issue: add one line to `newsletter/links.txt` (link | title | date | topic | summary)
+- Daily robot settings: `site.config.json`; word, prompt and quiz library: `data/daily.json`
 
-**How to edit on GitHub:** open the repo, click `content.js`, click the ✏️ pencil, change the text between the "quotes", then click **Commit changes**. The live site updates in about a minute.
+Edit a file on GitHub with the pencil icon, then Commit changes. The site updates in about two minutes.
 
-Rules of thumb:
-- Keep the quotes `"..."` and the commas between items.
-- To use a quote mark inside text, write `\"`. Apostrophes (') are fine.
-- To add a person or a read, copy an existing line, paste it below, and edit it.
-- If the page goes blank after an edit, a comma or quote is probably missing. Open the commit history and click "Revert", or fix the line.
+## Do not edit by hand
+The robot (`scripts/build.py`, run by `.github/workflows/daily.yml`) rewrites the parts of `index.html` between `<!--BUILD:...-->` markers, plus `sitemap.xml`, `feed.xml`, `newsletter/index.html` and the version stamps (`?v=`) on scripts and styles.
 
-## Editing page text
-Headings, the intro, About, "What I believe", "Now" and Contact are in **`index.html`**. Search for the words you want to change and edit them the same way.
+## Rules for any agent working on this site
+- Facts about Kunal come only from `about/index.html` and `llms.txt`. Say "20+ years".
+- Always write the framework's full name: "The Human Line by Kunal Mukherjee".
+- No em dashes. ImagiNxt and Fashion Entrepreneur Fund appear only on /about/, in schema and in llms.txt.
 
-## Files
-- `index.html`: page structure and fixed text
-- `content.js`: all list content (edit this)
-- `app.js`: interactive behaviour (normally leave alone)
-- `styles.css`: design
-- `og-image.png`: the preview image shown when the link is shared
-- `favicon.*`, `apple-touch-icon.png`: icons
-- `CNAME`: tells GitHub Pages to use kunalai.in (don't delete)
-- `robots.txt`, `sitemap.xml`: for search engines. Update `lastmod` in the sitemap after big changes.
-
-## Preview locally (optional)
-Double-click `index.html`, or run `python3 -m http.server` and open http://localhost:8000.
+## How updates are installed (one zip, one upload)
+1. Upload a file named `update-<anything>.zip` to the main folder (Add file, Upload files, Commit).
+2. The robot in `.github/workflows/daily.yml` unpacks it into the right folders, removes every path listed in the zip's `DELETE.txt`, deletes the zip, rebuilds the site and publishes it. It takes about 2 minutes.
+3. A zip can't write outside the site, can't change `.git` or `CNAME`, and never writes files under `.github`; changes to the robot itself are uploaded by hand.
