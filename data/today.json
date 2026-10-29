@@ -1,47 +1,47 @@
 {
  "whats": {
-  "VCs will make billions on Anthropic’s IPO, but Amazon is set to make much (much) more": "Shows how AI investment gains can flow more to big partners like Amazon than to early investors.",
-  "QwikBuild raises $2.3M pre-seed to expand enterprise AI platform": "Fresh funding for enterprise AI tools shows investors still see demand for workplace AI platforms.",
-  "Workforce shake-up is here to stay. Brace for it": "Signals that managers should plan for ongoing shifts in team structures, not a one time change.",
-  "Preparing people to put AI to work": "Highlights that training staff to use AI well is becoming as important as adopting the technology itself.",
-  "Cognizant restructures software engineering business as clients seek AI returns": "Shows a major IT firm reshaping its engineering teams as clients expect clearer value from AI spending."
+  "Google has a plan to keep ads alive even when AI agents do the shopping": "If AI agents start doing the shopping, brands will need new ways to be seen. Marketing leaders should start thinking about this now.",
+  "Shopify CEO turned his wine cellar into an AI rack — and uses it to find his most stressful meetings": "Leaders are finding creative ways to use AI on their own work habits. It is a prompt to ask how AI could help you understand your own time.",
+  "IBM India focuses on Digital Swaraj for AI opportunity": "Big technology firms are shaping how they pitch AI to Indian businesses. Managers should watch what local approaches are on offer.",
+  "AI sovereignty drives enterprise shift to regional infrastructure": "Where your AI runs and where your data sits is becoming a real business decision. Ask your IT team about it before you sign anything.",
+  "AI pushes finance towards a continuous close": "AI could change how often finance teams close their books. Finance managers should start asking which routine steps can be sped up."
  },
  "term": {
-  "term": "Enterprise AI platform",
-  "def": "A shared software system that lets different teams in a company use AI tools together, instead of each team buying separate apps."
+  "term": "Data residency",
+  "def": "Data residency means choosing to store and process your data in a specific country or region. It matters when AI tools handle customer or company information."
  },
  "prompt": {
-  "for": "Leadership",
-  "prompt": "List three roles in [your team] that AI could change in the next two years, and suggest one reskilling step for each."
+  "for": "Finance",
+  "prompt": "Act as a finance analyst. Here is our month end checklist: [paste checklist]. Suggest which steps could be done daily instead of once a month, and list the risks of each."
  },
  "quiz": [
   {
-   "q": "TechCrunch reports that VCs will earn billions from Anthropic's IPO, but Amazon is set to earn far more.",
+   "q": "Business Insider reports that Google has a plan to keep ads alive even when AI agents do the shopping.",
    "a": true,
-   "why": "This directly restates what TechCrunch's headline says about who profits most from the IPO."
+   "why": "That is what the headline says. It shows that big companies are already planning for a world where AI helps people buy things."
   },
   {
-   "q": "Livemint reports that Cognizant is restructuring its software engineering business as clients seek AI returns.",
+   "q": "Asian Business Review reports that AI is pushing finance towards a continuous close.",
    "a": true,
-   "why": "This matches Livemint's headline about Cognizant's restructuring move."
+   "why": "That is what the headline says. For finance teams, it points to closing the books more often instead of waiting for month end."
   },
   {
-   "q": "AI can fully replace human judgment in every business decision.",
+   "q": "If you ask an AI tool politely, it will always give you a correct answer.",
    "a": false,
-   "why": "AI can support decisions with data and patterns, but final judgment calls still need human context and accountability."
+   "why": "AI can sound confident and still be wrong. Politeness does not change that, so always check important facts before you use them."
   },
   {
-   "q": "Reskilling current employees is often a practical way to adapt to AI changes, instead of always hiring new people.",
-   "a": true,
-   "why": "Training existing staff on new tools usually costs less and keeps valuable experience inside the company."
-  },
-  {
-   "q": "Every company must build its own AI model from scratch to use AI well.",
+   "q": "You need to know coding to get useful work out of AI tools.",
    "a": false,
-   "why": "Most businesses use existing AI platforms or tools built by others rather than building models themselves."
+   "why": "Most AI tools work with plain language. If you can explain a task clearly to a colleague, you can write a useful prompt."
+  },
+  {
+   "q": "Giving an AI tool clear background and a clear task usually gives you a better answer than a vague request.",
+   "a": true,
+   "why": "AI works from the words you give it. More context about who, what and why helps it produce something closer to what you need."
   }
  ],
  "source": "ai",
- "date": "2026-10-28",
- "model": "claude-sonnet-5"
+ "date": "2026-10-29",
+ "model": "claude-sonnet-5-5"
 }
