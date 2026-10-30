@@ -1,47 +1,47 @@
 {
  "whats": {
-  "Google has a plan to keep ads alive even when AI agents do the shopping": "If AI agents start doing the shopping, brands will need new ways to be seen. Marketing leaders should start thinking about this now.",
-  "Shopify CEO turned his wine cellar into an AI rack — and uses it to find his most stressful meetings": "Leaders are finding creative ways to use AI on their own work habits. It is a prompt to ask how AI could help you understand your own time.",
-  "IBM India focuses on Digital Swaraj for AI opportunity": "Big technology firms are shaping how they pitch AI to Indian businesses. Managers should watch what local approaches are on offer.",
-  "AI sovereignty drives enterprise shift to regional infrastructure": "Where your AI runs and where your data sits is becoming a real business decision. Ask your IT team about it before you sign anything.",
-  "AI pushes finance towards a continuous close": "AI could change how often finance teams close their books. Finance managers should start asking which routine steps can be sped up."
+  "Defenders of Digital Bharat: Navigating Cybersecurity in India's Evolving Artificial Intelligence Landscape": "AI brings new security risks, so managers should ask how their company's data and tools are being protected.",
+  "How to Choose the Right AI Security Software for Your Business": "Picking AI security software is now a real business decision, so compare options carefully before you buy anything.",
+  "UNSC Election 2028-29: AI, Maritime Security India's Key Priorities": "AI is being named among India's global priorities, a sign it is now a topic far beyond technology teams.",
+  "India Flags AI, Maritime Security As Key Priorities For 2028-29 UNSC Term": "AI is being flagged as a key priority at national level, which shows how big the topic has become for every sector.",
+  "Agentic AI Is Coming to Enterprise Software. But What Does That Mean for Todays Software Engineers": "Agentic AI is heading into business software, so managers should learn what it could mean for their teams and skills."
  },
  "term": {
-  "term": "Data residency",
-  "def": "Data residency means choosing to store and process your data in a specific country or region. It matters when AI tools handle customer or company information."
+  "term": "Agentic AI",
+  "def": "AI that can plan and carry out several steps on its own to reach a goal, instead of only answering one question at a time."
  },
  "prompt": {
-  "for": "Finance",
-  "prompt": "Act as a finance analyst. Here is our month end checklist: [paste checklist]. Suggest which steps could be done daily instead of once a month, and list the risks of each."
+  "for": "Leadership",
+  "prompt": "Act as a cybersecurity advisor for a [size] company in [industry]. List the five biggest risks of using AI tools at work and one simple step to reduce each."
  },
  "quiz": [
   {
-   "q": "Business Insider reports that Google has a plan to keep ads alive even when AI agents do the shopping.",
-   "a": true,
-   "why": "That is what the headline says. It shows that big companies are already planning for a world where AI helps people buy things."
-  },
-  {
-   "q": "Asian Business Review reports that AI is pushing finance towards a continuous close.",
-   "a": true,
-   "why": "That is what the headline says. For finance teams, it points to closing the books more often instead of waiting for month end."
-  },
-  {
-   "q": "If you ask an AI tool politely, it will always give you a correct answer.",
+   "q": "You need to know coding to use AI tools well at work.",
    "a": false,
-   "why": "AI can sound confident and still be wrong. Politeness does not change that, so always check important facts before you use them."
+   "why": "Most AI tools work with plain language. If you can explain a task clearly in words, you can start using them today."
   },
   {
-   "q": "You need to know coding to get useful work out of AI tools.",
-   "a": false,
-   "why": "Most AI tools work with plain language. If you can explain a task clearly to a colleague, you can write a useful prompt."
-  },
-  {
-   "q": "Giving an AI tool clear background and a clear task usually gives you a better answer than a vague request.",
+   "q": "AI tools can give confident answers that are wrong, so important facts should always be checked.",
    "a": true,
-   "why": "AI works from the words you give it. More context about who, what and why helps it produce something closer to what you need."
+   "why": "AI predicts likely words and does not truly know facts. It can sound sure even when it is mistaken, so checking matters."
+  },
+  {
+   "q": "If you ask an AI tool politely, it will always give a correct answer.",
+   "a": false,
+   "why": "Being polite does not make an answer more accurate. Clear instructions and good context help far more than good manners."
+  },
+  {
+   "q": "Techloy has published a guide on how to choose the right AI security software for your business.",
+   "a": true,
+   "why": "This is what the headline says. Choosing security tools for AI is now a topic businesses are reading about."
+  },
+  {
+   "q": "TheWire.in reports that agentic AI is coming to enterprise software.",
+   "a": true,
+   "why": "That is the claim in the headline. The article also asks what this means for today's software engineers."
   }
  ],
  "source": "ai",
- "date": "2026-10-29",
+ "date": "2026-10-30",
  "model": "claude-sonnet-5-5"
 }
