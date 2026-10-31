@@ -1,47 +1,47 @@
 {
  "whats": {
-  "Defenders of Digital Bharat: Navigating Cybersecurity in India's Evolving Artificial Intelligence Landscape": "AI brings new security risks, so managers should ask how their company's data and tools are being protected.",
-  "How to Choose the Right AI Security Software for Your Business": "Picking AI security software is now a real business decision, so compare options carefully before you buy anything.",
-  "UNSC Election 2028-29: AI, Maritime Security India's Key Priorities": "AI is being named among India's global priorities, a sign it is now a topic far beyond technology teams.",
-  "India Flags AI, Maritime Security As Key Priorities For 2028-29 UNSC Term": "AI is being flagged as a key priority at national level, which shows how big the topic has become for every sector.",
-  "Agentic AI Is Coming to Enterprise Software. But What Does That Mean for Todays Software Engineers": "Agentic AI is heading into business software, so managers should learn what it could mean for their teams and skills."
+  "AI advantage will come from enterprise reinvention, not adoption alone - CNBC TV18": "Buying AI tools is not enough. Managers should think about how the work itself can be redone around them.",
+  "TermSheet Capital Reports Rising Global Demand for Indian AI Firms": "Demand for Indian AI firms is rising worldwide, so AI skills and services built in India may become more valuable to your business.",
+  "Three stocks with strong order books to watch amid India's data-centre boom": "Data centres are growing fast in India, and the companies that supply them are drawing attention. AI needs this physical base.",
+  "Ecuador Ambassador highlights growing role of Artificial Intelligence in modern diplomacy": "AI is now being discussed even in diplomacy, a sign that leaders in every kind of organisation need a basic view on it.",
+  "The Genius Behind DeepMind's AI Revolution": "Rediff profiles the mind behind DeepMind, a useful read if you want to understand where today's AI tools came from."
  },
  "term": {
-  "term": "Agentic AI",
-  "def": "AI that can plan and carry out several steps on its own to reach a goal, instead of only answering one question at a time."
+  "term": "Data centre",
+  "def": "A large building full of powerful computers that store data and run AI tools. When you use an AI chatbot, your request is usually handled in one."
  },
  "prompt": {
   "for": "Leadership",
-  "prompt": "Act as a cybersecurity advisor for a [size] company in [industry]. List the five biggest risks of using AI tools at work and one simple step to reduce each."
+  "prompt": "Act as a strategy advisor. Our company is [company and industry]. List five processes we could redesign with AI, not just speed up. For each, give the current step, the new way, and one risk."
  },
  "quiz": [
   {
-   "q": "You need to know coding to use AI tools well at work.",
+   "q": "If an AI tool sounds very confident, its answer is almost certainly correct.",
    "a": false,
-   "why": "Most AI tools work with plain language. If you can explain a task clearly in words, you can start using them today."
+   "why": "AI can write wrong answers in a confident tone. Always check important facts, numbers and names before you use them."
   },
   {
-   "q": "AI tools can give confident answers that are wrong, so important facts should always be checked.",
+   "q": "SMEStreet reports that TermSheet Capital sees rising global demand for Indian AI firms.",
    "a": true,
-   "why": "AI predicts likely words and does not truly know facts. It can sound sure even when it is mistaken, so checking matters."
+   "why": "This is what the SMEStreet headline says. It points to growing interest in AI companies built in India."
   },
   {
-   "q": "If you ask an AI tool politely, it will always give a correct answer.",
+   "q": "TradingView reports that AI is forcing recruitment firms to overhaul their business models.",
+   "a": true,
+   "why": "This restates the TradingView headline. It shows AI is changing how whole businesses work, not only single tasks."
+  },
+  {
+   "q": "You need to know coding to get useful results from everyday AI tools.",
    "a": false,
-   "why": "Being polite does not make an answer more accurate. Clear instructions and good context help far more than good manners."
+   "why": "Most AI tools work with plain language. You type what you need in normal words, like briefing a colleague."
   },
   {
-   "q": "Techloy has published a guide on how to choose the right AI security software for your business.",
+   "q": "Giving an AI tool clear context in your prompt usually leads to a better answer.",
    "a": true,
-   "why": "This is what the headline says. Choosing security tools for AI is now a topic businesses are reading about."
-  },
-  {
-   "q": "TheWire.in reports that agentic AI is coming to enterprise software.",
-   "a": true,
-   "why": "That is the claim in the headline. The article also asks what this means for today's software engineers."
+   "why": "Details like your role, your audience and the format you want help the tool understand the task and respond better."
   }
  ],
  "source": "ai",
- "date": "2026-10-30",
+ "date": "2026-10-31",
  "model": "claude-sonnet-5-5"
 }
