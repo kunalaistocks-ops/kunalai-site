@@ -1,47 +1,47 @@
 {
  "whats": {
-  "OpenAI wants to rename its data centres to AI compute campuses": "A naming change like this often signals how a company wants its technology seen, not a change in what it actually does.",
-  "Why enterprise AI investments fail to deliver business value": "Managers should note that many AI rollouts stall when business goals are vague, even with good technology.",
-  "Pantera Partner Explains How AI Agents Are Reshaping SaaS Business Models and Crypto Payments": "This points to AI tools increasingly shaping how software companies sell and get paid, worth watching for budget planning.",
-  "SK Telecom grows enterprise-wide AI transformation programme": "Large firms expanding company wide AI programmes shows this shift is becoming standard practice, not experimental.",
-  "What is Volta-Autodoxer, new AI-enhanced malware profiling victims for hackers in seconds?": "New AI-powered hacking tools mean managers should treat basic cybersecurity training as urgent, not optional."
+  "Indian companies trust AI with greater autonomy but struggle to prove financial returns: Report": "Trusting AI with more freedom is not enough. Managers still need to show what it earns or saves the business.",
+  "Dun & Bradstreet Survey Highlights India's AI Readiness Gap": "A survey points to an AI readiness gap in India, so check your own team's skills and data before making big bets.",
+  "Securonix CPO on the limits of AI in security operations": "Even in security work, AI has limits. Know what it can and cannot do before you rely on it for protection.",
+  "AI sell-off may not bring foreign investors back to India, Bernstein warns; here's why": "Bernstein warns that an AI sell-off may not bring foreign investors back to India. Useful context for leaders watching investor mood.",
+  "Google Cloud’s Vision AI can cut manufacturing downtime, operating costs by up to 30%": "The Tribune reports Vision AI could cut factory downtime and costs by up to 30%. Ask vendors for proof in your own setting."
  },
  "term": {
-  "term": "AI-enhanced malware",
-  "def": "Malicious software that uses AI to study a victim's system and craft custom attacks in seconds, instead of using the same old method for everyone."
+  "term": "Computer vision",
+  "def": "Computer vision is AI that looks at images or video and understands what is in them. For example, it can spot a faulty part on a factory line."
  },
  "prompt": {
-  "for": "Operations",
-  "prompt": "Write a short staff memo explaining how AI tools can make phishing emails look more convincing, with three quick checks before clicking a link from [a vendor, bank, or client]."
+  "for": "Leadership",
+  "prompt": "Act as a finance analyst. Help me build a simple one page case showing the return on our [AI tool] pilot in [team]. Ask me for costs, time saved and risks, then draft the summary."
  },
  "quiz": [
   {
-   "q": "India Today reports that OpenAI wants to rename its data centres to AI compute campuses.",
+   "q": "ANI News reports that Indian companies trust AI with greater autonomy but struggle to prove financial returns.",
    "a": true,
-   "why": "This is exactly what the headline states."
+   "why": "This is what the headline says. It reminds managers to track clear numbers for any AI project, not just enthusiasm."
   },
   {
-   "q": "Bisinfotech reports that IBS acquired Quantum Compute Solutions in a HK$563 million deal.",
+   "q": "The Tribune reports that Google Cloud's Vision AI can cut manufacturing downtime and operating costs by up to 30%.",
    "a": true,
-   "why": "This is exactly what the headline states."
+   "why": "That is the headline claim. 'Up to' means results vary, so ask any vendor to prove it in your own setting."
   },
   {
-   "q": "AI can genuinely feel emotions the same way people do.",
+   "q": "If an AI tool gives a confident answer, you can trust that it is correct.",
    "a": false,
-   "why": "AI can mimic emotional language convincingly but it does not actually feel anything."
+   "why": "AI can sound sure and still be wrong. Always check important facts, numbers and names before you use them."
   },
   {
-   "q": "Many enterprise AI projects fail because the business problem was unclear from the start, not because the technology was weak.",
-   "a": true,
-   "why": "Unclear goals and poor planning are common, well known reasons AI projects underdeliver."
-  },
-  {
-   "q": "Adding more automated AI tools to a business always lowers its costs.",
+   "q": "You need to know how to write code to get real value from everyday AI tools.",
    "a": false,
-   "why": "New AI tools often bring setup, training and maintenance costs that can outweigh early savings."
+   "why": "Most popular AI tools work with plain language instructions. Clear writing matters far more than coding skill."
+  },
+  {
+   "q": "Telling an AI tool your goal and your audience usually makes its answer more useful.",
+   "a": true,
+   "why": "AI works better with context. The more clearly you describe what you need and who it is for, the better the result."
   }
  ],
  "source": "ai",
- "date": "2026-11-02",
- "model": "claude-sonnet-5"
+ "date": "2026-11-03",
+ "model": "claude-sonnet-5-5"
 }
