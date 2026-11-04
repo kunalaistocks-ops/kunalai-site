@@ -1,47 +1,47 @@
 {
  "whats": {
-  "Indian companies trust AI with greater autonomy but struggle to prove financial returns: Report": "Trusting AI with more freedom is not enough. Managers still need to show what it earns or saves the business.",
-  "Dun & Bradstreet Survey Highlights India's AI Readiness Gap": "A survey points to an AI readiness gap in India, so check your own team's skills and data before making big bets.",
-  "Securonix CPO on the limits of AI in security operations": "Even in security work, AI has limits. Know what it can and cannot do before you rely on it for protection.",
-  "AI sell-off may not bring foreign investors back to India, Bernstein warns; here's why": "Bernstein warns that an AI sell-off may not bring foreign investors back to India. Useful context for leaders watching investor mood.",
-  "Google Cloud’s Vision AI can cut manufacturing downtime, operating costs by up to 30%": "The Tribune reports Vision AI could cut factory downtime and costs by up to 30%. Ask vendors for proof in your own setting."
+  "securing aI agents is central to enterprise cyber resilience Dipesh Kaura Country Director, India and SAARC, Securonix": "AI tools used at work need strong security, since weak controls can create new risks for a business.",
+  "IndiaAI Mission releases three indigenous AI models by Soket, ZenteiQ": "India now has its own AI models, giving businesses local options instead of relying only on foreign AI tools.",
+  "Google to Cut Off Search access for students at schools that reject AI: What it means for students and teachers": "Schools that reject AI tools may lose certain search access, a shift worth watching for education leaders.",
+  "IndiaAI Mission Released Indigenous Foundation Models EKA-1 by Soket and Dhīr 2B & Dhīr 5B by ZenteiQ Under the IndiaAI Innovation Centre Pillar": "New home-grown AI models aim to give Indian organisations more locally built choices for AI projects.",
+  "IndiaAI Mission's three indigenous AI models target offline mobile access, secure use in critical sectors": "These new AI models are built to work offline and to support secure use in important sectors."
  },
  "term": {
-  "term": "Computer vision",
-  "def": "Computer vision is AI that looks at images or video and understands what is in them. For example, it can spot a faulty part on a factory line."
+  "term": "Foundation model",
+  "def": "A foundation model is a large AI system trained on broad data that can later be adapted for many different business tasks."
  },
  "prompt": {
   "for": "Leadership",
-  "prompt": "Act as a finance analyst. Help me build a simple one page case showing the return on our [AI tool] pilot in [team]. Ask me for costs, time saved and risks, then draft the summary."
+  "prompt": "List three questions to ask before adopting a new foundation model for [business function], covering security, cost, and data privacy."
  },
  "quiz": [
   {
-   "q": "ANI News reports that Indian companies trust AI with greater autonomy but struggle to prove financial returns.",
+   "q": "The Economic Times reports that IndiaAI Mission's three indigenous AI models target offline mobile access and secure use in critical sectors.",
    "a": true,
-   "why": "This is what the headline says. It reminds managers to track clear numbers for any AI project, not just enthusiasm."
+   "why": "This directly restates what The Economic Times headline states."
   },
   {
-   "q": "The Tribune reports that Google Cloud's Vision AI can cut manufacturing downtime and operating costs by up to 30%.",
+   "q": "Upstox reports that the IndiaAI Mission released three indigenous AI models built by Soket and ZenteiQ.",
    "a": true,
-   "why": "That is the headline claim. 'Up to' means results vary, so ask any vendor to prove it in your own setting."
+   "why": "This directly restates what the Upstox headline states."
   },
   {
-   "q": "If an AI tool gives a confident answer, you can trust that it is correct.",
+   "q": "A foundation model can be fine-tuned later for different uses after its initial training.",
+   "a": true,
+   "why": "This is how foundation models are commonly used across industries once trained."
+  },
+  {
+   "q": "AI models always need a live internet connection to function.",
    "a": false,
-   "why": "AI can sound sure and still be wrong. Always check important facts, numbers and names before you use them."
+   "why": "Many AI models can run on local devices or offline once installed, without constant internet access."
   },
   {
-   "q": "You need to know how to write code to get real value from everyday AI tools.",
+   "q": "A foundation model is designed to do only one narrow task and nothing else.",
    "a": false,
-   "why": "Most popular AI tools work with plain language instructions. Clear writing matters far more than coding skill."
-  },
-  {
-   "q": "Telling an AI tool your goal and your audience usually makes its answer more useful.",
-   "a": true,
-   "why": "AI works better with context. The more clearly you describe what you need and who it is for, the better the result."
+   "why": "Foundation models are built broadly on purpose, so they can be adapted to many different tasks later."
   }
  ],
  "source": "ai",
- "date": "2026-11-03",
- "model": "claude-sonnet-5-5"
+ "date": "2026-11-04",
+ "model": "claude-sonnet-5"
 }
