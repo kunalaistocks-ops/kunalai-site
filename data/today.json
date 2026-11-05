@@ -1,47 +1,47 @@
 {
  "whats": {
-  "securing aI agents is central to enterprise cyber resilience Dipesh Kaura Country Director, India and SAARC, Securonix": "AI tools used at work need strong security, since weak controls can create new risks for a business.",
-  "IndiaAI Mission releases three indigenous AI models by Soket, ZenteiQ": "India now has its own AI models, giving businesses local options instead of relying only on foreign AI tools.",
-  "Google to Cut Off Search access for students at schools that reject AI: What it means for students and teachers": "Schools that reject AI tools may lose certain search access, a shift worth watching for education leaders.",
-  "IndiaAI Mission Released Indigenous Foundation Models EKA-1 by Soket and Dhīr 2B & Dhīr 5B by ZenteiQ Under the IndiaAI Innovation Centre Pillar": "New home-grown AI models aim to give Indian organisations more locally built choices for AI projects.",
-  "IndiaAI Mission's three indigenous AI models target offline mobile access, secure use in critical sectors": "These new AI models are built to work offline and to support secure use in important sectors."
+  "From Traditional Reports to AI Powered Business Insights": "AI can turn raw business reports into clearer insights, helping managers make faster, better informed decisions.",
+  "CERT-In flags ‘Crafty Falcon’ AI hacking campaign targeting Indian fintech firms": "Fintech managers should tighten defences now that regulators have flagged an active AI hacking campaign targeting the sector.",
+  "JAPAN AI leverages multi-channel campaign to scale enterprise client acquisition": "Shows how running AI across multiple marketing channels together can help a business win more enterprise clients.",
+  "India’s new AI security audit rules could put OpenAI, Anthropic under greater scrutiny": "Stricter AI audit rules could mean more paperwork and checks for any business relying on big AI vendors in India.",
+  "India Launches Three Homegrown AI Models, Two Designed to Run Offline": "New Indian AI models, including offline ones, give local businesses more choice and less dependence on constant internet access."
  },
  "term": {
-  "term": "Foundation model",
-  "def": "A foundation model is a large AI system trained on broad data that can later be adapted for many different business tasks."
+  "term": "AI security audit",
+  "def": "An AI security audit is a formal check of how an AI system handles data, access and risk, often required by regulators before wider use."
  },
  "prompt": {
-  "for": "Leadership",
-  "prompt": "List three questions to ask before adopting a new foundation model for [business function], covering security, cost, and data privacy."
+  "for": "Operations",
+  "prompt": "List every AI tool our team uses today, then flag any that have not had a security or privacy review in the last [number] months."
  },
  "quiz": [
   {
-   "q": "The Economic Times reports that IndiaAI Mission's three indigenous AI models target offline mobile access and secure use in critical sectors.",
+   "q": "The Indian Express reports that CERT-In has flagged an AI hacking campaign called 'Crafty Falcon' targeting Indian fintech firms.",
    "a": true,
-   "why": "This directly restates what The Economic Times headline states."
+   "why": "This directly restates what The Indian Express reported about the CERT-In alert."
   },
   {
-   "q": "Upstox reports that the IndiaAI Mission released three indigenous AI models built by Soket and ZenteiQ.",
+   "q": "CNBC TV18 reports that India's new AI security audit rules could put OpenAI and Anthropic under greater scrutiny.",
    "a": true,
-   "why": "This directly restates what the Upstox headline states."
+   "why": "This directly restates what CNBC TV18 reported about the new audit rules."
   },
   {
-   "q": "A foundation model can be fine-tuned later for different uses after its initial training.",
-   "a": true,
-   "why": "This is how foundation models are commonly used across industries once trained."
-  },
-  {
-   "q": "AI models always need a live internet connection to function.",
+   "q": "Once an AI system is deployed, it can never be hacked or misused again.",
    "a": false,
-   "why": "Many AI models can run on local devices or offline once installed, without constant internet access."
+   "why": "No system is immune forever. Ongoing monitoring and audits are needed to catch new risks."
   },
   {
-   "q": "A foundation model is designed to do only one narrow task and nothing else.",
+   "q": "Regular security reviews can help catch weaknesses in AI tools before someone exploits them.",
+   "a": true,
+   "why": "Audits and reviews are a standard way to find gaps before they cause real harm."
+  },
+  {
+   "q": "Only large global tech companies need to worry about AI security risks.",
    "a": false,
-   "why": "Foundation models are built broadly on purpose, so they can be adapted to many different tasks later."
+   "why": "Any business using AI tools, including small firms, can be targeted or exposed to risk."
   }
  ],
  "source": "ai",
- "date": "2026-11-04",
+ "date": "2026-11-05",
  "model": "claude-sonnet-5"
 }
