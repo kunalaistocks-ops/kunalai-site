@@ -1,47 +1,47 @@
 {
  "whats": {
-  "CG Power, Mtar Tech, Hitachi Energy India, other AI-related shares fall up to 8% amid global tech...": "Moneycontrol says AI-linked shares fell amid global tech worries. Markets can swing fast, so judge AI projects on business value, not market mood.",
-  "Palo Alto Networks in talks to buy AI agent security startup Clutch for $500M": "Security for AI agents is now attracting deal talks. If your team plans to use AI agents, ask early how they will be kept safe.",
-  "Festo, Softcat, ANS Group and SCC Demonstrate the Business Impact of AI-Powered Observability": "Companies are linking AI-powered observability, which means watching how systems run, to business results. Ask your IT team what it can show you.",
-  "What actually makes a company AI-native?": "Being AI-native is about more than buying tools. Ask whether your company is changing how it works, not just adding software.",
-  "AI can unearth latent enterprise value": "AI may help firms find value already sitting inside their business. Look at what your team already has before buying anything new."
+  "Artificial Intelligence (AI) Security Auditing Guidelines": "New AI security auditing guidelines mean managers may soon need formal checks before trusting AI systems at work.",
+  "Before the AQI turns severe: How AI can help India breathe": "The report says AI could help India tackle air pollution, worth watching for managers in city planning or logistics.",
+  "India Plans to Develop Homegrown GPUs Within Two Years India Targets Indigenous GPU": "India's push for homegrown GPUs could lower long term costs and reduce reliance on foreign chip makers.",
+  "Why investors are dumping AI company stocks after Democrats’ election sweep": "Investors pulling back from AI stocks after the election signals markets are growing cautious about AI spending.",
+  "EXL Strengthens Enterprise AI Services With Aimpoint Acquisition": "EXL's acquisition shows AI service providers are consolidating to offer broader enterprise AI capabilities."
  },
  "term": {
-  "term": "AI-native",
-  "def": "A company built around AI from day one, so AI shapes its products and daily work. It is not an extra tool added later to old ways of working."
+  "term": "GPU",
+  "def": "A GPU is a computer chip built to do thousands of calculations at once. It powers most AI tools, from chatbots to image generators."
  },
  "prompt": {
-  "for": "Leadership",
-  "prompt": "Act as an operations advisor. Here is how my team handles [process]. List five steps where AI could save time, and for each one, name the risk and how I can check the output."
+  "for": "Operations",
+  "prompt": "Explain in simple terms how an AI tool could track daily air quality near [office or city] and suggest steps to take when AQI turns poor."
  },
  "quiz": [
   {
-   "q": "TechCrunch reports that Palo Alto Networks is in talks to buy AI agent security startup Clutch for $500M.",
+   "q": "The420.in reports that India plans to develop homegrown GPUs within two years.",
    "a": true,
-   "why": "That is what the headline says. It describes talks, not a finished deal, so details could still change."
+   "why": "This directly restates the headline about India's plan for indigenous GPUs."
   },
   {
-   "q": "If an AI tool sounds very confident, you can trust its answer without checking.",
-   "a": false,
-   "why": "AI tools can state wrong things in a smooth, confident tone. Always check important facts, numbers and names."
-  },
-  {
-   "q": "AI chatbots understand your question the way a human colleague does.",
-   "a": false,
-   "why": "They work by spotting patterns in huge amounts of text. They can sound human without understanding like one."
-  },
-  {
-   "q": "Giving an AI tool clear context, such as your role and goal, usually gives better answers.",
+   "q": "The Washington Post reports that investors are dumping AI company stocks after Democrats' election sweep.",
    "a": true,
-   "why": "AI works from what you write. More useful detail in the prompt usually means a more useful reply."
+   "why": "This restates the Washington Post headline about investor reaction to the election result."
   },
   {
-   "q": "You need to know coding to start using AI tools well at work.",
+   "q": "AI software can run without any physical chips or hardware.",
    "a": false,
-   "why": "Most popular AI tools work with plain-language instructions. Clear writing matters more than coding for most office tasks."
+   "why": "Every AI model needs chips like GPUs to process data and give answers, even after training is done."
+  },
+  {
+   "q": "GPUs were first designed for rendering video game graphics before AI started using them.",
+   "a": true,
+   "why": "GPUs were built for fast graphics rendering, and their number-crunching power later proved ideal for AI tasks too."
+  },
+  {
+   "q": "Once an AI model finishes training, it needs no further computing power to answer questions.",
+   "a": false,
+   "why": "Running a trained model, called inference, still needs real computing power every time it responds."
   }
  ],
  "source": "ai",
- "date": "2026-11-06",
- "model": "claude-sonnet-5-5"
+ "date": "2026-11-07",
+ "model": "claude-sonnet-5"
 }
