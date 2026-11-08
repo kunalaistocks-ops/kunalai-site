@@ -1,47 +1,47 @@
 {
  "whats": {
-  "Artificial Intelligence (AI) Security Auditing Guidelines": "New AI security auditing guidelines mean managers may soon need formal checks before trusting AI systems at work.",
-  "Before the AQI turns severe: How AI can help India breathe": "The report says AI could help India tackle air pollution, worth watching for managers in city planning or logistics.",
-  "India Plans to Develop Homegrown GPUs Within Two Years India Targets Indigenous GPU": "India's push for homegrown GPUs could lower long term costs and reduce reliance on foreign chip makers.",
-  "Why investors are dumping AI company stocks after Democrats’ election sweep": "Investors pulling back from AI stocks after the election signals markets are growing cautious about AI spending.",
-  "EXL Strengthens Enterprise AI Services With Aimpoint Acquisition": "EXL's acquisition shows AI service providers are consolidating to offer broader enterprise AI capabilities."
+  "AI to boost industrial robotics growth, but manufacturers may benefit less than customers: S&P Global": "S&P Global says AI will grow industrial robotics, but customers may gain more than the manufacturers making the robots.",
+  "Only 13% of CIOs Say AI Has Delivered Significant Value. The Gap Comes Down to Measurement": "A survey finds just 13% of CIOs see real AI value, pointing to poor measurement as the main gap managers must fix.",
+  "FIIs return to Dalal Street, pump Rs 38,971 crore into Indian equities amid AI sell-off": "Foreign investors poured Rs 38,971 crore into Indian stocks even as global AI stocks faced a sell-off.",
+  "Unlocking AI value in insurance": "KPMG looks at how insurance firms can unlock real value from AI, a useful read for finance and operations leaders.",
+  "Up Wing Economics and the United States of AI": "AEI explores big-picture economic thinking around AI's role in shaping the United States economy."
  },
  "term": {
-  "term": "GPU",
-  "def": "A GPU is a computer chip built to do thousands of calculations at once. It powers most AI tools, from chatbots to image generators."
+  "term": "AI ROI",
+  "def": "AI ROI means the real business value a company gets back from its AI spending, measured in time saved, cost cut, or revenue gained."
  },
  "prompt": {
-  "for": "Operations",
-  "prompt": "Explain in simple terms how an AI tool could track daily air quality near [office or city] and suggest steps to take when AQI turns poor."
+  "for": "Leadership",
+  "prompt": "List 3 ways we could measure whether our AI tools for [team or process] are actually saving time or money, not just getting used."
  },
  "quiz": [
   {
-   "q": "The420.in reports that India plans to develop homegrown GPUs within two years.",
+   "q": "Times Square Chronicles reports that only 13% of CIOs say AI has delivered significant value so far.",
    "a": true,
-   "why": "This directly restates the headline about India's plan for indigenous GPUs."
+   "why": "This restates the headline's own finding about CIOs and AI value."
   },
   {
-   "q": "The Washington Post reports that investors are dumping AI company stocks after Democrats' election sweep.",
+   "q": "The Times of India reports that FIIs pumped Rs 38,971 crore into Indian equities amid an AI sell-off.",
    "a": true,
-   "why": "This restates the Washington Post headline about investor reaction to the election result."
+   "why": "This matches the figure and context given in the headline."
   },
   {
-   "q": "AI software can run without any physical chips or hardware.",
+   "q": "AI always gives accurate answers because it truly understands facts the way a person does.",
    "a": false,
-   "why": "Every AI model needs chips like GPUs to process data and give answers, even after training is done."
+   "why": "AI predicts likely words based on patterns, so it can sound confident while being wrong."
   },
   {
-   "q": "GPUs were first designed for rendering video game graphics before AI started using them.",
+   "q": "AI tools can sometimes produce answers that sound fluent but are factually incorrect.",
    "a": true,
-   "why": "GPUs were built for fast graphics rendering, and their number-crunching power later proved ideal for AI tasks too."
+   "why": "This is a well known limitation often called hallucination, and managers should always verify key facts."
   },
   {
-   "q": "Once an AI model finishes training, it needs no further computing power to answer questions.",
+   "q": "Buying an AI tool automatically improves business results without any change to how teams work.",
    "a": false,
-   "why": "Running a trained model, called inference, still needs real computing power every time it responds."
+   "why": "Value usually comes from redesigning workflows around the tool, not from the tool alone."
   }
  ],
  "source": "ai",
- "date": "2026-11-07",
+ "date": "2026-11-08",
  "model": "claude-sonnet-5"
 }
