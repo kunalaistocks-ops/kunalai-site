@@ -1,47 +1,47 @@
 {
  "whats": {
-  "AI to boost industrial robotics growth, but manufacturers may benefit less than customers: S&P Global": "S&P Global says AI will grow industrial robotics, but customers may gain more than the manufacturers making the robots.",
-  "Only 13% of CIOs Say AI Has Delivered Significant Value. The Gap Comes Down to Measurement": "A survey finds just 13% of CIOs see real AI value, pointing to poor measurement as the main gap managers must fix.",
-  "FIIs return to Dalal Street, pump Rs 38,971 crore into Indian equities amid AI sell-off": "Foreign investors poured Rs 38,971 crore into Indian stocks even as global AI stocks faced a sell-off.",
-  "Unlocking AI value in insurance": "KPMG looks at how insurance firms can unlock real value from AI, a useful read for finance and operations leaders.",
-  "Up Wing Economics and the United States of AI": "AEI explores big-picture economic thinking around AI's role in shaping the United States economy."
+  "Microsoft's 60,000-employee exit offer and Nadella's vision of 20 million AI agents": "A huge exit offer alongside a bold AI agent vision signals Microsoft expects AI to reshape how work gets staffed.",
+  "Planet Labs CEO Says Geopolitical Shifts, AI Are Reshaping Space Business: ‘Defense Is Really What’s Driving The Biggest Boom Right Now’": "Defense spending tied to AI is now a bigger growth driver for space companies than commercial demand, says Planet Labs' CEO.",
+  "Chilli Fruit Web Consulting Ranked #1 AI Visibility Agency for Enterprise Brands": "Being ranked top for AI visibility shows brands increasingly need specialised help to be found by AI search tools.",
+  "From mapping to AI-powered spatial intelligence: India's geospatial sector enters a new era of growth": "India's geospatial sector shifting to AI-powered spatial intelligence could open new planning and infrastructure opportunities.",
+  "Nexawork AI Launches Custom Software for SMEs From RM19,900.00": "Affordable custom AI software launches show smaller businesses now have real options to adopt AI without big budgets."
  },
  "term": {
-  "term": "AI ROI",
-  "def": "AI ROI means the real business value a company gets back from its AI spending, measured in time saved, cost cut, or revenue gained."
+  "term": "Spatial Intelligence",
+  "def": "Spatial intelligence is AI's ability to read maps, locations and physical layouts, helping tools spot patterns in geography, assets and movement."
  },
  "prompt": {
-  "for": "Leadership",
-  "prompt": "List 3 ways we could measure whether our AI tools for [team or process] are actually saving time or money, not just getting used."
+  "for": "Operations",
+  "prompt": "Using our [warehouse and store locations] data, suggest three ways AI could help us cut delivery time or costs across [region]."
  },
  "quiz": [
   {
-   "q": "Times Square Chronicles reports that only 13% of CIOs say AI has delivered significant value so far.",
+   "q": "India Today reports Microsoft offered an exit package to 60,000 employees while Nadella spoke of a vision of 20 million AI agents.",
    "a": true,
-   "why": "This restates the headline's own finding about CIOs and AI value."
+   "why": "This restates what India Today's headline states about Microsoft's offer and Nadella's agent vision."
   },
   {
-   "q": "The Times of India reports that FIIs pumped Rs 38,971 crore into Indian equities amid an AI sell-off.",
+   "q": "TechCrunch reports Yale's Jeffrey Sonnenfeld estimates Jensen Huang's job security at about 50-50.",
    "a": true,
-   "why": "This matches the figure and context given in the headline."
+   "why": "This matches the quoted estimate in the TechCrunch headline, nothing more is claimed."
   },
   {
-   "q": "AI always gives accurate answers because it truly understands facts the way a person does.",
+   "q": "AI models reason and think exactly the way the human brain does.",
    "a": false,
-   "why": "AI predicts likely words based on patterns, so it can sound confident while being wrong."
+   "why": "AI finds patterns in data using math, not biological thought, so it does not reason like a human brain."
   },
   {
-   "q": "AI tools can sometimes produce answers that sound fluent but are factually incorrect.",
-   "a": true,
-   "why": "This is a well known limitation often called hallucination, and managers should always verify key facts."
-  },
-  {
-   "q": "Buying an AI tool automatically improves business results without any change to how teams work.",
+   "q": "AI always gives accurate answers because it is a machine and machines do not make mistakes.",
    "a": false,
-   "why": "Value usually comes from redesigning workflows around the tool, not from the tool alone."
+   "why": "AI can be confidently wrong or make up details, a problem often called hallucination."
+  },
+  {
+   "q": "The same AI tool can give slightly different answers to the exact same question asked twice.",
+   "a": true,
+   "why": "Many AI systems use some randomness in generating answers, so responses can vary even for identical prompts."
   }
  ],
  "source": "ai",
- "date": "2026-11-08",
+ "date": "2026-11-09",
  "model": "claude-sonnet-5"
 }
