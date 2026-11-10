@@ -1,47 +1,47 @@
 {
  "whats": {
-  "Microsoft's 60,000-employee exit offer and Nadella's vision of 20 million AI agents": "A huge exit offer alongside a bold AI agent vision signals Microsoft expects AI to reshape how work gets staffed.",
-  "Planet Labs CEO Says Geopolitical Shifts, AI Are Reshaping Space Business: ‘Defense Is Really What’s Driving The Biggest Boom Right Now’": "Defense spending tied to AI is now a bigger growth driver for space companies than commercial demand, says Planet Labs' CEO.",
-  "Chilli Fruit Web Consulting Ranked #1 AI Visibility Agency for Enterprise Brands": "Being ranked top for AI visibility shows brands increasingly need specialised help to be found by AI search tools.",
-  "From mapping to AI-powered spatial intelligence: India's geospatial sector enters a new era of growth": "India's geospatial sector shifting to AI-powered spatial intelligence could open new planning and infrastructure opportunities.",
-  "Nexawork AI Launches Custom Software for SMEs From RM19,900.00": "Affordable custom AI software launches show smaller businesses now have real options to adopt AI without big budgets."
+  "Meta Muse AI Agent Pricing Launch in India": "Managers in India should watch Meta Muse pricing closely, since it signals how costly AI agent tools may become for teams.",
+  "Agentic AI Could Shrink Enterprise Process Redesign Cycles | Oracle": "Oracle's point suggests AI could help businesses redesign slow internal processes faster, which is worth tracking for operations teams.",
+  "Man kills nephew, removes organs to make a quick buck. His guide: AI app": "This case is a stark reminder that AI apps can be misused for harm, so leaders must think about responsible use and oversight.",
+  "Otter AI can now follow conversations across 30+ languages": "Wider language support in tools like Otter AI could help managers run multilingual meetings and teams more smoothly.",
+  "IIT Hyderabad opens applications for three-month programme on deploying AI in businesses": "IIT Hyderabad's new programme gives managers a structured way to learn how to actually deploy AI in their own businesses."
  },
  "term": {
-  "term": "Spatial Intelligence",
-  "def": "Spatial intelligence is AI's ability to read maps, locations and physical layouts, helping tools spot patterns in geography, assets and movement."
+  "term": "Prompt injection",
+  "def": "A trick where hidden instructions are slipped into text, files or websites to make an AI tool act against the user's wishes. It is a growing risk as more teams connect AI to emails, documents and systems."
  },
  "prompt": {
   "for": "Operations",
-  "prompt": "Using our [warehouse and store locations] data, suggest three ways AI could help us cut delivery time or costs across [region]."
+  "prompt": "Review this vendor contract for risky clauses and summarise them in plain language for a non-lawyer: [paste contract text]"
  },
  "quiz": [
   {
-   "q": "India Today reports Microsoft offered an exit package to 60,000 employees while Nadella spoke of a vision of 20 million AI agents.",
+   "q": "TechCrunch reports that Otter AI can now follow conversations across more than 30 languages.",
    "a": true,
-   "why": "This restates what India Today's headline states about Microsoft's offer and Nadella's agent vision."
+   "why": "This is exactly what the TechCrunch headline states about Otter AI's new language support."
   },
   {
-   "q": "TechCrunch reports Yale's Jeffrey Sonnenfeld estimates Jensen Huang's job security at about 50-50.",
+   "q": "Analytics India Magazine reports that Meta has launched pricing for its Muse AI agent in India.",
    "a": true,
-   "why": "This matches the quoted estimate in the TechCrunch headline, nothing more is claimed."
+   "why": "This restates the headline about Meta Muse AI agent pricing launching in India."
   },
   {
-   "q": "AI models reason and think exactly the way the human brain does.",
+   "q": "An AI tool will always give the exact same answer to the exact same question.",
    "a": false,
-   "why": "AI finds patterns in data using math, not biological thought, so it does not reason like a human brain."
+   "why": "Many AI tools add small random variation by design, so answers can differ slightly even for identical prompts."
   },
   {
-   "q": "AI always gives accurate answers because it is a machine and machines do not make mistakes.",
-   "a": false,
-   "why": "AI can be confidently wrong or make up details, a problem often called hallucination."
-  },
-  {
-   "q": "The same AI tool can give slightly different answers to the exact same question asked twice.",
+   "q": "AI tools can sound confident even when the answer they give is wrong.",
    "a": true,
-   "why": "Many AI systems use some randomness in generating answers, so responses can vary even for identical prompts."
+   "why": "AI models predict likely words, not verified truth, so confident wrong answers do happen and need human checking."
+  },
+  {
+   "q": "Once a company starts using AI tools, employees no longer need any training to use them well.",
+   "a": false,
+   "why": "Good results still depend on clear prompts, context and judgement, which usually need some basic training."
   }
  ],
  "source": "ai",
- "date": "2026-11-09",
+ "date": "2026-11-10",
  "model": "claude-sonnet-5"
 }
