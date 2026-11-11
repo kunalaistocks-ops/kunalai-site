@@ -1,47 +1,47 @@
 {
  "whats": {
-  "Meta Muse AI Agent Pricing Launch in India": "Managers in India should watch Meta Muse pricing closely, since it signals how costly AI agent tools may become for teams.",
-  "Agentic AI Could Shrink Enterprise Process Redesign Cycles | Oracle": "Oracle's point suggests AI could help businesses redesign slow internal processes faster, which is worth tracking for operations teams.",
-  "Man kills nephew, removes organs to make a quick buck. His guide: AI app": "This case is a stark reminder that AI apps can be misused for harm, so leaders must think about responsible use and oversight.",
-  "Otter AI can now follow conversations across 30+ languages": "Wider language support in tools like Otter AI could help managers run multilingual meetings and teams more smoothly.",
-  "IIT Hyderabad opens applications for three-month programme on deploying AI in businesses": "IIT Hyderabad's new programme gives managers a structured way to learn how to actually deploy AI in their own businesses."
+  "AI can be a critical enabler for telcos, but not the business model - Digital Transformation - Telco": "Use AI to help your business run better, but do not mistake it for a business plan. You still need a clear way to earn money.",
+  "NATIONAL EDUCATION DAY: Experts call for future-ready education rooted in AI, critical thinking and practical learning": "Experts link AI with critical thinking and practical learning, so managers should build both skills in their teams, not only tool knowledge.",
+  "Can banks financing AI data centres be held liable for water, energy impacts? What a BIICL report says": "Questions are being raised about who is responsible when financing AI data centres affects water and energy. Managers should watch such risks.",
+  "AI in India’s Courts: Making Evidence and Judicial Decisions More Accountable": "AI is being discussed as a way to make court evidence and decisions more accountable, which shows why clear records matter when using AI.",
+  "NTT Docomo Business X and ElevenLabs link voice AI to enterprise telephony": "Voice AI is being linked to business phone systems, so managers should think about how it could change customer calls."
  },
  "term": {
-  "term": "Prompt injection",
-  "def": "A trick where hidden instructions are slipped into text, files or websites to make an AI tool act against the user's wishes. It is a growing risk as more teams connect AI to emails, documents and systems."
+  "term": "Text-to-speech",
+  "def": "Technology that turns written text into spoken audio. Modern AI versions sound natural, so companies use them in call centres and phone systems."
  },
  "prompt": {
   "for": "Operations",
-  "prompt": "Review this vendor contract for risky clauses and summarise them in plain language for a non-lawyer: [paste contract text]"
+  "prompt": "Act as a careful operations advisor. My team plans to use AI for [task]. List 5 risks, how likely each one is, and one simple step to reduce each."
  },
  "quiz": [
   {
-   "q": "TechCrunch reports that Otter AI can now follow conversations across more than 30 languages.",
+   "q": "ITnews Asia reports that AI can be a critical enabler for telcos, but not the business model.",
    "a": true,
-   "why": "This is exactly what the TechCrunch headline states about Otter AI's new language support."
+   "why": "The headline separates AI as a helper that improves a business from AI as the business itself."
   },
   {
-   "q": "Analytics India Magazine reports that Meta has launched pricing for its Muse AI agent in India.",
+   "q": "Telecompaper reports that NTT Docomo Business X and ElevenLabs link voice AI to enterprise telephony.",
    "a": true,
-   "why": "This restates the headline about Meta Muse AI agent pricing launching in India."
+   "why": "The headline says voice AI is being connected to business phone systems. It gives no further details."
   },
   {
-   "q": "An AI tool will always give the exact same answer to the exact same question.",
+   "q": "If an AI tool sounds confident, its answer is probably correct.",
    "a": false,
-   "why": "Many AI tools add small random variation by design, so answers can differ slightly even for identical prompts."
+   "why": "AI can state wrong things in a smooth, sure tone. Always check important facts, numbers and names yourself."
   },
   {
-   "q": "AI tools can sound confident even when the answer they give is wrong.",
-   "a": true,
-   "why": "AI models predict likely words, not verified truth, so confident wrong answers do happen and need human checking."
-  },
-  {
-   "q": "Once a company starts using AI tools, employees no longer need any training to use them well.",
+   "q": "You need to know programming to get useful work from an AI tool.",
    "a": false,
-   "why": "Good results still depend on clear prompts, context and judgement, which usually need some basic training."
+   "why": "Most AI tools work with plain-language instructions. Clear writing matters far more than coding skills."
+  },
+  {
+   "q": "AI tools understand your question the way a human colleague does.",
+   "a": false,
+   "why": "AI finds patterns in language and data to produce answers. It does not understand meaning or context like a person."
   }
  ],
  "source": "ai",
- "date": "2026-11-10",
- "model": "claude-sonnet-5"
+ "date": "2026-11-11",
+ "model": "claude-sonnet-5-5"
 }
