@@ -1,47 +1,47 @@
 {
  "whats": {
-  "AI can be a critical enabler for telcos, but not the business model - Digital Transformation - Telco": "Use AI to help your business run better, but do not mistake it for a business plan. You still need a clear way to earn money.",
-  "NATIONAL EDUCATION DAY: Experts call for future-ready education rooted in AI, critical thinking and practical learning": "Experts link AI with critical thinking and practical learning, so managers should build both skills in their teams, not only tool knowledge.",
-  "Can banks financing AI data centres be held liable for water, energy impacts? What a BIICL report says": "Questions are being raised about who is responsible when financing AI data centres affects water and energy. Managers should watch such risks.",
-  "AI in India’s Courts: Making Evidence and Judicial Decisions More Accountable": "AI is being discussed as a way to make court evidence and decisions more accountable, which shows why clear records matter when using AI.",
-  "NTT Docomo Business X and ElevenLabs link voice AI to enterprise telephony": "Voice AI is being linked to business phone systems, so managers should think about how it could change customer calls."
+  "OpenAI introduces local AI processing for businesses in India": "Local processing of OpenAI tools in India could matter if your company cares about where its data is handled.",
+  "BMAsia Music launches AI-powered Beat Breeze platform for retail and business": "AI is reaching everyday business tools like in-store music, so managers may soon see it in products they already buy.",
+  "Nebuly Raises $21M Series A to Expand Enterprise AI Measurement": "Investors are backing tools that measure enterprise AI, a sign that tracking results is becoming part of the job.",
+  "Before India writes its AI law, it must decide who answers for the machine": "The headline asks who answers when AI goes wrong. Managers should decide who owns the outcome of AI decisions in their team.",
+  "AI Investment Faces Returns Test Over Next 18 Months: Goldman Sachs": "Goldman Sachs says AI spending faces a returns test, so expect more questions about what your AI projects actually deliver."
  },
  "term": {
-  "term": "Text-to-speech",
-  "def": "Technology that turns written text into spoken audio. Modern AI versions sound natural, so companies use them in call centres and phone systems."
+  "term": "Inference",
+  "def": "Inference is the step where a trained AI model reads your question and produces an answer. Doing it locally means that work happens on servers in your own country."
  },
  "prompt": {
-  "for": "Operations",
-  "prompt": "Act as a careful operations advisor. My team plans to use AI for [task]. List 5 risks, how likely each one is, and one simple step to reduce each."
+  "for": "Leadership",
+  "prompt": "Act as a careful advisor. I manage [team] at a [type of company]. We are thinking of using an AI tool for [task]. List five questions I should ask the vendor about cost, data handling and results."
  },
  "quiz": [
   {
-   "q": "ITnews Asia reports that AI can be a critical enabler for telcos, but not the business model.",
+   "q": "BW Businessworld reports a Goldman Sachs view that AI investment faces a returns test over the next 18 months.",
    "a": true,
-   "why": "The headline separates AI as a helper that improves a business from AI as the business itself."
+   "why": "That is what the headline says. For managers, it is a reminder to link AI spending to results you can measure."
   },
   {
-   "q": "Telecompaper reports that NTT Docomo Business X and ElevenLabs link voice AI to enterprise telephony.",
+   "q": "BMI reports that OpenAI is introducing local AI processing for businesses in India.",
    "a": true,
-   "why": "The headline says voice AI is being connected to business phone systems. It gives no further details."
+   "why": "That is what the headline says. Local processing means the work of answering questions happens on servers inside India."
   },
   {
-   "q": "If an AI tool sounds confident, its answer is probably correct.",
+   "q": "A good AI tool always knows when it is wrong and will warn you.",
    "a": false,
-   "why": "AI can state wrong things in a smooth, sure tone. Always check important facts, numbers and names yourself."
+   "why": "AI can give wrong answers in a very confident tone. Always check important facts, numbers and names yourself."
   },
   {
-   "q": "You need to know programming to get useful work from an AI tool.",
+   "q": "AI tools understand your business automatically, so you do not need to give them any background.",
    "a": false,
-   "why": "Most AI tools work with plain-language instructions. Clear writing matters far more than coding skills."
+   "why": "An AI tool only knows what it learned in training and what you tell it. Good context in your prompt gives better answers."
   },
   {
-   "q": "AI tools understand your question the way a human colleague does.",
-   "a": false,
-   "why": "AI finds patterns in language and data to produce answers. It does not understand meaning or context like a person."
+   "q": "AI chatbots can sometimes make up facts that sound believable.",
+   "a": true,
+   "why": "This is often called hallucination. It is why a person should review AI output before it is used for anything important."
   }
  ],
  "source": "ai",
- "date": "2026-11-11",
+ "date": "2026-11-12",
  "model": "claude-sonnet-5-5"
 }
