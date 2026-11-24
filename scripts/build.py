@@ -966,5 +966,28 @@ def main():
     print(f"built {TODAY}: {len(news)} headlines, {len(issues)} newsletter issues, daily picks from {picks['source']}")
 
 
+# ---- Type scale guard (Nov 2026): pages may only use the var(--fs-*) tokens defined in styles.css.
+# Any px/em font-size written into a page's inline styles is snapped to the nearest token.
+def _fs_token(px):
+    for lim, t in ((14.5, "xs"), (15.5, "sm"), (17.9, "base"), (22.4, "md"), (28, "lg"), (35, "xl"), (43.7, "2xl"), (54, "3xl")):
+        if px <= lim: return t
+    return "display"
+
+
+def enforce_type_scale():
+    def fix(m):
+        v = m.group(2); n = float(m.group(3)) * (16 if m.group(4) in ("em", "rem") else 1)
+        return m.group(1) + "var(--fs-" + _fs_token(n) + ")"
+    pat = re.compile(r"(font-size\s*:\s*)(([\d.]+)(px|r?em))")
+    for f in ROOT.rglob("*.html"):
+        if ".git" in f.parts: continue
+        s = f.read_text(encoding="utf-8")
+        t = re.sub(r'style="([^"]*)"', lambda m: 'style="' + pat.sub(fix, m.group(1)) + '"', s)
+        if t != s:
+            print(f"::warning::type scale: snapped ad hoc font sizes in {f.relative_to(ROOT)}")
+            f.write_text(t, encoding="utf-8")
+
+
 if __name__ == "__main__":
     main()
+    enforce_type_scale()
