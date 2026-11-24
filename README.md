@@ -11,7 +11,9 @@ The personal site of Kunal Mukherjee, Human + AI Strategist for marketing and br
 | /the-human-line/ | `the-human-line/index.html` | Redirects to /human-line/ |
 | /check/ | `check/index.html` | The Human Line Check, with an optional email of the result |
 | /newsletter/ | built by the robot | What the AI!? archive, from `newsletter/links.txt` |
+| /learn/ | `learn/index.html` | Learn by doing: 45 tasks, Prompt Guru and Prompt Master |
 | /privacy.html | `privacy.html` | Privacy |
+| /404.html | `404.html` | Not-found page |
 
 ## Editing
 - Links and settings (Substack, Google Sheet, LinkedIn tag): `SITE` at the top of `content.js`
@@ -22,12 +24,19 @@ The personal site of Kunal Mukherjee, Human + AI Strategist for marketing and br
 Edit a file on GitHub with the pencil icon, then Commit changes. The site updates in about two minutes.
 
 ## Do not edit by hand
-The robot (`scripts/build.py`, run by `.github/workflows/daily.yml`) rewrites the parts of `index.html` between `<!--BUILD:...-->` markers, plus `sitemap.xml`, `feed.xml`, `newsletter/index.html` and the version stamps (`?v=`) on scripts and styles.
+The robot (`scripts/build.py`, run by `.github/workflows/daily.yml`) rewrites the parts of `index.html` between `<!--BUILD:...-->` markers, plus `sitemap.xml`, `feed.xml`, `llms-full.txt`, `data/lastmod.json`, `newsletter/index.html` and the version stamps (`?v=`) on scripts and styles.
 
 ## Rules for any agent working on this site
 - Facts about Kunal come only from `about/index.html` and `llms.txt`. Say "20+ years".
 - Always write the framework's full name: "The Human Line by Kunal Mukherjee".
-- No em dashes. ImagiNxt and Fashion Entrepreneur Fund appear only on /about/, in schema and in llms.txt.
+- No em or en dashes. Never mention ImagiNxt, Google, Gemini, Times Network or CMO in copy about Kunal.
+
+## Search and AI-answer files (SEO and GEO)
+- `robots.txt`: allows all crawlers, with search and AI crawlers named.
+- `llms.txt`: short guide for AI assistants (hand-edited). `llms-full.txt`: long guide, rebuilt daily from `data/llms-full.md` plus the newsletter list. Edit the `.md`, not the `.txt`.
+- `sitemap.xml`: rebuilt daily. A page's lastmod moves only when its content changes (hashes in `data/lastmod.json`).
+- Structured data: every page carries JSON-LD. Shared ids: `https://kunalai.in/#kunal` (Person) and `https://kunalai.in/#site` (WebSite). The full Person sits on `/` and `/about/`; other pages point to it by id. Today's edition schema is written by the robot into the `EDITIONLD` block.
+- New page? Add canonical, description, Open Graph and Twitter tags, a JSON-LD block, and add it to `SITEMAP_PAGES` in `scripts/build.py` and to `llms.txt`.
 
 ## How updates are installed (one zip, one upload)
 1. Upload a file named `update-<anything>.zip` to the main folder (Add file, Upload files, Commit).

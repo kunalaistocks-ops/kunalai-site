@@ -537,6 +537,37 @@ def render_more(issues):
     return "".join(out)
 
 
+def jsonld(graph):
+    """One JSON-LD @graph, safe to drop inside a <script> tag."""
+    return json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False).replace("</", "<\\/")
+
+
+def breadcrumbs(trail):
+    page = trail[-1][1]
+    items = [("Home", SITE + "/")] + list(trail)
+    return {"@type": "BreadcrumbList", "@id": page + "#breadcrumb",
+            "itemListElement": [{"@type": "ListItem", "position": n + 1, "name": name, "item": u}
+                                for n, (name, u) in enumerate(items)]}
+
+
+def render_edition_ld(news, picks):
+    """Structured data for today's edition on the homepage: date, headlines and the word of the day."""
+    page = SITE + "/#today"
+    node = {"@type": "WebPage", "@id": page, "url": page,
+            "name": f"Today's AI edition, {nice_date(TODAY)}",
+            "description": "The AI headlines that matter today, one word to learn, one prompt to try and a two-minute quiz, refreshed every morning at 6 AM IST on kunalai.in.",
+            "datePublished": TODAY.isoformat(), "dateModified": NOW.isoformat(timespec="seconds"),
+            "inLanguage": "en-IN", "isPartOf": {"@id": SITE + "/#site"}, "publisher": {"@id": SITE + "/#kunal"},
+            "mainEntity": {"@type": "ItemList", "name": f"Top AI headlines, {nice_date(TODAY)}",
+                           "itemListElement": [{"@type": "ListItem", "position": n + 1, "name": it["title"],
+                                                "url": it["link"]} for n, it in enumerate(news[:8])]}}
+    term = (picks or {}).get("term") or {}
+    if term.get("term") and term.get("def"):
+        node["about"] = {"@type": "DefinedTerm", "name": term["term"], "description": term["def"],
+                         "inDefinedTermSet": "AI word of the day, kunalai.in"}
+    return '<script type="application/ld+json">' + jsonld([node]) + '</script>'
+
+
 PAGE = """<!doctype html>
 <html lang="en-IN">
 <head>
@@ -546,13 +577,26 @@ PAGE = """<!doctype html>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{url}">
 <meta name="theme-color" content="#2B3BFF">
-<meta property="og:type" content="article">
-<meta property="og:title" content="{title}">
+<meta name="author" content="Kunal Mukherjee">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta property="og:type" content="{ogtype}">
+<meta property="og:site_name" content="kunalai.in">
+<meta property="og:locale" content="en_IN">
+<meta property="og:title" content="{title}: What the AI!? by Kunal Mukherjee">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{url}">
 <meta property="og:image" content="{site}/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="What the AI!? by Kunal Mukherjee">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@mukherjee_kunal">
+<meta name="twitter:title" content="{title}: What the AI!? by Kunal Mukherjee">
+<meta name="twitter:description" content="{desc}">
+<meta name="twitter:image" content="{site}/og-image.png">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="alternate" type="application/rss+xml" title="What the AI!?" href="/feed.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -564,7 +608,7 @@ PAGE = """<!doctype html>
 <div class="s1">
 <header class="s6"><div class="s7">
 <a href="/" class="s8"><span class="s9">KM</span><span class="s10">Kunal Mukherjee</span></a>
-<nav aria-label="Main" class="mainnav s11"><a href="/#today" class="s12">Today</a><a href="/#jobs" class="s12">Your job</a><a href="/#newsletter" class="s12">Newsletter</a><a href="/#about" class="s12">About</a></nav>
+<nav aria-label="Main" class="mainnav s11"><a href="/#today" class="s12">Today</a><a href="/#jobs" class="s12">Your job</a><a href="/#newsletter" class="s12">Newsletter</a><a href="/about/" class="s12">About</a><a href="/learn/" class="s12">Learn by doing</a></nav>
 </div></header>
 <main class="art">
 {body}
@@ -577,7 +621,7 @@ PAGE = """<!doctype html>
 </div></section>
 <footer class="s103"><div class="s104">
 <span>© {year} Kunal Mukherjee · Views are my own · <a class="foot" href="mailto:{email}">Email</a> · <a class="foot" href="{li}">LinkedIn</a>{xlink} · <a class="foot" href="/feed.xml">RSS</a></span>
-<span><a class="foot" href="/privacy.html">Privacy</a> · <a class="foot" href="#" data-cookie-settings>Cookie settings</a> · Made in Mumbai</span>
+<span><a class="foot" href="/about/">About</a> · <a class="foot" href="/human-line/">The Human Line</a> · <a class="foot" href="/learn/">Learn by doing</a> · <a class="foot" href="/privacy.html">Privacy</a> · <a class="foot" href="#" data-cookie-settings>Cookie settings</a> · Made in Mumbai</span>
 </div></footer>
 </div>
 <script src="/content.js"></script>
@@ -622,12 +666,14 @@ def write_issue_pages(issues):
                 f'<h1 class="art-h">{E(it["title"])}</h1>'
                 f'<p class="art-by">By Kunal Mukherjee</p>'
                 f'<div class="prose">{it["html"]}</div>{orig}{nav}')
-        ld = json.dumps({"@context": "https://schema.org", "@type": "Article",
-                         "headline": it["title"], "datePublished": it["date"].isoformat(),
-                         "author": {"@type": "Person", "name": "Kunal Mukherjee", "url": SITE + "/"},
-                         "mainEntityOfPage": url, "image": SITE + "/og-image.png"})
+        ld = jsonld([{"@type": "Article", "@id": url + "#article", "headline": it["title"],
+                      "description": it["summary"], "datePublished": it["date"].isoformat(),
+                      "author": {"@id": SITE + "/#kunal"}, "publisher": {"@id": SITE + "/#kunal"},
+                      "isPartOf": {"@id": SITE + "/#site"}, "inLanguage": "en-IN",
+                      "mainEntityOfPage": url, "image": SITE + "/og-image.png"},
+                     breadcrumbs([("What the AI!?", f"{SITE}/newsletter/"), (it["title"], url)])])
         (outdir / f"{it['slug']}.html").write_text(stamp_assets(PAGE, asset_versions()).format(
-            title=E(it["title"]), desc=E(it["summary"]), url=url, body=body, ld=ld,
+            title=E(it["title"]), desc=E(it["summary"]), url=url, body=body, ld=ld, ogtype="article",
             **page_common()), encoding="utf-8")
     # Full archive page, grouped by year
     years = {}
@@ -641,9 +687,22 @@ def write_issue_pages(issues):
             f'<p class="art-by">Every Saturday: one task, one verdict on where the line sits, one tested tool, one thing to try on Monday. {len(issues)} issues so far, newest first. '
             f'<a href="{E(sub)}" target="_blank" rel="noopener">Subscribe on LinkedIn ↗</a></p>'
             + (groups or '<p>New issues will appear here.</p>'))
+    arch_url = f"{SITE}/newsletter/"
+    arch_desc = ("Every issue of What the AI!? by Kunal Mukherjee, Human + AI Strategist. Every Saturday: one task, "
+                 "one verdict on where the line sits, one tested tool, one thing to try on Monday.")
+    arch_ld = jsonld([
+        {"@type": "CollectionPage", "@id": arch_url + "#webpage", "url": arch_url,
+         "name": "All issues: What the AI!? by Kunal Mukherjee", "description": arch_desc, "inLanguage": "en-IN",
+         "isPartOf": {"@id": SITE + "/#site"}, "author": {"@id": SITE + "/#kunal"},
+         "breadcrumb": {"@id": arch_url + "#breadcrumb"}, "mainEntity": {"@id": arch_url + "#issues"}},
+        {"@type": "ItemList", "@id": arch_url + "#issues", "name": "What the AI!? issues", "numberOfItems": len(issues),
+         "itemListElement": [{"@type": "ListItem", "position": n + 1, "name": i["title"],
+                              "url": i.get("external") or f"{SITE}/newsletter/{i['slug']}.html"}
+                             for n, i in enumerate(issues)]},
+        breadcrumbs([("What the AI!?", arch_url)])])
     (outdir / "index.html").write_text(stamp_assets(PAGE, asset_versions()).format(
-        title="All issues", desc="Every issue of What the AI!? by Kunal Mukherjee.",
-        url=f"{SITE}/newsletter/", body=body, ld="{}", **page_common())
+        title="All issues", desc=E(arch_desc), ogtype="website",
+        url=arch_url, body=body, ld=arch_ld, **page_common())
         .replace('<main class="art">', '<main class="art art-wide">'), encoding="utf-8")
 
 
@@ -662,14 +721,53 @@ def write_feed(issues):
         f"<language>en-in</language>{''.join(items)}</channel></rss>\n", encoding="utf-8")
 
 
+LASTMOD_FILE = ROOT / "data" / "lastmod.json"
+SITEMAP_PAGES = [("/", "index.html"), ("/about/", "about/index.html"), ("/human-line/", "human-line/index.html"),
+                 ("/check/", "check/index.html"), ("/learn/", "learn/index.html"),
+                 ("/newsletter/", "newsletter/index.html"), ("/privacy.html", "privacy.html")]
+
+
+def page_lastmod(rel, known):
+    """Date the page's content last changed. Asset version stamps are ignored, so a CSS tweak
+    does not make every page look new. Hashes are kept in data/lastmod.json."""
+    import hashlib
+    f = ROOT / rel
+    if not f.exists():
+        return TODAY
+    text = re.sub(r'\?v=[0-9a-f]+', '', f.read_text(encoding="utf-8"))
+    sha = hashlib.sha1(text.encode("utf-8")).hexdigest()
+    old = known.get(rel) or {}
+    if old.get("sha") != sha:
+        known[rel] = {"sha": sha, "date": TODAY.isoformat()}
+    return dt.date.fromisoformat(known[rel]["date"])
+
+
 def write_sitemap(issues):
-    urls = [(f"{SITE}/", TODAY), (f"{SITE}/about/", TODAY), (f"{SITE}/human-line/", TODAY),
-            (f"{SITE}/check/", TODAY), (f"{SITE}/learn/", TODAY), (f"{SITE}/newsletter/", TODAY), (f"{SITE}/privacy.html", TODAY)]
+    try:
+        known = json.loads(LASTMOD_FILE.read_text(encoding="utf-8"))
+    except Exception:  # noqa
+        known = {}
+    urls = [(SITE + path, page_lastmod(rel, known)) for path, rel in SITEMAP_PAGES]
+    LASTMOD_FILE.write_text(json.dumps(known, indent=1, sort_keys=True) + "\n", encoding="utf-8")
     urls += [(f"{SITE}/newsletter/{i['slug']}.html", i["date"]) for i in issues if i.get("slug")]
     body = "".join(f"<url><loc>{u}</loc><lastmod>{d.isoformat()}</lastmod></url>" for u, d in urls)
     (ROOT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         f'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{body}</urlset>\n', encoding="utf-8")
+
+
+def write_llms_full(issues):
+    """llms-full.txt = data/llms-full.md (hand-written facts) + every newsletter issue."""
+    base = ROOT / "data" / "llms-full.md"
+    if not base.exists():
+        return
+    lines = [base.read_text(encoding="utf-8").rstrip(), "", "## What the AI!? issues (newest first)"]
+    for i in issues:
+        link = i.get("external") or f"{SITE}/newsletter/{i['slug']}.html"
+        summ = f": {clean_text(i['summary'])}" if i.get("summary") else ""
+        lines.append(f"- [{clean_text(i['title'])}]({link}) ({i['date'].isoformat()}){summ}")
+    lines += ["", f"Last updated: {TODAY.isoformat()}", ""]
+    (ROOT / "llms-full.txt").write_text("\n".join(lines), encoding="utf-8")
 
 
 # ---------- 4. X ----------
@@ -734,6 +832,8 @@ def main():
     page = replace_block(page, "TERM", render_term(picks["term"]))
     page = replace_block(page, "PROMPT", render_prompt(picks["prompt"]))
     page = replace_block(page, "QUIZ", render_quiz(picks["quiz"], picks["source"]))
+    if news:
+        page = replace_block(page, "EDITIONLD", render_edition_ld(news, picks))
 
     issues = load_issues()
     page = replace_block(page, "NEWSLETTER", render_archive(issues))
@@ -748,6 +848,7 @@ def main():
             f.write_text(stamp_assets(f.read_text(encoding="utf-8"), versions), encoding="utf-8")
     write_issue_pages(issues)
     write_feed(issues)
+    write_llms_full(issues)
     write_sitemap(issues)
     print(f"built {TODAY}: {len(news)} headlines, {len(issues)} newsletter issues, daily picks from {picks['source']}")
 
