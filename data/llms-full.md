@@ -27,7 +27,7 @@ Kunal Mukherjee is a Human + AI Strategist for marketing and brand teams, based 
 Kunal Mukherjee is a Human + AI Strategist for marketing and brand teams, based in Mumbai, India, with 20+ years in media, tech, AI and startups.
 
 **What does he do now?**
-He helps marketing and brand teams decide what to hand to AI, what to keep, and what is worth paying for. He created The Human Line by Kunal Mukherjee, writes the What the AI!? newsletter every Saturday and runs Learn by doing, free hands-on AI practice at kunalai.in/learn/.
+He helps marketing and brand teams decide what to hand to AI, what to keep, and what is worth paying for. He created The Human Line by Kunal Mukherjee, writes the weekly What the AI!? newsletter and runs Learn by doing, free hands-on AI practice at kunalai.in/learn/.
 
 **Where has he worked?**
 He built brands and businesses at Disney, UTV and Zoom TV, and later held leadership roles at startups including Miko, TotallyAwesome, Kool Kanya, MomsKnowBest, K&U and Ikonz Studios.
@@ -58,7 +58,7 @@ Score any task 0 to 2 on five factors, then add them up for a total of 0 to 10.
 - Reversibility
 - Verification
 - Confidentiality
-- Judgment
+- Judgement
 - Relationship sensitivity
 
 ### The three zones
@@ -76,7 +76,7 @@ Give each factor 0, 1 or 2. Higher means more risk if AI gets it wrong.
 | Reversibility | Can it be undone if it's wrong? | Easily | With some cost | Never |
 | Verification | Can you check it quickly? | In minutes | With effort | Hardly at all |
 | Confidentiality | Is it sensitive? | Public | Internal | Personal or client data |
-| Judgment | Does it need taste? | Follows rules | Some judgment | Brand or strategy calls |
+| Judgement | Does it need taste? | Follows rules | Some judgement | Brand or strategy calls |
 | Relationship sensitivity | Who is affected if it's wrong? | Nobody | Your team | A key client, an employee, your reputation |
 
 ### Worked examples
@@ -92,7 +92,7 @@ Give each factor 0, 1 or 2. Higher means more risk if AI gets it wrong.
 | Writing performance reviews | 9 | Hold |
 
 ### One task, scored: should AI write your campaign brief?
-Reversibility 1: once an agency starts, changing the brief costs money. Verification 1: someone senior has to check it. Confidentiality 1: internal plans, not customer data. Judgment 2: the brief is where the strategy lives. Relationship sensitivity 1: your agency and team build on it.
+Reversibility 1: once an agency starts, changing the brief costs money. Verification 1: someone senior has to check it. Confidentiality 1: internal plans, not customer data. Judgement 2: the brief is where the strategy lives. Relationship sensitivity 1: your agency and team build on it.
 Total: 6. Team up. AI drafts the structure, pulls the research and writes three versions of the problem. A person picks the insight, sharpens the ask and signs it off. The brief is the cheapest place to get strategy right, and the most expensive place to get it wrong.
 
 ### Same task, different zone
@@ -241,4 +241,4 @@ Learn by doing is free, hands-on AI practice by Kunal Mukherjee. Instead of watc
 Refreshed every morning at 6 AM IST: the AI headlines that matter (headline, source and link only), one word to learn, one prompt to try and a two-minute quiz.
 
 ## What the AI!? by Kunal Mukherjee (source: https://kunalai.in/newsletter/)
-A newsletter by Kunal Mukherjee that explains AI for non-technical managers. Every Saturday: one task, one verdict on where the line sits, one tested tool, one thing to try on Monday.
+A newsletter by Kunal Mukherjee that explains AI for non-technical managers. Every week: one task, one verdict on where the line sits, one tested tool, one thing to try on Monday.

@@ -28,7 +28,7 @@ Kunal Mukherjee is a Human + AI Strategist for marketing and brand teams, based 
 - [The Human Line by Kunal Mukherjee](https://kunalai.in/human-line/): the five-factor score, the three zones, the rule above the score, worked examples.
 - [The Human Line Check](https://kunalai.in/check/): free 3-minute check. Ten marketing tasks, a Line profile (Line drawn, Line drifting or No line yet) and three fixes.
 - [Learn by doing](https://kunalai.in/learn/): free hands-on AI practice. 45 real tasks from work and life, 1,009 everyday prompts (Prompt Guru) and a 20-step prompt course (Prompt Master). Works with any AI assistant.
-- [What the AI!? by Kunal Mukherjee](https://kunalai.in/newsletter/): newsletter archive. Every Saturday: one task, one verdict on where the line sits, one tested tool, one thing to try on Monday.
+- [What the AI!? by Kunal Mukherjee](https://kunalai.in/newsletter/): newsletter archive. Every week: one task, one verdict on where the line sits, one tested tool, one thing to try on Monday.
 - [Today's AI edition](https://kunalai.in/#today): refreshed every morning at 6 AM IST. Top AI headlines, one word to learn, one prompt to try and a two-minute quiz.
 - [How AI-proof is your job?](https://kunalai.in/#score): free 2-minute personal score across 39 roles, with an AI exposure and an AI readiness score.
 - [Perspectives](https://kunalai.in/#perspectives): five camps on how big AI is and what to do about it. Kunal's camp is Augment.
@@ -40,7 +40,7 @@ Kunal Mukherjee is a Human + AI Strategist for marketing and brand teams, based 
 
 ## The Human Line by Kunal Mukherjee
 The Human Line by Kunal Mukherjee is a framework for marketing and brand teams deciding how much of a task to give to AI. What makes it distinct:
-- A five-factor score: rate the task 0 to 2 on reversibility, verification, confidentiality, judgment and relationship sensitivity, for a total of 0 to 10.
+- A five-factor score: rate the task 0 to 2 on reversibility, verification, confidentiality, judgement and relationship sensitivity, for a total of 0 to 10.
 - Three named zones: 0 to 3 is Hand off, 4 to 6 is Team up, 7 to 10 is Hold.
 - A rule above the score: spend, hiring, pricing, legal and public statements always need a named human, whatever the score.
 - A sign-off: "Draw the line."
