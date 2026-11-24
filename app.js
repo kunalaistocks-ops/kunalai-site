@@ -1,6 +1,7 @@
 /* Site behaviour. You normally don't need to edit this file. Edit content.js instead. */
 (function(){
 var S={camp:"augment",role:"Marketing",track:"pro",ptag:"ALL",rtag:"ALL",spot:0,w:0};
+if(typeof K_READS!=="undefined"&&K_READS.length){S.spot=Math.floor(Math.random()*K_READS.length);}
 var $=function(id){return document.getElementById(id);};
 var esc=function(t){return String(t).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});};
 var cap=function(t){return t.charAt(0)+t.slice(1).toLowerCase();};
@@ -48,7 +49,28 @@ function render(){
   $("readsList").innerHTML=K_READS.filter(function(x){return S.rtag==="ALL"||x.tag===S.rtag;}).map(function(x){
     return '<a class="k-tile" href="'+esc(x.url)+'" target="_blank" rel="noopener" style="color: #E8E8E3; text-decoration: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 8px 32px; padding: 24px 12px; border-bottom: 1px solid #3A3B40; align-items: baseline"><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-family: \'Bricolage Grotesque\', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: -0.02em">'+esc(x.title)+' ↗</span><span style="font-size: 14px; opacity: 0.75">'+esc(x.source)+' · '+cap(x.tag)+'</span></span><span style="font-size: 17px">'+esc(x.why)+'</span></a>';}).join("");
   var sp=K_READS[S.spot]; $("spotLink").href=sp.url; $("spotTitle").textContent=sp.title;
+  clipLists();
 }
+/* On phones, long lists start collapsed with a "Show all" button. Nothing is removed. */
+var OPEN={};
+function clipLists(){
+  [["peopleList","people"],["readsList","reads"],["nlCards","issues"]].forEach(function(p){
+    var el=$(p[0]); if(!el) return;
+    var box=getComputedStyle(el).display==="contents"?el.parentNode:el;
+    if(!box.id) box.id=p[0]+"Box";
+    var btn=$(p[0]+"More");
+    if(!btn){btn=document.createElement("button");btn.type="button";btn.id=p[0]+"More";btn.className="m-more";btn.setAttribute("aria-controls",box.id);
+      btn.addEventListener("click",function(){OPEN[p[0]]=!OPEN[p[0]];clipLists();if(!OPEN[p[0]])box.scrollIntoView({block:"start"});});
+      box.parentNode.insertBefore(btn,box.nextSibling);}
+    var n=el.children.length, small=window.matchMedia("(max-width:640px)").matches;
+    var clip=small&&!OPEN[p[0]]&&n>4;
+    box.classList.toggle("m-clip",clip);
+    btn.hidden=!(small&&n>4);
+    btn.setAttribute("aria-expanded",String(!clip));
+    btn.textContent=clip?("Show all "+n+" "+p[1]):"Show fewer";
+  });
+}
+window.addEventListener("resize",function(){clipLists();});
 function tick(){var n=new Date();
   $("clock").textContent=n.toLocaleTimeString("en-IN",{timeZone:"Asia/Kolkata",hour:"2-digit",minute:"2-digit",hour12:false});
   $("todayDate").textContent=n.toLocaleDateString("en-IN",{timeZone:"Asia/Kolkata",weekday:"long",day:"numeric",month:"long",year:"numeric"}).toUpperCase();}
