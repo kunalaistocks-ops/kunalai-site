@@ -152,6 +152,8 @@ h2.h{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:28px
 .tbl th{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;font-weight:500;text-transform:uppercase}
 .ok{color:#0a7a2f;font-weight:700}.miss{color:#b3261e;font-weight:700}
 .tbl-wrap{overflow-x:auto}
+@media (max-width:600px){.tbl thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.tbl,.tbl tbody,.tbl tr,.tbl td{display:block;width:100%}.tbl tr{border:2px solid #101114;margin:0 0 12px;padding:6px 14px;background:#fff}.tbl td{border-bottom:1px solid #E2E2DC;padding:8px 0;display:grid;grid-template-columns:7.5em 1fr;gap:10px}.tbl td:last-child{border-bottom:0}.tbl td::before{content:attr(data-label);font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#3A3B40;padding-top:3px}}
+.err{color:#b3261e;font-weight:600;font-size:15px;margin:-4px 0 0}
 ol.fixes{padding-left:22px}ol.fixes li{margin:10px 0}
 .zones{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
 .zones div{border:2px solid #101114;padding:14px 16px;font-size:16px}
@@ -238,7 +240,8 @@ a.foot{color:#D9FF3F}
 <p>Get your Line profile, your three fixes and a one-page summary of The Human Line by email. Useful for sharing with your team.</p>
 <form id="hlcForm" novalidate style="display:grid;gap:10px;max-width:520px">
 <label for="hlcEmail" style="font-weight:600">Work email</label>
-<input id="hlcEmail" type="email" autocomplete="email" placeholder="you@company.com" required style="min-height:48px;padding:0 14px;border:2px solid #101114;border-radius:10px;font-size:16px">
+<input id="hlcEmail" type="email" autocomplete="email" placeholder="you@company.com" required aria-describedby="hlcErr" style="min-height:48px;padding:0 14px;border:2px solid #101114;border-radius:10px;font-size:16px">
+<p class="err" id="hlcErr" role="alert" hidden></p>
 <label for="hlcRole" style="font-weight:600">Your role <span class="small">(optional)</span></label>
 <select id="hlcRole" style="min-height:48px;padding:0 12px;border:2px solid #101114;border-radius:10px;font-size:16px;background:#fff"><option value="">Choose one</option><option>Head of marketing or brand</option><option>Marketing or brand manager</option><option>Agency</option><option>Founder or business owner</option><option>Other</option></select>
 <label for="hlcSize" style="font-weight:600">Team size <span class="small">(optional)</span></label>
@@ -250,7 +253,7 @@ a.foot{color:#D9FF3F}
 </form>
 </div>
 
-<h2 class="h">Get one of these every Saturday</h2>
+<h2 class="h">Get one of these every week</h2>
 <p><em>What the AI!?</em> is my free weekly newsletter: one task, one verdict on where the human line sits, one tested tool, one thing to try on Monday. Written for marketing and brand teams.</p>
 <div class="row" style="margin-top:12px"><a class="btn alt" href="https://vadersasaint.substack.com/subscribe" rel="noopener">Subscribe free on Substack</a><a class="btn ghost" href="/human-line/">Read The Human Line</a></div>
 <p class="small" style="margin-top:14px">Subscribing is optional and happens on Substack, which has its own privacy terms. You never need an email to see your result.</p>
@@ -259,7 +262,7 @@ a.foot{color:#D9FF3F}
 <!-- ALWAYS-VISIBLE REFERENCE -->
 <section aria-labelledby="ref-h">
 <h2 id="ref-h" class="h">The scoring, in full</h2>
-<p>The check uses the framework behind The Human Line: score a task 0 to 2 on five factors (reversibility, verification, confidentiality, judgment, relationship sensitivity), then place it in a zone.</p>
+<p>The check uses the framework behind The Human Line: score a task 0 to 2 on five factors (reversibility, verification, confidentiality, judgement, relationship sensitivity), then place it in a zone.</p>
 <div class="zones">
 <div><b>Hand off</b>Score 0 to 3. AI drafts and executes, you spot-check.</div>
 <div><b>Team up</b>Score 4 to 6. AI drafts, you challenge, edit and approve.</div>
@@ -286,9 +289,9 @@ a.foot{color:#D9FF3F}
     {t:"Summarising an internal meeting", rec:2, zone:"Hand off", line:"Hand off", why:"Low risk, easy to check, nobody outside is affected."},
     {t:"Resizing and reformatting campaign assets", rec:2, zone:"Hand off", line:"Hand off", why:"Rule-based and checked in minutes."},
     {t:"First-pass competitor research", rec:2, zone:"Hand off", line:"Hand off", why:"Public information, and a person reads it before it is used."},
-    {t:"Drafting social caption variants", rec:1, zone:"Hand off", line:"Hand off to draft; approve before publishing", why:"AI drafts well, but a public statement always needs a named person."},
-    {t:"Writing the campaign brief", rec:1, zone:"Team up", line:"Team up", why:"Strategic judgment: AI drafts, a person decides."},
-    {t:"A campaign concept for a launch", rec:1, zone:"Team up", line:"Team up", why:"Taste and brand judgment, so a person challenges and edits."},
+    {t:"Drafting social caption variants", rec:1, zone:"Team up", line:"Team up; a person approves before publishing", why:"AI drafts well, but a public statement always needs a named person."},
+    {t:"Writing the campaign brief", rec:1, zone:"Team up", line:"Team up", why:"Strategic judgement: AI drafts, a person decides."},
+    {t:"A campaign concept for a launch", rec:1, zone:"Team up", line:"Team up", why:"Taste and brand judgement, so a person challenges and edits."},
     {t:"Notes from a board or leadership meeting", rec:1, zone:"Team up", line:"Team up", why:"Confidential, so AI helps and a person checks."},
     {t:"Shortlisting agencies", rec:1, zone:"Team up", line:"Team up; the final pick is human", why:"Spend is involved, so the final choice needs a named person."},
     {t:"Replying to an upset key client", rec:0, zone:"Hold", line:"Hold", why:"Relationship at stake, hard to undo. AI may inform, a person writes."},
@@ -332,7 +335,7 @@ a.foot{color:#D9FF3F}
       return "On \u201C" + t.t.toLowerCase() + "\u201D, keep AI as the drafter and put a named person in charge of the final call before anything goes out.";
     }
     if (t.rec === 2) return "On \u201C" + t.t.toLowerCase() + "\u201D, hand the first pass to AI and spot-check it. People's time is better spent elsewhere.";
-    return "On \u201C" + t.t.toLowerCase() + "\u201D, let AI draft it and keep the judgment with a person. Starting from a blank page is the slow way.";
+    return "On \u201C" + t.t.toLowerCase() + "\u201D, let AI draft it and keep the judgement with a person. Starting from a blank page is the slow way.";
   }
   function finish(){
     var score = 0, over = 0, under = 0, miss = [];
@@ -359,7 +362,7 @@ a.foot{color:#D9FF3F}
     TASKS.forEach(function(t,i){
       var tr = document.createElement("tr"), ok = answers[i]===t.rec;
       [String(i+1), t.t, LETTER[answers[i]]+") "+LABEL[answers[i]], t.line+" ("+LETTER[t.rec]+")", ok?"Yes":"No"].forEach(function(v,c){
-        var td = document.createElement("td"); td.textContent = v;
+        var td = document.createElement("td"); td.textContent = v; td.setAttribute("data-label", ["#","Task","Your team","The Human Line says","Match"][c]);
         if (c===4) td.className = ok?"ok":"miss";
         tr.appendChild(td);
       });
@@ -393,13 +396,16 @@ a.foot{color:#D9FF3F}
   var SHEET=(typeof SITE!=="undefined"&&SITE.sheet)?SITE.sheet:"";
   if(!SHEET){ var b=document.getElementById("hlcMail"); if(b) b.hidden=true; return; }
   var RANK={a:2,b:1,c:0};
+  document.getElementById("hlcEmail").addEventListener("input",function(){var e=document.getElementById("hlcErr");if(!e.hidden){e.hidden=true;this.removeAttribute("aria-invalid");this.style.borderColor="#101114";}});
   form.addEventListener("submit",function(e){
     e.preventDefault();
     var msg=document.getElementById("hlcMsg"), btn=document.getElementById("hlcSend");
     var email=document.getElementById("hlcEmail").value.trim();
     var r=window.__hlc;
     if(!r){ msg.textContent="Finish the check first."; return; }
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ msg.textContent="Please check your email address."; document.getElementById("hlcEmail").focus(); return; }
+    var inp=document.getElementById("hlcEmail"), err=document.getElementById("hlcErr");
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ err.textContent=email?"Please check your email address.":"Enter your email address to get your result."; err.hidden=false; inp.setAttribute("aria-invalid","true"); inp.style.borderColor="#b3261e"; inp.focus(); return; }
+    err.hidden=true; err.textContent=""; inp.removeAttribute("aria-invalid"); inp.style.borderColor="#101114";
     var over=[], under=[], answers="";
     Array.prototype.forEach.call(document.querySelectorAll("#rtbl tbody tr"),function(tr){
       var c=tr.children, task=c[1].textContent, mine=c[2].textContent.trim().charAt(0), rec=(c[3].textContent.match(/\(([abc])\)\s*$/)||[])[1], line=c[3].textContent.replace(/\s*\([abc]\)\s*$/,"");
