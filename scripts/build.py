@@ -675,7 +675,7 @@ PAGE = """<!doctype html>
 <title>{title}: What the AI!? by Kunal Mukherjee</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{url}">
-<meta name="theme-color" content="#2B3BFF">
+<meta name="theme-color" content="#0F2A22">
 <meta name="author" content="Kunal Mukherjee">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta property="og:type" content="{ogtype}">
@@ -699,7 +699,7 @@ PAGE = """<!doctype html>
 <link rel="alternate" type="application/rss+xml" title="What the AI!?" href="/feed.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles.css">
 <script type="application/ld+json">{ld}</script>
 </head>

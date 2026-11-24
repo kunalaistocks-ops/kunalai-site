@@ -381,7 +381,7 @@
   }
 
   // ---------- share image (1080 x 1350, LinkedIn's 4:5 feed format) ----------
-  var TCOL = { operator: ["#D9FF3F", "#101114"], next: ["#FF7A2F", "#101114"], multiplier: ["#FFFFFF", "#2B3BFF"], bystander: ["#101114", "#FFFFFF"] };
+  var TCOL = { operator: ["#CDEBD9", "#17201C"], next: ["#DE9A80", "#17201C"], multiplier: ["#FFFFFF", "#0E5A43"], bystander: ["#17201C", "#FFFFFF"] };
   function wrap(ctx, text, x, y, maxW, lh, maxLines) {
     var words = String(text).split(" "), line = "", lines = [];
     words.forEach(function (w) { var t = line ? line + " " + w : w; if (ctx.measureText(t).width > maxW && line) { lines.push(line); line = w; } else { line = t; } });
@@ -395,22 +395,22 @@
     var t = TYPES[r.type], col = TCOL[r.type], x = c.getContext("2d"), W = 1080, H = 1350, M = 72;
     x.clearRect(0, 0, W, H);
     // background and grid
-    x.fillStyle = "#2B3BFF"; x.fillRect(0, 0, W, H);
+    x.fillStyle = "#0E5A43"; x.fillRect(0, 0, W, H);
     x.strokeStyle = "rgba(255,255,255,0.07)"; x.lineWidth = 1;
     for (var g = 0; g <= W; g += 40) { x.beginPath(); x.moveTo(g, 0); x.lineTo(g, H); x.stroke(); }
     for (g = 0; g <= H; g += 40) { x.beginPath(); x.moveTo(0, g); x.lineTo(W, g); x.stroke(); }
     // header
-    x.fillStyle = "#D9FF3F"; x.beginPath(); x.arc(M + 10, 92, 10, 0, 7); x.fill();
-    x.font = "500 26px 'JetBrains Mono', monospace"; x.textBaseline = "alphabetic";
+    x.fillStyle = "#CDEBD9"; x.beginPath(); x.arc(M + 10, 92, 10, 0, 7); x.fill();
+    x.font = "500 26px 'Inter', monospace"; x.textBaseline = "alphabetic";
     x.fillText("MY AI SCORE · KUNALAI.IN", M + 34, 101);
     if (sample) {
-      x.font = "700 22px 'JetBrains Mono', monospace"; var sw = x.measureText("SAMPLE").width + 36;
-      x.fillStyle = "#FF7A2F"; rrect(x, W - M - sw, 66, sw, 50, 25); x.fill(); x.strokeStyle = "#101114"; x.lineWidth = 3; x.stroke();
-      x.fillStyle = "#101114"; x.fillText("SAMPLE", W - M - sw + 18, 100);
+      x.font = "700 22px 'Inter', monospace"; var sw = x.measureText("SAMPLE").width + 36;
+      x.fillStyle = "#DE9A80"; rrect(x, W - M - sw, 66, sw, 50, 25); x.fill(); x.strokeStyle = "#17201C"; x.lineWidth = 3; x.stroke();
+      x.fillStyle = "#17201C"; x.fillText("SAMPLE", W - M - sw + 18, 100);
     }
     // role pill
     if (r.role && r.role !== "Something else") {
-      x.font = "500 24px 'JetBrains Mono', monospace";
+      x.font = "500 24px 'Inter', monospace";
       var role = r.role.toUpperCase(); while (x.measureText(role).width > W - 2 * M - 60 && role.length > 10) role = role.slice(0, -2);
       if (role !== r.role.toUpperCase()) role = role.replace(/\s*\S*$/, "") + "...";
       var pw = x.measureText(role).width + 44;
@@ -419,67 +419,67 @@
     }
     // "I'm a" + type name
     var lead = r.name ? r.name + " is a" : "I'm a", lsz = 72;
-    x.font = "800 " + lsz + "px 'Bricolage Grotesque', sans-serif";
-    while (x.measureText(lead).width > W - 2 * M && lsz > 44) { lsz -= 4; x.font = "800 " + lsz + "px 'Bricolage Grotesque', sans-serif"; }
+    x.font = "800 " + lsz + "px 'Newsreader',Georgia,'Times New Roman',serif";
+    while (x.measureText(lead).width > W - 2 * M && lsz > 44) { lsz -= 4; x.font = "800 " + lsz + "px 'Newsreader',Georgia,'Times New Roman',serif"; }
     x.fillStyle = "#FFFFFF"; x.fillText(lead, M, 300);
     var size = t.name.length > 18 ? 92 : t.name.length > 13 ? 110 : 124;
-    x.font = "800 " + size + "px 'Bricolage Grotesque', sans-serif";
+    x.font = "800 " + size + "px 'Newsreader',Georgia,'Times New Roman',serif";
     var nw = Math.min(x.measureText(t.name).width, W - 2 * M - 40), bh = size * 1.22;
     x.save(); x.translate(M, 330); x.rotate(-0.022);
-    x.fillStyle = "#101114"; x.fillRect(12, 12, nw + 48, bh);
+    x.fillStyle = "#17201C"; x.fillRect(12, 12, nw + 48, bh);
     x.fillStyle = col[0]; x.fillRect(0, 0, nw + 48, bh);
-    x.strokeStyle = "#101114"; x.lineWidth = 4; x.strokeRect(0, 0, nw + 48, bh);
+    x.strokeStyle = "#17201C"; x.lineWidth = 4; x.strokeRect(0, 0, nw + 48, bh);
     x.fillStyle = col[1]; x.fillText(t.name, 24, bh * 0.78, W - 2 * M - 40);
     x.restore();
     // score cards (left) and type map (right)
     var top = 560, colW = 440, gap = W - 2 * M - 2 * colW;
     [["AI EXPOSURE", r.exposure, "How much of my work AI could take on"], ["AI READINESS", r.readiness, "How ready I am to make the most of it"]].forEach(function (m, i) {
       var y = top + i * 210;
-      x.fillStyle = "#101114"; x.fillRect(M + 8, y + 8, colW, 190);
+      x.fillStyle = "#17201C"; x.fillRect(M + 8, y + 8, colW, 190);
       x.fillStyle = "#FFFFFF"; x.fillRect(M, y, colW, 190);
-      x.strokeStyle = "#101114"; x.lineWidth = 4; x.strokeRect(M, y, colW, 190);
-      x.fillStyle = "#2B3BFF"; x.font = "500 22px 'JetBrains Mono', monospace"; x.fillText(m[0], M + 28, y + 44);
-      x.fillStyle = "#101114"; x.font = "800 96px 'Bricolage Grotesque', sans-serif"; x.fillText(String(m[1]), M + 24, y + 140);
+      x.strokeStyle = "#17201C"; x.lineWidth = 4; x.strokeRect(M, y, colW, 190);
+      x.fillStyle = "#0E5A43"; x.font = "500 22px 'Inter', monospace"; x.fillText(m[0], M + 28, y + 44);
+      x.fillStyle = "#17201C"; x.font = "800 96px 'Newsreader',Georgia,'Times New Roman',serif"; x.fillText(String(m[1]), M + 24, y + 140);
       var nwid = x.measureText(String(m[1])).width;
-      x.fillStyle = "#5B5C62"; x.font = "600 28px 'Hanken Grotesk', sans-serif"; x.fillText("/100", M + 32 + nwid, y + 140);
-      x.fillStyle = "#DADAD4"; x.fillRect(M + 28, y + 160, colW - 56, 12);
-      x.fillStyle = "#2B3BFF"; x.fillRect(M + 28, y + 160, (colW - 56) * m[1] / 100, 12);
+      x.fillStyle = "#5B5C62"; x.font = "600 28px 'Inter',system-ui,-apple-system,'Segoe UI',sans-serif"; x.fillText("/100", M + 32 + nwid, y + 140);
+      x.fillStyle = "#D3DBD6"; x.fillRect(M + 28, y + 160, colW - 56, 12);
+      x.fillStyle = "#0E5A43"; x.fillRect(M + 28, y + 160, (colW - 56) * m[1] / 100, 12);
     });
     // map: x = readiness, y = exposure
     var mx = M + colW + gap, my = top, ms = colW - 20, cell = ms / 2;
     var cells = [["next", "NEXT IN LINE", 0, 0], ["operator", "QUIET OPERATOR", 1, 0], ["bystander", "BYSTANDER", 0, 1], ["multiplier", "MULTIPLIER", 1, 1]];
-    x.fillStyle = "#101114"; x.fillRect(mx + 28, my + 8, ms, ms);
+    x.fillStyle = "#17201C"; x.fillRect(mx + 28, my + 8, ms, ms);
     cells.forEach(function (cl) {
       var cx = mx + 20 + cl[2] * cell, cy = my + cl[3] * cell, on = cl[0] === r.type;
       x.fillStyle = on ? TCOL[cl[0]][0] : "rgba(255,255,255,0.92)"; x.fillRect(cx, cy, cell, cell);
-      x.fillStyle = on ? TCOL[cl[0]][1] : "#5B5C62"; x.font = (on ? "700 " : "500 ") + "17px 'JetBrains Mono', monospace";
+      x.fillStyle = on ? TCOL[cl[0]][1] : "#5B5C62"; x.font = (on ? "700 " : "500 ") + "17px 'Inter', monospace";
       x.fillText(cl[1], cx + 14, cy + 30, cell - 24);
     });
-    x.strokeStyle = "#101114"; x.lineWidth = 4; x.strokeRect(mx + 20, my, ms, ms);
+    x.strokeStyle = "#17201C"; x.lineWidth = 4; x.strokeRect(mx + 20, my, ms, ms);
     x.beginPath(); x.moveTo(mx + 20 + cell, my); x.lineTo(mx + 20 + cell, my + ms); x.moveTo(mx + 20, my + cell); x.lineTo(mx + 20 + ms, my + cell); x.lineWidth = 2; x.stroke();
     var dx = mx + 20 + ms * r.readiness / 100, dy = my + ms * (1 - r.exposure / 100);
     dx = Math.max(mx + 46, Math.min(mx + 20 + ms - 26, dx)); dy = Math.max(my + 78, Math.min(my + ms - 28, dy)); if (dy > my + cell - 30 && dy < my + cell + 52) dy = dy < my + cell + 11 ? my + cell - 30 : my + cell + 52;
-    x.fillStyle = "#101114"; x.beginPath(); x.arc(dx + 3, dy + 3, 22, 0, 7); x.fill();
-    x.fillStyle = r.type === "next" ? "#FFFFFF" : "#FF7A2F"; x.beginPath(); x.arc(dx, dy, 22, 0, 7); x.fill();
-    x.strokeStyle = "#101114"; x.lineWidth = 4; x.stroke();
-    x.fillStyle = "#101114"; x.font = "800 15px 'JetBrains Mono', monospace"; x.textAlign = "center"; x.fillText("ME", dx, dy + 5); x.textAlign = "left";
-    x.fillStyle = "#FFFFFF"; x.font = "500 18px 'JetBrains Mono', monospace";
+    x.fillStyle = "#17201C"; x.beginPath(); x.arc(dx + 3, dy + 3, 22, 0, 7); x.fill();
+    x.fillStyle = r.type === "next" ? "#FFFFFF" : "#DE9A80"; x.beginPath(); x.arc(dx, dy, 22, 0, 7); x.fill();
+    x.strokeStyle = "#17201C"; x.lineWidth = 4; x.stroke();
+    x.fillStyle = "#17201C"; x.font = "800 15px 'Inter', monospace"; x.textAlign = "center"; x.fillText("ME", dx, dy + 5); x.textAlign = "left";
+    x.fillStyle = "#FFFFFF"; x.font = "500 18px 'Inter', monospace";
     x.fillText("READINESS →", mx + 20, my + ms + 34);
     x.save(); x.translate(mx + 4, my + ms); x.rotate(-Math.PI / 2); x.fillText("EXPOSURE →", 0, 0); x.restore();
     // verdict
-    x.fillStyle = "#FFFFFF"; x.font = "600 36px 'Hanken Grotesk', sans-serif";
+    x.fillStyle = "#FFFFFF"; x.font = "600 36px 'Inter',system-ui,-apple-system,'Segoe UI',sans-serif";
     wrap(x, t.line, M, 1052, W - 2 * M, 48, 3);
     // footer
-    x.fillStyle = "#101114"; x.fillRect(0, H - 150, W, 150);
-    x.fillStyle = "#D9FF3F"; x.font = "800 50px 'Bricolage Grotesque', sans-serif"; x.fillText("How AI-proof is your job?", M, H - 82);
-    x.fillStyle = "#FFFFFF"; x.font = "500 24px 'JetBrains Mono', monospace"; x.fillText("TAKE THE 2-MINUTE CHECK  →  KUNALAI.IN", M, H - 40);
+    x.fillStyle = "#17201C"; x.fillRect(0, H - 150, W, 150);
+    x.fillStyle = "#CDEBD9"; x.font = "800 50px 'Newsreader',Georgia,'Times New Roman',serif"; x.fillText("How AI-proof is your job?", M, H - 82);
+    x.fillStyle = "#FFFFFF"; x.font = "500 24px 'Inter', monospace"; x.fillText("TAKE THE 2-MINUTE CHECK  →  KUNALAI.IN", M, H - 40);
   }
   function drawCard(r, id, sample) {
     var c = document.getElementById(id || "scCanvas"); if (!c || !c.getContext) return;
     var go = function () { paintCard(c, r, sample); };
     go();
     if (document.fonts && document.fonts.load) {
-      Promise.all([document.fonts.load("800 72px 'Bricolage Grotesque'"), document.fonts.load("500 26px 'JetBrains Mono'"), document.fonts.load("600 36px 'Hanken Grotesk'")]).then(go, go);
+      Promise.all([document.fonts.load("800 72px 'Newsreader'"), document.fonts.load("500 26px 'Inter'"), document.fonts.load("600 36px 'Inter'")]).then(go, go);
     }
   }
 
