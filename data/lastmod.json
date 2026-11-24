@@ -1,19 +1,19 @@
 {
  "about/index.html": {
   "date": "2026-11-24",
-  "sha": "d97711540bd73e89597bfdfd13aa151ae4895f27"
+  "sha": "0108a67a7d8ce104a84d4c48cb76a1fcad3d4b09"
  },
  "check/index.html": {
   "date": "2026-11-24",
-  "sha": "4794068d9478556700f85e8effcd2050eaed29cf"
+  "sha": "8c4a1f4cde4a3790df1aa2aa1b7f71313545ac65"
  },
  "human-line/index.html": {
   "date": "2026-11-24",
-  "sha": "aa810a0bc9ccd476ec665f93d8567b34b4dca172"
+  "sha": "1dd3e0a7e79716c990b6db5c485b282cbeef253d"
  },
  "index.html": {
   "date": "2026-11-24",
-  "sha": "7d314c310dea1ac0798d79ec24edba24384145cb"
+  "sha": "ae88c4c858e54ad5ca857a8f6b8b840c8ba25dcd"
  },
  "learn/index.html": {
   "date": "2026-11-24",
@@ -21,10 +21,10 @@
  },
  "newsletter/index.html": {
   "date": "2026-11-24",
-  "sha": "f27d344941da64c76fd5b638a6230afbb4d42ed4"
+  "sha": "9ee00819e342879f7f5ea2335de6b33e8f68486e"
  },
  "privacy.html": {
   "date": "2026-11-24",
-  "sha": "9ff79862d8759de5452dcb774261414455cad2f1"
+  "sha": "6a7943192f950c23f39064adfdb9391ab7a09907"
  }
 }

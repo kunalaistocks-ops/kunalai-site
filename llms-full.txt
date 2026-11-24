@@ -27,7 +27,7 @@ Kunal Mukherjee is a Human + AI Strategist for marketing and brand teams, based 
 Kunal Mukherjee is a Human + AI Strategist for marketing and brand teams, based in Mumbai, India, with 20+ years in media, tech, AI and startups.
 
 **What does he do now?**
-He helps marketing and brand teams decide what to hand to AI, what to keep, and what is worth paying for. He created The Human Line by Kunal Mukherjee, writes the What the AI!? newsletter every Saturday and runs Learn by doing, free hands-on AI practice at kunalai.in/learn/.
+He helps marketing and brand teams decide what to hand to AI, what to keep, and what is worth paying for. He created The Human Line by Kunal Mukherjee, writes the weekly What the AI!? newsletter and runs Learn by doing, free hands-on AI practice at kunalai.in/learn/.
 
 **Where has he worked?**
 He built brands and businesses at Disney, UTV and Zoom TV, and later held leadership roles at startups including Miko, TotallyAwesome, Kool Kanya, MomsKnowBest, K&U and Ikonz Studios.
@@ -58,7 +58,7 @@ Score any task 0 to 2 on five factors, then add them up for a total of 0 to 10.
 - Reversibility
 - Verification
 - Confidentiality
-- Judgment
+- Judgement
 - Relationship sensitivity
 
 ### The three zones
@@ -76,7 +76,7 @@ Give each factor 0, 1 or 2. Higher means more risk if AI gets it wrong.
 | Reversibility | Can it be undone if it's wrong? | Easily | With some cost | Never |
 | Verification | Can you check it quickly? | In minutes | With effort | Hardly at all |
 | Confidentiality | Is it sensitive? | Public | Internal | Personal or client data |
-| Judgment | Does it need taste? | Follows rules | Some judgment | Brand or strategy calls |
+| Judgement | Does it need taste? | Follows rules | Some judgement | Brand or strategy calls |
 | Relationship sensitivity | Who is affected if it's wrong? | Nobody | Your team | A key client, an employee, your reputation |
 
 ### Worked examples
@@ -92,7 +92,7 @@ Give each factor 0, 1 or 2. Higher means more risk if AI gets it wrong.
 | Writing performance reviews | 9 | Hold |
 
 ### One task, scored: should AI write your campaign brief?
-Reversibility 1: once an agency starts, changing the brief costs money. Verification 1: someone senior has to check it. Confidentiality 1: internal plans, not customer data. Judgment 2: the brief is where the strategy lives. Relationship sensitivity 1: your agency and team build on it.
+Reversibility 1: once an agency starts, changing the brief costs money. Verification 1: someone senior has to check it. Confidentiality 1: internal plans, not customer data. Judgement 2: the brief is where the strategy lives. Relationship sensitivity 1: your agency and team build on it.
 Total: 6. Team up. AI drafts the structure, pulls the research and writes three versions of the problem. A person picks the insight, sharpens the ask and signs it off. The brief is the cheapest place to get strategy right, and the most expensive place to get it wrong.
 
 ### Same task, different zone
@@ -241,9 +241,12 @@ Learn by doing is free, hands-on AI practice by Kunal Mukherjee. Instead of watc
 Refreshed every morning at 6 AM IST: the AI headlines that matter (headline, source and link only), one word to learn, one prompt to try and a two-minute quiz.
 
 ## What the AI!? by Kunal Mukherjee (source: https://kunalai.in/newsletter/)
-A newsletter by Kunal Mukherjee that explains AI for non-technical managers. Every Saturday: one task, one verdict on where the line sits, one tested tool, one thing to try on Monday.
+A newsletter by Kunal Mukherjee that explains AI for non-technical managers. Every week: one task, one verdict on where the line sits, one tested tool, one thing to try on Monday.
 
 ## What the AI!? issues (newest first)
+- [What should you actually hand to AI?](https://www.linkedin.com/pulse/what-should-you-actually-hand-ai-kunal-mukherjee-nkndf/) (2026-11-14): A 60-second rule for deciding what goes to AI and what stays with a person, ten common marketing tasks scored, and a worksheet for your team on Monday.
+- [The AI Ad Paradox: Built With AI, Sold as Human](https://www.linkedin.com/pulse/ai-ad-paradox-built-sold-human-kunal-mukherjee-iqdcf/) (2026-10-31): Brands use AI everywhere behind the scenes, then badge their ads "Made without AI". What the gap between what executives think and what consumers say tells you about where AI belongs.
+- [The Job Nobody Is Advertising: Human + AI Consultant](https://www.linkedin.com/pulse/job-nobody-advertising-human-ai-consultant-kunal-mukherjee-n0hof/) (2026-10-24): Companies have bought the AI tools, but most pilots never reach production. The gap is a new job nobody has posted yet: the person who gets AI working inside a team.
 - [Build your AI superpowers #1: Goblin Tools](https://www.linkedin.com/pulse/what-ai-issue-9-build-your-superpowers-1-kunal-mukherjee-yp4zf/) (2026-07-04): Every Saturday, one AI tool and one new superpower. First up: Goblin Tools, which turns overwhelming tasks into small, doable steps.
 - [The Trust Economy: why marketers must care who owns the AI](https://www.linkedin.com/pulse/what-ai-issue-8-kunal-mukherjee-jpfbc/) (2026-06-27): From cool copy to brand safety. Why trust and data sovereignty are the new currency, two prompts to audit your stack, and India's sovereign AI toolkit.
 - [The death of the rectangle: when AI opens its eyes](https://www.linkedin.com/pulse/death-rectangle-when-ai-opens-its-eyes-kunal-mukherjee-ndiff/) (2026-02-26): The screenless revolution. Why your camera is the new keyboard, the rise of AI for blue-collar work, and how vision AI turns every mechanic into a master technician.
@@ -252,6 +255,6 @@ A newsletter by Kunal Mukherjee that explains AI for non-technical managers. Eve
 - [The Doing Era: why 2026 changes everything](https://www.linkedin.com/pulse/what-ai-issue-4-kunal-mukherjee-wysef/) (2026-01-07): 2026 is the year AI stops chatting and starts doing. From prompting to delegating, the rise of the one-person unicorn, and India's leap to voice agents.
 - [The end of the Information Tax](https://www.linkedin.com/pulse/what-ai-3-kunal-mukherjee-vbn2c/) (2025-12-23): For 75 years India has paid an information tax. How AI moves us from search to synthesis, and why in India it is about access, not efficiency.
 - [AI does not level the playing field. It widens the gap](https://www.linkedin.com/pulse/what-ai-issue-2-does-level-playing-field-widens-gap-kunal-mukherjee-2axof/) (2025-12-02): Prompt copiers, tool tourists and quiet operators. Four AI workflows every marketer should master, and why India could become the capital of AI-led marketing.
-- [You're overthinking AI. Here's what actually matters](https://www.linkedin.com/pulse/youre-overthinking-ai-heres-what-actually-matters-kunal-mukherjee-gfevf/) (2025-11-18): AI won't steal your job, it will steal your excuses. Why judgment, not output, is your real edge, plus a Chief of Staff prompt and five underrated tools.
+- [You're overthinking AI. Here's what actually matters](https://www.linkedin.com/pulse/youre-overthinking-ai-heres-what-actually-matters-kunal-mukherjee-gfevf/) (2025-11-18): AI won't steal your job, it will steal your excuses. Why judgement, not output, is your real edge, plus a Chief of Staff prompt and five underrated tools.
 
 Last updated: 2026-11-24
