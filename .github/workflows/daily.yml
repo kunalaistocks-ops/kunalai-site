@@ -25,6 +25,9 @@ on:
       - "the-human-line/**"
       - "check/**"
       - "learn/**"
+      - "robots.txt"
+      - "404.html"
+      - "data/llms-full.md"
       - "scripts/**"
 
 permissions:
