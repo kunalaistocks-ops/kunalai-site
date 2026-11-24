@@ -126,13 +126,11 @@ The team that owns the work. Scoring together is useful in itself: it shows wher
 A free 3-minute check for marketing and brand teams by Kunal Mukherjee. Ten everyday marketing tasks, three answers each: a) AI does it on its own, b) AI drafts, a person decides, c) people only. Each answer is compared with where The Human Line by Kunal Mukherjee says the task belongs (Hand off, Team up or Hold), one point per match. The result is a Line profile (Line drawn, Line drifting or No line yet) and three fixes. No login and no email needed to see the result; answers are scored in the browser.
 
 ## Learn by doing (source: https://kunalai.in/learn/)
-Learn by doing is free, hands-on AI practice by Kunal Mukherjee. Instead of watching lessons, you pick a real task from your work or your life and do it with any AI assistant, step by step. Three parts: 45 guided tasks, Prompt Guru for 1,009 everyday prompts, and Prompt Master, a 20-step prompt course. The courses are free.
+Learn by doing is free, hands-on AI practice by Kunal Mukherjee. Instead of watching lessons, you pick a real task from your work or your life and do it with any AI assistant, step by step. Three parts: 45 guided tasks, Prompt Guru for 1,000+ everyday prompts, and Prompt Master, a 20-step prompt course. The courses are free.
 
 ### At work: Pick your role. Learn AI on the work you actually do.
 **Marketing** (Briefs, videos, posts and positioning)
 - Create your first e-commerce product video (30 to 45 min): Turn one product photograph into a polished 10 to 15-second product ad, even if you have never edited a video. Link: https://kunalai.in/learn/#task-product-video
-- Create your first AI video (10 to 15 min): Go from a topic to a narrated 15-second vertical video, written and rendered by AI, in ten minutes. Link: https://kunalai.in/learn/#task-first-video
-- Create your first AI poster (10 min): Describe an occasion and watch AI design a poster for it, then get prompts for photo-real versions. Link: https://kunalai.in/learn/#task-first-poster
 - Turn one product photo into 5 social posts (20 min): Get a week of on-brand posts from a single product photo: captions, formats and visuals. Link: https://kunalai.in/learn/#task-social-posts
 - Write a campaign brief in 10 minutes (10 min): Turn a vague idea into a one-page campaign brief your team or agency can act on. Link: https://kunalai.in/learn/#task-campaign-brief
 - Research your competitors (15 min): Compare competitors on positioning, pricing and messaging, and find the gap you can own. Link: https://kunalai.in/learn/#task-competitor-scan
@@ -142,40 +140,31 @@ Learn by doing is free, hands-on AI practice by Kunal Mukherjee. Instead of watc
 - Write a cold email that gets replies (10 min): Write a short, personal outreach email people actually reply to. Link: https://kunalai.in/learn/#task-cold-email
 - Prepare for a sales call (15 min): Walk into any sales call with sharp questions and answers to likely objections. Link: https://kunalai.in/learn/#task-call-prep
 - Write a proposal summary (15 min): Turn messy deal notes into a crisp one-page proposal summary. Link: https://kunalai.in/learn/#task-proposal
-- Write a message that gets results (10 min): Turn messy notes into a clear, polite message in your own voice, in under ten minutes. Link: https://kunalai.in/learn/#task-write-message
 
 **HR and people** (Hiring, onboarding and tough conversations)
 - Write an inclusive job description (10 min): Write a clear, inclusive job description that attracts the right people. Link: https://kunalai.in/learn/#task-job-description
 - Plan a new joiner's first week (10 min): Give every new joiner a welcoming, well-organised first week. Link: https://kunalai.in/learn/#task-onboarding-plan
 - Prepare a difficult conversation (10 min): Plan what to say in a tough conversation: feedback, a no, or bad news. Link: https://kunalai.in/learn/#task-hard-conversation
-- Turn messy meeting notes into an action plan (10 min): Go from scribbled notes to a clear action table and follow-up email in five minutes. Link: https://kunalai.in/learn/#task-meeting-actions
 
 **Finance and accounts** (Formulas, expenses and reminders)
 - Get any Excel formula explained (5 min): Get the exact spreadsheet formula you need, and understand it. Link: https://kunalai.in/learn/#task-excel-formula
 - Turn expenses into insights (10 min): Turn a messy list of expenses into clear insights and savings. Link: https://kunalai.in/learn/#task-expense-insights
 - Send a firm, polite payment reminder (5 min): Chase an overdue payment without damaging the relationship. Link: https://kunalai.in/learn/#task-payment-reminder
-- Which AI subscriptions are worth paying for? (15 min): Decide which AI subscriptions, if any, are worth your money, based on what you actually do. Link: https://kunalai.in/learn/#task-ai-subscriptions
 
 **Managers and everyday office** (Meetings, updates, SOPs and messages)
-- Turn messy meeting notes into an action plan (10 min): Go from scribbled notes to a clear action table and follow-up email in five minutes. Link: https://kunalai.in/learn/#task-meeting-actions
+- Turn messy meeting notes into an action plan (5 min): Go from scribbled notes to a clear action table and follow-up email in five minutes. Link: https://kunalai.in/learn/#task-meeting-actions
 - Write your weekly status report (5 min): Turn bullet notes into a crisp weekly update your boss will actually read. Link: https://kunalai.in/learn/#task-status-report
 - Write an SOP or checklist (10 min): Turn 'how we do it' in your head into a clear SOP anyone can follow. Link: https://kunalai.in/learn/#task-sop
 - Write a message that gets results (10 min): Turn messy notes into a clear, polite message in your own voice, in under ten minutes. Link: https://kunalai.in/learn/#task-write-message
-- Prepare a difficult conversation (10 min): Plan what to say in a tough conversation: feedback, a no, or bad news. Link: https://kunalai.in/learn/#task-hard-conversation
 
 **Founders and small business** (Customers, pricing, plans and listings)
 - Reply to customer reviews (10 min): Reply to good and bad reviews warmly, fast and on-brand. Link: https://kunalai.in/learn/#task-review-replies
 - Price your product (15 min): Work out a sensible price using costs, competitors and value. Link: https://kunalai.in/learn/#task-pricing
 - Write a one-page business plan (15 min): Get your business idea onto one clear page you can share with a partner or investor. Link: https://kunalai.in/learn/#task-one-page-plan
-- Write product descriptions that sell (10 min): Write clear, search-friendly product descriptions for your website or marketplace. Link: https://kunalai.in/learn/#task-seo-descriptions
-- Create your first e-commerce product video (30 to 45 min): Turn one product photograph into a polished 10 to 15-second product ad, even if you have never edited a video. Link: https://kunalai.in/learn/#task-product-video
-- Turn one product photo into 5 social posts (20 min): Get a week of on-brand posts from a single product photo: captions, formats and visuals. Link: https://kunalai.in/learn/#task-social-posts
 
 **Teachers and trainers** (Lessons, quizzes and parent messages)
 - Plan a lesson in 10 minutes (10 min): Plan an engaging lesson with activities and a quick check for understanding. Link: https://kunalai.in/learn/#task-lesson-plan
 - Make a quiz from any chapter (5 min): Turn any chapter or notes into a fun quiz with an answer key. Link: https://kunalai.in/learn/#task-quiz-maker
-- Write a message that gets results (10 min): Turn messy notes into a clear, polite message in your own voice, in under ten minutes. Link: https://kunalai.in/learn/#task-write-message
-- Create your first AI video (10 to 15 min): Go from a topic to a narrated 15-second vertical video, written and rendered by AI, in ten minutes. Link: https://kunalai.in/learn/#task-first-video
 
 ### In my life: Save money, time and stress on everyday things.
 **Travel** (Flights, cabs, itineraries and packing)
@@ -196,7 +185,6 @@ Learn by doing is free, hands-on AI practice by Kunal Mukherjee. Instead of watc
 - Help with homework without giving answers (5 min): Help your child understand, not just copy. Link: https://kunalai.in/learn/#task-homework-helper
 - Plan a festive dinner with AI (20 min): Plan a stress-free dinner for family or friends: menu, budget, shopping list and a cooking timeline. Link: https://kunalai.in/learn/#task-hosting-planner
 - Write a complaint that gets action (10 min): Complain to a company, landlord or society clearly and firmly. Link: https://kunalai.in/learn/#task-complaint-letter
-- Write a toast or speech (10 min): Write a warm, funny, personal toast for a wedding, birthday or farewell. Link: https://kunalai.in/learn/#task-speech
 
 **Learning and career** (Prompting, new skills and interviews)
 - Write your first great prompt (5 min): Turn a vague request into a prompt that gets a genuinely useful answer, and see the difference side by side. Link: https://kunalai.in/learn/#task-first-prompt
@@ -207,13 +195,11 @@ Learn by doing is free, hands-on AI practice by Kunal Mukherjee. Instead of watc
 
 **Health and wellbeing** (Prepare, understand and ask better questions)
 - Prepare for a doctor's visit (5 min): Go in prepared: understand terms and know what to ask. Not medical advice. Link: https://kunalai.in/learn/#task-doctor-visit
-- Plan a week of meals and groceries (10 min): A week of easy meals and one grocery list, in ten minutes. Link: https://kunalai.in/learn/#task-meal-plan
 
 **Celebrations and creative** (Invites, videos, posters and speeches)
 - Create your first AI poster (10 min): Describe an occasion and watch AI design a poster for it, then get prompts for photo-real versions. Link: https://kunalai.in/learn/#task-first-poster
 - Create your first AI video (10 to 15 min): Go from a topic to a narrated 15-second vertical video, written and rendered by AI, in ten minutes. Link: https://kunalai.in/learn/#task-first-video
 - Write a toast or speech (10 min): Write a warm, funny, personal toast for a wedding, birthday or farewell. Link: https://kunalai.in/learn/#task-speech
-- Plan a festive dinner with AI (20 min): Plan a stress-free dinner for family or friends: menu, budget, shopping list and a cooking timeline. Link: https://kunalai.in/learn/#task-hosting-planner
 
 ### Prompt Master: the 20 steps
 1. Just ask, then notice: See why vague questions get vague answers
