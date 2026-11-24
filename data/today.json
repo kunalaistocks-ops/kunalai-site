@@ -1,47 +1,47 @@
 {
  "whats": {
-  "OpenAI introduces local AI processing for businesses in India": "Local processing of OpenAI tools in India could matter if your company cares about where its data is handled.",
-  "BMAsia Music launches AI-powered Beat Breeze platform for retail and business": "AI is reaching everyday business tools like in-store music, so managers may soon see it in products they already buy.",
-  "Nebuly Raises $21M Series A to Expand Enterprise AI Measurement": "Investors are backing tools that measure enterprise AI, a sign that tracking results is becoming part of the job.",
-  "Before India writes its AI law, it must decide who answers for the machine": "The headline asks who answers when AI goes wrong. Managers should decide who owns the outcome of AI decisions in their team.",
-  "AI Investment Faces Returns Test Over Next 18 Months: Goldman Sachs": "Goldman Sachs says AI spending faces a returns test, so expect more questions about what your AI projects actually deliver."
+  "Sunway Group Selects Hewlett Packard Enterprise Private Cloud AI To Accelerate Artificial Intelligence Innovation": "A major group picking HPE's private cloud AI shows big firms want AI power without handing data to public clouds.",
+  "Why Is the Most Costly Enterprise AI Expense Not Listed on Model Procurement Orders?": "A question about hidden enterprise AI costs reminds managers that the invoice price is rarely the full story.",
+  "AI, leadership and global mandates: What will shape India's GCCs in 2027?": "Indian global capability centres are shaping how AI and leadership rules will work by 2027, worth watching early.",
+  "Anthropic introduces zero data retention option for firms using advanced AI": "Anthropic's zero data retention option lets firms use its AI without worrying about data being stored afterwards.",
+  "The AI compute race: How chips, memory and data centres are redefining the future of computing": "The race for chips, memory and data centres is reshaping computing, which affects AI costs and speed for everyone."
  },
  "term": {
-  "term": "Inference",
-  "def": "Inference is the step where a trained AI model reads your question and produces an answer. Doing it locally means that work happens on servers in your own country."
+  "term": "Zero data retention",
+  "def": "Zero data retention means an AI provider processes your data but does not store it afterwards, so nothing sits on their servers later."
  },
  "prompt": {
-  "for": "Leadership",
-  "prompt": "Act as a careful advisor. I manage [team] at a [type of company]. We are thinking of using an AI tool for [task]. List five questions I should ask the vendor about cost, data handling and results."
+  "for": "Legal",
+  "prompt": "Review our contract with [AI vendor name] and list exactly what it says about storing, retaining or deleting our company data."
  },
  "quiz": [
   {
-   "q": "BW Businessworld reports a Goldman Sachs view that AI investment faces a returns test over the next 18 months.",
+   "q": "Business Standard reports that Anthropic introduced a zero data retention option for firms using advanced AI.",
    "a": true,
-   "why": "That is what the headline says. For managers, it is a reminder to link AI spending to results you can measure."
+   "why": "This is what the headline states about Anthropic's new offering for business users."
   },
   {
-   "q": "BMI reports that OpenAI is introducing local AI processing for businesses in India.",
+   "q": "ET Datacenters reports that India tops a digital sovereignty index but struggles with AI control.",
    "a": true,
-   "why": "That is what the headline says. Local processing means the work of answering questions happens on servers inside India."
+   "why": "This directly reflects what the headline says about India's ranking and challenge."
   },
   {
-   "q": "A good AI tool always knows when it is wrong and will warn you.",
+   "q": "AI models understand language the same way humans do, with real comprehension and feelings.",
    "a": false,
-   "why": "AI can give wrong answers in a very confident tone. Always check important facts, numbers and names yourself."
+   "why": "AI predicts likely word patterns from data. It has no understanding, feelings or awareness."
   },
   {
-   "q": "AI tools understand your business automatically, so you do not need to give them any background.",
-   "a": false,
-   "why": "An AI tool only knows what it learned in training and what you tell it. Good context in your prompt gives better answers."
-  },
-  {
-   "q": "AI chatbots can sometimes make up facts that sound believable.",
+   "q": "AI tools can sound completely confident while giving an answer that is factually wrong.",
    "a": true,
-   "why": "This is often called hallucination. It is why a person should review AI output before it is used for anything important."
+   "why": "This is a well known limitation. Confidence in tone never guarantees accuracy, so checking matters."
+  },
+  {
+   "q": "Once an AI model is trained, it never needs to be updated or retrained again.",
+   "a": false,
+   "why": "Models can go stale as information changes, so providers regularly retrain or update them."
   }
  ],
  "source": "ai",
- "date": "2026-11-12",
- "model": "claude-sonnet-5-5"
+ "date": "2026-11-24",
+ "model": "claude-sonnet-5"
 }

@@ -30,6 +30,7 @@
   "Spatial Intelligence",
   "Prompt injection",
   "Text-to-speech",
-  "Inference"
+  "Inference",
+  "Zero data retention"
  ]
 }
