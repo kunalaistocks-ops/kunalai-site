@@ -1,58 +1,58 @@
 {
  "about/index.html": {
   "date": "2026-11-24",
-  "sha": "3211ac77cf65d4e03302acc42c5c0523b25d1d58"
+  "sha": "9b914d9bd5978d99715c9b6ae01b943410b5d098"
  },
  "check/index.html": {
   "date": "2026-11-24",
-  "sha": "eb2d81fdbd914b9e74ef630c4393e06c41637f41"
+  "sha": "681ae75d450edf7c9accda441eb66c6a5ea566b6"
  },
  "explore/index.html": {
   "date": "2026-11-24",
-  "sha": "1607095ffe03733a0391852ddc62821f8d2b0e5d"
+  "sha": "b9bff18d4d4b75a8d2faf53baa3bf8d1a0cec4b8"
  },
  "explore/people/index.html": {
   "date": "2026-11-24",
-  "sha": "4cc0b7c308c4828ce0d79f415ed1b08bfb034e54"
+  "sha": "aa0a14d05b7f6e6e80e53235a6ff0669771cec5d"
  },
  "explore/perspectives/index.html": {
   "date": "2026-11-24",
-  "sha": "f0aa807cee028fe52541d5101ab6c8b99361997a"
+  "sha": "b8718b7ce40d73ddda38200c6db024c64ae8b6ac"
  },
  "explore/reads/index.html": {
   "date": "2026-11-24",
-  "sha": "2070e8d8e8d2329a2e124585d1edc558fce00114"
+  "sha": "ae512f04164be998b7b06a1338c6ba08ff1b81bc"
  },
  "explore/what-to-study/index.html": {
   "date": "2026-11-24",
-  "sha": "5c809636a4b8007b36fb2091e42a18cbb1639f97"
+  "sha": "2addffc1419bb8080179cfe1a775ba955a957891"
  },
  "human-line/index.html": {
   "date": "2026-11-24",
-  "sha": "840ebde5604883393edf87e4f98f77f3ac811cb4"
+  "sha": "8fb79f637e75ace0ba6457e190450e2feb2bcd9f"
  },
  "index.html": {
   "date": "2026-11-24",
-  "sha": "8aaa39f11e590056d92ad550e5b384884832b505"
+  "sha": "7d0715529ab9310a56726f2ea5d7f61d27087585"
  },
  "jobs/index.html": {
   "date": "2026-11-24",
-  "sha": "8eaf5ed4fdf3f5dae9958aebe715e9f543d308bc"
+  "sha": "37987084a16b8705f3d0db59d977935f2206ac32"
  },
  "learn/index.html": {
   "date": "2026-11-24",
-  "sha": "1cabca07ded68461c4dbcffbce7c0b2de6ad38a0"
+  "sha": "7a7a7562fbaba6b537ffb3fd0355e9e24556cb36"
  },
  "newsletter/index.html": {
   "date": "2026-11-24",
-  "sha": "6bbe50cae4ab88de7a550e22d579961e4344185a"
+  "sha": "adca20752127abbeecde4edf336c6217b4df623e"
  },
  "privacy.html": {
   "date": "2026-11-24",
-  "sha": "f36f03637651ad482c81bca09b09d0fa72f849b0"
+  "sha": "de177c643cdca08e282a847b3d1187d3f7cc7319"
  },
  "today/index.html": {
   "date": "2026-11-24",
-  "sha": "e39c12821a76cac11cce28cb7023eec8c36aaa1b"
+  "sha": "100d6aefe6b85be05b0e6755e821b450e5e83a7d"
  }
 }
