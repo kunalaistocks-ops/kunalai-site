@@ -1,0 +1,30 @@
+{
+ "about/index.html": {
+  "date": "2026-11-24",
+  "sha": "d97711540bd73e89597bfdfd13aa151ae4895f27"
+ },
+ "check/index.html": {
+  "date": "2026-11-24",
+  "sha": "4794068d9478556700f85e8effcd2050eaed29cf"
+ },
+ "human-line/index.html": {
+  "date": "2026-11-24",
+  "sha": "aa810a0bc9ccd476ec665f93d8567b34b4dca172"
+ },
+ "index.html": {
+  "date": "2026-11-24",
+  "sha": "ae721b26f14b32226ad1fc09f36d6d6df30fe119"
+ },
+ "learn/index.html": {
+  "date": "2026-11-24",
+  "sha": "482c48da29970ea7e33bf911856f59019653dd25"
+ },
+ "newsletter/index.html": {
+  "date": "2026-11-24",
+  "sha": "f27d344941da64c76fd5b638a6230afbb4d42ed4"
+ },
+ "privacy.html": {
+  "date": "2026-11-24",
+  "sha": "9ff79862d8759de5452dcb774261414455cad2f1"
+ }
+}
