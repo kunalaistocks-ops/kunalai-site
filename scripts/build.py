@@ -130,6 +130,61 @@ def fetch_news():
     return picked
 
 
+GN_UA = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36"}
+
+
+def publisher_url(link):
+    """news.google.com/rss/articles/... -> the publisher's own article URL, or None.
+    Uses the same lookup the Google News page itself makes. Any failure keeps the original link."""
+    if "news.google.com/" not in link or "/articles/" not in link:
+        return link
+    try:
+        from urllib.parse import urlencode, urlsplit, urlunsplit, parse_qsl
+        aid = link.split("/articles/")[1].split("?")[0]
+        req = urllib.request.Request(f"https://news.google.com/rss/articles/{aid}", headers=GN_UA)
+        page = urllib.request.urlopen(req, timeout=15).read(3_000_000).decode("utf-8", "ignore")
+        sg = re.search(r'data-n-a-sg="([^"]+)"', page)
+        ts = re.search(r'data-n-a-ts="([^"]+)"', page)
+        if not (sg and ts):
+            return None
+        inner = ('["garturlreq",[["X","X",["X","X"],null,null,1,1,"US:en",null,1,null,null,null,null,null,0,1],'
+                 f'"X","X",1,[1,1,1],1,1,null,0,0,null,0],"{aid}",{ts.group(1)},"{sg.group(1)}"]')
+        data = urlencode({"f.req": json.dumps([[["Fbv4je", inner]]])}).encode()
+        req = urllib.request.Request("https://news.google.com/_/DotsSplashUi/data/batchexecute", data=data,
+                                     headers={**GN_UA, "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"})
+        raw = urllib.request.urlopen(req, timeout=15).read().decode("utf-8", "ignore")
+        url = json.loads(json.loads(raw.split("\n\n")[1])[:-2][0][2])[1]
+        parts = urlsplit(url)
+        if parts.scheme not in ("http", "https") or not parts.netloc or "google." in parts.netloc:
+            return None
+        query = urlencode([(k, v) for k, v in parse_qsl(parts.query) if not k.lower().startswith("utm_")])
+        return urlunsplit((parts.scheme, parts.netloc, parts.path, query, ""))
+    except Exception as e:  # noqa
+        print(f"could not resolve a news link: {e}", file=sys.stderr)
+        return None
+
+
+def resolve_links(items):
+    """Point every picked headline at its publisher. Returns how many still go through an aggregator."""
+    left = 0
+    for it in items:
+        if "news.google.com/" in it["link"]:
+            url = publisher_url(it["link"])
+            if url and "news.google.com/" not in url:
+                it["link"] = url
+            else:
+                left += 1
+    return left
+
+
+def render_newsnote(left):
+    if left == 0:
+        return "Headlines link to the original publishers. At least two India stories every day."
+    word = "headline opens" if left == 1 else "headlines open"
+    return (f"Most headlines link to the original publishers; {left} {word} through a news aggregator first. "
+            "At least two India stories every day.")
+
+
 def render_news(items):
     out = ['<ol class="td-list">']
     for it in items:
@@ -528,7 +583,7 @@ def render_more(issues):
     if not more:
         return ""
     out = ['<div class="nl-more"><div class="td-head"><p class="s59">EARLIER ISSUES</p>'
-           f'<p class="s59">{len(issues)} ISSUES SO FAR</p></div><div class="nl-cards">']
+           f'<p class="s59">{len(issues)} ISSUES SO FAR</p></div><div class="nl-cards" id="nlCards">']
     out += [card(i) for i in more]
     out.append("</div>")
     if len(issues) > 7:
@@ -684,11 +739,11 @@ def write_issue_pages(issues):
                      for y, items in years.items())
     sub = CFG.get("linkedin_newsletter_url") or CFG["linkedin_profile"]
     body = ('<p class="s14">THE NEWSLETTER</p><h1 class="art-h">What the AI!?</h1>'
-            f'<p class="art-by">Every Saturday: one task, one verdict on where the line sits, one tested tool, one thing to try on Monday. {len(issues)} issues so far, newest first. '
+            f'<p class="art-by">Every week: one task, one verdict on where the line sits, one tested tool, one thing to try on Monday. {len(issues)} issues so far, newest first. '
             f'<a href="{E(sub)}" target="_blank" rel="noopener">Subscribe on LinkedIn ↗</a></p>'
             + (groups or '<p>New issues will appear here.</p>'))
     arch_url = f"{SITE}/newsletter/"
-    arch_desc = ("Every issue of What the AI!? by Kunal Mukherjee, Human + AI Strategist. Every Saturday: one task, "
+    arch_desc = ("Every issue of What the AI!? by Kunal Mukherjee, Human + AI Strategist. Every week: one task, "
                  "one verdict on where the line sits, one tested tool, one thing to try on Monday.")
     arch_ld = jsonld([
         {"@type": "CollectionPage", "@id": arch_url + "#webpage", "url": arch_url,
@@ -715,8 +770,10 @@ def write_feed(issues):
                      f"<guid>{E(link)}</guid><pubDate>{pub}</pubDate>"
                      f"<description>{E(it['summary'])}</description></item>")
     (ROOT / "feed.xml").write_text(
-        '<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel>'
+        '<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel>'
         f"<title>What the AI!? by Kunal Mukherjee</title><link>{SITE}/</link>"
+        f'<atom:link href="{SITE}/feed.xml" rel="self" type="application/rss+xml"/>'
+        f"<lastBuildDate>{NOW.strftime('%a, %d %b %Y %H:%M:%S %z')}</lastBuildDate>"
         "<description>AI explained for the people who run things.</description>"
         f"<language>en-in</language>{''.join(items)}</channel></rss>\n", encoding="utf-8")
 
@@ -820,6 +877,7 @@ def main():
 
     news = fetch_news()
     if news:
+        page = replace_block(page, "NEWSNOTE", E(render_newsnote(resolve_links(news))))
         page = replace_block(page, "NEWS", render_news(news))
         page = replace_block(page, "NEWSTIME", E(f"UPDATED {NOW.strftime('%-I:%M %p')} IST"))
     else:
