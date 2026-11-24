@@ -341,7 +341,7 @@
     var moves = t.moves.slice();
     if (role && role.next) moves.push("Your next skill: " + role.next.charAt(0).toLowerCase() + role.next.slice(1));
     var shareText = "I'm a " + t.name + ": " + r.exposure + " AI exposure, " + r.readiness + " readiness. How AI-proof is your job? Take the 2-minute check at kunalai.in";
-    var url = "https://kunalai.in/#score";
+    var url = "https://kunalai.in/jobs/#score";
     box.innerHTML =
       '<div class="sc-res sc-t-' + r.type + '">' +
       '<div class="sc-res-head"><p class="s59">YOUR AI TYPE' + (r.role && r.role !== "Something else" ? " · " + esc(r.role.toUpperCase()) : "") + '</p>' +
@@ -519,7 +519,7 @@
       } catch (err) { box.querySelector(".sc-copied").textContent = "Couldn't download. Long-press or right-click the image to save it."; }
     }
     if (a === "copy") {
-      var note = box.querySelector(".sc-copied"), txt = box._share + " https://kunalai.in/#score";
+      var note = box.querySelector(".sc-copied"), txt = box._share + " https://kunalai.in/jobs/#score";
       var ok = function () { note.textContent = "Caption copied. Paste it with your image."; };
       if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(txt).then(ok, function () { window.prompt("Copy this caption:", txt); }); }
       else { window.prompt("Copy this caption:", txt); }

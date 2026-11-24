@@ -223,7 +223,7 @@ Learn by doing is free, hands-on AI practice by Kunal Mukherjee. Instead of watc
 19. Set standing instructions: Write your custom instructions
 20. Master challenge: the Prompt Doctor: Fix a broken prompt using everything you've learned
 
-## Today's AI edition (source: https://kunalai.in/#today)
+## Today's AI edition (source: https://kunalai.in/today/)
 Refreshed every morning at 6 AM IST: the AI headlines that matter (headline, source and link only), one word to learn, one prompt to try and a two-minute quiz.
 
 ## What the AI!? by Kunal Mukherjee (source: https://kunalai.in/newsletter/)

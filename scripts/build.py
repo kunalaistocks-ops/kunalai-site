@@ -53,10 +53,11 @@ def nice_date(d):
     return f"{d.strftime('%A')}, {d.day} {d.strftime('%B %Y')}"
 
 
-def replace_block(page, name, content):
+def replace_block(page, name, content, quiet=False):
     pat = re.compile(rf"(<!--BUILD:{name}-->)(.*?)(<!--/BUILD:{name}-->)", re.S)
     if not pat.search(page):
-        print(f"warning: marker {name} not found", file=sys.stderr)
+        if not quiet:
+            print(f"warning: marker {name} not found", file=sys.stderr)
         return page
     return pat.sub(lambda m: m.group(1) + content + m.group(3), page)
 
@@ -179,7 +180,7 @@ def resolve_links(items):
 
 def render_newsnote(left):
     if left == 0:
-        return "Headlines link to the original publishers. At least two India stories every day."
+        return "Every headline links straight to its publisher. At least two India stories every day."
     word = "headline opens" if left == 1 else "headlines open"
     return (f"Most headlines link to the original publishers; {left} {word} through a news aggregator first. "
             "At least two India stories every day.")
@@ -366,6 +367,48 @@ def render_top5(news, whats):
             + (f'<p class="t5-what"><span>WHAT IT MEANS</span>{E(what)}</p>' if what else "") +
             '</li>')
     out.append("</ol>")
+    return "".join(out)
+
+
+def render_top3(news, whats):
+    """Return the <ol class="t3-list"> for the first 3 news items, or "" if none."""
+    if not news:
+        return ""
+
+    def rel(dt):
+        try:
+            secs = (NOW - dt).total_seconds()
+        except Exception:
+            return "just now"
+        if secs < 3600:
+            return "just now"
+        hours = int(secs // 3600)
+        if hours < 24:
+            return f"{hours}h ago"
+        return f"{hours // 24}d ago"
+
+    items = news[:3]
+    total = len(items)
+    out = ['<ol class="t3-list">']
+    for i, n in enumerate(items, 1):
+        title = E(n.get("title", ""))
+        link = E(n.get("link", ""))
+        source = E(n.get("source", ""))
+        is_india = str(n.get("region") or "").strip().lower() == "india"
+        flag = ' <span class="t3-flag">INDIA</span>' if is_india else ""
+        src_bits = [b for b in (source,) if b]  # home shows the source only
+        src_txt = " · ".join(src_bits)
+        if src_txt:
+            src_txt += " · "
+        out.append(
+            '<li class="t3-card">'
+            f'<p class="t3-num"><b>{i:02d}</b> / {total:02d}{flag}</p>'
+            f'<a class="t3-h" href="{link}" target="_blank" rel="noopener">{title}</a>'
+            f'<p class="t3-src">{src_txt}'
+            f'<a href="{link}" target="_blank" rel="noopener" aria-label="Read at source: {title}">Read at source ↗</a></p>'
+            '</li>'
+        )
+    out.append('</ol>')
     return "".join(out)
 
 
@@ -607,12 +650,13 @@ def breadcrumbs(trail):
 
 def render_edition_ld(news, picks):
     """Structured data for today's edition on the homepage: date, headlines and the word of the day."""
-    page = SITE + "/#today"
-    node = {"@type": "WebPage", "@id": page, "url": page,
+    page = SITE + "/today/"
+    node = {"@type": "WebPage", "@id": page + "#webpage", "url": page,
             "name": f"Today's AI edition, {nice_date(TODAY)}",
             "description": "The AI headlines that matter today, one word to learn, one prompt to try and a two-minute quiz, refreshed every morning at 6 AM IST on kunalai.in.",
             "datePublished": TODAY.isoformat(), "dateModified": NOW.isoformat(timespec="seconds"),
             "inLanguage": "en-IN", "isPartOf": {"@id": SITE + "/#site"}, "publisher": {"@id": SITE + "/#kunal"},
+            "author": {"@id": SITE + "/#kunal"}, "breadcrumb": {"@id": page + "#breadcrumb"},
             "mainEntity": {"@type": "ItemList", "name": f"Top AI headlines, {nice_date(TODAY)}",
                            "itemListElement": [{"@type": "ListItem", "position": n + 1, "name": it["title"],
                                                 "url": it["link"]} for n, it in enumerate(news[:8])]}}
@@ -663,20 +707,19 @@ PAGE = """<!doctype html>
 <div class="s1">
 <header class="s6"><div class="s7">
 <a href="/" class="s8"><span class="s9">KM</span><span class="s10">Kunal Mukherjee</span></a>
-<nav aria-label="Main" class="mainnav s11"><a href="/#today" class="s12">Today</a><a href="/#jobs" class="s12">Your job</a><a href="/#newsletter" class="s12">Newsletter</a><a href="/about/" class="s12">About</a><a href="/learn/" class="s12">Learn by doing</a></nav>
+<nav aria-label="Main" class="mainnav s11"><a href="/today/" class="s12">Today</a><a href="/check/" class="s12">The Check</a><a href="/learn/" class="s12">Learn <span class="nav-free">FREE</span></a><a href="/jobs/" class="s12">Your job</a><a href="/newsletter/" class="s12" aria-current="page">Newsletter</a></nav>
 </div></header>
 <main class="art">
 {body}
 </main>
-<section class="s97"><div class="s98">
-<h2 class="s99">Disagree with<br>something? Good.</h2>
-<p class="s100">Speaking, partnerships, collaborations, or a good argument about AI. My inbox is open.</p>
-<div class="s88"><a href="mailto:{email}" class="s101">Email me</a><a href="{sub}" target="_blank" rel="noopener" class="s102">Subscribe on LinkedIn</a>{xbtn}</div>
-<p class="mailline">Or write to <a href="mailto:{email}">{email}</a></p>
+<section class="nx" aria-labelledby="nx-title"><div class="nx-in">
+<p class="nx-kick">NEVER MISS AN ISSUE</p>
+<h2 class="nx-h" id="nx-title">Get it free, every week.</h2>
+<a class="nx-go" href="{sub}" target="_blank" rel="noopener">Subscribe free ↗</a>
 </div></section>
 <footer class="s103"><div class="s104">
-<span>© {year} Kunal Mukherjee · Views are my own · <a class="foot" href="mailto:{email}">Email</a> · <a class="foot" href="{li}">LinkedIn</a>{xlink} · <a class="foot" href="/feed.xml">RSS</a></span>
-<span><a class="foot" href="/about/">About</a> · <a class="foot" href="/human-line/">The Human Line</a> · <a class="foot" href="/learn/">Learn by doing</a> · <a class="foot" href="/privacy.html">Privacy</a> · <a class="foot" href="#" data-cookie-settings>Cookie settings</a> · Made in Mumbai</span>
+<span>© {year} Kunal Mukherjee · Views are my own · <a class="foot" href="mailto:{email}">Email</a> · <a class="foot" href="{li}" target="_blank" rel="noopener">LinkedIn</a>{xlink} · <a class="foot" href="/feed.xml">RSS</a></span>
+<span><a class="foot" href="/about/">About</a> · <a class="foot" href="/human-line/">The Human Line</a> · <a class="foot" href="/explore/">Explore</a> · <a class="foot" href="/privacy.html">Privacy</a> · <a class="foot" href="#" data-cookie-settings>Cookie settings</a> · Made in Mumbai</span>
 </div></footer>
 </div>
 <script src="/content.js"></script>
@@ -716,7 +759,7 @@ def write_issue_pages(issues):
         nav += "</nav>"
         orig = (f'<p class="orig">Also published on <a href="{E(it["linkedin"])}">LinkedIn</a>.</p>'
                 if it.get("linkedin") else "")
-        body = (f'<p class="s14"><a href="/#newsletter">WHAT THE AI!?</a> · '
+        body = (f'<p class="s14"><a href="/newsletter/">WHAT THE AI!?</a> · '
                 f'{it["date"].day} {it["date"].strftime("%B %Y").upper()} · {it["minutes"]} MIN READ</p>'
                 f'<h1 class="art-h">{E(it["title"])}</h1>'
                 f'<p class="art-by">By Kunal Mukherjee</p>'
@@ -779,7 +822,11 @@ def write_feed(issues):
 
 
 LASTMOD_FILE = ROOT / "data" / "lastmod.json"
-SITEMAP_PAGES = [("/", "index.html"), ("/about/", "about/index.html"), ("/human-line/", "human-line/index.html"),
+SITEMAP_PAGES = [("/", "index.html"), ("/today/", "today/index.html"), ("/jobs/", "jobs/index.html"),
+                 ("/explore/", "explore/index.html"), ("/explore/perspectives/", "explore/perspectives/index.html"),
+                 ("/explore/what-to-study/", "explore/what-to-study/index.html"), ("/explore/people/", "explore/people/index.html"),
+                 ("/explore/reads/", "explore/reads/index.html"),
+                 ("/about/", "about/index.html"), ("/human-line/", "human-line/index.html"),
                  ("/check/", "check/index.html"), ("/learn/", "learn/index.html"),
                  ("/newsletter/", "newsletter/index.html"), ("/privacy.html", "privacy.html")]
 
@@ -870,37 +917,45 @@ def stamp_assets(page, versions):
 
 
 def main():
+    # The home page carries Today's Top 3 and the latest issue; /today/ carries the full edition.
     page_path = ROOT / "index.html"
     page = page_path.read_text(encoding="utf-8")
-
-    page = replace_block(page, "DATE", E(nice_date(TODAY).replace(",", "").upper()))
+    today_path = ROOT / "today" / "index.html"
+    tpage = today_path.read_text(encoding="utf-8") if today_path.exists() else ""
+    stamp = E(nice_date(TODAY).replace(",", "").upper())
 
     news = fetch_news()
     if news:
-        page = replace_block(page, "NEWSNOTE", E(render_newsnote(resolve_links(news))))
-        page = replace_block(page, "NEWS", render_news(news))
-        page = replace_block(page, "NEWSTIME", E(f"UPDATED {NOW.strftime('%-I:%M %p')} IST"))
+        note = E(render_newsnote(resolve_links(news)))
+        tpage = replace_block(tpage, "NEWSNOTE", note)
+        tpage = replace_block(tpage, "NEWS", render_news(news))
+        tpage = replace_block(tpage, "NEWSTIME", E(f"UPDATED {NOW.strftime('%-I:%M %p')} IST"))
     else:
         print("no fresh news; keeping previous headlines", file=sys.stderr)
 
     picks = ai_picks(news) or library_picks()
     if news:
-        page = replace_block(page, "TOP5", render_top5(news, picks.get("whats", {})))
-    page = replace_block(page, "T5DATE", E(nice_date(TODAY).replace(",", "").upper()))
-    page = replace_block(page, "TERM", render_term(picks["term"]))
-    page = replace_block(page, "PROMPT", render_prompt(picks["prompt"]))
-    page = replace_block(page, "QUIZ", render_quiz(picks["quiz"], picks["source"]))
-    if news:
-        page = replace_block(page, "EDITIONLD", render_edition_ld(news, picks))
+        page = replace_block(page, "TOP3", render_top3(news, picks.get("whats", {})))
+        tpage = replace_block(tpage, "TOP5", render_top5(news, picks.get("whats", {})), quiet=True)
+        tpage = replace_block(tpage, "EDITIONLD", render_edition_ld(news, picks))
+    page = replace_block(page, "T3DATE", stamp)
+    tpage = replace_block(tpage, "DATE", stamp)
+    tpage = replace_block(tpage, "T5DATE", stamp, quiet=True)
+    tpage = replace_block(tpage, "TERM", render_term(picks["term"]))
+    tpage = replace_block(tpage, "PROMPT", render_prompt(picks["prompt"]))
+    tpage = replace_block(tpage, "QUIZ", render_quiz(picks["quiz"], picks["source"]))
 
     issues = load_issues()
     page = replace_block(page, "NEWSLETTER", render_archive(issues))
-    page = replace_block(page, "NLMORE", render_more(issues))
+    page = replace_block(page, "NLALL", f'<a class="nl-all" href="/newsletter/">All {len(issues)} issues →</a>' if issues else "")
 
     versions = asset_versions()
-    page = stamp_assets(page, versions)
-    page_path.write_text(page, encoding="utf-8")
-    for extra in ["privacy.html", "about/index.html", "human-line/index.html", "check/index.html"]:
+    page_path.write_text(stamp_assets(page, versions), encoding="utf-8")
+    if tpage:
+        today_path.write_text(stamp_assets(tpage, versions), encoding="utf-8")
+    for extra in ["privacy.html", "404.html", "about/index.html", "human-line/index.html", "check/index.html", "jobs/index.html",
+                  "explore/index.html", "explore/perspectives/index.html", "explore/what-to-study/index.html",
+                  "explore/people/index.html", "explore/reads/index.html"]:
         f = ROOT / extra
         if f.exists():
             f.write_text(stamp_assets(f.read_text(encoding="utf-8"), versions), encoding="utf-8")

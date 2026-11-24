@@ -1,19 +1,43 @@
 {
  "about/index.html": {
   "date": "2026-11-24",
-  "sha": "0108a67a7d8ce104a84d4c48cb76a1fcad3d4b09"
+  "sha": "3211ac77cf65d4e03302acc42c5c0523b25d1d58"
  },
  "check/index.html": {
   "date": "2026-11-24",
-  "sha": "8c4a1f4cde4a3790df1aa2aa1b7f71313545ac65"
+  "sha": "eb2d81fdbd914b9e74ef630c4393e06c41637f41"
+ },
+ "explore/index.html": {
+  "date": "2026-11-24",
+  "sha": "1607095ffe03733a0391852ddc62821f8d2b0e5d"
+ },
+ "explore/people/index.html": {
+  "date": "2026-11-24",
+  "sha": "4cc0b7c308c4828ce0d79f415ed1b08bfb034e54"
+ },
+ "explore/perspectives/index.html": {
+  "date": "2026-11-24",
+  "sha": "f0aa807cee028fe52541d5101ab6c8b99361997a"
+ },
+ "explore/reads/index.html": {
+  "date": "2026-11-24",
+  "sha": "2070e8d8e8d2329a2e124585d1edc558fce00114"
+ },
+ "explore/what-to-study/index.html": {
+  "date": "2026-11-24",
+  "sha": "5c809636a4b8007b36fb2091e42a18cbb1639f97"
  },
  "human-line/index.html": {
   "date": "2026-11-24",
-  "sha": "1dd3e0a7e79716c990b6db5c485b282cbeef253d"
+  "sha": "840ebde5604883393edf87e4f98f77f3ac811cb4"
  },
  "index.html": {
   "date": "2026-11-24",
-  "sha": "8c42310895a6d95cb048c208c2a5361e05a0ebdb"
+  "sha": "569107484e3261197265ef81d936066c7f8db661"
+ },
+ "jobs/index.html": {
+  "date": "2026-11-24",
+  "sha": "8eaf5ed4fdf3f5dae9958aebe715e9f543d308bc"
  },
  "learn/index.html": {
   "date": "2026-11-24",
@@ -21,10 +45,14 @@
  },
  "newsletter/index.html": {
   "date": "2026-11-24",
-  "sha": "9ee00819e342879f7f5ea2335de6b33e8f68486e"
+  "sha": "6bbe50cae4ab88de7a550e22d579961e4344185a"
  },
  "privacy.html": {
   "date": "2026-11-24",
-  "sha": "bda4fb0b4893e39458c8d94bc67028210985ac73"
+  "sha": "f36f03637651ad482c81bca09b09d0fa72f849b0"
+ },
+ "today/index.html": {
+  "date": "2026-11-24",
+  "sha": "2ad015bf3b8e21faca139b0834ec628eb71f2057"
  }
 }
