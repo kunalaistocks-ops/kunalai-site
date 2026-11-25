@@ -45,9 +45,6 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
     env:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
     steps:
@@ -123,5 +120,18 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
+
+  # Publishing runs as its own job so GitHub has finished registering the
+  # uploaded site package before the deploy step looks for it. Doing both in
+  # one job caused "No artifacts named github-pages" failures.
+  deploy:
+    needs: build-and-deploy
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Give GitHub a moment to register the package
+        run: sleep 15
       - id: deploy
         uses: actions/deploy-pages@v4
