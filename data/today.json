@@ -1,47 +1,47 @@
 {
  "whats": {
-  "Sunway Group Selects Hewlett Packard Enterprise Private Cloud AI To Accelerate Artificial Intelligence Innovation": "A major group picking HPE's private cloud AI shows big firms want AI power without handing data to public clouds.",
-  "Why Is the Most Costly Enterprise AI Expense Not Listed on Model Procurement Orders?": "A question about hidden enterprise AI costs reminds managers that the invoice price is rarely the full story.",
-  "AI, leadership and global mandates: What will shape India's GCCs in 2027?": "Indian global capability centres are shaping how AI and leadership rules will work by 2027, worth watching early.",
-  "Anthropic introduces zero data retention option for firms using advanced AI": "Anthropic's zero data retention option lets firms use its AI without worrying about data being stored afterwards.",
-  "The AI compute race: How chips, memory and data centres are redefining the future of computing": "The race for chips, memory and data centres is reshaping computing, which affects AI costs and speed for everyone."
+  "Yale’s Sonnenfeld: Nvidia is a ‘detriment’ to U.S. industrial might — not a champion": "A sharp public critique of a major AI chip supplier is a reminder to question hype before betting budgets on it.",
+  "Microsoft Ignite 2026: Is Your Enterprise Ready to Let AI Agents Act?": "Bain's question for Ignite reminds managers to think through risks before letting AI tools act without oversight.",
+  "Dell lifts annual forecasts after record quarter on surging AI server demand": "Strong demand for AI server hardware signals companies everywhere are still investing heavily in AI capacity.",
+  "Jensen Huang still thinks a succession plan creates unnecessary hierarchy": "A leader resisting formal succession planning is a useful prompt for managers to review their own backup plans.",
+  "Beyond AI talent: India’s battle for strategic compute": "India's push for computing power, not just AI skills, matters for any business planning long term AI use here."
  },
  "term": {
-  "term": "Zero data retention",
-  "def": "Zero data retention means an AI provider processes your data but does not store it afterwards, so nothing sits on their servers later."
+  "term": "AI infrastructure",
+  "def": "The servers, chips and networks that run AI tools behind the scenes. When companies plan for AI growth, this is usually what needs upgrading first."
  },
  "prompt": {
-  "for": "Legal",
-  "prompt": "Review our contract with [AI vendor name] and list exactly what it says about storing, retaining or deleting our company data."
+  "for": "Leadership",
+  "prompt": "List three tasks in [team or department] where letting an AI tool act on its own, without a human checking first, could go wrong. Suggest a safeguard for each."
  },
  "quiz": [
   {
-   "q": "Business Standard reports that Anthropic introduced a zero data retention option for firms using advanced AI.",
+   "q": "TechCrunch reports Yale's Sonnenfeld called Nvidia a 'detriment' to US industrial might, not a champion.",
    "a": true,
-   "why": "This is what the headline states about Anthropic's new offering for business users."
+   "why": "This directly reflects what TechCrunch reported about his comments."
   },
   {
-   "q": "ET Datacenters reports that India tops a digital sovereignty index but struggles with AI control.",
+   "q": "Reuters reports Dell raised its annual forecasts after a record quarter driven by surging AI server demand.",
    "a": true,
-   "why": "This directly reflects what the headline says about India's ranking and challenge."
+   "why": "This matches what Reuters reported about Dell's results."
   },
   {
-   "q": "AI models understand language the same way humans do, with real comprehension and feelings.",
+   "q": "AI systems understand meaning the same way humans do.",
    "a": false,
-   "why": "AI predicts likely word patterns from data. It has no understanding, feelings or awareness."
+   "why": "AI finds patterns in data and predicts likely answers. It does not understand ideas the way a person does."
   },
   {
-   "q": "AI tools can sound completely confident while giving an answer that is factually wrong.",
-   "a": true,
-   "why": "This is a well known limitation. Confidence in tone never guarantees accuracy, so checking matters."
-  },
-  {
-   "q": "Once an AI model is trained, it never needs to be updated or retrained again.",
+   "q": "Feeding an AI model more data automatically makes its answers more accurate.",
    "a": false,
-   "why": "Models can go stale as information changes, so providers regularly retrain or update them."
+   "why": "Quality and relevance of data matter more than sheer volume. Bad or messy data can make results worse."
+  },
+  {
+   "q": "AI tools can sound confident while still giving a wrong answer.",
+   "a": true,
+   "why": "This is a well known limitation called hallucination, so checking important outputs is still necessary."
   }
  ],
  "source": "ai",
- "date": "2026-11-24",
+ "date": "2026-11-25",
  "model": "claude-sonnet-5"
 }
