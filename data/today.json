@@ -1,47 +1,47 @@
 {
  "whats": {
-  "Yale’s Sonnenfeld: Nvidia is a ‘detriment’ to U.S. industrial might — not a champion": "A sharp public critique of a major AI chip supplier is a reminder to question hype before betting budgets on it.",
-  "Microsoft Ignite 2026: Is Your Enterprise Ready to Let AI Agents Act?": "Bain's question for Ignite reminds managers to think through risks before letting AI tools act without oversight.",
-  "Dell lifts annual forecasts after record quarter on surging AI server demand": "Strong demand for AI server hardware signals companies everywhere are still investing heavily in AI capacity.",
-  "Jensen Huang still thinks a succession plan creates unnecessary hierarchy": "A leader resisting formal succession planning is a useful prompt for managers to review their own backup plans.",
-  "Beyond AI talent: India’s battle for strategic compute": "India's push for computing power, not just AI skills, matters for any business planning long term AI use here."
+  "S&P considers Nvidia credit downgrade over governance and ‘key man’ risks": "A credit downgrade review for Nvidia shows how leadership dependence can affect a company's financial risk profile.",
+  "How OutSystems AI Agents Modernise Business, Not Just Code": "AI agents modernising business processes means managers may rethink workflows, not just coding tasks.",
+  "Google’s patent for custom AI video feeds paints a bleak picture of entertainment’s future": "A patent for custom AI video feeds signals a future where entertainment could be personalised in new, concerning ways.",
+  "The AI trade is unraveling days after Jensen Huang's comeback sparked a monster rally": "A shaky AI stock rally after a big leadership moment reminds managers that investor confidence in AI can swing quickly.",
+  "SAP Survey Finds ERP Systems Are the Primary AI Platform for 63% of Surveyed Saudi IT Decision-Makers": "Most surveyed Saudi IT leaders say ERP systems are their main AI platform, showing AI is merging into core business tools."
  },
  "term": {
-  "term": "AI infrastructure",
-  "def": "The servers, chips and networks that run AI tools behind the scenes. When companies plan for AI growth, this is usually what needs upgrading first."
+  "term": "Key person risk",
+  "def": "This is the danger a company faces when it depends heavily on one leader or expert. If that person leaves or is lost, the business can struggle to function."
  },
  "prompt": {
   "for": "Leadership",
-  "prompt": "List three tasks in [team or department] where letting an AI tool act on its own, without a human checking first, could go wrong. Suggest a safeguard for each."
+  "prompt": "List the top 5 risks my business faces if we depend too heavily on [one vendor, leader, or AI tool] for [critical function]. Suggest ways to reduce this dependency."
  },
  "quiz": [
   {
-   "q": "TechCrunch reports Yale's Sonnenfeld called Nvidia a 'detriment' to US industrial might, not a champion.",
+   "q": "TechCrunch reports S&P is considering a credit downgrade for Nvidia over governance and key man risks.",
    "a": true,
-   "why": "This directly reflects what TechCrunch reported about his comments."
+   "why": "This directly restates what TechCrunch reported about S&P's review of Nvidia's credit standing."
   },
   {
-   "q": "Reuters reports Dell raised its annual forecasts after a record quarter driven by surging AI server demand.",
+   "q": "News On AIR reports that India, the U.S. and eight other nations signed a declaration to safeguard AI supply chains.",
    "a": true,
-   "why": "This matches what Reuters reported about Dell's results."
+   "why": "This matches the headline about ten nations agreeing to protect AI supply chains."
   },
   {
-   "q": "AI systems understand meaning the same way humans do.",
+   "q": "AI models always give the exact same answer to the same question every time.",
    "a": false,
-   "why": "AI finds patterns in data and predicts likely answers. It does not understand ideas the way a person does."
+   "why": "Many AI tools include randomness by design, so the same question can produce slightly different answers."
   },
   {
-   "q": "Feeding an AI model more data automatically makes its answers more accurate.",
-   "a": false,
-   "why": "Quality and relevance of data matter more than sheer volume. Bad or messy data can make results worse."
-  },
-  {
-   "q": "AI tools can sound confident while still giving a wrong answer.",
+   "q": "AI tools generally improve when they are trained on larger amounts of relevant data.",
    "a": true,
-   "why": "This is a well known limitation called hallucination, so checking important outputs is still necessary."
+   "why": "More good quality data usually helps AI systems recognise patterns more accurately."
+  },
+  {
+   "q": "AI can fully replace human judgment in every business decision without any oversight.",
+   "a": false,
+   "why": "AI can support decisions but lacks context, accountability and ethical judgment that humans provide."
   }
  ],
  "source": "ai",
- "date": "2026-11-25",
+ "date": "2026-11-26",
  "model": "claude-sonnet-5"
 }
