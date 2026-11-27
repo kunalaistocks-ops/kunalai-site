@@ -1,47 +1,47 @@
 {
  "whats": {
-  "S&P considers Nvidia credit downgrade over governance and ‘key man’ risks": "A credit downgrade review for Nvidia shows how leadership dependence can affect a company's financial risk profile.",
-  "How OutSystems AI Agents Modernise Business, Not Just Code": "AI agents modernising business processes means managers may rethink workflows, not just coding tasks.",
-  "Google’s patent for custom AI video feeds paints a bleak picture of entertainment’s future": "A patent for custom AI video feeds signals a future where entertainment could be personalised in new, concerning ways.",
-  "The AI trade is unraveling days after Jensen Huang's comeback sparked a monster rally": "A shaky AI stock rally after a big leadership moment reminds managers that investor confidence in AI can swing quickly.",
-  "SAP Survey Finds ERP Systems Are the Primary AI Platform for 63% of Surveyed Saudi IT Decision-Makers": "Most surveyed Saudi IT leaders say ERP systems are their main AI platform, showing AI is merging into core business tools."
+  "A Stanford physicist drops an AI-assisted theory that has scientists at odds": "A new AI-assisted theory is dividing scientists, a reminder that AI output still needs careful human review before trust.",
+  "Korean AI Startups Face a Buyer Test Over Data Access, Model Providers and Agent Tools": "Korean AI startups are being tested on data access and tools, useful for managers vetting any AI vendor's reliability.",
+  "Nvidia hits pause on chip shipments to Southeast Asia": "Nvidia pausing chip shipments to Southeast Asia could affect AI hardware timelines for businesses in that region.",
+  "An Anthropic team lead says AI is changing the factors that are weighed in a promotion": "An Anthropic leader says AI is reshaping promotion criteria, so managers may need to rethink what skills they reward.",
+  "SAP Weighs Cutting at Least 10,000 Positions in AI Restructuring": "SAP considering over 10,000 job cuts shows how AI restructuring can reshape large companies' workforce plans."
  },
  "term": {
-  "term": "Key person risk",
-  "def": "This is the danger a company faces when it depends heavily on one leader or expert. If that person leaves or is lost, the business can struggle to function."
+  "term": "AI restructuring",
+  "def": "This means a company reshapes teams, roles or costs because AI tools can now handle part of the work once done by people."
  },
  "prompt": {
   "for": "Leadership",
-  "prompt": "List the top 5 risks my business faces if we depend too heavily on [one vendor, leader, or AI tool] for [critical function]. Suggest ways to reduce this dependency."
+  "prompt": "Help me plan a fair communication strategy for my team if we restructure roles because of [AI tool or process]. List three key messages to share."
  },
  "quiz": [
   {
-   "q": "TechCrunch reports S&P is considering a credit downgrade for Nvidia over governance and key man risks.",
+   "q": "Business Standard reports that SAP is weighing cutting at least 10,000 positions in an AI restructuring.",
    "a": true,
-   "why": "This directly restates what TechCrunch reported about S&P's review of Nvidia's credit standing."
+   "why": "This directly restates the headline from Business Standard about SAP's planned job cuts."
   },
   {
-   "q": "News On AIR reports that India, the U.S. and eight other nations signed a declaration to safeguard AI supply chains.",
+   "q": "TechCrunch reports that Nvidia has paused chip shipments to Southeast Asia.",
    "a": true,
-   "why": "This matches the headline about ten nations agreeing to protect AI supply chains."
+   "why": "This directly restates the headline from TechCrunch about Nvidia's shipment pause."
   },
   {
-   "q": "AI models always give the exact same answer to the same question every time.",
+   "q": "AI restructuring always means most employees are replaced by machines overnight.",
    "a": false,
-   "why": "Many AI tools include randomness by design, so the same question can produce slightly different answers."
+   "why": "Restructuring usually means roles change or shift focus, not instant mass replacement by machines."
   },
   {
-   "q": "AI tools generally improve when they are trained on larger amounts of relevant data.",
+   "q": "AI restructuring can involve changing what skills matter for a role, not just cutting jobs.",
    "a": true,
-   "why": "More good quality data usually helps AI systems recognise patterns more accurately."
+   "why": "Many companies redesign roles around new AI tools rather than only reducing headcount."
   },
   {
-   "q": "AI can fully replace human judgment in every business decision without any oversight.",
+   "q": "Once a company announces AI restructuring, human judgment is no longer needed in decisions.",
    "a": false,
-   "why": "AI can support decisions but lacks context, accountability and ethical judgment that humans provide."
+   "why": "AI tools support decisions but people still set goals, judge context and handle exceptions."
   }
  ],
  "source": "ai",
- "date": "2026-11-26",
+ "date": "2026-11-27",
  "model": "claude-sonnet-5"
 }
