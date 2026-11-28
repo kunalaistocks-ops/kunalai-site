@@ -3,8 +3,10 @@
 Daily build for kunalai.in
 
 Runs every morning via GitHub Actions (see .github/workflows/daily.yml).
-It rewrites the marked blocks inside index.html, so the published page is
-plain HTML that search engines and AI assistants can read.
+It rewrites the marked blocks inside index.html when those markers are present,
+so the published page is plain HTML that search engines and AI assistants can read.
+The homepage is now the prompt library and has no markers; the daily edition
+is written only into /today/.
 
 What it does:
   1. Stamps today's date (IST) as the edition date.
@@ -851,7 +853,12 @@ def write_sitemap(issues):
         known = json.loads(LASTMOD_FILE.read_text(encoding="utf-8"))
     except Exception:  # noqa
         known = {}
-    urls = [(SITE + path, page_lastmod(rel, known)) for path, rel in SITEMAP_PAGES]
+    # Prompt library pages live beside the older routes. products.html is not published.
+    library = [("/explore.html", "explore.html"), ("/about.html", "about.html"),
+               ("/collections.html", "collections.html"), ("/favourites.html", "favourites.html")]
+    library += [(f"/{p.name}", p.name) for p in sorted(ROOT.glob("collection-*.html"))]
+    library += [(f"/{p.name}", p.name) for p in sorted(ROOT.glob("prompt-*.html"))]
+    urls = [(SITE + path, page_lastmod(rel, known)) for path, rel in SITEMAP_PAGES + library]
     LASTMOD_FILE.write_text(json.dumps(known, indent=1, sort_keys=True) + "\n", encoding="utf-8")
     urls += [(f"{SITE}/newsletter/{i['slug']}.html", i["date"]) for i in issues if i.get("slug")]
     body = "".join(f"<url><loc>{u}</loc><lastmod>{d.isoformat()}</lastmod></url>" for u, d in urls)
@@ -917,7 +924,7 @@ def stamp_assets(page, versions):
 
 
 def main():
-    # The home page carries Today's Top 3 and the latest issue; /today/ carries the full edition.
+    # Today's edition lives on /today/. The homepage is the prompt library unless it still has BUILD markers.
     page_path = ROOT / "index.html"
     page = page_path.read_text(encoding="utf-8")
     today_path = ROOT / "today" / "index.html"
@@ -935,10 +942,13 @@ def main():
 
     picks = ai_picks(news) or library_picks()
     if news:
-        page = replace_block(page, "TOP3", render_top3(news, picks.get("whats", {})))
+        # The prompt-library homepage has no TOP3 marker. Don't warn, and don't rewrite it.
+        if "<!--BUILD:TOP3-->" in page:
+            page = replace_block(page, "TOP3", render_top3(news, picks.get("whats", {})))
         tpage = replace_block(tpage, "TOP5", render_top5(news, picks.get("whats", {})), quiet=True)
         tpage = replace_block(tpage, "EDITIONLD", render_edition_ld(news, picks))
-    page = replace_block(page, "T3DATE", stamp)
+    if "<!--BUILD:T3DATE-->" in page:
+        page = replace_block(page, "T3DATE", stamp)
     tpage = replace_block(tpage, "DATE", stamp)
     tpage = replace_block(tpage, "T5DATE", stamp, quiet=True)
     tpage = replace_block(tpage, "TERM", render_term(picks["term"]))
@@ -946,11 +956,13 @@ def main():
     tpage = replace_block(tpage, "QUIZ", render_quiz(picks["quiz"], picks["source"]))
 
     issues = load_issues()
-    page = replace_block(page, "NEWSLETTER", render_archive(issues))
-    page = replace_block(page, "NLALL", f'<a class="nl-all" href="/newsletter/">All {len(issues)} issues →</a>' if issues else "")
-
     versions = asset_versions()
-    page_path.write_text(stamp_assets(page, versions), encoding="utf-8")
+    if "<!--BUILD:" in page:
+        page = replace_block(page, "NEWSLETTER", render_archive(issues))
+        page = replace_block(page, "NLALL", f'<a class="nl-all" href="/newsletter/">All {len(issues)} issues →</a>' if issues else "")
+        page_path.write_text(stamp_assets(page, versions), encoding="utf-8")
+    else:
+        print("homepage has no daily markers; leaving the prompt library index.html unchanged")
     if tpage:
         today_path.write_text(stamp_assets(tpage, versions), encoding="utf-8")
     for extra in ["privacy.html", "404.html", "about/index.html", "human-line/index.html", "check/index.html", "jobs/index.html",
@@ -982,6 +994,10 @@ def enforce_type_scale():
     for f in ROOT.rglob("*.html"):
         if ".git" in f.parts: continue
         s = f.read_text(encoding="utf-8")
+        # The prompt library uses its own type scale. Snapping those sizes to var(--fs-*)
+        # would point at tokens the pages do not load.
+        if "styles.css" not in s:
+            continue
         t = re.sub(r'style="([^"]*)"', lambda m: 'style="' + pat.sub(fix, m.group(1)) + '"', s)
         if t != s:
             print(f"::warning::type scale: snapped ad hoc font sizes in {f.relative_to(ROOT)}")
