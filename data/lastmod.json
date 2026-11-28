@@ -1,4 +1,8 @@
 {
+ "about.html": {
+  "date": "2026-11-28",
+  "sha": "4f3fa8936fb0e7712e8ffc3b1ebda852e04e4b3f"
+ },
  "about/index.html": {
   "date": "2026-11-24",
   "sha": "9b914d9bd5978d99715c9b6ae01b943410b5d098"
@@ -6,6 +10,46 @@
  "check/index.html": {
   "date": "2026-11-24",
   "sha": "8061f69e075324bfb21d80ffff9a32af2a512390"
+ },
+ "collection-0.html": {
+  "date": "2026-11-28",
+  "sha": "d421c6fa35590feee1037642c115d073b29b6385"
+ },
+ "collection-1.html": {
+  "date": "2026-11-28",
+  "sha": "46f73bbe24bb63020e5fae68a82c4f934c41e626"
+ },
+ "collection-2.html": {
+  "date": "2026-11-28",
+  "sha": "36041609f5aeeba91bcac9b2d60e4272b6188d27"
+ },
+ "collection-3.html": {
+  "date": "2026-11-28",
+  "sha": "14ffb8e850f112e2b4d7b3c3895b7d07efef2815"
+ },
+ "collection-4.html": {
+  "date": "2026-11-28",
+  "sha": "d358eb990ca614690015589dc1a96895de255941"
+ },
+ "collection-5.html": {
+  "date": "2026-11-28",
+  "sha": "35f6536cf0df4b216c3c820d71def09acc90f00d"
+ },
+ "collection-6.html": {
+  "date": "2026-11-28",
+  "sha": "785dab1a153590b2bc96a7eb6fc63f5d530f6350"
+ },
+ "collection-7.html": {
+  "date": "2026-11-28",
+  "sha": "d379905392a2c8e6e9daed0aae7216465b22e693"
+ },
+ "collections.html": {
+  "date": "2026-11-28",
+  "sha": "c98a3ea1a1876fcf0a76e5988e02f1b3099fff49"
+ },
+ "explore.html": {
+  "date": "2026-11-28",
+  "sha": "df0390243ac360d481e447d5363600f97e347826"
  },
  "explore/index.html": {
   "date": "2026-11-24",
@@ -27,21 +71,25 @@
   "date": "2026-11-24",
   "sha": "2addffc1419bb8080179cfe1a775ba955a957891"
  },
+ "favourites.html": {
+  "date": "2026-11-28",
+  "sha": "d09ae42726e0de7850304b96e7514742642f4aca"
+ },
  "human-line/index.html": {
   "date": "2026-11-24",
   "sha": "8fb79f637e75ace0ba6457e190450e2feb2bcd9f"
  },
  "index.html": {
   "date": "2026-11-28",
-  "sha": "a709fbd59638939a48d27538ba706af1090c6511"
+  "sha": "713397e88bfd0ab2fb2041890b2c4eb1174df636"
  },
  "jobs/index.html": {
   "date": "2026-11-24",
   "sha": "37987084a16b8705f3d0db59d977935f2206ac32"
  },
  "learn/index.html": {
-  "date": "2026-11-24",
-  "sha": "5c5351a3bed7bdc8d71f5912051e9bba2995b2c4"
+  "date": "2026-11-28",
+  "sha": "8f6b9eade500dcc836161506e09c39c4c51fa966"
  },
  "newsletter/index.html": {
   "date": "2026-11-24",
@@ -51,8 +99,88 @@
   "date": "2026-11-24",
   "sha": "de177c643cdca08e282a847b3d1187d3f7cc7319"
  },
+ "prompt-birthday.html": {
+  "date": "2026-11-28",
+  "sha": "c7160c552594c1d56723f2b9e2d4503720691feb"
+ },
+ "prompt-customers.html": {
+  "date": "2026-11-28",
+  "sha": "0d052235ca79376392551d929cc2f9873ef14935"
+ },
+ "prompt-dog.html": {
+  "date": "2026-11-28",
+  "sha": "529c0d73abe0aefcc5617d84f976966e8e3453aa"
+ },
+ "prompt-food.html": {
+  "date": "2026-11-28",
+  "sha": "c7af15ebbcdb140dfdde45b6c57f4809cbf80178"
+ },
+ "prompt-freelance.html": {
+  "date": "2026-11-28",
+  "sha": "e35a0482dba11e9f242e3e33b3d5b73c33aae4f5"
+ },
+ "prompt-getaway.html": {
+  "date": "2026-11-28",
+  "sha": "0cd6c2110f2a04895ebc7a118504336f05c63704"
+ },
+ "prompt-gift.html": {
+  "date": "2026-11-28",
+  "sha": "13177c48809a886ace762d314e7837e3725e21b6"
+ },
+ "prompt-inbox.html": {
+  "date": "2026-11-28",
+  "sha": "0a27ea2bd64476928ee2e7ff5f769418cee862f9"
+ },
+ "prompt-learn.html": {
+  "date": "2026-11-28",
+  "sha": "71516e5a13083b3c20f03fc5417292566cd92c3f"
+ },
+ "prompt-memories.html": {
+  "date": "2026-11-28",
+  "sha": "925e45cde0947072855b0e0cdb0625778f3065fd"
+ },
+ "prompt-money.html": {
+  "date": "2026-11-28",
+  "sha": "51f15c44ce36867c23b074000d7d3712b22c9628"
+ },
+ "prompt-museum.html": {
+  "date": "2026-11-28",
+  "sha": "2c54424f8baa5233b73466fd0b1f64ac7b890118"
+ },
+ "prompt-party.html": {
+  "date": "2026-11-28",
+  "sha": "32aea794b75815420235f06c1318616b1f0c57a7"
+ },
+ "prompt-phones.html": {
+  "date": "2026-11-28",
+  "sha": "8c538f1dfe9632b684cd6c3d88b2b82b3f02b78f"
+ },
+ "prompt-priceless.html": {
+  "date": "2026-11-28",
+  "sha": "b9cd674df909169a80215caeeb0a8440db955f61"
+ },
+ "prompt-rentbuy.html": {
+  "date": "2026-11-28",
+  "sha": "3a705bb92371f35859ea06fad41f08d47f05d8f9"
+ },
+ "prompt-salary.html": {
+  "date": "2026-11-28",
+  "sha": "6c83278834fedc76d4042b7783d2987caeb71e0b"
+ },
+ "prompt-speech.html": {
+  "date": "2026-11-28",
+  "sha": "becc7564e8cf0d9e94c4fa26a394e23b20af4c0e"
+ },
+ "prompt-tiffin.html": {
+  "date": "2026-11-28",
+  "sha": "e1e8c271c94ee7b269ae282258a92f9232b5a63e"
+ },
+ "prompt-weekend.html": {
+  "date": "2026-11-28",
+  "sha": "69f61b84be1044165a192c2ac26ebaab4360234b"
+ },
  "today/index.html": {
   "date": "2026-11-28",
-  "sha": "8e5226b237ac03272f64c0480fa7b35328325356"
+  "sha": "d31449f104f430df6fc3e1465d3469a221f47c2b"
  }
 }
