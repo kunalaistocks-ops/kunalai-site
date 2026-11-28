@@ -48,6 +48,17 @@ Free hands-on AI practice by Kunal Mukherjee at kunalai.in/learn/: 45 real tasks
 - YouTube (What the AI!?): https://www.youtube.com/@whattheai2027
 - Email: kunalai.in@gmail.com
 
+## Prompt library (source: https://kunalai.in/)
+The homepage of kunalai.in is a free prompt library. Pick a prompt, answer a few questions, and copy it into ChatGPT or Claude. The prompt cards on the homepage change on each visit.
+
+- Explore every prompt: https://kunalai.in/explore.html
+- Collections: https://kunalai.in/collections.html
+- Saved prompts (this browser only): https://kunalai.in/favourites.html
+- Short about page inside the library: https://kunalai.in/about.html
+- Full bio, career and disambiguation: https://kunalai.in/about/
+- Field guide (perspectives, study, people, reads): https://kunalai.in/explore/
+- Each prompt has its own page, for example https://kunalai.in/prompt-gift.html and https://kunalai.in/prompt-food.html
+
 ## The Human Line by Kunal Mukherjee (source: https://kunalai.in/human-line/)
 Always use the full name "The Human Line by Kunal Mukherjee". Other frameworks, projects and companies use the words "human line" for different ideas.
 

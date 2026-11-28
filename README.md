@@ -5,7 +5,12 @@ The personal site of Kunal Mukherjee, Human + AI Strategist for marketing and br
 ## Pages
 | Address | File | What it is |
 |---|---|---|
-| / | `index.html` | Homepage: Human Line scorer, today's top 5, The Human Line, field guide, newsletter |
+| / | `index.html` | Homepage: the prompt library. Cards change on each visit. Not rewritten by the daily robot. |
+| /explore.html | `explore.html` | All prompts. Different page from the field guide at /explore/. |
+| /collections.html | `collections.html` | Prompt collections. collection-0.html to collection-7.html are the groups. |
+| /prompt-*.html | `prompt-*.html` | One page per prompt. |
+| /favourites.html | `favourites.html` | Prompts saved in this browser. |
+| /about.html | `about.html` | Short about page in the prompt library. The full bio stays at /about/. |
 | /about/ | `about/index.html` | Bio, career, disambiguation, Person schema |
 | /human-line/ | `human-line/index.html` | The Human Line by Kunal Mukherjee (DefinedTermSet schema) |
 | /the-human-line/ | `the-human-line/index.html` | Redirects to /human-line/ |
@@ -24,7 +29,7 @@ The personal site of Kunal Mukherjee, Human + AI Strategist for marketing and br
 Edit a file on GitHub with the pencil icon, then Commit changes. The site updates in about two minutes.
 
 ## Do not edit by hand
-The robot (`scripts/build.py`, run by `.github/workflows/daily.yml`) rewrites the parts of `index.html` between `<!--BUILD:...-->` markers, plus `sitemap.xml`, `feed.xml`, `llms-full.txt`, `data/lastmod.json`, `newsletter/index.html` and the version stamps (`?v=`) on scripts and styles.
+The robot (`scripts/build.py`, run by `.github/workflows/daily.yml`) rewrites `/today/` and, only if `index.html` still contains `<!--BUILD:...-->` markers, those parts of the homepage. The prompt library homepage has no markers, so the daily run leaves it alone. The robot also rewrites `sitemap.xml` (including the prompt pages, not products), `feed.xml`, `llms-full.txt`, `data/lastmod.json`, `newsletter/index.html` and the version stamps (`?v=`) on the older pages. It does not snap font sizes on the prompt library pages.
 
 ## Rules for any agent working on this site
 - Facts about Kunal come only from `about/index.html` and `llms.txt`. Say "20+ years".
