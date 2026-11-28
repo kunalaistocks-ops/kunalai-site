@@ -1,47 +1,47 @@
 {
  "whats": {
-  "A Stanford physicist drops an AI-assisted theory that has scientists at odds": "A new AI-assisted theory is dividing scientists, a reminder that AI output still needs careful human review before trust.",
-  "Korean AI Startups Face a Buyer Test Over Data Access, Model Providers and Agent Tools": "Korean AI startups are being tested on data access and tools, useful for managers vetting any AI vendor's reliability.",
-  "Nvidia hits pause on chip shipments to Southeast Asia": "Nvidia pausing chip shipments to Southeast Asia could affect AI hardware timelines for businesses in that region.",
-  "An Anthropic team lead says AI is changing the factors that are weighed in a promotion": "An Anthropic leader says AI is reshaping promotion criteria, so managers may need to rethink what skills they reward.",
-  "SAP Weighs Cutting at Least 10,000 Positions in AI Restructuring": "SAP considering over 10,000 job cuts shows how AI restructuring can reshape large companies' workforce plans."
+  "India Emerges as AI Haven, Seeks Boost From New US Chip Curbs": "India's rising role as an AI hub amid US chip curbs could open new business and investment opportunities.",
+  "IIT-K symposium explores AI’s impact on human thought, creativity": "Academic focus on AI's effect on thinking and creativity signals managers should rethink how teams work and learn.",
+  "Why AI and Data Could Transform India's Manufacturing Future": "Manufacturing leaders should start exploring how AI and data can reshape production and planning.",
+  "US goods trade deficit widens 10.7% to $149.5 billion as AI boom drives record imports": "AI investment is now big enough to shift national trade figures, showing how large its economic footprint has grown.",
+  "India, U.S. and eight other nations sign declaration to safeguard AI supply chains": "A multi-country declaration on AI supply chains could influence sourcing rules and risk planning for Indian businesses."
  },
  "term": {
-  "term": "AI restructuring",
-  "def": "This means a company reshapes teams, roles or costs because AI tools can now handle part of the work once done by people."
+  "term": "AI supply chain",
+  "def": "The network of chips, cloud services, data and software that come together to build and run AI systems, from raw materials to finished product."
  },
  "prompt": {
   "for": "Leadership",
-  "prompt": "Help me plan a fair communication strategy for my team if we restructure roles because of [AI tool or process]. List three key messages to share."
+  "prompt": "List three risks if [a key AI tool or vendor] we rely on became unavailable overnight, and suggest two backup options for each risk."
  },
  "quiz": [
   {
-   "q": "Business Standard reports that SAP is weighing cutting at least 10,000 positions in an AI restructuring.",
+   "q": "Bloomberg reports that India is emerging as an AI haven seeking a boost from new US chip curbs.",
    "a": true,
-   "why": "This directly restates the headline from Business Standard about SAP's planned job cuts."
+   "why": "This is what the Bloomberg headline states directly."
   },
   {
-   "q": "TechCrunch reports that Nvidia has paused chip shipments to Southeast Asia.",
+   "q": "News On AIR reports that India, the US and eight other nations signed a declaration to safeguard AI supply chains.",
    "a": true,
-   "why": "This directly restates the headline from TechCrunch about Nvidia's shipment pause."
+   "why": "This matches the News On AIR headline exactly."
   },
   {
-   "q": "AI restructuring always means most employees are replaced by machines overnight.",
+   "q": "AI systems genuinely understand meaning the way a human mind does.",
    "a": false,
-   "why": "Restructuring usually means roles change or shift focus, not instant mass replacement by machines."
+   "why": "AI finds patterns in data and predicts likely outputs, it does not understand in the human sense."
   },
   {
-   "q": "AI restructuring can involve changing what skills matter for a role, not just cutting jobs.",
-   "a": true,
-   "why": "Many companies redesign roles around new AI tools rather than only reducing headcount."
-  },
-  {
-   "q": "Once a company announces AI restructuring, human judgment is no longer needed in decisions.",
+   "q": "You must know how to code to use most AI tools at work today.",
    "a": false,
-   "why": "AI tools support decisions but people still set goals, judge context and handle exceptions."
+   "why": "Most modern AI tools are built for plain language instructions, no coding needed."
+  },
+  {
+   "q": "AI tools can sound confident while giving an answer that is completely wrong.",
+   "a": true,
+   "why": "AI models predict likely words, so fluent and wrong answers can look identical to fluent and right ones."
   }
  ],
  "source": "ai",
- "date": "2026-11-27",
+ "date": "2026-11-28",
  "model": "claude-sonnet-5"
 }

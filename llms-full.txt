@@ -243,4 +243,4 @@ A newsletter by Kunal Mukherjee that explains AI for non-technical managers. Eve
 - [AI does not level the playing field. It widens the gap](https://www.linkedin.com/pulse/what-ai-issue-2-does-level-playing-field-widens-gap-kunal-mukherjee-2axof/) (2025-12-02): Prompt copiers, tool tourists and quiet operators. Four AI workflows every marketer should master, and why India could become the capital of AI-led marketing.
 - [You're overthinking AI. Here's what actually matters](https://www.linkedin.com/pulse/youre-overthinking-ai-heres-what-actually-matters-kunal-mukherjee-gfevf/) (2025-11-18): AI won't steal your job, it will steal your excuses. Why judgement, not output, is your real edge, plus a Chief of Staff prompt and five underrated tools.
 
-Last updated: 2026-11-27
+Last updated: 2026-11-28
